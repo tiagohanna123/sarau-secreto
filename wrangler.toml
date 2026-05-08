@@ -1,0 +1,12 @@
+# Wrangler Config — Sarau Secreto
+# Deploy: npx wrangler pages deploy dist/ --project-name=sarau-secreto
+
+name = "sarau-secreto"
+compatibility_date = "2026-05-08"
+
+pages_build_output_dir = "dist"
+
+# API runs on port 3002 (separate server)
+# Configure via Cloudflare Dashboard:
+# - Pages > sarau-secreto > Settings > Functions > passthrough /api/*
+# Or set up a subdomain for the API server

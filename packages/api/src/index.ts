@@ -35,6 +35,7 @@ await app.register(import('./routes/yuzer.js'), { prefix: '/api/yuzer' })
 await app.register(import('./routes/sympla-sync.js'), { prefix: '/api/sympla' })
 await app.register(import('./routes/artists.js'), { prefix: '/api/artists' })
 await app.register(import('./routes/convergence.js'), { prefix: '/api/insights' })
+await app.register(import('./routes/yuzer-sync.js'), { prefix: '/api/yuzer' })
 
 // ── Start ──
 const port = parseInt(process.env.PORT || '3001')
