@@ -92,11 +92,18 @@ async function main() {
       }
 
       // 4. Persist bar sales for this event (aggregated by product)
-      // Check if sales already exist for this event+Yuzer combo
-      // We use the existing BarSale records' count as a heuristic
-      const existingCount = await prisma.barSale.count({
-        where: { eventId, importBatch: batch.id },
+      // Check if sales already exist for this event from ANY yuzer-api batch
+      // (using importBatch: batch.id was WRONG — each run creates a new batch)
+      const yuzerBatches = await prisma.importBatch.findMany({
+        where: { source: 'yuzer-api', status: 'completed' },
+        select: { id: true },
       })
+      const yuzerBatchIds = yuzerBatches.map(b => b.id)
+      const existingCount = yuzerBatchIds.length > 0
+        ? await prisma.barSale.count({
+            where: { eventId, importBatch: { in: yuzerBatchIds } },
+          })
+        : 0
 
       if (existingCount > 0) {
         console.log(`[yuzer-sync] BarSales já existem p/ ${eventTitle} (${existingCount}), pulando`)

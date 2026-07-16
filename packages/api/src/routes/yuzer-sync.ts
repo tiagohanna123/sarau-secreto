@@ -78,9 +78,18 @@ export default async function yuzerSyncRoute(app: FastifyInstance) {
           totalSynthEvents++
         }
 
-        const existingCount = await prisma.barSale.count({
-          where: { eventId, importBatch: batch.id },
+        // Check if sales already exist for this event from ANY yuzer-api batch
+        // (importBatch is a plain string ID, not a relation — cannot use { source: ... })
+        const yuzerBatches = await prisma.importBatch.findMany({
+          where: { source: 'yuzer-api', status: 'completed' },
+          select: { id: true },
         })
+        const yuzerBatchIds = yuzerBatches.map(b => b.id)
+        const existingCount = yuzerBatchIds.length > 0
+          ? await prisma.barSale.count({
+              where: { eventId, importBatch: { in: yuzerBatchIds } },
+            })
+          : 0
         if (existingCount > 0) continue
 
         for (const prod of yev.produtos) {

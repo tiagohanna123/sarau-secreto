@@ -1,5 +1,5 @@
 // Auto-generated — DADOS REAIS do backup Yuzer
-// 34 eventos, R$ 726,410.66, 50 produtos, 6 categorias
+// 39 eventos, R$ 726,410.66, 50 produtos, 6 categorias
 
 import type { BarHistoryData } from './use-bar-data'
 
@@ -11,8 +11,8 @@ export interface EventBarRevenue {
 
 export const BAR_EMBED: BarHistoryData = {
   "source": "backup",
-  "totalEvents": 34,
-  "totalRevenue": 580697.66,
+  "totalEvents": 39,
+  "totalRevenue": 713515.66,
   "totalOrders": 17939,
   "totalItens": 23794,
   "ticketMedioBar": 40.49,
@@ -391,6 +391,50 @@ export const BAR_EMBED: BarHistoryData = {
       "itensVendidos": 0,
       "produtos": [],
       "metodosPagamento": []
+    },
+    {
+      "start": "2026-05-14",
+      "end": "2026-05-15",
+      "days": 1,
+      "orders": 0,
+      "revenue": 0,
+      "ticketMedio": 0,
+      "itensVendidos": 0,
+      "produtos": [],
+      "metodosPagamento": []
+    },
+    {
+      "start": "2026-06-11",
+      "end": "2026-06-13",
+      "days": 1,
+      "orders": 0,
+      "revenue": 0,
+      "ticketMedio": 0,
+      "itensVendidos": 0,
+      "produtos": [],
+      "metodosPagamento": []
+    },
+    {
+      "start": "2026-06-25",
+      "end": "2026-06-26",
+      "days": 1,
+      "orders": 0,
+      "revenue": 0,
+      "ticketMedio": 0,
+      "itensVendidos": 0,
+      "produtos": [],
+      "metodosPagamento": []
+    },
+    {
+      "start": "2026-07-09",
+      "end": "2026-07-11",
+      "days": 1,
+      "orders": 0,
+      "revenue": 0,
+      "ticketMedio": 0,
+      "itensVendidos": 0,
+      "produtos": [],
+      "metodosPagamento": []
     }
   ],
   "eventBarRevenue": {
@@ -406,6 +450,11 @@ export const BAR_EMBED: BarHistoryData = {
       "transactions": 0,
       "perCapita": 0
     },
+    "cmowubsuk0d4ktua7kgqhk7ad": {
+      "revenue": 16030.0,
+      "transactions": 0,
+      "perCapita": 0
+    },
     "cmos4gvwi000btuzoc8pt324j": {
       "revenue": 4906.0,
       "transactions": 0,
@@ -414,6 +463,36 @@ export const BAR_EMBED: BarHistoryData = {
     "cmos4gwit000ctuzobv5wgzyb": null,
     "cmos4gx76000ftuzo0zg533i4": {
       "revenue": 5008.0,
+      "transactions": 0,
+      "perCapita": 0
+    },
+    "cmowubsml0c80tua7xboaj3ew": {
+      "revenue": 24491.0,
+      "transactions": 0,
+      "perCapita": 0
+    },
+    "cmowubsjx0bxbtua7thjxu0s1": {
+      "revenue": 9100.0,
+      "transactions": 0,
+      "perCapita": 0
+    },
+    "cmowubshe0bgxtua70qoojntf": {
+      "revenue": 19031.0,
+      "transactions": 0,
+      "perCapita": 0
+    },
+    "cmowubsej0b28tua7nxx9qkg8": {
+      "revenue": 14653.0,
+      "transactions": 0,
+      "perCapita": 0
+    },
+    "cmowubsat0a9qtua7cydohe8k": {
+      "revenue": 40008.0,
+      "transactions": 0,
+      "perCapita": 0
+    },
+    "cmowubs7u0a0wtua7mzroohak": {
+      "revenue": 8350.0,
       "transactions": 0,
       "perCapita": 0
     },
@@ -468,6 +547,11 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 12205.0,
       "transactions": 0,
       "perCapita": 44.06
+    },
+    "cmowubrg505sftua7duoe1ojk": {
+      "revenue": 1155.0,
+      "transactions": 0,
+      "perCapita": 0
     },
     "sympla-2987008": {
       "revenue": 28126.0,
@@ -525,7 +609,12 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 30327.66,
       "transactions": 0,
       "perCapita": 44.93
-    }
+    },
+    "sympla-3420938": null,
+    "sympla-3457402": null,
+    "sympla-3474070": null,
+    "sympla-3492296": null,
+    "sympla-3500838": null
   },
   "mensais": [
     {
