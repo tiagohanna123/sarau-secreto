@@ -466,25 +466,17 @@ const ENRICH_PATHS = new Set([
 ])
 
 async function requestOrFallback(path: string, options?: RequestInit): Promise<any> {
-  async function enrichApiResponse(data: any, path: string) {
-    if (path === '/events') return enrichWithBarEvents(data)
-    if (path === '/insights/overview') {
-      const enriched = enrichWithBarEvents(data.events || [])
-      return { ...data, events: enriched, aggregates: recomputeAggregates(enriched) }
-    }
-    if (path === '/insights/comparison') return enrichWithBarEvents(data)
-    if (path.match(/^\/events\/(.+)$/)) {
-      // Evento individual: enriquece com barRevenue se houver match no BAR_EMBED
-      const enrichedArr = enrichWithBarEvents([data])
-      return enrichedArr[0] || data
-    }
+  // Enriquecimento APENAS no fallback embed — a API do Cloudflare Function
+  // ja retorna dados com bar corretamente mergeados. Re-enriquecer sobreescreve
+  // dados corretos com dados do bar-embed.ts local (que pode estar desatualizado).
+  async function enrichApiResponse(data: any, _path: string) {
     return data
   }
 
   if (!isProduction) {
     try {
       const data = await request(path, options)
-      return enrichApiResponse(data, path)
+      return data
     } catch {
       return computeFromEmbed(path)
     }
@@ -492,7 +484,7 @@ async function requestOrFallback(path: string, options?: RequestInit): Promise<a
 
   try {
     const data = await request(path, options)
-    return enrichApiResponse(data, path)
+    return data
   } catch {
     return computeFromEmbed(path)
   }
