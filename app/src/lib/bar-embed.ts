@@ -75,7 +75,9 @@ export const BAR_EMBED: BarHistoryData = {
     "sympla-3420938": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
     "sympla-3457402": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
     "sympla-3474070": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
-    "sympla-3492296": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01}
+    "sympla-3477015": null,
+    "sympla-3492296": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
+    "sympla-3500838": null
   },
   "mensais": [
     {"mes": "2024-08", "label": "Ago/24-08", "eventos": 2, "orders": 325, "revenue": 11575.0, "ticketMedio": 35.62},
