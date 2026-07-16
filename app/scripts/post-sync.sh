@@ -22,7 +22,10 @@ else
   echo "⚠️  Backup Yuzer não encontrado — usando bar-embed.ts existente (git)"
 fi
 
-# 3. Rebuild automático da dist com dados atualizados
+# 3. Sempre regera embeds atualizados do banco SQLite (gerar-embeds.py)
+python3 /home/ser/.hermes/scripts/gerar-embeds.py 2>&1
+
+# 4. Rebuild automático da dist com dados atualizados
 echo "🏗️  post-sync: rebuild da dist..."
 cd "$ROOT"
 npx tsc -b --noCheck 2>&1 | tail -5

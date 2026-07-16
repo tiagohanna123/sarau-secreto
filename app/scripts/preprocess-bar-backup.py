@@ -5,11 +5,12 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 
 BACKUP = os.path.expanduser("~/sarau-yuzer-backup")
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # app/
 ORDERS_PATH = os.path.join(BACKUP, "orders.json")
 RANKING_PATH = os.path.join(BACKUP, "dashboards_ranking.json")
 PAYMENTS_PATH = os.path.join(BACKUP, "dashboards_payments_statistics.json")
 DB_EMBED_PATH = os.path.join(ROOT, "src", "lib", "db-embed.ts")
+OUT_PATH = os.path.join(ROOT, "src", "lib", "bar-embed.ts")
 
 SAFEDIV = lambda a, b: round(a / b, 2) if b else 0
 
@@ -263,7 +264,6 @@ bar_data = {
     'categorias': categorias_list,
 }
 
-out_path = os.path.join(ROOT, "src", "lib", "bar-embed.ts")
 ts = f'''// Auto-generated — DADOS REAIS do backup Yuzer
 // {len(events_bar)} eventos, R$ {total_bar_revenue:,.2f}, {len(produtoMix)} produtos, {len(categorias_list)} categorias
 
@@ -277,6 +277,6 @@ export interface EventBarRevenue {{
 
 export const BAR_EMBED: BarHistoryData = {json.dumps(bar_data, indent=2, ensure_ascii=False)}
 '''
-with open(out_path, 'w') as f: f.write(ts)
+with open(OUT_PATH, 'w') as f: f.write(ts)
 
 print(f'OK: {len(events_bar)} eventos ranking, {matched_ids} DB eventos com bar data, R$ {total_bar_revenue_matched:,.2f} matched, {len(produtoMix)} produtos, {len(categorias_list)} categorias, {len(mensais)} meses')

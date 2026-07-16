@@ -3,9 +3,9 @@
 # Uso: bash scripts/preprocess-db.sh
 
 set -e
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DB="$ROOT/packages/api/prisma/dev.db"
-OUT="$ROOT/src/lib/db-embed.ts"
+OUT="$(cd "$(dirname "$0")/.." && pwd)/src/lib/db-embed.ts"
 
 if [ ! -f "$DB" ]; then
   echo "❌ Banco não encontrado: $DB"

@@ -4,10 +4,13 @@ import jwt from '@fastify/jwt'
 import multipart from '@fastify/multipart'
 import rateLimit from '@fastify/rate-limit'
 import { PrismaClient } from '@prisma/client'
-import { resolve } from 'path'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import { config } from 'dotenv'
 
-config({ path: resolve(import.meta.dirname, '../.env') })
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+config({ path: resolve(__dirname, '../.env') })
 
 const prisma = new PrismaClient()
 
