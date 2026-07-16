@@ -29,7 +29,7 @@ export function ComparativoPage() {
         <>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
             <Cmp label="Receita" a={fmt(evA.revenue)} b={fmt(evB.revenue)} diff={evB.revenue - evA.revenue} unit="currency" />
-            <Cmp label="Pedidos" a={fmtNum(evA.orders)} b={fmtNum(evB.orders)} diff={evB.orders - evA.orders} unit="number" />
+            <Cmp label="Ingressos" a={fmtNum(evA.orders)} b={fmtNum(evB.orders)} diff={evB.orders - evA.orders} unit="number" />
             <Cmp label="Ticket Médio" a={fmt(evA.ticketMedio)} b={fmt(evB.ticketMedio)} diff={evB.ticketMedio - evA.ticketMedio} unit="currency" />
             <Cmp label="Itens" a={fmtNum(evA.itensVendidos)} b={fmtNum(evB.itensVendidos)} diff={evB.itensVendidos - evA.itensVendidos} unit="number" />
           </div>

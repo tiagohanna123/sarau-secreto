@@ -293,11 +293,11 @@ function TabCorr({ d, a }: { d: any; a: any }) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <SarauSection title="Receita × Pedidos">
+        <SarauSection title="Receita × Ingressos">
           <ResponsiveContainer width="100%" height={260}>
             <ScatterChart>
               <CartesianGrid strokeDasharray="3 3" stroke="#1e1e1e" />
-              <XAxis dataKey="orders" name="Pedidos" tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} />
+              <XAxis dataKey="orders" name="Ingressos" tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} />
               <YAxis dataKey="revenue" name="Receita" tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
               <Tooltip contentStyle={TT} labelStyle={TT_LABEL} itemStyle={TT_ITEM} />
               <Scatter data={d.mensais} fill={GOLD} opacity={0.7} />
