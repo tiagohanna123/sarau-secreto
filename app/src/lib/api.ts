@@ -139,12 +139,15 @@ function buildMergedEvents(): any[] {
       matchedDates.add(barMatch.date)
     }
 
-    const barData = barMatch && bestDist <= 2
-      ? { barRevenue: barMatch.event.revenue || 0, barTransactions: barMatch.event.orders || 0, perCapitaBar: 0 }
-      : { barRevenue: 0, barTransactions: 0, perCapitaBar: 0 }
+    const barRev = (barMatch && bestDist <= 2) ? (barMatch.event.revenue || 0) : 0
+    const sold = tickets[ev.id]?.count ?? ev.soldCount ?? 0
+    const barData = {
+      barRevenue: barRev,
+      barTransactions: (barMatch && bestDist <= 2) ? (barMatch.event.orders || 0) : 0,
+      perCapitaBar: sold > 0 && barRev > 0 ? Math.round((barRev / sold) * 100) / 100 : 0,
+    }
 
     const ticketRev = tickets[ev.id]?.revenue ?? ev.totalRevenue ?? 0
-    const barRev = barData.barRevenue
     merged.push({
       id: ev.id,
       title: ev.title,
@@ -267,9 +270,13 @@ function enrichWithBarEvents(apiEvents: any[]): any[] {
       matchedBarEvents.add(bestBarIdx)
     }
 
-    const barData = bestBar && bestDist <= 2
-      ? { barRevenue: bestBar.revenue || 0, barTransactions: bestBar.orders || 0, perCapitaBar: 0 }
-      : { barRevenue: 0, barTransactions: 0, perCapitaBar: 0 }
+    const barRev2 = (bestBar && bestDist <= 2) ? (bestBar.revenue || 0) : 0
+    const sold2 = ev.ticketsSold || ev.soldCount || 0
+    const barData = {
+      barRevenue: barRev2,
+      barTransactions: (bestBar && bestDist <= 2) ? (bestBar.orders || 0) : 0,
+      perCapitaBar: sold2 > 0 && barRev2 > 0 ? Math.round((barRev2 / sold2) * 100) / 100 : 0,
+    }
 
     const tRev = ev.ticketRevenue || ev.totalTicketRevenue || 0
     // Só usa barRevenue do embed se a API não tiver dados de bar (ev.barRevenue é 0 ou undefined)
@@ -352,7 +359,7 @@ function computeFromEmbed(path: string): any {
       barRevenue: ev.barRevenue || 0,
       barTransactions: ev.barTransactions || 0,
       totalRevenue: (ev.ticketRevenue || 0) + (ev.barRevenue || 0),
-      perCapitaBar: 0,
+      perCapitaBar: (ev.ticketsSold || 0) > 0 && (ev.barRevenue || 0) > 0 ? Math.round(((ev.barRevenue || 0) / (ev.ticketsSold || 0)) * 100) / 100 : 0,
       noShowRate: (ev.ticketsSold || 0) > 0 && (ev.checkedIn || 0) > 0
         ? Math.round((((ev.ticketsSold || 0) - (ev.checkedIn || 0)) / (ev.ticketsSold || 0)) * 100 * 10) / 10
         : 0,
@@ -390,7 +397,7 @@ function computeFromEmbed(path: string): any {
         barRevenue: ev.barRevenue || 0,
         barTransactions: ev.barTransactions || 0,
         totalRevenue: (ev.ticketRevenue || 0) + (ev.barRevenue || 0),
-        perCapitaBar: 0,
+        perCapitaBar: ev.ticketsSold > 0 && ev.barRevenue > 0 ? Math.round((ev.barRevenue / ev.ticketsSold) * 100) / 100 : 0,
       }))
       .filter((e: any) => e.ticketsSold > 0 || e.ticketRevenue > 0 || e.barRevenue > 0)
   }
@@ -416,7 +423,7 @@ function computeFromEmbed(path: string): any {
         barRevenue: barRev,
         barTransactions: ev.barTransactions || 0,
         totalRevenue: rev + barRev,
-        perCapitaBar: 0,
+        perCapitaBar: barRev > 0 && ts > 0 ? Math.round((barRev / ts) * 100) / 100 : 0,
       },
       kpis: {
         totalRevenue: rev + barRev,
@@ -427,7 +434,7 @@ function computeFromEmbed(path: string): any {
         checkedIn,
         noShow,
         noShowRate: ts > 0 ? Math.round((noShow / ts) * 100 * 10) / 10 : 0,
-        perCapitaBar: 0,
+        perCapitaBar: barRev > 0 && ts > 0 ? Math.round((barRev / ts) * 100) / 100 : 0,
       },
       ticketTimeline: [],
       hourlyBarSales: [],

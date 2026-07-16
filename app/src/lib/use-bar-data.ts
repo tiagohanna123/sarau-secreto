@@ -146,7 +146,7 @@ function barDataToRawInsights(data: BarHistoryData): { aggregates: any; events: 
       barRevenue: ev.revenue || 0,
       barTransactions: ev.orders || 0,
       totalRevenue: ev.revenue || 0,
-      perCapitaBar: 0,
+      perCapitaBar: (ev.orders || 0) > 0 && (ev.revenue || 0) > 0 ? Math.round(((ev.revenue || 0) / (ev.orders || 0)) * 100) / 100 : 0,
       noShowRate: 0,
     })),
   }
