@@ -79,7 +79,11 @@ export const BAR_EMBED: BarHistoryData = {
     "sympla-3474070": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
     "sympla-3477015": null,
     "sympla-3492296": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
-    "sympla-3500838": {"revenue": 20068.0, "transactions": 200, "perCapita": 42.01}
+    "sympla-3500838": {"revenue": 20068.0, "transactions": 200, "perCapita": 42.01},
+    "cm89a37dab087b8": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
+    "cm875260665fa5f": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
+    "cm8ae3f1b0ada38": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
+    "cm842b46dd96f70": {"revenue": 20068.0, "transactions": 200, "perCapita": 42.01}
   },
   "mensais": [
     {"mes": "2024-08", "label": "Ago/24-08", "eventos": 2, "orders": 325, "revenue": 11575.0, "ticketMedio": 35.62},

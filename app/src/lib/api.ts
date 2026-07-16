@@ -28,10 +28,11 @@ const BASE = '/api'
 const isProduction = typeof window !== 'undefined' && !window.location.hostname.includes('localhost')
 
 // --- Helper: look up bar revenue for an event from embedded data ---
-function barDataForEvent(eventId: string): EventBarRevenue | null {
+function barDataForEvent(eventId: string, symplaEventId?: string | null): EventBarRevenue | null {
   const map = (BAR_EMBED as any)?.eventBarRevenue as Record<string, EventBarRevenue | null> | undefined
   if (!map) return null
-  return map[eventId] ?? null
+  // Try exact ID first, then sympla- prefixed ID (for events with auto-generated IDs)
+  return map[eventId] ?? (symplaEventId ? map[`sympla-${symplaEventId}`] : null) ?? null
 }
 
 function checkinForEvent(eventId: string): CheckinData | null {
@@ -111,7 +112,8 @@ function buildMergedEvents(): any[] {
     let bestDist = 999
 
     // Try exact ID match via barRevMap first (most reliable)
-    const barRevEntry = ev.id ? barRevMap[ev.id] : undefined
+    // Also try symplaEventId as fallback (auto-generated IDs like cm... don't match sympla-N)
+    const barRevEntry = ev.id ? (barRevMap[ev.id] ?? (ev.symplaEventId ? barRevMap[`sympla-${ev.symplaEventId}`] : undefined)) : undefined
     if (barRevEntry !== undefined) {
       if (barRevEntry !== null) {
         // ID match found — use barRevenue data directly from barRevMap
@@ -218,7 +220,8 @@ function enrichWithBarEvents(apiEvents: any[]): any[] {
     let bestBar: any = null
 
     // Try exact ID match via barRevMap first (most reliable)
-    const barRevEntry = ev.id ? barRevMap[ev.id] : undefined
+    // Also try symplaEventId as fallback
+    const barRevEntry = ev.id ? (barRevMap[ev.id] ?? (ev.symplaEventId ? barRevMap[`sympla-${ev.symplaEventId}`] : undefined)) : undefined
     if (barRevEntry !== undefined && barRevEntry !== null) {
       // Matched by ID — use barRevEntry revenue data but still try to find
       // the matching bar event for its full data (revenue already known)
