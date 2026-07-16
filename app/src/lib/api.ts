@@ -162,8 +162,13 @@ function buildMergedEvents(): any[] {
   }
 
   // Pass 2: BAR events without DB match — create synthetic events
+  // Only create if bar date NOT within ±2 days of any DB event (prevents ghost rows)
+  const allDbDates = dbEvents.map(ev => parseDate(ev.date))
   for (const [bd, be] of barByDate) {
     if (matchedDates.has(bd)) continue
+    // Double-check against ALL DB events (±2 days)
+    const nearDbEvent = allDbDates.some(dd => daysBetween(bd, dd) <= 2)
+    if (nearDbEvent) continue
     const rev = be.revenue || 0
     merged.push({
       id: `bar-${bd}`,
@@ -279,11 +284,16 @@ function enrichWithBarEvents(apiEvents: any[]): any[] {
   })
 
   // Add synthetic events for each unmatched bar event (individual, not grouped by date)
+  // Only if bar date NOT within ±2 days of any API event
+  const allApiDates = apiEvents.map((ev: any) => parseDate(ev.date || ev.start || ''))
   for (let i = 0; i < barEvents.length; i++) {
     if (matchedBarEvents.has(i)) continue
     const be = barEvents[i]
     const bd = be.start ? be.start.slice(0, 10) : ''
     if (!bd) continue
+    // Skip if bar date is within ±2 days of any API event (already linked above)
+    const nearApiDate = allApiDates.some((dd: string) => dd && daysBetween(bd, dd) <= 2)
+    if (nearApiDate) continue
     const rev = be.revenue || 0
     enriched.push({
       id: `bar-${bd}-${i}`,
