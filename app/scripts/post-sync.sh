@@ -30,6 +30,10 @@ else
   echo "⚠️  Backup Yuzer não encontrado em $BACKUP_DIR — mantendo bar-embed.ts existente"
 fi
 
+# 2b. Sobrescreve com dados AO VIVO do Yuzer (cobre eventos recentes que o backup nao tem)
+echo "🔄 yuzer-embed-sync: buscando dados vivos..."
+python3 "$ROOT/../scripts/yuzer-embed-sync.py" 2>&1 || echo "⚠️  yuzer-embed-sync falhou (proxima execucao tentara de novo)"
+
 # 3. Atualiza embeds do banco SQLite (apenas se banco tiver registros)
 if [ -f "$DB_PATH" ] && [ "$(sqlite3 "$DB_PATH" 'SELECT COUNT(*) FROM BarSale;' 2>/dev/null || echo 0)" -gt 0 ]; then
   python3 /home/ser/.hermes/scripts/gerar-embeds.py 2>&1
