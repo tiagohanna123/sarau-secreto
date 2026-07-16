@@ -1,5 +1,5 @@
 // Auto-generated — DADOS REAIS do backup Yuzer
-// 29 DB eventos com bar data, 34 ranking eventos, R$ 726,410.66, 50 produtos, 6 categorias
+// 37 DB eventos com bar data, 39 ranking eventos, R$ 835,683.66, 50 produtos, 6 categorias
 
 import type { BarHistoryData } from './use-bar-data'
 
@@ -12,7 +12,7 @@ export interface EventBarRevenue {
 export const BAR_EMBED: BarHistoryData = {
   "source": "backup",
   "totalEvents": 29,
-  "totalRevenue": 726410.66,
+  "totalRevenue": 835683.66,
   "totalOrders": 17939,
   "totalItens": 23794,
   "ticketMedioBar": 40.49,

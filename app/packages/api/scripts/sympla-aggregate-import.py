@@ -141,7 +141,15 @@ def process_events(events: list, dry_run: bool = False) -> dict:
             by_sympla_id[ev["symplaEventId"]] = ev
         # Normalize title for matching
         title_key = ev["title"].strip().lower()
-        by_title_date[f"{title_key}|{ev['date'][:10]}"] = ev
+        # date can be int (unix ms) or ISO string
+        date_val = ev["date"]
+        if isinstance(date_val, (int, float)):
+            date_str = datetime.fromtimestamp(date_val / 1000).strftime("%Y-%m-%d")
+        elif isinstance(date_val, str):
+            date_str = date_val[:10]
+        else:
+            date_str = str(date_val)[:10]
+        by_title_date[f"{title_key}|{date_str}"] = ev
 
     updated = 0
     not_found = []
