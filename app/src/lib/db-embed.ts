@@ -415,7 +415,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "date": "1778727600000",
       "symplaEventId": "3420938",
       "soldCount": 323,
-      "totalRevenue": null,
+      "totalRevenue": 9690.0,
       "capacity": 335,
       "status": "completed"
     },
@@ -425,7 +425,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "date": "1781146800000",
       "symplaEventId": "3457402",
       "soldCount": 715,
-      "totalRevenue": null,
+      "totalRevenue": 35750.0,
       "capacity": 754,
       "status": "completed"
     },
@@ -434,8 +434,8 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "title": "Sala Secreta",
       "date": "1782356400000",
       "symplaEventId": "3474070",
-      "soldCount": null,
-      "totalRevenue": null,
+      "soldCount": 199,
+      "totalRevenue": 5970.0,
       "capacity": null,
       "status": "published"
     },
@@ -445,7 +445,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "date": "1783566000000",
       "symplaEventId": "3492296",
       "soldCount": 621,
-      "totalRevenue": null,
+      "totalRevenue": 31050.0,
       "capacity": 819,
       "status": "completed"
     },
@@ -455,7 +455,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "date": "1784170800000",
       "symplaEventId": "3500838",
       "soldCount": 634,
-      "totalRevenue": null,
+      "totalRevenue": 25360.0,
       "capacity": 1160,
       "status": "published"
     }
