@@ -78,18 +78,8 @@ function buildMergedEvents() {
     })
   }
 
-  const allDbDates = EVENTOS.map(ev => parseDate(ev.date))
-  for (const [bd, be] of barByDate) {
-    if (matchedDates.has(bd)) continue
-    if (allDbDates.some(dd => daysBetween(bd, dd) <= 2)) continue
-    const rev = be.revenue || 0
-    merged.push({
-      id: `bar-${bd}`, title: `Sarau Secreto (${bd})`, slug: `sarau-secreto-${bd}`,
-      date: bd, location: '', capacity: null, status: 'completed',
-      ticketsSold: 0, checkedIn: 0, ticketRevenue: 0,
-      barRevenue: rev, barTransactions: be.orders || 0, totalRevenue: rev, perCapitaBar: 0,
-    })
-  }
+  // Pass 2: skip — unmatched bar events are date-mismatched duplicates of real events
+  // Bar revenue from real events is already attributed via BAR_REVENUE_MAP in Pass 1
 
   merged.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   return merged
