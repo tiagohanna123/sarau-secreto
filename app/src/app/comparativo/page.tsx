@@ -98,7 +98,7 @@ function SelectEvent({ eventos, value, onChange, label }: { eventos: any[]; valu
       <select value={value} onChange={e => onChange(parseInt(e.target.value))}
         className="w-full bg-[#141414] border border-[#1e1e1e] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#c8a96e]">
         {eventos.map((ev, i) => (
-          <option key={ev.start} value={i}>{ev.start} — {fmt(ev.revenue)} ({ev.orders} pedidos)</option>
+          <option key={ev.start} value={i}>{ev.start} — {fmt(ev.revenue)} ({ev.orders} ingressos)</option>
         ))}
       </select>
     </div>

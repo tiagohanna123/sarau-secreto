@@ -407,7 +407,7 @@ function TabInsights({ d, a }: { d: any; a: any }) {
       icon: a.correlation > 0.85 ? '🎯' : '📐',
       title: 'Alavanca',
       text: a.correlation > 0.85
-        ? `R=${a.correlation.toFixed(2)}. Crescer = mais pedidos.`
+        ? `R=${a.correlation.toFixed(2)}. Crescer = mais ingressos.`
         : `R=${a.correlation.toFixed(2)}. Ticket e mix importam.`,
       color: a.correlation > 0.85 ? '#a78bfa' : '#60a5fa',
     },

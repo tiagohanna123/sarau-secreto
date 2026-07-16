@@ -462,7 +462,7 @@ export function Dashboard() {
                     <span className="text-muted-foreground truncate">{ev.start}</span>
                   </div>
                   <span className="text-foreground font-medium w-24 text-right">{fmt(ev.revenue)}</span>
-                  <span className="text-[#4b5563] w-16 text-right">{fmtNum(ev.orders)} pedidos</span>
+                  <span className="text-[#4b5563] w-16 text-right">{fmtNum(ev.orders)} ingressos</span>
                 </div>
               ))}
             </div>
