@@ -159,7 +159,7 @@ function TabOverview({ d, a }: { d: any; a: any }) {
       {/* KPI row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <SarauKPI label="CAGR" value={`${a.cagr > 0 ? '+' : ''}${a.cagr.toFixed(1)}%`} sub="crescimento anual composto" />
-        <SarauKPI label="Correlação" value={a.correlation.toFixed(3)} sub="receita × pedidos" />
+        <SarauKPI label="Correlação" value={a.correlation.toFixed(3)} sub="receita × ingressos" />
         <SarauKPI label="Crescimento" value={pct(hg)} sub="2ª metade vs 1ª" />
         <SarauKPI label="Previsão 3m" value={fmt(a.forecast.reduce((s: number, f: any) => s + f.previsto, 0))} sub="receita estimada" />
       </div>
@@ -286,7 +286,7 @@ function TabCorr({ d, a }: { d: any; a: any }) {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <SarauKPI label="Correlação R" value={a.correlation.toFixed(3)} sub="receita × pedidos" />
+        <SarauKPI label="Correlação R" value={a.correlation.toFixed(3)} sub="receita × ingressos" />
         <SarauKPI label="Ticket Atual" value={fmt(a.tt)} sub={`${pct(a.tg)} evolução`} />
         <SarauKPI label="Sazonalidade" value={a.seasonal.sort((a: any, b: any) => b.media - a.media)[0]?.mes || '-'} sub="mês de pico" />
         <SarauKPI label="Melhor Mês" value={a.bestMonth?.label || '-'} sub={fmt(a.bestMonth?.revenue || 0)} />

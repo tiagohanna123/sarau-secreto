@@ -81,6 +81,7 @@ export function EventsPage({
   const totalGeral = totalRevenue + totalBar
   const barPerCapitaGeral = totalTickets > 0 ? totalBar / totalTickets : 0
   const barPctKPI = totalGeral > 0 ? Math.round(totalBar / totalGeral * 100) : 0
+  const receitaPorIngresso = totalTickets > 0 ? totalGeral / totalTickets : 0
 
   if (loading) return <LoadingSkeleton />
 
@@ -113,7 +114,7 @@ export function EventsPage({
           <div>
             <h1 className="text-xl font-bold tracking-tight">Eventos</h1>
             <p className="mt-1 text-xs text-muted-foreground">
-              {sorted.length} edições · {totalTickets.toLocaleString('pt-BR')} pedidos · {fmtBRL(totalGeral)} receita total
+              {sorted.length} edições · {totalTickets.toLocaleString('pt-BR')} ingressos · {fmtBRL(totalGeral)} receita total
             </p>
           </div>
           {/* Sort controls */}
@@ -130,12 +131,13 @@ export function EventsPage({
       </header>
 
       {/* KPIs estratégicos */}
-      <div className="mb-6 grid grid-cols-4 gap-3">
+      <div className="mb-6 grid grid-cols-5 gap-3">
         {[
           { label: 'Receita Total', value: fmtBRL(totalGeral), sub: '' },
           { label: 'Bar Total', value: fmtBRL(totalBar), sub: `${barPctKPI}%` },
-          { label: 'Pedidos', value: totalTickets.toLocaleString('pt-BR'), sub: `itens vendidos` },
-          { label: 'Gasto Médio', value: fmtBRLc(barPerCapitaGeral), sub: `por pedido` },
+          { label: 'Ingressos', value: totalTickets.toLocaleString('pt-BR'), sub: `ingressos vendidos` },
+          { label: 'Receita/Ingresso', value: fmtBRLc(receitaPorIngresso), sub: `total por ingresso` },
+          { label: 'Gasto Médio', value: fmtBRLc(barPerCapitaGeral), sub: `por ingresso` },
         ].map(kpi => (
           <div key={kpi.label} className="kpi-card text-center">
             <p className="text-[10px] uppercase tracking-widest text-muted-foreground">{kpi.label}</p>
@@ -183,7 +185,7 @@ export function EventsPage({
                       {ev.status === 'draft' ? 'rascunho' : 'concluído'}
                     </span>
                     <span className="text-[9px] text-muted-foreground ml-auto">
-                      {ev.tickets} pedidos {ev.capacity ? `· ${ocupacao}% ocupação` : ''}
+                      {ev.tickets} ingressos {ev.capacity ? `· ${ocupacao}% ocupação` : ''}
                     </span>
                   </div>
                   <h2 className="mt-0.5 text-sm font-semibold leading-tight">{ev.title}</h2>
@@ -214,7 +216,7 @@ export function EventsPage({
 
                 {/* Per capita bar */}
                 <div className="rounded-lg bg-white/[0.03] px-3 py-2">
-                  <p className="text-[9px] uppercase tracking-wider text-muted-foreground">Gasto/pedido</p>
+                  <p className="text-[9px] uppercase tracking-wider text-muted-foreground">Gasto/ingresso</p>
                   <p className="mt-0.5 text-sm font-bold">{ev.barRevenue > 0 ? fmtBRLc(ev.perCapitaBar) : '—'}</p>
                 </div>
               </div>

@@ -217,7 +217,7 @@ export function Dashboard() {
         <div>
           <PageHeader
             title="Dashboard"
-            subtitle={`${f.totalEvents} eventos · ${fmtNum(f.totalOrders)} pedidos · ${fmt(f.totalRevenue)}`}
+            subtitle={`${f.totalEvents} eventos · ${fmtNum(f.totalOrders)} ingressos · ${fmt(f.totalRevenue)}`}
             source={data.source}
           />
         </div>
@@ -233,15 +233,15 @@ export function Dashboard() {
           trend={trendUp(f.revenueChange) ? 'up' : trendDown(f.revenueChange) ? 'down' : undefined}
         />
         <SarauKPI
-          label="Pedidos"
+          label="Ingressos"
           value={fmtNum(f.totalOrders)}
-          sub={hasPrev ? `${pct(f.ordersChange)} vs anterior` : 'Total de pedidos'}
+          sub={hasPrev ? `${pct(f.ordersChange)} vs anterior` : 'Total de ingressos'}
           trend={trendUp(f.ordersChange) ? 'up' : trendDown(f.ordersChange) ? 'down' : undefined}
         />
         <SarauKPI
           label="Ticket Médio"
           value={fmt(f.ticketMedio)}
-          sub={hasPrev ? `${pct(f.ticketChange)} vs anterior` : 'Receita / Pedido'}
+          sub={hasPrev ? `${pct(f.ticketChange)} vs anterior` : 'Receita / Ingresso'}
           trend={trendUp(f.ticketChange) ? 'up' : trendDown(f.ticketChange) ? 'down' : undefined}
         />
         <SarauKPI
