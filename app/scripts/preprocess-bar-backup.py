@@ -14,6 +14,22 @@ OUT_PATH = os.path.join(ROOT, "src", "lib", "bar-embed.ts")
 
 SAFEDIV = lambda a, b: round(a / b, 2) if b else 0
 
+# --- PRESERVAR: ler bar-embed.ts existente antes de sobrescrever ---
+old = ""  # conteudo do bar-embed.ts atual (vazio se nao existir)
+existing_bar_rev = {}
+if os.path.exists(OUT_PATH):
+    with open(OUT_PATH) as f:
+        old = f.read()
+    # Extrai eventBarRevenue do arquivo existente
+    m = re.search(r'"eventBarRevenue":\s*\{([^}]+)\}\s*,\s*"mensais"', old, re.DOTALL)
+    if m:
+        for k, v in re.findall(r'"([^"]+)"\s*:\s*(\{[^}]*\}|null)', m.group(1)):
+            # Converte string JSON para dict ou None
+            try:
+                existing_bar_rev[k] = json.loads(v) if v != 'null' else None
+            except:
+                pass
+
 # --- 0) Read DB events (EMBEDDED_DB) to build per-event bar revenue ---
 db_events = []
 if os.path.exists(DB_EMBED_PATH):
@@ -227,14 +243,44 @@ for ev in db_events:
             'perCapita': SAFEDIV(m['revenue'], tickets) if tickets > 0 else 0,
         }
     else:
-        event_bar_export[eid] = None
+        # Backup nao tem dados para este evento — tentar preservar do existing_bar_rev
+        preserved = None
+        # Try by event ID (eid) first
+        if eid in existing_bar_rev and existing_bar_rev[eid] is not None:
+            preserved = existing_bar_rev[eid]
+        # Try by symplaEventId as fallback (existing bar may use sympla-XX keys)
+        if preserved is None:
+            sympla_id = ev.get('symplaEventId')
+            if sympla_id and sympla_id != 'None' and f'sympla-{sympla_id}' in existing_bar_rev:
+                sid_key = f'sympla-{sympla_id}'
+                if existing_bar_rev[sid_key] is not None:
+                    preserved = existing_bar_rev[sid_key]
+                    print(f"  PRESERVED via sympla: {eid} ({ev['title'][:35]}) -> R$ {preserved['revenue']:,.0f}")
+        if preserved is not None:
+            event_bar_export[eid] = preserved
+            print(f"  PRESERVED: {eid} | {ev['title'][:35]} -> R$ {preserved['revenue']:,.0f}")
+        else:
+            # Ultimo fallback: dados manuais de 2026 do Yuzer
+            yuzer_2026 = {
+                "cm89a37dab087b8": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
+                "cm875260665fa5f": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
+                "sympla-3474070": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
+                "cm8ae3f1b0ada38": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
+                "cm842b46dd96f70": None,
+            }
+            if eid in yuzer_2026 and yuzer_2026[eid] is not None:
+                event_bar_export[eid] = yuzer_2026[eid]
+                print(f"  YUZER2026: {eid} | {ev['title'][:35]} -> R$ {yuzer_2026[eid]['revenue']:,.0f}")
+            else:
+                event_bar_export[eid] = None
 
-# Count matched
+# Count matched (inclui preservados)
 matched_ids = {k for k, v in event_bar_export.items() if v is not None}
 total_bar_revenue_matched = sum(v['revenue'] for v in event_bar_export.values() if v)
 
 # --- 5) Build events list for bar-embed.ts from ranking ---
 events_bar = []
+events_bar_dates = set()
 for start in sorted_dates:
     rev = event_revenue[start]
     events_bar.append({
@@ -242,6 +288,28 @@ for start in sorted_dates:
         'orders': 0, 'revenue': round(rev, 2), 'ticketMedio': 0, 'itensVendidos': 0,
         'produtos': [], 'metodosPagamento': [],
     })
+    events_bar_dates.add(start)
+
+# Merge existing events from bar-embed.ts that aren't in the backup ranking
+if existing_bar_rev:
+    # Extract existing events list from old bar-embed.ts
+    old_events = []
+    m_events = re.findall(r'\{"start": "([^"]+)",[^}]+"revenue": ([^,]+)', old, re.DOTALL)
+    for start_date, rev_str in m_events:
+        if start_date not in events_bar_dates:
+            try:
+                rev = float(rev_str)
+                old_events.append({
+                    'start': start_date, 'end': start_date, 'days': 1,
+                    'orders': 0, 'revenue': rev, 'ticketMedio': 0, 'itensVendidos': 0,
+                    'produtos': [], 'metodosPagamento': [],
+                })
+                events_bar_dates.add(start_date)
+                print(f"  MERGED event: {start_date} -> R$ {rev:,.0f}")
+            except:
+                pass
+    events_bar.extend(old_events)
+    events_bar.sort(key=lambda x: x['start'])
 
 # Monthly from orders
 mensais = sorted([{'mes': k, 'label': k, 'eventos': 1, 'orders': 0,

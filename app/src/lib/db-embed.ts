@@ -30,10 +30,30 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
+      "id": "cmrns8qz70001tujaozipre33",
+      "title": "SARAU SECRETO CONVIDA LETÍCIA FIALHO",
+      "date": "1691708400000",
+      "symplaEventId": "s2008d6",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
       "id": "cmos4gtzk0002tuzo6qahavd8",
       "title": "Sarau Secreto",
       "date": "1697065200000",
       "symplaEventId": "2195243",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
+      "id": "cmrns8r5b0002tuja561dgd53",
+      "title": "Sarau Secreto",
+      "date": "1697065200000",
+      "symplaEventId": "s217f2b",
       "soldCount": null,
       "totalRevenue": null,
       "capacity": null,
@@ -50,10 +70,30 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
+      "id": "cmrns8raz0005tujacgq3s8gd",
+      "title": "Sarau Secreto Convida Os Garotin",
+      "date": "1699570800000",
+      "symplaEventId": "s21eda6",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
       "id": "cmos4gv9d0008tuzod1v6vohy",
       "title": "Sarau Secreto",
       "date": "1702594800000",
       "symplaEventId": "2274987",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
+      "id": "cmrns8rhb000atujakw63qraa",
+      "title": "Sarau Secreto",
+      "date": "1702594800000",
+      "symplaEventId": "s22b6ab",
       "soldCount": null,
       "totalRevenue": null,
       "capacity": null,
@@ -70,6 +110,16 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
+      "id": "cmrns8rmy000dtujai5gx7trs",
+      "title": "AFTER SECRETO",
+      "date": "1706223600000",
+      "symplaEventId": "s234269",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
       "id": "cmos4gwit000ctuzobv5wgzyb",
       "title": "Sarau Secreto Convida Youn",
       "date": "1709852400000",
@@ -80,10 +130,30 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
+      "id": "cmrns8rsb000etujaljig701d",
+      "title": "Sarau Secreto Convida Youn",
+      "date": "1709852400000",
+      "symplaEventId": "s23fac9",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
       "id": "cmos4gx76000ftuzo0zg533i4",
       "title": "After Secreto - Antonela",
       "date": "1711062000000",
       "symplaEventId": "2373126",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
+      "id": "cmrns8rxq000htujavg8gn1a2",
+      "title": "After Secreto - Antonela",
+      "date": "1711062000000",
+      "symplaEventId": "s243606",
       "soldCount": null,
       "totalRevenue": null,
       "capacity": null,
@@ -404,6 +474,22 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "revenue": 33.0
     },
     "cmos4gwit000ctuzobv5wgzyb": {
+      "count": 1,
+      "revenue": 88.0
+    },
+    "cmrns8r5b0002tuja561dgd53": {
+      "count": 1,
+      "revenue": 33.0
+    },
+    "cmrns8raz0005tujacgq3s8gd": {
+      "count": 2,
+      "revenue": 198.0
+    },
+    "cmrns8rhb000atujakw63qraa": {
+      "count": 1,
+      "revenue": 33.0
+    },
+    "cmrns8rsb000etujaljig701d": {
       "count": 1,
       "revenue": 88.0
     }
