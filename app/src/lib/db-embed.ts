@@ -20,6 +20,76 @@ export interface EmbeddedDB {
 export const EMBEDDED_DB: EmbeddedDB = {
   "events": [
     {
+      "id": "cmrnwoc4q0001tuel5sp59129",
+      "title": "SARAU SECRETO CONVIDA LETÍCIA FIALHO",
+      "date": "1691708400000",
+      "symplaEventId": "s2008d6",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
+      "id": "cmrnwockh0002tuela7o7e2l3",
+      "title": "Sarau Secreto",
+      "date": "1697065200000",
+      "symplaEventId": "s217f2b",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
+      "id": "cmrnwocqb0005tuelsn49fe5w",
+      "title": "Sarau Secreto Convida Os Garotin",
+      "date": "1699570800000",
+      "symplaEventId": "s21eda6",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
+      "id": "cmrnwocvv000atuelcidqhk61",
+      "title": "Sarau Secreto",
+      "date": "1702594800000",
+      "symplaEventId": "s22b6ab",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
+      "id": "cmrnwod14000dtuelw4rrofiy",
+      "title": "AFTER SECRETO",
+      "date": "1706223600000",
+      "symplaEventId": "s234269",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
+      "id": "cmrnwod6l000etueloc7rhc39",
+      "title": "Sarau Secreto Convida Youn",
+      "date": "1709852400000",
+      "symplaEventId": "s23fac9",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
+      "id": "cmrnwodck000htuelon3bjl71",
+      "title": "After Secreto - Antonela",
+      "date": "1711062000000",
+      "symplaEventId": "s243606",
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "published"
+    },
+    {
       "id": "sympla-2633353",
       "title": "SARAU SECRETO - 2 ANOS",
       "date": "1726099200000",
@@ -310,5 +380,22 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     }
   ],
-  "tickets": {}
+  "tickets": {
+    "cmrnwockh0002tuela7o7e2l3": {
+      "count": 1,
+      "revenue": 33.0
+    },
+    "cmrnwocqb0005tuelsn49fe5w": {
+      "count": 2,
+      "revenue": 198.0
+    },
+    "cmrnwocvv000atuelcidqhk61": {
+      "count": 1,
+      "revenue": 33.0
+    },
+    "cmrnwod6l000etueloc7rhc39": {
+      "count": 1,
+      "revenue": 88.0
+    }
+  }
 }
