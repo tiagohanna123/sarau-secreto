@@ -478,7 +478,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "totalRevenue": null,
       "capacity": null,
       "status": "published"
-    },
+    }
   ],
   "tickets": {}
 }

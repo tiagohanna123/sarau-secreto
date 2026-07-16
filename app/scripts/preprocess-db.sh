@@ -4,7 +4,7 @@
 
 set -e
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-DB="$ROOT/packages/api/prisma/dev.db"
+DB="$ROOT/app/packages/api/prisma/dev.db"
 OUT="$(cd "$(dirname "$0")/.." && pwd)/src/lib/db-embed.ts"
 
 if [ ! -f "$DB" ]; then
