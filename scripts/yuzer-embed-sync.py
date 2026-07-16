@@ -13,7 +13,17 @@ APP_LIB = PROJECT / "app/src/lib"
 BAR_EMBED = APP_LIB / "bar-embed.ts"
 YUZER_API = "https://api.eagle.yuzer.com.br/api"
 
-YUZER_JWT = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2FvLm5zcGlAZ21haWwuY29tIiwiaWQiOjE3Mzk1LCJuYW1lIjoiSm_Do28gTWFyY2VsbyBTYW50b3MiLCJ0eXBlIjoiQURNSU5JU1RSQVRJT04iLCJtYXN0ZXJDb21wYW55SWQiOjMwNSwiaWF0IjoxNzg0MjEyMTgxLCJleHAiOjE3ODQyOTg1ODF9.u2e_M0iSrYvNXbZIfLrETjhDWQivajyp2EZuLAZOh8M"
+def get_token(key):
+    """Read token from ~/sistema-sarau-secreto/.env or environment."""
+    env_path = Path.home() / "sistema-sarau-secreto/.env"
+    if env_path.exists():
+        for line in env_path.read_text().splitlines():
+            line = line.strip()
+            if line.startswith(key + "="):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return os.environ.get(key, "")
+
+YUZER_JWT = get_token("YUZER_JWT") or get_token("YUZER_TOKEN") or ""
 
 def yuzer_post(path, body):
     url = f"{YUZER_API}{path}"
@@ -58,7 +68,7 @@ def cluster_events(orders):
         if d: date_set.add(d)
     dates = sorted(date_set)
     if not dates: return []
-    
+
     clusters = [[dates[0]]]
     for i in range(1, len(dates)):
         prev = datetime.strptime(clusters[-1][-1], "%Y-%m-%d")
@@ -67,7 +77,7 @@ def cluster_events(orders):
             clusters[-1].append(dates[i])
         else:
             clusters.append([dates[i]])
-    
+
     events = []
     for cl in clusters:
         paid = [o for o in orders if o.get("createdAt","")[:10] in cl and o.get("paymentStatus")=="PAID"]
@@ -86,18 +96,21 @@ def cluster_events(orders):
     return events
 
 def main():
+    if not YUZER_JWT:
+        print("ERRO: YUZER_JWT nao definido. Configure YUZER_JWT ou YUZER_TOKEN no .env")
+        sys.exit(1)
+
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Yuzer Embed Sync")
     print("1. Buscando orders...")
     orders = fetch_all_orders()
     print(f"   Total: {len(orders)} orders")
-    
+
     print("2. Clusterizando eventos...")
     events = cluster_events(orders)
     print(f"   {len(events)} eventos")
     for e in events:
         print(f"     {e['start']} -> {e['end']}: R$ {e['revenue']:,.2f} ({e['orders']} ord)")
-    
-    # Ler existing sympla entries
+
     existing_rev = {}
     if BAR_EMBED.exists():
         txt = BAR_EMBED.read_text()
@@ -105,19 +118,17 @@ def main():
         if m:
             for k, v in re.findall(r'"([^"]+)"\s*:\s*(\{[^}]*\}|null)', m.group(1)):
                 existing_rev[k] = v
-    
-    # Build date entries
+
     date_entries = {}
     for e in events:
         date_entries[e["start"]] = {"revenue":round(e["revenue"],2),"transactions":e["orders"],"perCapita":e["ticketMedio"]}
-    
-    # Build final eventBarRevenue: sympla first, then date
+
     final_rev = {}
     for k, v in existing_rev.items():
         if k.startswith("sympla-"): final_rev[k] = v
     for k, v in sorted(date_entries.items(), reverse=True):
         final_rev[k] = v
-    
+
     known_defaults = {
         "sympla-3420938": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
         "sympla-3457402": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
@@ -128,7 +139,6 @@ def main():
     }
     for k, default_v in known_defaults.items():
         if k not in final_rev:
-            # Prefer API data, then existing non-null data, then hardcoded default
             api_v = date_entries.get(k.replace("sympla-", ""))
             if api_v is not None:
                 final_rev[k] = api_v
@@ -136,8 +146,7 @@ def main():
                 final_rev[k] = existing_rev[k]
             else:
                 final_rev[k] = default_v
-    
-    # Build mensais
+
     month_map = defaultdict(lambda:{"e":set(),"o":0,"r":0.0})
     for e in events:
         m = e["start"][:7]
@@ -152,8 +161,7 @@ def main():
         tm = round(v["r"]/v["o"],2) if v["o"]>0 else 0
         mensais.append({"mes":mes,"label":lbl,"eventos":len(v["e"]),"orders":v["o"],
                         "revenue":round(v["r"],2),"ticketMedio":tm})
-    
-    # Produto mix
+
     pm = defaultdict(lambda:{"q":0,"t":0.0})
     for e in events:
         for p in e["produtos"]:
@@ -162,8 +170,7 @@ def main():
     total_r = sum(e["revenue"] for e in events)
     mix = [{"name":n,"qty":v["q"],"total":round(v["t"],2),"pct":round(v["t"]/total_r*100,1) if total_r>0 else 0}
            for n,v in sorted(pm.items(), key=lambda x:-x[1]["t"])[:50]]
-    
-    # Categorias
+
     cat_rules = [(re.compile(r'VINHO|UVITA|CARMEN|MALBEC|CABERNET|MERLOT|ROSE',re.I),'Vinho'),
                  (re.compile(r'CERVEJA|HEINEKEN|SPATEN|STELLA|BUDWEISER',re.I),'Cerveja'),
                  (re.compile(r'ÁGUA|AGUA|COCA|REFRIG|SUCO|GATORADE',re.I),'NaoAlcoolico'),
@@ -178,12 +185,11 @@ def main():
         if not found: cm["Outros"]["t"]+=p["total"]; cm["Outros"]["q"]+=p["qty"]
     cats = [{"name":n,"total":round(v["t"],2),"qty":v["q"],"pct":round(v["t"]/total_r*100,1) if total_r>0 else 0}
             for n,v in sorted(cm.items(), key=lambda x:-x[1]["t"])]
-    
-    # Write
+
     total_ord = sum(e["orders"] for e in events)
     total_it = sum(e["itensVendidos"] for e in events)
     tm_geral = round(total_r/total_ord,2) if total_ord>0 else 0
-    
+
     lines = ["// Auto-generated by yuzer-embed-sync.py",
              f"// {len(events)} eventos, R$ {total_r:,.2f}",
              "", "import type { BarHistoryData } from './use-bar-data'",
@@ -196,7 +202,7 @@ def main():
         sep = "," if i < len(events)-1 else ""
         lines.append(f'    {{"start": "{e["start"]}", "end": "{e["end"]}", "days": {e["days"]}, "orders": {e["orders"]}, "revenue": {e["revenue"]}, "ticketMedio": {e["ticketMedio"]}, "itensVendidos": {e["itensVendidos"]}, "produtos": {json.dumps(e["produtos"][:50])}, "metodosPagamento": []}}{sep}')
     lines.append('  ],')
-    
+
     lines.append('  "eventBarRevenue": {')
     items = list(final_rev.items())
     for i,(k,v) in enumerate(items):
@@ -206,13 +212,13 @@ def main():
         elif isinstance(v,dict):
             lines.append(f'    "{k}": {{"revenue": {v["revenue"]}, "transactions": {v["transactions"]}, "perCapita": {v["perCapita"]}}}{sep}')
     lines.append('  },')
-    
+
     lines.append('  "mensais": [')
     for i,m in enumerate(mensais):
         sep = "," if i < len(mensais)-1 else ""
         lines.append(f'    {{"mes": "{m["mes"]}", "label": "{m["label"]}", "eventos": {m["eventos"]}, "orders": {m["orders"]}, "revenue": {m["revenue"]}, "ticketMedio": {m["ticketMedio"]}}}{sep}')
     lines.append('  ],')
-    
+
     lines.append('  "produtoMix": [')
     for i,p in enumerate(mix):
         sep = "," if i < len(mix)-1 else ""
@@ -225,7 +231,7 @@ def main():
         lines.append(f'    {{"name": "{c["name"]}", "total": {c["total"]}, "qty": {c["qty"]}, "pct": {c["pct"]}}}{sep}')
     lines.append('  ]')
     lines.append('}')
-    
+
     BAR_EMBED.write_text("\n".join(lines)+"\n")
     print(f"\n3. Escrito: bar-embed.ts ({len(events)} eventos, R$ {total_r:,.2f})")
 
