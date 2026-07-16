@@ -208,7 +208,7 @@ export function Dashboard() {
   const top10 = [...(data.produtoMix || [])].sort((a: any, b: any) => b.total - a.total).slice(0, 10)
 
   // Últimos eventos filtrados
-  const ultimosEventos = [...f.eventos].reverse().slice(0, 6)
+  const ultimosEventos = f.eventos.slice(0, 6)
 
   return (
     <div className="p-4 sm:p-6 max-w-7xl mx-auto">
