@@ -1,8 +1,8 @@
 // Cloudflare Pages Function — GET /api/checkin
-import { CHECKIN_EMBED } from '../../src/lib/checkin-embed'
+import { CHECKIN } from '../data/checkin'
 
 export async function onRequest() {
-  return new Response(JSON.stringify(CHECKIN_EMBED), {
+  return new Response(JSON.stringify(CHECKIN), {
     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
   })
 }
