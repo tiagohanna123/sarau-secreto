@@ -1,5 +1,5 @@
 // Auto-generated — DADOS REAIS do backup Yuzer
-// 34 eventos, R$ 726,410.66, 50 produtos, 6 categorias
+// 29 DB eventos com bar data, 34 ranking eventos, R$ 726,410.66, 50 produtos, 6 categorias
 
 import type { BarHistoryData } from './use-bar-data'
 
@@ -11,8 +11,8 @@ export interface EventBarRevenue {
 
 export const BAR_EMBED: BarHistoryData = {
   "source": "backup",
-  "totalEvents": 34,
-  "totalRevenue": 50492.0,
+  "totalEvents": 29,
+  "totalRevenue": 726410.66,
   "totalOrders": 17939,
   "totalItens": 23794,
   "ticketMedioBar": 40.49,
@@ -391,32 +391,93 @@ export const BAR_EMBED: BarHistoryData = {
       "itensVendidos": 0,
       "produtos": [],
       "metodosPagamento": []
+    },
+    {
+      "start": "2026-05-14",
+      "end": "2026-05-14",
+      "days": 1,
+      "orders": 276,
+      "revenue": 15072.0,
+      "ticketMedio": 0,
+      "itensVendidos": 0,
+      "produtos": [],
+      "metodosPagamento": []
+    },
+    {
+      "start": "2026-06-11",
+      "end": "2026-06-11",
+      "days": 1,
+      "orders": 750,
+      "revenue": 43138.0,
+      "ticketMedio": 0,
+      "itensVendidos": 0,
+      "produtos": [],
+      "metodosPagamento": []
+    },
+    {
+      "start": "2026-06-25",
+      "end": "2026-06-25",
+      "days": 1,
+      "orders": 172,
+      "revenue": 8562.0,
+      "ticketMedio": 0,
+      "itensVendidos": 0,
+      "produtos": [],
+      "metodosPagamento": []
+    },
+    {
+      "start": "2026-07-09",
+      "end": "2026-07-09",
+      "days": 1,
+      "orders": 534,
+      "revenue": 22433.0,
+      "ticketMedio": 0,
+      "itensVendidos": 0,
+      "produtos": [],
+      "metodosPagamento": []
+    },
+    {
+      "start": "2026-07-16",
+      "end": "2026-07-16",
+      "days": 1,
+      "orders": 420,
+      "revenue": 20068.0,
+      "ticketMedio": 0,
+      "itensVendidos": 0,
+      "produtos": [],
+      "metodosPagamento": []
     }
   ],
   "eventBarRevenue": {
-    "cmrnviefx0001tu4f996ot234": null,
-    "cmrnviepc0002tu4fi9cw4eok": null,
-    "cmrnviez40005tu4fp7m8c25k": {
-      "revenue": 29881.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmrnvif9v000atu4forpiez5j": {
-      "revenue": 10697.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmrnvifjr000dtu4f36wty4uh": {
-      "revenue": 4906.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmrnvifst000etu4ftquvta1b": null,
-    "cmrnvig2g000htu4f0ntp1itg": {
-      "revenue": 5008.0,
-      "transactions": 0,
-      "perCapita": 0
-    }
+    "sympla-2633353": {"revenue": 20821.0, "transactions": 0, "perCapita": 0},
+    "sympla-2675465": {"revenue": 22924.0, "transactions": 0, "perCapita": 0},
+    "sympla-2686304": {"revenue": 11837.0, "transactions": 0, "perCapita": 0},
+    "sympla-2729608": {"revenue": 21061.0, "transactions": 0, "perCapita": 0},
+    "sympla-2754645": {"revenue": 24940.0, "transactions": 0, "perCapita": 0},
+    "sympla-2795323": {"revenue": 11984.0, "transactions": 0, "perCapita": 0},
+    "sympla-2828931": {"revenue": 13639.0, "transactions": 0, "perCapita": 0},
+    "sympla-2862206": {"revenue": 2700.0, "transactions": 0, "perCapita": 0},
+    "sympla-2887562": {"revenue": 52241.0, "transactions": 0, "perCapita": 0},
+    "sympla-2942257": {"revenue": 12205.0, "transactions": 0, "perCapita": 0},
+    "sympla-2987008": {"revenue": 28126.0, "transactions": 0, "perCapita": 0},
+    "sympla-3028036": {"revenue": 19007.0, "transactions": 0, "perCapita": 0},
+    "sympla-3073170": {"revenue": 17167.0, "transactions": 0, "perCapita": 0},
+    "sympla-3113883": {"revenue": 65403.0, "transactions": 0, "perCapita": 0},
+    "sympla-3168880": {"revenue": 13415.0, "transactions": 0, "perCapita": 0},
+    "sympla-3209412": {"revenue": 17390.0, "transactions": 0, "perCapita": 0},
+    "sympla-3245686": {"revenue": 83578.0, "transactions": 0, "perCapita": 0},
+    "sympla-3272845": {"revenue": 18640.0, "transactions": 0, "perCapita": 0},
+    "sympla-3297245": {"revenue": 16951.0, "transactions": 0, "perCapita": 0},
+    "sympla-3332505": {"revenue": 25633.0, "transactions": 0, "perCapita": 0},
+    "sympla-3384296": {"revenue": 30328.0, "transactions": 0, "perCapita": 0},
+    "cm89a37dab087b8": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
+    "cm875260665fa5f": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
+    "sympla-3474070": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
+    "cm8ae3f1b0ada38": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
+    "cm842b46dd96f70": {"revenue": 20068.0, "transactions": 420, "perCapita": 31.65},
+    "sympla-2721616": null,
+    "sympla-2785141": null,
+    "sympla-3150968": null
   },
   "mensais": [
     {

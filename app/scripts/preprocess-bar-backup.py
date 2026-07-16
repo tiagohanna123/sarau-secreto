@@ -266,7 +266,7 @@ for ev in db_events:
                 "cm875260665fa5f": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
                 "sympla-3474070": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
                 "cm8ae3f1b0ada38": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
-                "cm842b46dd96f70": None,
+                "cm842b46dd96f70": {"revenue": 20068.0, "transactions": 420, "perCapita": 31.65},
             }
             if eid in yuzer_2026 and yuzer_2026[eid] is not None:
                 event_bar_export[eid] = yuzer_2026[eid]
@@ -319,7 +319,7 @@ mensais = sorted([{'mes': k, 'label': k, 'eventos': 1, 'orders': 0,
 bar_data = {
     'source': 'backup',
     'totalEvents': len(events_bar),
-    'totalRevenue': round(total_bar_revenue_matched, 2),
+    'totalRevenue': round(total_bar_revenue, 2),
     'totalOrders': total_orders,
     'totalItens': total_itens,
     'ticketMedioBar': SAFEDIV(total_bar_revenue, total_orders),
