@@ -1,0 +1,388 @@
+@import "tailwindcss";
+
+/* ─── Sarau Secreto — Fontes ─── */
+@font-face {
+  font-family: 'Anisette';
+  src: url('/fonts/anisette-bold-2.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Butik Display';
+  src: url('/fonts/ButikDisplayVF-Ups.woff2') format('woff2'),
+       url('/fonts/ButikDisplayVF-Ups.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Sarau Secreto — Jazz Dark Theme ─── */
+@theme {
+  --color-background: oklch(0.08 0 0);           /* #0a0a0a */
+  --color-foreground: oklch(0.95 0.01 80);
+  --color-muted: oklch(0.12 0.005 75);
+  --color-muted-foreground: oklch(0.50 0.03 80);
+
+  --color-gold: oklch(0.72 0.10 75);             /* #c8a96e dourado jazz */
+  --color-gold-dim: oklch(0.65 0.08 75);
+  --color-gold-glow: oklch(0.72 0.10 75 / 0.15);
+  --color-violet: oklch(0.55 0.22 290);          /* #8b5cf6 violeta secreto */
+  --color-violet-dim: oklch(0.45 0.18 290);
+  --color-violet-glow: oklch(0.55 0.22 290 / 0.15);
+
+  --color-accent: oklch(0.72 0.10 75);
+  --color-secondary: oklch(0.55 0.22 290);
+
+  --color-border: oklch(0.72 0.10 75 / 0.12);
+  --color-card: oklch(0.11 0.01 75);
+  --color-card-hover: oklch(0.14 0.015 75);
+
+  --color-success: oklch(0.70 0.18 145);
+  --color-warning: oklch(0.75 0.15 85);
+  --color-danger: oklch(0.65 0.22 25);
+
+  --font-display: 'Butik Display', 'Bodoni Moda', Georgia, serif;
+  --font-heading: 'Anisette', 'Fredoka', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ─── Fallback Safari < 15 (não suporta oklch) ─── */
+@supports not (color: oklch(0 0 0)) {
+  :root {
+    --color-background: #020202;
+    --color-foreground: #f2eee7;
+    --color-muted: #070604;
+    --color-muted-foreground: #6c6250;
+    --color-gold: #c99b5a;
+    --color-gold-dim: #ac8856;
+    --color-gold-glow: rgba(201, 155, 90, 0.15);
+    --color-violet: #764be5;
+    --color-violet-dim: #5937af;
+    --color-violet-glow: rgba(118, 75, 229, 0.15);
+    --color-accent: #c99b5a;
+    --color-secondary: #764be5;
+    --color-border: rgba(201, 155, 90, 0.12);
+    --color-card: #060402;
+    --color-card-hover: #0d0804;
+    --color-success: #45ba50;
+    --color-warning: #d9a514;
+    --color-danger: #f94144;
+  }
+}
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 300; letter-spacing: -0.01em; }
+
+/* ─── Sidebar ─── */
+.sidebar {
+  background: oklch(0.09 0.01 75);
+  border-right: 1px solid var(--color-border);
+  width: 220px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-logo {
+  padding: 1.5rem 1.25rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.25rem;
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  border-radius: 6px;
+  margin: 0 0.5rem;
+  transition: all 0.15s;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.nav-item:hover { background: var(--color-muted); color: var(--color-foreground); }
+.nav-item.active {
+  background: var(--color-gold-glow);
+  color: var(--color-gold);
+  border: 1px solid var(--color-gold-dim) / 0.3;
+}
+
+/* ─── Cards ─── */
+.kpi-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  cursor: default;
+}
+.kpi-card:hover {
+  background: var(--color-card-hover);
+  border-color: oklch(0.72 0.10 75 / 0.35);
+  transform: scale(1.02);
+}
+.section-card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+.section-card:hover {
+  border-color: oklch(0.72 0.10 75 / 0.2);
+}
+
+/* ─── Ripple Effect ─── */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.btn-ripple:active::after {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* Ripple built-in for all button classes */
+.btn-primary::after,
+.btn-ghost::after,
+.btn-violet::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.btn-primary:active::after,
+.btn-ghost:active::after,
+.btn-violet:active::after {
+  transform: scale(2.5);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* ─── Tab content fade ─── */
+.tab-fade-enter {
+  animation: tabFadeIn 0.2s ease-out both;
+}
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Buttons ─── */
+.btn-primary {
+  background: var(--color-gold);
+  color: oklch(0.08 0 0);
+  border: none;
+  border-radius: 7px;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: opacity 0.15s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary:hover { opacity: 0.85; transform: scale(1.02); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-ghost {
+  background: transparent;
+  color: var(--color-muted-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: all 0.15s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-ghost:hover { color: var(--color-foreground); border-color: oklch(0.72 0.10 75 / 0.3); transform: scale(1.02); }
+.btn-ghost:active { transform: scale(0.98); }
+.btn-violet {
+  background: var(--color-violet);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: opacity 0.15s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-violet:hover { opacity: 0.85; transform: scale(1.02); }
+.btn-violet:active { transform: scale(0.98); }
+
+/* ─── Inputs ─── */
+.input-field {
+  background: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  padding: 0.55rem 0.85rem;
+  color: var(--color-foreground);
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+.input-field:focus { border-color: var(--color-gold-dim); }
+.input-field::placeholder { color: var(--color-muted-foreground); }
+
+/* ─── Tags & Badges ─── */
+.badge-gold {
+  background: var(--color-gold-glow);
+  color: var(--color-gold);
+  border: 1px solid oklch(0.72 0.10 75 / 0.25);
+  border-radius: 4px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge-violet {
+  background: var(--color-violet-glow);
+  color: var(--color-violet);
+  border: 1px solid oklch(0.55 0.22 290 / 0.25);
+  border-radius: 4px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ─── Gold divider ─── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  opacity: 0.3;
+  margin: 1rem 0;
+}
+
+/* ─── Recharts override ─── */
+.recharts-cartesian-axis-tick-value { fill: oklch(0.50 0.03 80); font-size: 12px; }
+.recharts-legend-item-text { color: oklch(0.50 0.03 80) !important; fill: oklch(0.50 0.03 80) !important; }
+.recharts-tooltip-wrapper { outline: none; }
+
+/* ─── Animações Sarau ─── */
+
+/* Gold breathe — cards KPI respiram suavemente */
+@keyframes gold-breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.92; transform: scale(1.005); }
+}
+
+/* Gold glow — pulso de brilho dourado nos cards */
+@keyframes gold-glow {
+  0%, 100% { box-shadow: 0 0 0px rgba(200, 169, 110, 0); }
+  50% { box-shadow: 0 0 20px rgba(200, 169, 110, 0.08); }
+}
+
+/* Violet float — flutuação suave para elementos decorativos */
+@keyframes violet-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Gold shimmer — linha dourada pulsante */
+@keyframes gold-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Card fade-up — entrada suave */
+@keyframes card-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Classes de animação */
+.sarau-breathe {
+  animation: gold-breathe 5s ease-in-out infinite;
+}
+
+.sarau-glow {
+  animation: gold-glow 4s ease-in-out infinite;
+}
+
+.sarau-float {
+  animation: violet-float 6s ease-in-out infinite;
+}
+
+.sarau-float-delayed {
+  animation: violet-float 7s ease-in-out 2s infinite;
+}
+
+.sarau-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(200, 169, 110, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: gold-shimmer 3s ease-in-out infinite;
+}
+
+.sarau-fade-up {
+  animation: card-fade-up 0.5s ease-out both;
+}
+
+.sarau-fade-up-1 { animation-delay: 0.1s; }
+.sarau-fade-up-2 { animation-delay: 0.2s; }
+.sarau-fade-up-3 { animation-delay: 0.3s; }
+.sarau-fade-up-4 { animation-delay: 0.4s; }
+
+/* ─── Table ─── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.data-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  color: var(--color-muted-foreground);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-border);
+}
+.data-table td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid oklch(0.72 0.10 75 / 0.06);
+}
+.data-table tr:hover td { background: var(--color-muted); }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: oklch(0.72 0.10 75 / 0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(0.72 0.10 75 / 0.4); }

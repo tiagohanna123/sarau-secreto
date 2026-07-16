@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id            String        @id @default(cuid())
+  title         String
+  slug          String        @unique
+  description   String?
+  date          DateTime
+  endDate       DateTime?
+  location      String?
+  latitude      Float?
+  longitude     Float?
+  capacity      Int?
+  soldCount     Int?
+  totalRevenue  Float?
+  symplaUserId  String?
+  symplaEventId String?
+  symplaUrl     String?
+  status        String        @default("draft")
+  imageUrl      String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  barSales      BarSale[]
+  imports       ImportBatch[]
+  products      Product[]
+  tickets       Ticket[]
+  artistJoins   EventArtistJoin[]
+}
+
+model Ticket {
+  id           String    @id @default(cuid())
+  eventId      String
+  buyerName    String
+  buyerEmail   String
+  buyerPhone   String?
+  ticketType   String
+  quantity     Int
+  unitPrice    Float
+  totalPaid    Float
+  fee          Float?
+  purchaseDate DateTime
+  checkedIn    Boolean   @default(false)
+  checkInTime  DateTime?
+  externalId   String?
+  importBatch  String?
+  createdAt    DateTime  @default(now())
+  event        Event     @relation(fields: [eventId], references: [id])
+}
+
+model Product {
+  id        String    @id @default(cuid())
+  eventId   String
+  name      String
+  category  String
+  unitCost  Float?
+  unitPrice Float
+  createdAt DateTime  @default(now())
+  sales     BarSale[]
+  event     Event     @relation(fields: [eventId], references: [id])
+}
+
+model BarSale {
+  id            String    @id @default(cuid())
+  eventId       String
+  productId     String?
+  productName   String
+  quantity      Int
+  unitPrice     Float
+  total         Float
+  saleTime      DateTime?
+  paymentMethod String?
+  importBatch   String?
+  createdAt     DateTime  @default(now())
+  product       Product?  @relation(fields: [productId], references: [id])
+  event         Event     @relation(fields: [eventId], references: [id])
+}
+
+model User {
+  id          String    @id @default(cuid())
+  email       String    @unique
+  password    String
+  name        String
+  role        String    @default("viewer")
+  avatar      String?
+  lastLoginAt DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model EventArtistJoin {
+  id        String   @id @default(cuid())
+  eventId   String
+  artistId  String
+  createdAt DateTime @default(now())
+  event     Event    @relation(fields: [eventId], references: [id])
+  artist    Artist   @relation(fields: [artistId], references: [id])
+
+  @@unique([eventId, artistId])
+}
+
+model ImportBatch {
+  id           String    @id @default(cuid())
+  source       String
+  eventId      String?
+  filename     String?
+  recordsCount Int
+  status       String    @default("pending")
+  errorLog     String?
+  metadata     String?
+  importedBy   String?
+  createdAt    DateTime  @default(now())
+  completedAt  DateTime?
+  event        Event?    @relation(fields: [eventId], references: [id])
+}
+
+model SymplaSync {
+  id          String   @id @default(cuid())
+  lastSyncAt  DateTime
+  eventsCount Int      @default(0)
+  ordersCount Int      @default(0)
+  status      String   @default("idle")
+  errorLog    String?
+  createdAt   DateTime @default(now())
+}
+
+model Artist {
+  id            String   @id @default(cuid())
+  name          String
+  genre         String?
+  contact       String?
+  instagram     String?
+  bio           String?
+  eventCount    Int      @default(0)
+  totalAudience Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  eventJoins    EventArtistJoin[]
+}

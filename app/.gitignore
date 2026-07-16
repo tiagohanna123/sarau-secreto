@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+*.db
+*.sqlite
+.tmp
+
+__pycache__/
+*.db
+*.sqlite
+.env
