@@ -320,38 +320,5 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     }
   ],
-  "tickets": {
-    "cmos4gtzk0002tuzo6qahavd8": {
-      "count": 1,
-      "revenue": 33.0
-    },
-    "cmos4gumu0005tuzowyzny7xa": {
-      "count": 1,
-      "revenue": 110.0
-    },
-    "cmos4gv9d0008tuzod1v6vohy": {
-      "count": 1,
-      "revenue": 33.0
-    },
-    "cmos4gwit000ctuzobv5wgzyb": {
-      "count": 1,
-      "revenue": 88.0
-    },
-    "cmrns8r5b0002tuja561dgd53": {
-      "count": 1,
-      "revenue": 33.0
-    },
-    "cmrns8raz0005tujacgq3s8gd": {
-      "count": 2,
-      "revenue": 198.0
-    },
-    "cmrns8rhb000atujakw63qraa": {
-      "count": 1,
-      "revenue": 33.0
-    },
-    "cmrns8rsb000etujaljig701d": {
-      "count": 1,
-      "revenue": 88.0
-    }
-  }
+  "tickets": {}
 }
