@@ -5,7 +5,7 @@ import json, re, os, subprocess, sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-PROJECT = Path("/home/ser/projetos/sarau-secreto-novo")
+PROJECT = Path("/home/ser/sistema-sarau-secreto")
 APP_LIB = PROJECT / "app/src/lib"
 DB_EMBED = APP_LIB / "db-embed.ts"
 BAR_EMBED = APP_LIB / "bar-embed.ts"

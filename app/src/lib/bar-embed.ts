@@ -12,7 +12,7 @@ export interface EventBarRevenue {
 export const BAR_EMBED: BarHistoryData = {
   "source": "backup",
   "totalEvents": 34,
-  "totalRevenue": 743843.32,
+  "totalRevenue": 580697.66,
   "totalOrders": 17939,
   "totalItens": 23794,
   "ticketMedioBar": 40.49,
@@ -394,163 +394,10 @@ export const BAR_EMBED: BarHistoryData = {
     }
   ],
   "eventBarRevenue": {
-    "sympla-3384296": {
-      "revenue": 30327.66,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-3332505": {
-      "revenue": 25633.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-3297245": null,
-    "sympla-3272845": {
-      "revenue": 18640.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-3245686": {
-      "revenue": 83578.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-3209412": {
-      "revenue": 17390.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-3168880": {
-      "revenue": 13415.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-3150968": null,
-    "sympla-3113883": {
-      "revenue": 65403.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-3073170": {
-      "revenue": 17167.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-3060095": {
-      "revenue": 17167.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-3028036": {
-      "revenue": 19007.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2987008": {
-      "revenue": 28126.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmowubrg505sftua7duoe1ojk": {
-      "revenue": 1155.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2942257": {
-      "revenue": 12205.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2887562": {
-      "revenue": 52241.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2862206": {
-      "revenue": 2700.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2828931": {
-      "revenue": 13639.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2795323": {
-      "revenue": 11984.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2785141": null,
-    "sympla-2754645": {
-      "revenue": 24940.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2729608": {
-      "revenue": 21061.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2721616": null,
-    "sympla-2686304": {
-      "revenue": 11837.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2675465": {
-      "revenue": 22924.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "sympla-2633353": {
-      "revenue": 20821.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmowubs7u0a0wtua7mzroohak": {
-      "revenue": 8350.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmowubsat0a9qtua7cydohe8k": {
-      "revenue": 40008.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmowubsej0b28tua7nxx9qkg8": {
-      "revenue": 14653.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmowubshe0bgxtua70qoojntf": {
-      "revenue": 19031.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmowubsjx0bxbtua7thjxu0s1": {
-      "revenue": 9100.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmowubsml0c80tua7xboaj3ew": {
-      "revenue": 24491.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmos4gx76000ftuzo0zg533i4": {
-      "revenue": 5008.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmos4gwit000ctuzobv5wgzyb": null,
-    "cmos4gvwi000btuzoc8pt324j": {
-      "revenue": 4906.0,
-      "transactions": 0,
-      "perCapita": 0
-    },
-    "cmowubsuk0d4ktua7kgqhk7ad": {
-      "revenue": 16030.0,
+    "cmos4gt0l0001tuzohf8se5zp": null,
+    "cmos4gtzk0002tuzo6qahavd8": null,
+    "cmos4gumu0005tuzowyzny7xa": {
+      "revenue": 29881.0,
       "transactions": 0,
       "perCapita": 0
     },
@@ -559,23 +406,131 @@ export const BAR_EMBED: BarHistoryData = {
       "transactions": 0,
       "perCapita": 0
     },
-    "cmos4gumu0005tuzowyzny7xa": {
-      "revenue": 29881.0,
+    "cmos4gvwi000btuzoc8pt324j": {
+      "revenue": 4906.0,
       "transactions": 0,
       "perCapita": 0
     },
-    "cmos4gtzk0002tuzo6qahavd8": null,
-    "cmos4gt0l0001tuzohf8se5zp": null,
-    "sarau-secreto-convida-sotam": null,
-    "sarau-secreto-convida-ellen-oleria": null,
-    "sala-secreta": null,
-    "sarau-secreto-solsticio-de-inverno": null,
-    "sarau-secreto-convida-magrao": null,
-    "sarau-secreto-maio-2026": {
-      "revenue": 30327.66,
+    "cmos4gwit000ctuzobv5wgzyb": null,
+    "cmos4gx76000ftuzo0zg533i4": {
+      "revenue": 5008.0,
       "transactions": 0,
       "perCapita": 0
-    }
+    },
+    "sympla-2633353": {
+      "revenue": 20821.0,
+      "transactions": 0,
+      "perCapita": 41.23
+    },
+    "sympla-2675465": {
+      "revenue": 22924.0,
+      "transactions": 0,
+      "perCapita": 37.77
+    },
+    "sympla-2686304": {
+      "revenue": 11837.0,
+      "transactions": 0,
+      "perCapita": 26.3
+    },
+    "sympla-2721616": null,
+    "sympla-2729608": {
+      "revenue": 21061.0,
+      "transactions": 0,
+      "perCapita": 42.04
+    },
+    "sympla-2754645": {
+      "revenue": 24940.0,
+      "transactions": 0,
+      "perCapita": 42.41
+    },
+    "sympla-2785141": null,
+    "sympla-2795323": {
+      "revenue": 11984.0,
+      "transactions": 0,
+      "perCapita": 35.04
+    },
+    "sympla-2828931": {
+      "revenue": 13639.0,
+      "transactions": 0,
+      "perCapita": 43.71
+    },
+    "sympla-2862206": {
+      "revenue": 2700.0,
+      "transactions": 0,
+      "perCapita": 30.0
+    },
+    "sympla-2887562": {
+      "revenue": 52241.0,
+      "transactions": 0,
+      "perCapita": 38.38
+    },
+    "sympla-2942257": {
+      "revenue": 12205.0,
+      "transactions": 0,
+      "perCapita": 44.06
+    },
+    "sympla-2987008": {
+      "revenue": 28126.0,
+      "transactions": 0,
+      "perCapita": 44.79
+    },
+    "sympla-3028036": {
+      "revenue": 19007.0,
+      "transactions": 0,
+      "perCapita": 50.42
+    },
+    "sympla-3060095": {
+      "revenue": 17167.0,
+      "transactions": 0,
+      "perCapita": 10.47
+    },
+    "sympla-3073170": {
+      "revenue": 17167.0,
+      "transactions": 0,
+      "perCapita": 70.94
+    },
+    "sympla-3113883": {
+      "revenue": 65403.0,
+      "transactions": 0,
+      "perCapita": 43.54
+    },
+    "sympla-3150968": null,
+    "sympla-3168880": {
+      "revenue": 13415.0,
+      "transactions": 0,
+      "perCapita": 45.94
+    },
+    "sympla-3209412": {
+      "revenue": 17390.0,
+      "transactions": 0,
+      "perCapita": 41.4
+    },
+    "sympla-3245686": {
+      "revenue": 83578.0,
+      "transactions": 0,
+      "perCapita": 44.93
+    },
+    "sympla-3272845": {
+      "revenue": 18640.0,
+      "transactions": 0,
+      "perCapita": 40.97
+    },
+    "sympla-3297245": null,
+    "sympla-3332505": {
+      "revenue": 25633.0,
+      "transactions": 0,
+      "perCapita": 42.51
+    },
+    "sympla-3384296": {
+      "revenue": 30327.66,
+      "transactions": 0,
+      "perCapita": 44.93
+    },
+    "cm89a37dab087b8": null,
+    "cm875260665fa5f": null,
+    "sympla-3474070": null,
+    "cm8ae3f1b0ada38": null,
+    "cm842b46dd96f70": null
   },
   "mensais": [
     {
