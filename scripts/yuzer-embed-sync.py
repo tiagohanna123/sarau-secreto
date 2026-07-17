@@ -123,9 +123,8 @@ def main():
     for e in events:
         date_entries[e["start"]] = {"revenue":round(e["revenue"],2),"transactions":e["orders"],"perCapita":e["ticketMedio"]}
 
+    # Merges: API date entries > known defaults > existing
     final_rev = {}
-    for k, v in existing_rev.items():
-        if k.startswith("sympla-"): final_rev[k] = v
     for k, v in sorted(date_entries.items(), reverse=True):
         final_rev[k] = v
 
@@ -139,13 +138,7 @@ def main():
     }
     for k, default_v in known_defaults.items():
         if k not in final_rev:
-            api_v = date_entries.get(k.replace("sympla-", ""))
-            if api_v is not None:
-                final_rev[k] = api_v
-            elif k in existing_rev and existing_rev[k] != "null":
-                final_rev[k] = existing_rev[k]
-            else:
-                final_rev[k] = default_v
+            final_rev[k] = default_v
 
     month_map = defaultdict(lambda:{"e":set(),"o":0,"r":0.0})
     for e in events:

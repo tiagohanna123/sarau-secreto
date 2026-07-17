@@ -465,25 +465,52 @@ const ENRICH_PATHS = new Set([
   '/events', '/insights/overview', '/insights/comparison', '/insights/event/',
 ])
 
+const enrichPaths = new Set(['/events', '/insights/overview', '/insights/comparison'])
+const enrichPathPrefixes = ['/insights/event/', '/events/']
+
 async function requestOrFallback(path: string, options?: RequestInit): Promise<any> {
-  // Enriquecimento APENAS no fallback embed — a API do Cloudflare Function
-  // ja retorna dados com bar corretamente mergeados. Re-enriquecer sobreescreve
-  // dados corretos com dados do bar-embed.ts local (que pode estar desatualizado).
-  async function enrichApiResponse(data: any, _path: string) {
-    return data
-  }
-
-  if (!isProduction) {
-    try {
-      const data = await request(path, options)
-      return data
-    } catch {
-      return computeFromEmbed(path)
-    }
-  }
-
   try {
     const data = await request(path, options)
+
+    // Enriquece resposta da API com dados de bar do bar-embed.ts
+    // A API (Fastify + Prisma) nao tem dados de BarSale na tabela,
+    // entao o barRevenue vem do bar-embed.ts que tem dados reais do Yuzer.
+    if (path === '/events' && Array.isArray(data)) {
+      return enrichWithBarEvents(data)
+    }
+    if (path === '/insights/overview' && data?.events) {
+      const enriched = enrichWithBarEvents(data.events)
+      const totalTickets = enriched.reduce((s: number, e: any) => s + (e.ticketsSold || 0), 0)
+      const totalBarRev = enriched.reduce((s: number, e: any) => s + (e.barRevenue || 0), 0)
+      return {
+        ...data,
+        events: enriched,
+        aggregates: {
+          ...data.aggregates,
+          totalBarRevenue: totalBarRev,
+          totalRevenue: (data.aggregates?.totalTicketRevenue || 0) + totalBarRev,
+          perCapitaBar: totalTickets > 0 ? Math.round((totalBarRev / totalTickets) * 100) / 100 : 0,
+        },
+      }
+    }
+    if (path === '/insights/comparison' && Array.isArray(data)) {
+      return enrichWithBarEvents(data)
+    }
+    if (path.startsWith('/insights/event/') && data?.event && data?.kpis) {
+      const enrichedArray = enrichWithBarEvents([data.event])
+      if (enrichedArray.length > 0) {
+        const enriched = enrichedArray[0]
+        data.event.barRevenue = enriched.barRevenue
+        data.event.barTransactions = enriched.barTransactions
+        data.event.totalRevenue = (data.event.ticketRevenue || 0) + (enriched.barRevenue || 0)
+        data.event.perCapitaBar = enriched.perCapitaBar
+        data.kpis.barRevenue = enriched.barRevenue
+        data.kpis.barTransactions = enriched.barTransactions
+        data.kpis.totalRevenue = (data.kpis.ticketRevenue || 0) + (enriched.barRevenue || 0)
+        data.kpis.perCapitaBar = enriched.perCapitaBar
+      }
+    }
+
     return data
   } catch {
     return computeFromEmbed(path)
