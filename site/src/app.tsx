@@ -53,6 +53,8 @@ export function App() {
         <HomePage onScrollTo={scrollTo} />
         <AdBannerHero />
         <EventosPage />
+        <CuradoriaPage />
+        <AdBannerMiddle index={0} />
         <div className="max-w-7xl mx-auto px-5">
           <div className="flex gap-6 items-start">
             <div className="flex-1 min-w-0">
@@ -65,8 +67,6 @@ export function App() {
             </div>
           </div>
         </div>
-        <AdBannerMiddle index={0} />
-        <CuradoriaPage />
         <AdBannerMiddle index={1} />
       </main>
       <AdBannerFooter />

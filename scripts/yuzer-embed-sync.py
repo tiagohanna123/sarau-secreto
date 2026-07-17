@@ -135,7 +135,7 @@ def main():
         "sympla-3474070": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
         "sympla-3477015": None,
         "sympla-3492296": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
-        "sympla-3500838": None,
+        "sympla-3500838": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
     }
     for k, default_v in known_defaults.items():
         if k not in final_rev:

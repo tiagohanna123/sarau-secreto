@@ -3,21 +3,22 @@ export function Footer() {
     <footer className="border-t border-border/50 bg-black">
       <div className="max-w-7xl mx-auto px-5 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="ss-emblem"><span>SS</span></div>
-              <span className="text-xs tracking-[0.25em] uppercase text-muted-foreground">2026</span>
-            </div>
+          <div className="col-span-2 md:col-span-1">
+            <img
+              src="./sarau-logo-white.png"
+              alt="Sarau Secreto"
+              className="h-10 w-auto opacity-70 mb-4"
+            />
             <p className="text-[0.65rem] text-muted-foreground leading-relaxed max-w-[200px]">
-              A experiência musical mais exclusiva do Brasil. De Brasília para o mundo.
+              De Brasília para o mundo. A experiência musical mais exclusiva do Brasil.
             </p>
           </div>
           <div>
             <h4 className="text-[0.5rem] tracking-[0.2em] uppercase text-muted-foreground mb-3">Navegar</h4>
             <div className="flex flex-col gap-1.5">
-              {['O Sarau', 'Eventos', 'Artistas', 'Loja', 'Anuncie'].map(item => (
+              {['O Sarau', 'Eventos', 'Loja', 'Artistas'].map(item => (
                 <button key={item}
-                  onClick={() => document.getElementById(item === 'O Sarau' ? 'sobre' : item === 'Loja' ? 'loja' : item === 'Anuncie' ? 'anuncie' : item.toLowerCase())?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => document.getElementById(item === 'O Sarau' ? 'sobre' : item.toLowerCase())?.scrollIntoView({ behavior: 'smooth' })}
                   className="text-[0.6rem] text-muted-foreground hover:text-foreground transition-colors text-left">
                   {item}
                 </button>

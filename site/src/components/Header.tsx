@@ -4,9 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 const NAV_ITEMS = [
   { label: 'O Sarau', href: 'sobre' },
   { label: 'Eventos', href: 'eventos' },
-  { label: 'Artistas', href: 'artistas' },
   { label: 'Loja', href: 'loja' },
-  { label: 'Anuncie', href: 'anuncie' },
+  { label: 'Artistas', href: 'artistas' },
 ]
 
 export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
@@ -43,10 +42,12 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
     >
       <div className="max-w-7xl mx-auto px-5 flex items-center justify-between h-16">
         <button onClick={() => { onScrollTo('hero'); setOpen(false) }}
-          className="flex items-center gap-2.5 group">
-          <div className="ss-emblem shadow-[0_0_12px_rgba(220,38,38,0.1)] group-hover:shadow-[0_0_20px_rgba(220,38,38,0.2)] transition-shadow duration-500">
-            <span>SS</span>
-          </div>
+          className="flex items-center gap-3 group">
+          <img
+            src="./sarau-logo-white.png"
+            alt="Sarau Secreto"
+            className="h-7 w-auto opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+          />
           <span className="hidden sm:inline text-[0.5rem] text-muted-foreground tracking-[0.25em] uppercase"
             style={{ opacity: scrolled ? 0.5 : 0.25 }}>
             2026
