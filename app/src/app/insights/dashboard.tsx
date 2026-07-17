@@ -9,9 +9,7 @@ import { useData } from '@/lib/data-context'
 import {
   Skel, fmt, fmtNum, GOLD, PALETA, PageHeader, SarauSection, SarauKPI, EmptyState, pct, pctAbs,
 } from '@/lib/ui'
-import {
-  DollarSign, TrendingUp, TrendingDown, Wine, Sparkles, CalendarDays, UserMinus,
-} from 'lucide-react'
+import { CalendarDays, TrendingUp, TrendingDown, Wine, Sparkles, UserMinus, Target, Clock } from 'lucide-react'
 import { parseISO, isWithinInterval } from 'date-fns'
 
 /* ── Tooltip Theme ── */
@@ -88,7 +86,7 @@ function Sparkline({ data, color }: { data: { label: string; revenue: number }[]
 /* ── Componente Principal ──────────────────────────── */
 
 export function Dashboard() {
-  const { barData: data, loading } = useData()
+  const { barData: data, loading, events } = useData()
   const { period, dateRange } = usePeriod()
 
   /* ── Dados filtrados por período ── */
@@ -316,6 +314,48 @@ export function Dashboard() {
           </p>
         </div>
       </div>
+
+      {/* ═══ Próximo Evento ═══ */}
+        {(() => {
+          const agora = new Date()
+          const proximo = events
+            .filter(ev => ev.date && new Date(ev.date + 'T23:59:59') >= agora)
+            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0]
+          if (!proximo) return null
+
+          const diffMs = new Date(proximo.date + 'T23:59:59').getTime() - agora.getTime()
+          const diffDias = Math.ceil(diffMs / (1000 * 60 * 60 * 24))
+          const diffLabel = diffDias <= 0 ? 'Hoje!' : diffDias === 1 ? 'Amanhã' : `${diffDias} dias`
+
+          return (
+            <div className="bg-card border border-border rounded-xl p-4 mb-6 transition-all hover:border-gold/35">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="bg-gold/10 rounded-lg p-2.5">
+                    <Target size={20} className="text-gold" />
+                  </div>
+                  <div>
+                    <p className="text-[9px] text-gold uppercase tracking-widest mb-1">Próximo Evento</p>
+                    <p className="text-sm font-bold text-foreground">{proximo.title}</p>
+                    <p className="text-[11px] text-muted-foreground mt-0.5 flex items-center gap-1.5">
+                      <CalendarDays size={11} />
+                      {new Date(proximo.date).toLocaleDateString('pt-BR', {
+                        weekday: 'long', day: '2-digit', month: 'long'
+                      })}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right shrink-0">
+                  <div className="flex items-center gap-1.5 justify-end">
+                    <Clock size={12} className="text-gold" />
+                    <span className="text-lg font-bold text-gold">{diffDias}</span>
+                  </div>
+                  <p className="text-[9px] text-muted-foreground uppercase tracking-wider">{diffLabel}</p>
+                </div>
+              </div>
+            </div>
+          )
+        })()}
 
       {/* ═══ Gráficos ═══ */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

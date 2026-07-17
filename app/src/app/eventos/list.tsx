@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react'
 import { useData } from '@/lib/data-context'
 import type { FlatEvent } from '@/lib/data-context'
+import { SarauInput } from '@/lib/design-system'
+import { Search, X } from 'lucide-react'
 
 const fmtBRL = (v: number) =>
   v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })
@@ -46,8 +48,19 @@ export function EventsPage({
   const { events: dataEvents, loading, source } = useData()
   const [hovered, setHovered] = useState<string | null>(null)
   const [sortBy, setSortBy] = useState<'date' | 'revenue' | 'bar' | 'perCapita'>('date')
+  const [search, setSearch] = useState('')
+  const [monthFilter, setMonthFilter] = useState('')
 
-  // Transforma FlatEvent[] → EventData[] + ordena
+  // Extrai meses únicos para o filtro
+  const mesesDisponiveis = useMemo(() => {
+    const set = new Set<string>()
+    for (const ev of dataEvents || []) {
+      if (ev.date) set.add(ev.date.slice(0, 7)) // "YYYY-MM"
+    }
+    return [...set].sort((a, b) => b.localeCompare(a))
+  }, [dataEvents])
+
+  // Transforma FlatEvent[] → EventData[] + filtra + ordena
   const sorted = useMemo(() => {
     const mapped = (dataEvents || []).map((ev: FlatEvent) => ({
       id: ev.id,
@@ -66,7 +79,16 @@ export function EventsPage({
       status: ev.status ?? 'completed',
     }))
 
-    return [...mapped].sort((a, b) => {
+    return [...mapped]
+      .filter(ev => {
+        if (search) {
+          const q = search.toLowerCase()
+          if (!ev.title.toLowerCase().includes(q) && !ev.dateLabel.toLowerCase().includes(q)) return false
+        }
+        if (monthFilter && ev.date && ev.date.slice(0, 7) !== monthFilter) return false
+        return true
+      })
+      .sort((a, b) => {
       if (sortBy === 'revenue') return b.total - a.total
       if (sortBy === 'bar') return b.barRevenue - a.barRevenue
       if (sortBy === 'perCapita') return b.perCapitaBar - a.perCapitaBar
@@ -117,7 +139,36 @@ export function EventsPage({
               {sorted.length} edições · {totalTickets.toLocaleString('pt-BR')} ingressos · {fmtBRL(totalGeral)} receita total
             </p>
           </div>
-          {/* Sort controls */}
+          <div className="flex items-center gap-2">
+            {/* Search + Filter */}
+            <div className="relative hidden sm:block">
+              <Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
+              <input
+                type="text"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="Buscar evento..."
+                className="w-40 bg-muted border border-border rounded-lg pl-7 pr-7 py-1.5 text-[11px] text-foreground placeholder:text-muted-foreground outline-none focus:border-gold-dim transition-colors"
+              />
+              {search && (
+                <button onClick={() => setSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                  <X size={12} />
+                </button>
+              )}
+            </div>
+            <select
+              value={monthFilter}
+              onChange={e => setMonthFilter(e.target.value)}
+              className="bg-muted border border-border rounded-lg px-2 py-1.5 text-[11px] text-foreground outline-none focus:border-gold-dim transition-colors"
+            >
+              <option value="">Todos os meses</option>
+              {mesesDisponiveis.map(m => {
+                const [y, mo] = m.split('-')
+                const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+                return <option key={m} value={m}>{meses[parseInt(mo)-1]}/{y}</option>
+              })}
+            </select>
+            {/* Sort controls */}
           <div className="flex items-center gap-1 text-[10px]">
             <span className="text-muted-foreground">Ordenar:</span>
             {(['date', 'revenue', 'bar', 'perCapita'] as const).map(s => (
@@ -128,6 +179,7 @@ export function EventsPage({
             ))}
           </div>
         </div>
+      </div>
       </header>
 
       {/* KPIs estratégicos */}
@@ -146,6 +198,58 @@ export function EventsPage({
           </div>
         ))}
       </div>
+
+      {/* Snapshot Mensal (quando filtrado por mês) */}
+      {(() => {
+        if (!monthFilter) return null
+        const mesLabel = mesesDisponiveis.find(m => m === monthFilter)
+        if (!mesLabel) return null
+        const [yr, mo] = monthFilter.split('-')
+        const nomeMes = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'][parseInt(mo)-1]
+        const eventosMes = sorted.filter(ev => ev.date && ev.date.slice(0, 7) === monthFilter)
+        const qtd = eventosMes.length
+        const recTotal = eventosMes.reduce((s, e) => s + e.revenue + e.barRevenue, 0)
+        const recTicket = eventosMes.reduce((s, e) => s + e.revenue, 0)
+        const recBar = eventosMes.reduce((s, e) => s + e.barRevenue, 0)
+        const ingTotal = eventosMes.reduce((s, e) => s + e.tickets, 0)
+        const barPctMes = recTotal > 0 ? Math.round(recBar / recTotal * 100) : 0
+        const ticketMedioMes = ingTotal > 0 ? recTotal / ingTotal : 0
+        const barPerCapMes = ingTotal > 0 ? recBar / ingTotal : 0
+
+        return (
+          <div className="bg-card border border-border rounded-xl p-4 mb-6">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-gold text-lg">📅</span>
+              <div>
+                <p className="text-[9px] text-gold uppercase tracking-widest">{nomeMes} {yr}</p>
+                <p className="text-[10px] text-muted-foreground">{qtd} evento{qtd !== 1 ? 's' : ''} neste mês</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="bg-white/[0.03] rounded-lg p-3 text-center">
+                <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Receita</p>
+                <p className="text-sm font-bold text-gold">{fmtBRL(recTotal)}</p>
+                <p className="text-[8px] text-muted-foreground">{fmtBRL(recTicket)} ingressos · {fmtBRL(recBar)} bar ({barPctMes}%)</p>
+              </div>
+              <div className="bg-white/[0.03] rounded-lg p-3 text-center">
+                <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Ingressos</p>
+                <p className="text-sm font-bold">{ingTotal.toLocaleString('pt-BR')}</p>
+                <p className="text-[8px] text-muted-foreground">média de {Math.round(ingTotal / qtd)}/evento</p>
+              </div>
+              <div className="bg-white/[0.03] rounded-lg p-3 text-center">
+                <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Ticket Total</p>
+                <p className="text-sm font-bold">{fmtBRLc(ticketMedioMes)}</p>
+                <p className="text-[8px] text-muted-foreground">receita total / ingresso</p>
+              </div>
+              <div className="bg-white/[0.03] rounded-lg p-3 text-center">
+                <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Bar por Pessoa</p>
+                <p className="text-sm font-bold text-success">{fmtBRLc(barPerCapMes)}</p>
+                <p className="text-[8px] text-muted-foreground">receita bar / ingresso</p>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
 
       {/* Lista de eventos */}
       <div className="space-y-3">

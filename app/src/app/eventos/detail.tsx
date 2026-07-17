@@ -324,6 +324,53 @@ function enrichEvent(ev: FlatEvent): EnrichedEvent {
 
 // --- Top Produtos ---
 
+function LucroCard({ ev }: { ev: EnrichedEvent }) {
+  const CMV_BAR = 0.42
+  const TAXA_SYMPLA = 0.08
+  const CUSTO_PRODUCAO = 12000
+
+  const total = ev.ticketRevenue + ev.barRevenue
+  const custoSympla = ev.ticketRevenue * TAXA_SYMPLA
+  const cmvBar = ev.barRevenue * CMV_BAR
+  const custoTotal = custoSympla + cmvBar + CUSTO_PRODUCAO
+  const lucro = total - custoTotal
+  const margem = total > 0 ? (lucro / total) * 100 : 0
+  const margemOp = total > 0 ? ((total - custoSympla - cmvBar) / total) * 100 : 0
+
+  return (
+    <div className="bg-card border border-border rounded-xl p-4">
+      <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+        Lucratividade Estimada
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div>
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Receita Total</p>
+          <p className="mt-0.5 text-sm font-bold text-white">{fmt(ev.totalRevenue)}</p>
+        </div>
+        <div>
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Custos Fixos</p>
+          <p className="mt-0.5 text-sm font-bold text-red-400">{fmt(custoTotal)}</p>
+          <p className="text-[8px] text-muted-foreground">Sympla {fmt(custoSympla)} + CMV {fmt(cmvBar)} + Produção {fmt(CUSTO_PRODUCAO)}</p>
+        </div>
+        <div>
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Lucro Líquido</p>
+          <p className={`mt-0.5 text-sm font-bold ${lucro >= 0 ? 'text-success' : 'text-red-400'}`}>{fmt(lucro)}</p>
+        </div>
+        <div>
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Margem</p>
+          <p className="mt-0.5 text-sm font-bold text-success">{margem.toFixed(1)}%</p>
+          <p className="text-[8px] text-muted-foreground">{margemOp.toFixed(1)}% operacional</p>
+        </div>
+      </div>
+      <div className="mt-3 h-2 w-full bg-white/10 rounded-full overflow-hidden">
+        <div className={`h-full rounded-full transition-all ${lucro >= 0 ? 'bg-success' : 'bg-red-400'}`}
+          style={{ width: `${Math.min(100, Math.max(0, (lucro / ev.totalRevenue) * 100 * 2))}%` }} />
+      </div>
+      <p className="mt-1 text-[8px] text-muted-foreground">Barra proporcional ao lucro (200% = margem de 100%). Custos: Sympla {TAXA_SYMPLA*100}%, CMV bar {CMV_BAR*100}%, Produção R$ {CUSTO_PRODUCAO}/evento.</p>
+    </div>
+  )
+}
+
 function ProdutosCard({ produtos, barRevenue }: { produtos?: { name: string; qty: number; total: number; pct: number }[]; barRevenue: number }) {
   if (!produtos?.length || barRevenue <= 0) return null
 
@@ -454,6 +501,13 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
           color="text-success"
         />
       </div>
+
+      {/* Lucratividade */}
+      {(ev.ticketRevenue > 0 || ev.barRevenue > 0) && (
+        <div className="mb-6">
+          <LucroCard ev={ev} />
+        </div>
+      )}
 
       {/* Row 2: Split + Ocupação */}
       <div className="mb-6 grid gap-4 lg:grid-cols-2">

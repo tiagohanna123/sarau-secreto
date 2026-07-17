@@ -10,6 +10,15 @@ const BLUE = '#60a5fa'
 const PINK = '#f472b6'
 const COLORS = [GOLD, GREEN, BLUE, VIOLET, PINK]
 
+function downloadCSV(data: string, filename: string) {
+  const blob = new Blob([data], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url; a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
 function Card({ label, value, sub, badge }: { label: string; value: string; sub?: string; badge?: string }) {
   return (
     <div className="bg-card border border-border rounded-xl p-4">
@@ -119,8 +128,31 @@ export function FinanceiroPage() {
   return (
     <div className="p-4 sm:p-6 max-w-7xl mx-auto">
       <div className="mb-6">
-        <h1 className="text-lg font-semibold text-foreground tracking-tight">Financeiro</h1>
-        <p className="text-[11px] text-muted-foreground mt-1">{totalEventos} eventos · {eventosComBar} com dados de bar · {totalIngressos.toLocaleString('pt-BR')} ingressos</p>
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-lg font-semibold text-foreground tracking-tight">Financeiro</h1>
+            <p className="text-[11px] text-muted-foreground mt-1">{totalEventos} eventos · {eventosComBar} com dados de bar · {totalIngressos.toLocaleString('pt-BR')} ingressos</p>
+          </div>
+          <button
+            onClick={() => {
+              const rows = [['Data','Evento','Bilheteria','Bar','Total','Ingressos','Bar/Pessoa']]
+              for (const ev of events) {
+                const total = (ev.ticketRevenue || 0) + (ev.barRevenue || 0)
+                const bpc = ev.ticketsSold > 0 && ev.barRevenue > 0 ? (ev.barRevenue / ev.ticketsSold).toFixed(2) : '0'
+                rows.push([
+                  ev.date || '', ev.title,
+                  String(ev.ticketRevenue || 0), String(ev.barRevenue || 0), String(total),
+                  String(ev.ticketsSold || 0), bpc,
+                ])
+              }
+              const csv = rows.map(r => r.map(c => `"${c.replace(/"/g,'""')}"`).join(',')).join('\n')
+              downloadCSV('\uFEFF' + csv, `sarau-financeiro-${new Date().toISOString().slice(0,10)}.csv`)
+            }}
+            className="text-[10px] font-medium px-3 py-2 rounded-lg bg-gold/10 text-gold border border-gold/20 hover:bg-gold/20 transition-colors shrink-0"
+          >
+            Exportar CSV
+          </button>
+        </div>
       </div>
 
       {/* KPIs — Receita */}
