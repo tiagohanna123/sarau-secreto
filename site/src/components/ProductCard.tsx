@@ -8,11 +8,7 @@ export function ProductCard({ produto, index }: { produto: Produto; index: numbe
       initial={{ opacity: 0, y: 30, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{
-        duration: 0.7,
-        delay: index * 0.06,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      transition={{ duration: 0.7, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
       className="glass-premium p-4 flex flex-col group relative overflow-hidden"
     >
       {/* Image placeholder */}
@@ -32,7 +28,7 @@ export function ProductCard({ produto, index }: { produto: Produto; index: numbe
       {!produto.disponivel && (
         <div className="flex items-center gap-1.5 text-[0.5rem] text-warning bg-warning/5 border border-warning/15 rounded-full px-2.5 py-1 mb-3 w-fit">
           <AlertCircle size={10} />
-          Indisponivel
+          Indisponível
         </div>
       )}
 
@@ -46,7 +42,7 @@ export function ProductCard({ produto, index }: { produto: Produto; index: numbe
       <div className="flex items-center justify-between gap-2 mt-auto pt-3 border-t border-border/20">
         <span className="text-sm font-medium text-crimson tracking-wide">{produto.preco}</span>
         <span className="text-[0.45rem] tracking-wider uppercase text-muted-foreground/40 px-2 py-0.5 rounded-full bg-white/[0.02] border border-border/20">
-          {produto.categoria === 'vestuario' ? 'Vestuario' : produto.categoria === 'acessorio' ? 'Acessorio' : 'Colecionavel'}
+          {produto.categoria === 'vestuario' ? 'Vestuário' : produto.categoria === 'acessorio' ? 'Acessório' : 'Colecionável'}
         </span>
       </div>
     </motion.div>

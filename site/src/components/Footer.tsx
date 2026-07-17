@@ -19,7 +19,7 @@ export function Footer() {
             className="md:col-span-1"
           >
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="ss-logo w-8 h-8 rounded-full bg-gradient-to-br from-crimson to-wine flex items-center justify-center shadow-[0_0_16px_rgba(220,38,38,0.12)] distressed">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-crimson to-wine flex items-center justify-center shadow-[0_0_16px_rgba(220,38,38,0.10)] distressed">
                 <span className="text-[0.5rem] font-heading text-foreground font-bold tracking-wide">SS</span>
               </div>
               <span className="text-[0.5rem] font-sans text-muted-foreground tracking-[0.3em] uppercase">
@@ -27,11 +27,11 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-md">
-              Festival sociocultural nascido em Brasilia em 2022. 25+ artistas por edicao, banda sem ensaio,
-              local revelado dias antes. A experiencia musical mais exclusiva do Brasil.
+              Festival sociocultural nascido em Brasília em 2022. 25+ artistas por edição, banda sem ensaio,
+              local revelado dias antes. A experiência musical mais exclusiva do Brasil.
             </p>
             <p className="text-xs text-muted-foreground/50 mt-3">
-              Idealizado por Marvyn, JM e Thiago Jamelao.
+              Idealizado por Marvyn, JM e Thiago Jamelão.
             </p>
             <div className="flex items-center gap-2 mt-5">
               <a href="https://instagram.com/osarausecreto" target="_blank" rel="noopener noreferrer"
@@ -45,21 +45,21 @@ export function Footer() {
             </div>
           </motion.div>
 
-          {/* Navegacao */}
+          {/* Navegação */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h4 className="text-[0.5rem] tracking-[0.3em] uppercase text-muted-foreground mb-4">Navegacao</h4>
+            <h4 className="text-[0.5rem] tracking-[0.3em] uppercase text-muted-foreground mb-4">Navegação</h4>
             <ul className="space-y-2">
               {[
                 { label: 'O Sarau', href: '#sobre' },
                 { label: 'Eventos', href: '#eventos' },
                 { label: 'Artistas', href: '#artistas' },
                 { label: 'Marketplace', href: '#marketplace' },
-                { label: 'Espacos Publicitarios', href: '#espacos' },
+                { label: 'Espaços Publicitários', href: '#espacos' },
               ].map(link => (
                 <li key={link.href}>
                   <a href={link.href}
@@ -82,7 +82,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               <li><span className="text-sm text-muted-foreground/70">contato@osarausecreto.com</span></li>
               <li><span className="text-sm text-muted-foreground/70">@osarausecreto</span></li>
-              <li><span className="text-sm text-muted-foreground/70">Brasilia · Rio · Lisboa</span></li>
+              <li><span className="text-sm text-muted-foreground/70">Brasília · Rio · Lisboa</span></li>
               <li className="pt-2">
                 <a href="https://khem.app/sarau" target="_blank" rel="noopener noreferrer"
                   className="text-xs text-crimson hover:text-crimson-dim transition-colors inline-flex items-center gap-1">
@@ -106,7 +106,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Sarau Secreto.
           </p>
           <p className="text-xs text-muted-foreground/30 flex items-center gap-1.5">
-            <Music size={11} /> Brasilia — onde a musica encontra a alma.
+            <Music size={11} /> Brasília — onde a música encontra a alma.
           </p>
           <button onClick={scrollToTop}
             className="text-muted-foreground/30 hover:text-crimson transition-colors p-1.5 rounded-lg hover:bg-crimson-subtle">

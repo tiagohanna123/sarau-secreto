@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { Menu, X, Instagram, Ticket } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -38,20 +38,20 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         scrolled
-          ? 'bg-background/80 backdrop-blur-2xl border-b border-border'
+          ? 'bg-black/80 backdrop-blur-2xl border-b border-[rgba(220,38,38,0.06)]'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 sm:h-18">
-        {/* Logo - SS distressed monogram */}
+        {/* Logo */}
         <button onClick={() => { onScrollTo('hero'); setOpen(false) }}
           className="flex items-center gap-2.5 group">
-          <div className="ss-logo w-8 h-8 rounded-full bg-gradient-to-br from-crimson to-wine flex items-center justify-center shadow-[0_0_16px_rgba(220,38,38,0.15)] group-hover:shadow-[0_0_24px_rgba(220,38,38,0.25)] transition-shadow duration-500 distressed">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-crimson to-wine flex items-center justify-center shadow-[0_0_16px_rgba(220,38,38,0.12)] group-hover:shadow-[0_0_24px_rgba(220,38,38,0.2)] transition-shadow duration-500 distressed">
             <span className="text-[0.55rem] font-heading text-foreground font-bold tracking-wide">SS</span>
           </div>
           <motion.span
             className="hidden sm:inline text-[0.5rem] font-sans text-muted-foreground tracking-[0.3em] uppercase"
-            animate={{ opacity: scrolled ? 0.6 : 0.3 }}
+            animate={{ opacity: scrolled ? 0.5 : 0.25 }}
           >
             2026
           </motion.span>
@@ -79,7 +79,7 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
                 />
               )}
               <motion.div
-                className="absolute -bottom-px left-3 right-3 h-px bg-crimson/40"
+                className="absolute -bottom-px left-3 right-3 h-px bg-crimson/30"
                 initial={{ scaleX: 0, opacity: 0 }}
                 whileHover={{ scaleX: 1, opacity: 1 }}
                 transition={{ duration: 0.3 }}
@@ -114,7 +114,7 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden border-t border-border bg-background/95 backdrop-blur-2xl overflow-hidden"
+            className="md:hidden border-t border-border bg-black/95 backdrop-blur-2xl overflow-hidden"
           >
             <nav className="px-4 py-4 flex flex-col gap-1">
               {NAV_ITEMS.map((item, i) => (

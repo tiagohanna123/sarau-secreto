@@ -44,8 +44,9 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-black text-foreground">
       <div className="grain-overlay" />
+      <div className="grain-overlay-2" />
       <div className="vignette" />
       <ScrollProgress />
       <Header onScrollTo={scrollTo} />

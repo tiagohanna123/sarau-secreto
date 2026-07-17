@@ -10,18 +10,11 @@ export function ArtistCard({ artista, index }: { artista: Artista; index: number
       initial={{ opacity: 0, x: isLeft ? -30 : 30, y: 20 }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
-      transition={{
-        duration: 0.8,
-        delay: index * 0.07,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      transition={{ duration: 0.8, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
       className={`glass-premium p-5 group relative ${artista.destaque ? 'ring-1 ring-crimson/12' : ''}`}
     >
-      {/* Glow overlay */}
       <div className="absolute inset-0 rounded-[inherit] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-        style={{
-          background: 'radial-gradient(600px circle at 50% 50%, var(--color-crimson-glow), transparent 60%)',
-        }}
+        style={{ background: 'radial-gradient(600px circle at 50% 50%, var(--color-crimson-glow), transparent 60%)' }}
       />
 
       <div className="relative">

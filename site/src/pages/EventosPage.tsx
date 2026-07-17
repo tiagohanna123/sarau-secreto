@@ -1,29 +1,13 @@
 import { motion } from 'framer-motion'
-import { SectionTitle } from '@/components/SectionTitle'
-import { ScrollReveal } from '@/components/ScrollReveal'
+import { SectionTitle, ScrollReveal } from '@/components/ScrollReveal'
 import { EventCard } from '@/components/EventCard'
 import { eventos } from '@/data/events'
 import { ExternalLink, Music } from 'lucide-react'
 
 const steps = [
-  {
-    num: '01',
-    titulo: 'A data chega',
-    desc: 'O Sarau anuncia a edicao. Voce corre e garante seu ingresso no Sympla antes de esgotar.',
-    icon: '♫',
-  },
-  {
-    num: '02',
-    titulo: 'O segredo e revelado',
-    desc: 'Poucos dias antes, o local exato e divulgado. Endereco secreto, surpresa garantida.',
-    icon: '♪',
-  },
-  {
-    num: '03',
-    titulo: 'Acontece',
-    desc: '25+ artistas, banda sem ensaio, musica ao vivo, poesia, encontros. Uma noite que nao se repete.',
-    icon: '♩',
-  },
+  { num: '01', titulo: 'A data chega', desc: 'O Sarau anuncia a edição. Você corre e garante seu ingresso no Sympla antes de esgotar.', icon: '♫' },
+  { num: '02', titulo: 'O segredo é revelado', desc: 'Poucos dias antes, o local exato é divulgado. Endereço secreto, surpresa garantida.', icon: '♪' },
+  { num: '03', titulo: 'Acontece', desc: '25+ artistas, banda sem ensaio, música ao vivo, poesia, encontros. Uma noite que não se repete.', icon: '♩' },
 ]
 
 export function EventosPage() {
@@ -32,8 +16,8 @@ export function EventosPage() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <SectionTitle
           label="Eventos"
-          title="Edicoes"
-          subtitle="O Sarau Secreto ja passou por Brasilia, Rio de Janeiro e Lisboa. Cada edicao e unica — data, local e lineup sao surpresa ate o dia."
+          title="Edições"
+          subtitle="O Sarau Secreto já passou por Brasília, Rio de Janeiro e Lisboa. Cada edição é única — data, local e lineup são surpresa até o dia."
         />
 
         <div className="space-y-6">
@@ -45,14 +29,13 @@ export function EventosPage() {
         {/* Sympla CTA */}
         <ScrollReveal mode="scale-in" delay={0.2} className="mt-12">
           <div className="glass-premium p-8 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-gold/[0.02] to-transparent pointer-events-none" />
             <div className="relative">
-              <Music size={22} className="text-gold-dim/20 mx-auto mb-4" />
+              <Music size={22} className="text-crimson-dim/20 mx-auto mb-4" />
               <h3 className="text-lg font-display font-light text-foreground mb-2">
                 Ingressos via Sympla
               </h3>
               <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto leading-relaxed">
-                Todas as vendas oficiais sao pelo Sympla. Compra segura, ingresso nominal e suporte direto.
+                Todas as vendas oficiais são pelo Sympla. Compra segura, ingresso nominal e suporte direto.
               </p>
               <a href="https://www.sympla.com.br/produtor/sarausecreto"
                 target="_blank" rel="noopener noreferrer"
@@ -76,7 +59,7 @@ export function EventosPage() {
                 >
                   {item.icon}
                 </motion.span>
-                <h3 className="text-sm font-display font-light text-foreground mb-2 group-hover:text-gold transition-colors duration-300">
+                <h3 className="text-sm font-display font-light text-foreground mb-2 group-hover:text-crimson transition-colors duration-300">
                   {item.num} — {item.titulo}
                 </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
@@ -88,13 +71,13 @@ export function EventosPage() {
         {/* FAQ */}
         <ScrollReveal mode="clip-left" delay={0.2} className="mt-12">
           <div className="glass-premium p-6 sm:p-8">
-            <h3 className="text-sm font-display font-light text-foreground mb-6 text-center">Duvidas Frequentes</h3>
+            <h3 className="text-sm font-display font-light text-foreground mb-6 text-center">Dúvidas Frequentes</h3>
             <div className="max-w-lg mx-auto space-y-4 text-sm text-muted-foreground">
               {[
-                { q: 'Como sei a data e local?', a: 'Acompanhe o @osarausecreto no Instagram. A data e anunciada dias antes, e o local e revelado pouco antes do evento.' },
-                { q: 'Preciso pagar para participar?', a: 'Sim, os ingressos sao vendidos pelo Sympla. Precos acessiveis — o Sarau e democratico.' },
-                { q: 'Sou artista. Como me candidato?', a: 'Siga o @osarausecreto no Instagram. Chamadas abertas sao anunciadas por la.' },
-                { q: 'O evento acontece com chuva?', a: 'Sim! Local fechado. Chuva, nao e problema.' },
+                { q: 'Como sei a data e local?', a: 'Acompanhe o @osarausecreto no Instagram. A data é anunciada dias antes, e o local é revelado pouco antes do evento.' },
+                { q: 'Preciso pagar para participar?', a: 'Sim, os ingressos são vendidos pelo Sympla. Preços acessíveis — o Sarau é democrático.' },
+                { q: 'Sou artista. Como me candidato?', a: 'Siga o @osarausecreto no Instagram. Chamadas abertas são anunciadas por lá.' },
+                { q: 'O evento acontece com chuva?', a: 'Sim! Local fechado. Chuva não é problema.' },
               ].map((faq, i) => (
                 <motion.div
                   key={faq.q}

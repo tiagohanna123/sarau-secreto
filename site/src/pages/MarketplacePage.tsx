@@ -1,21 +1,19 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { SectionTitle } from '@/components/SectionTitle'
-import { ScrollReveal } from '@/components/ScrollReveal'
+import { SectionTitle, ScrollReveal } from '@/components/ScrollReveal'
 import { ProductCard } from '@/components/ProductCard'
 import { produtos } from '@/data/products'
 import { Package, Shirt, Watch, Album } from 'lucide-react'
 
 const categorias = [
   { key: 'todos', label: 'Todos', icon: Package },
-  { key: 'vestuario', label: 'Vestuario', icon: Shirt },
-  { key: 'acessorio', label: 'Acessorios', icon: Watch },
-  { key: 'colecionavel', label: 'Colecionaveis', icon: Album },
+  { key: 'vestuario', label: 'Vestuário', icon: Shirt },
+  { key: 'acessorio', label: 'Acessórios', icon: Watch },
+  { key: 'colecionavel', label: 'Colecionáveis', icon: Album },
 ]
 
 export function MarketplacePage() {
   const [filtro, setFiltro] = useState('todos')
-
   const filtrados = filtro === 'todos'
     ? produtos
     : produtos.filter(p => p.categoria === filtro)
@@ -25,8 +23,8 @@ export function MarketplacePage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <SectionTitle
           label="Marketplace"
-          title="Leve o Sarau com Voce"
-          subtitle="Camisetas, moletons, bones e edicoes limitadas. Produtos em desenvolvimento — cadastre seu interesse."
+          title="Leve o Sarau com Você"
+          subtitle="Camisetas, moletons, bonés e edições limitadas. Produtos em desenvolvimento — cadastre seu interesse."
         />
 
         <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
@@ -61,14 +59,13 @@ export function MarketplacePage() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Waiting list CTA */}
         <ScrollReveal mode="scale-in" delay={0.15} className="mt-12">
           <div className="glass-premium p-6 text-center max-w-md mx-auto">
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Produtos em fase de producao. Quer ser avisado quando lancar?
+              Produtos em fase de produção. Quer ser avisado quando lançar?
             </p>
             <a href="mailto:marketplace@osarausecreto.com"
-              className="inline-block mt-3 text-xs text-violet hover:text-violet-dim transition-colors tracking-wide hover:underline underline-offset-4">
+              className="inline-block mt-3 text-xs text-crimson hover:text-crimson-dim transition-colors tracking-wide hover:underline underline-offset-4">
               marketplace@osarausecreto.com
             </a>
           </div>

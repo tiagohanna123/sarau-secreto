@@ -3,7 +3,7 @@ import type { Evento } from '@/data/events'
 import { Calendar, MapPin, ArrowRight } from 'lucide-react'
 
 const statusLabels: Record<string, { label: string; class: string }> = {
-  disponivel: { label: 'Disponivel', class: 'bg-success/8 text-success border-success/15' },
+  disponivel: { label: 'Disponível', class: 'bg-success/8 text-success border-success/15' },
   breve:      { label: 'Em Breve', class: 'bg-crimson-glow text-crimson border-crimson/15' },
   esgotado:   { label: 'Esgotado', class: 'bg-danger/8 text-danger border-danger/15' },
   encerrado:  { label: 'Encerrado', class: 'bg-card text-muted-foreground border-border' },
@@ -18,14 +18,9 @@ export function EventCard({ evento, index }: { evento: Evento; index: number }) 
       initial={{ opacity: 0, y: 50, rotateX: isLeft ? 4 : -4 }}
       whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{
-        duration: 0.9,
-        delay: index * 0.12,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      transition={{ duration: 0.9, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
       className="glass-premium p-6 sm:p-8 group relative overflow-hidden"
     >
-      {/* Hover glow */}
       <div className="absolute -inset-1 bg-gradient-to-r from-crimson/0 via-crimson/[0.02] to-wine/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
       <div className="relative">

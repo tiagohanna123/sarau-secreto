@@ -8,9 +8,9 @@ const tipoIcons: Record<string, typeof Zap> = {
   midia: Mail,
 }
 const tipoLabels: Record<string, string> = {
-  patrocinio: 'Patrocinio',
-  espaco: 'Espaco Fisico',
-  midia: 'Midia Digital',
+  patrocinio: 'Patrocínio',
+  espaco: 'Espaço Físico',
+  midia: 'Mídia Digital',
 }
 
 export function AdCard({ anuncio, index }: { anuncio: Anuncio; index: number }) {
@@ -21,11 +21,7 @@ export function AdCard({ anuncio, index }: { anuncio: Anuncio; index: number }) 
       initial={{ opacity: 0, y: 30, scale: 0.96 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: '-50px' }}
-      transition={{
-        duration: 0.7,
-        delay: index * 0.08,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className="glass-premium p-5 group relative"
     >
       <div className="flex items-start gap-3 mb-3">

@@ -1,7 +1,17 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 
-type RevealMode = 'fade-up' | 'clip-left' | 'clip-right' | 'scale-in' | 'perspective'
+type RevealMode =
+  | 'fade-up'
+  | 'clip-left'
+  | 'clip-right'
+  | 'scale-in'
+  | 'perspective'
+  | 'ink-drip'
+  | 'splatter'
+  | 'slide-up'
+  | 'rotate-in'
+  | 'stagger-words'
 
 interface ScrollRevealProps {
   children: React.ReactNode
@@ -12,9 +22,9 @@ interface ScrollRevealProps {
   margin?: string
 }
 
-const modeVariants: Record<RevealMode, object> = {
+const modeVariants: Record<string, object> = {
   'fade-up': {
-    initial: { opacity: 0, y: 40 },
+    initial: { opacity: 0, y: 50 },
     whileInView: { opacity: 1, y: 0 },
   },
   'clip-left': {
@@ -26,12 +36,28 @@ const modeVariants: Record<RevealMode, object> = {
     whileInView: { clipPath: 'inset(0 100% 0 0)' },
   },
   'scale-in': {
-    initial: { opacity: 0, scale: 0.92 },
+    initial: { opacity: 0, scale: 0.88 },
     whileInView: { opacity: 1, scale: 1 },
   },
   'perspective': {
-    initial: { opacity: 0, rotateX: 8, y: 30 },
+    initial: { opacity: 0, rotateX: 12, y: 40 },
     whileInView: { opacity: 1, rotateX: 0, y: 0 },
+  },
+  'ink-drip': {
+    initial: { clipPath: 'inset(100% 0 0 0)' },
+    whileInView: { clipPath: 'inset(0% 0 0 0)' },
+  },
+  'splatter': {
+    initial: { opacity: 0, scale: 0.7, rotate: -5 },
+    whileInView: { opacity: 1, scale: 1, rotate: 0 },
+  },
+  'slide-up': {
+    initial: { opacity: 0, y: 60, filter: 'blur(4px)' },
+    whileInView: { opacity: 1, y: 0, filter: 'blur(0px)' },
+  },
+  'rotate-in': {
+    initial: { opacity: 0, rotateY: 15, x: -20 },
+    whileInView: { opacity: 1, rotateY: 0, x: 0 },
   },
 }
 
@@ -47,7 +73,10 @@ export function ScrollReveal({
   return (
     <motion.div
       {...base}
-      whileInView={{ ...(base as any).whileInView, transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] } }}
+      whileInView={{
+        ...(base as any).whileInView,
+        transition: { duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] },
+      }}
       viewport={{ once, margin }}
       className={className}
     >
@@ -56,67 +85,7 @@ export function ScrollReveal({
   )
 }
 
-/* ─── Magnetic hover button ─── */
-export function MagneticButton({
-  children,
-  className = '',
-  as = 'button',
-  href,
-  target,
-  rel,
-  onClick,
-}: {
-  children: React.ReactNode
-  className?: string
-  as?: 'button' | 'a'
-  href?: string
-  target?: string
-  rel?: string
-  onClick?: () => void
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [pos, setPos] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect()
-      const x = (e.clientX - rect.left - rect.width / 2) * 0.15
-      const y = (e.clientY - rect.top - rect.height / 2) * 0.15
-      setPos({ x, y })
-    }
-    const onLeave = () => setPos({ x: 0, y: 0 })
-    el.addEventListener('mousemove', onMove)
-    el.addEventListener('mouseleave', onLeave)
-    return () => {
-      el.removeEventListener('mousemove', onMove)
-      el.removeEventListener('mouseleave', onLeave)
-    }
-  }, [])
-
-  const Tag = as as any
-
-  return (
-    <div ref={ref} style={{ display: 'inline-block' }}>
-      <Tag
-        href={href}
-        target={target}
-        rel={rel}
-        onClick={onClick}
-        className={className}
-        style={{
-          transform: `translate(${pos.x}px, ${pos.y}px)`,
-          transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-        }}
-      >
-        {children}
-      </Tag>
-    </div>
-  )
-}
-
-/* ─── Parallax layer ─── */
+/* ─── ParallaxLayer ─── */
 export function ParallaxLayer({
   children,
   speed = 0.3,
@@ -131,8 +100,8 @@ export function ParallaxLayer({
     target: ref,
     offset: ['start end', 'end start'],
   })
-  const y = useTransform(scrollYProgress, [0, 1], [speed * 100, -speed * 100])
-  const springY = useSpring(y, { stiffness: 80, damping: 25 })
+  const y = useTransform(scrollYProgress, [0, 1], [speed * 120, -speed * 120])
+  const springY = useSpring(y, { stiffness: 60, damping: 20 })
 
   return (
     <div ref={ref} className={className}>
@@ -159,5 +128,66 @@ export function SectionChapter({
         {children}
       </div>
     </section>
+  )
+}
+
+/* ─── SectionTitle ─── */
+export function SectionTitle({
+  label,
+  title,
+  subtitle,
+}: {
+  label?: string
+  title: string
+  subtitle?: string
+}) {
+  return (
+    <div className="text-center mb-16 sm:mb-20">
+      {label && (
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="text-[0.5rem] tracking-[0.3em] uppercase text-crimson-dim font-medium inline-block relative">
+            <span className="absolute -left-6 top-1/2 w-4 h-px bg-crimson/30" />
+            {label}
+            <span className="absolute -right-6 top-1/2 w-4 h-px bg-crimson/30" />
+          </span>
+        </motion.div>
+      )}
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+        className="text-2xl sm:text-3xl lg:text-4xl font-display font-light text-foreground leading-[1.1] tracking-tight"
+      >
+        {title}
+      </motion.h2>
+      {subtitle && (
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-4 text-sm sm:text-base text-muted-foreground max-w-lg mx-auto leading-relaxed"
+        >
+          {subtitle}
+        </motion.p>
+      )}
+      <motion.div
+        initial={{ width: 0, opacity: 0 }}
+        whileInView={{ width: 80, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.3, ease: [0, 0, 0.2, 1] }}
+        className="h-px mx-auto mt-6"
+        style={{
+          background: 'linear-gradient(90deg, transparent, var(--color-crimson), transparent)',
+          opacity: 0.12,
+        }}
+      />
+    </div>
   )
 }
