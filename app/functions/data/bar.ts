@@ -36,6 +36,7 @@ export const BAR_EVENTOS = [
   {"start":"2026-06-11T20:00:00.000Z","end":"2026-06-12T03:00:00.000Z","title":"Sarau Secreto Convida Magrao","revenue":43138,"orders":367,"products":[{name:"Cerveja",qty:1438,revenue:21570},{name:"Destilados",qty:230,revenue:8280},{name:"Drinks",qty:336,revenue:9408},{name:"Outros",qty:115,revenue:3880}]},
   {"start":"2026-06-25T20:00:00.000Z","end":"2026-06-26T03:00:00.000Z","title":"Sala Secreta","revenue":8562,"orders":73,"products":[{name:"Cerveja",qty:285,revenue:4275},{name:"Destilados",qty:46,revenue:1656},{name:"Drinks",qty:67,revenue:1876},{name:"Outros",qty:23,revenue:755}]},
   {"start":"2026-07-09T20:00:00.000Z","end":"2026-07-10T03:00:00.000Z","title":"Sarau Secreto Convida Ellen Oleria","revenue":22433,"orders":191,"products":[{name:"Cerveja",qty:748,revenue:11220},{name:"Destilados",qty:120,revenue:4320},{name:"Drinks",qty:175,revenue:4900},{name:"Outros",qty:60,revenue:1993}]},
+  {"start":"2026-07-16T20:00:00.000Z","end":"2026-07-17T03:00:00.000Z","title":"Sarau Secreto Convida Sotam","revenue":29423,"orders":627,"products":[{name:"Cerveja",qty:350,revenue:5950},{name:"Vinho",qty:186,revenue:17112},{name:"Destilados",qty:55,revenue:1980},{name:"Drinks",qty:128,revenue:2176},{name:"Outros",qty:195,revenue:2205}]},
 ]
 
 export const BAR_REVENUE_MAP = {
@@ -64,8 +65,10 @@ export const BAR_REVENUE_MAP = {
     "cm875260665fa5f": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
     "sympla-3474070": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
     "cm8ae3f1b0ada38": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
-    "cm842b46dd96f70": null,
+    "cm842b46dd96f70": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
     "sympla-2721616": null,
     "sympla-2785141": null,
-    "sympla-3150968": null
+    "sympla-3150968": null,
+    "cm842b46dd96f70": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
+    "sympla-3500838": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93}
   }
