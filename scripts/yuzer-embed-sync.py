@@ -111,6 +111,14 @@ def main():
     for e in events:
         print(f"     {e['start']} -> {e['end']}: R$ {e['revenue']:,.2f} ({e['orders']} ord)")
 
+    # Safety: if Yuzer returned 0 eventos, preserve existing data to avoid wipe
+    if len(events) == 0 and BAR_EMBED.exists():
+        txt = BAR_EMBED.read_text()
+        existing_count = len(re.findall(r'\"start\":\\s*\"', txt))
+        if existing_count > 0:
+            print(f"   AVISO: Yuzer retornou 0 eventos, mas bar-embed.ts tem {existing_count} eventos. Preservando dados existentes.")
+            sys.exit(0)
+
     existing_rev = {}
     if BAR_EMBED.exists():
         txt = BAR_EMBED.read_text()
@@ -135,6 +143,10 @@ def main():
         "sympla-3477015": None,
         "sympla-3492296": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
         "sympla-3500838": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
+        "cm842b46dd96f70": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
+        "cm875260665fa5f": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
+        "cm89a37dab087b8": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
+        "cm8ae3f1b0ada38": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
     }
     for k, default_v in known_defaults.items():
         if k not in final_rev:

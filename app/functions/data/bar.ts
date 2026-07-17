@@ -1,7 +1,37 @@
 // Dados de bar para Pages Functions — auto-generated
+// Sync: extrai eventos do bar-embed.ts
 
 export const BAR_EVENTOS = [
-];
+  {"start":"2024-08-16","end":"2024-08-16","days":1,"orders":137,"revenue":3225.0,"ticketMedio":23.54,"itensVendidos":222},
+  {"start":"2024-08-22","end":"2024-08-23","days":2,"orders":188,"revenue":8350.0,"ticketMedio":44.41,"itensVendidos":317},
+  {"start":"2024-09-12","end":"2024-09-13","days":2,"orders":542,"revenue":20821.0,"ticketMedio":38.42,"itensVendidos":1018},
+  {"start":"2024-10-10","end":"2024-10-11","days":2,"orders":621,"revenue":22924.0,"ticketMedio":36.91,"itensVendidos":1133},
+  {"start":"2024-10-17","end":"2024-10-18","days":2,"orders":308,"revenue":11837.0,"ticketMedio":38.43,"itensVendidos":516},
+  {"start":"2024-11-14","end":"2024-11-15","days":2,"orders":546,"revenue":21061.0,"ticketMedio":38.57,"itensVendidos":939},
+  {"start":"2024-12-06","end":"2024-12-07","days":2,"orders":645,"revenue":24940.0,"ticketMedio":38.67,"itensVendidos":1111},
+  {"start":"2025-01-16","end":"2025-01-17","days":2,"orders":388,"revenue":11984.0,"ticketMedio":30.89,"itensVendidos":566},
+  {"start":"2025-02-13","end":"2025-02-14","days":2,"orders":312,"revenue":13639.0,"ticketMedio":43.71,"itensVendidos":576},
+  {"start":"2025-03-12","end":"2025-03-12","days":1,"orders":73,"revenue":2700.0,"ticketMedio":36.99,"itensVendidos":123},
+  {"start":"2025-04-10","end":"2025-04-11","days":2,"orders":1372,"revenue":52235.0,"ticketMedio":38.07,"itensVendidos":2440},
+  {"start":"2025-05-08","end":"2025-05-09","days":2,"orders":269,"revenue":12205.0,"ticketMedio":45.37,"itensVendidos":451},
+  {"start":"2025-05-16","end":"2025-05-16","days":1,"orders":20,"revenue":1155.0,"ticketMedio":57.75,"itensVendidos":28},
+  {"start":"2025-06-12","end":"2025-06-13","days":2,"orders":534,"revenue":28126.0,"ticketMedio":52.67,"itensVendidos":858},
+  {"start":"2025-07-10","end":"2025-07-11","days":2,"orders":359,"revenue":19007.0,"ticketMedio":52.94,"itensVendidos":599},
+  {"start":"2025-08-08","end":"2025-08-09","days":2,"orders":481,"revenue":17167.0,"ticketMedio":35.69,"itensVendidos":811},
+  {"start":"2025-08-14","end":"2025-08-15","days":2,"orders":284,"revenue":13111.0,"ticketMedio":46.17,"itensVendidos":502},
+  {"start":"2025-09-11","end":"2025-09-12","days":2,"orders":1508,"revenue":65403.0,"ticketMedio":43.37,"itensVendidos":2857},
+  {"start":"2025-10-16","end":"2025-10-17","days":2,"orders":413,"revenue":13415.0,"ticketMedio":32.48,"itensVendidos":633},
+  {"start":"2025-11-13","end":"2025-11-14","days":2,"orders":419,"revenue":17390.0,"ticketMedio":41.5,"itensVendidos":673},
+  {"start":"2025-12-11","end":"2025-12-12","days":2,"orders":1852,"revenue":83578.0,"ticketMedio":45.13,"itensVendidos":3608},
+  {"start":"2026-01-15","end":"2026-01-16","days":2,"orders":462,"revenue":18592.0,"ticketMedio":40.24,"itensVendidos":778},
+  {"start":"2026-02-05","end":"2026-02-06","days":2,"orders":369,"revenue":16951.0,"ticketMedio":45.94,"itensVendidos":613},
+  {"start":"2026-03-12","end":"2026-03-13","days":2,"orders":571,"revenue":25633.0,"ticketMedio":44.89,"itensVendidos":951},
+  {"start":"2026-04-16","end":"2026-04-17","days":2,"orders":595,"revenue":30293.0,"ticketMedio":50.91,"itensVendidos":1010},
+  {"start":"2026-05-14","end":"2026-05-15","days":2,"orders":276,"revenue":15072.0,"ticketMedio":54.61,"itensVendidos":483},
+  {"start":"2026-06-10","end":"2026-06-12","days":3,"orders":750,"revenue":43138.0,"ticketMedio":57.52,"itensVendidos":1340},
+  {"start":"2026-06-25","end":"2026-06-26","days":2,"orders":172,"revenue":8562.0,"ticketMedio":49.78,"itensVendidos":306},
+  {"start":"2026-07-09","end":"2026-07-10","days":2,"orders":534,"revenue":22433.0,"ticketMedio":42.01,"itensVendidos":933},
+]
 
 export const BAR_REVENUE_MAP: Record<string, { revenue: number; transactions: number; perCapita: number } | null> = {
   "sympla-3420938": {"revenue": 15072, "transactions": 276, "perCapita": 54.61},
@@ -12,5 +42,5 @@ export const BAR_REVENUE_MAP: Record<string, { revenue: number; transactions: nu
   "cm842b46dd96f70": {"revenue": 29423, "transactions": 627, "perCapita": 46.93},
   "cm875260665fa5f": {"revenue": 43138, "transactions": 750, "perCapita": 57.52},
   "cm89a37dab087b8": {"revenue": 15072, "transactions": 276, "perCapita": 54.61},
-  "cm8ae3f1b0ada38": {"revenue": 22433, "transactions": 534, "perCapita": 42.01}
-};
+  "cm8ae3f1b0ada38": {"revenue": 22433, "transactions": 534, "perCapita": 42.01},
+}
