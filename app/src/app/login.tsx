@@ -27,9 +27,9 @@ export function LoginPage({ onLogin }: Props) {
   return (
     <div className="relative min-h-screen bg-background flex items-center justify-center overflow-hidden">
       {/* Background glow — violet + gold orbs */}
-      <div className="absolute w-[600px] h-[600px] rounded-full bg-violet/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute w-[300px] h-[300px] rounded-full bg-gold/6 top-[30%] left-[60%] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      <div className="absolute w-[200px] h-[200px] rounded-full bg-violet/4 bottom-[20%] right-[60%] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute w-[600px] h-[600px] rounded-full bg-violet/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none max-sm:w-[300px] max-sm:h-[300px]" />
+      <div className="absolute w-[300px] h-[300px] rounded-full bg-gold/6 top-[25%] left-[55%] -translate-x-1/2 -translate-y-1/2 pointer-events-none max-sm:w-[150px] max-sm:h-[150px] max-sm:top-[20%] max-sm:left-[65%]" />
+      <div className="absolute w-[200px] h-[200px] rounded-full bg-violet/4 bottom-[25%] right-[55%] -translate-x-1/2 -translate-y-1/2 pointer-events-none max-sm:w-[120px] max-sm:h-[120px] max-sm:bottom-[20%] max-sm:right-[60%]" />
 
       <form onSubmit={handleSubmit} className="w-full max-w-sm px-6 relative z-10">
         {/* Logo */}

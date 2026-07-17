@@ -17,9 +17,14 @@ fi
 #    O backup Yuzer (preprocess-bar-backup.py) está desatualizado desde Maio/2026.
 echo "⏭️  bar-embed: mantendo versão commitada (não regenera do backup)"
 
-# 3. Rebuild da dist
-echo "🏗️  post-sync: rebuild da dist..."
+# 3. Rebuild da dist (admin)
+echo "🏗️  post-sync: rebuild da dist (admin)..."
 cd "$ROOT"
 npx vite build 2>&1 | tail -10
+
+# 4. Build do site publico
+echo "🌐 post-sync: build do site publico..."
+cd "$ROOT/../site"
+npm run build 2>&1 | tail -10
 
 echo "✅ post-sync: completo."

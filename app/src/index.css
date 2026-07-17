@@ -47,6 +47,22 @@
   --font-heading: 'Anisette', 'Fredoka', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+
+  /* Sombra */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-glow-gold: 0 0 20px rgba(200,169,110,0.08);
+  --shadow-glow-violet: 0 0 20px rgba(139,92,246,0.08);
+
+  /* Borda */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Transicao */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --easing-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ─── Fallback Safari < 15 (não suporta oklch) ─── */

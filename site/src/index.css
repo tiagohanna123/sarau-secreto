@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* ─── Sarau Secreto — Fontes ─── */
+@font-face {
+  font-family: 'Anisette';
+  src: url('/fonts/anisette-bold-2.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Butik Display';
+  src: url('/fonts/ButikDisplayVF-Ups.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Sarau Secreto — Jazz Dark Theme ─── */
+@theme {
+  --color-background: oklch(0.08 0 0);
+  --color-foreground: oklch(0.95 0.01 80);
+  --color-muted: oklch(0.12 0.005 75);
+  --color-muted-foreground: oklch(0.50 0.03 80);
+
+  --color-gold: oklch(0.72 0.10 75);
+  --color-gold-dim: oklch(0.65 0.08 75);
+  --color-gold-glow: oklch(0.72 0.10 75 / 0.15);
+  --color-violet: oklch(0.55 0.22 290);
+  --color-violet-dim: oklch(0.45 0.18 290);
+  --color-violet-glow: oklch(0.55 0.22 290 / 0.15);
+
+  --color-accent: oklch(0.72 0.10 75);
+  --color-secondary: oklch(0.55 0.22 290);
+
+  --color-border: oklch(0.72 0.10 75 / 0.12);
+  --color-card: oklch(0.11 0.01 75);
+  --color-card-hover: oklch(0.14 0.015 75);
+
+  --color-success: oklch(0.70 0.18 145);
+  --color-warning: oklch(0.75 0.15 85);
+  --color-danger: oklch(0.65 0.22 25);
+
+  --font-display: 'Butik Display', 'Bodoni Moda', Georgia, serif;
+  --font-heading: 'Anisette', 'Fredoka', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-glow-gold: 0 0 20px rgba(200,169,110,0.08);
+  --shadow-glow-violet: 0 0 20px rgba(139,92,246,0.08);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --easing-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@supports not (color: oklch(0 0 0)) {
+  :root {
+    --color-background: #020202;
+    --color-foreground: #f2eee7;
+    --color-muted: #070604;
+    --color-muted-foreground: #6c6250;
+    --color-gold: #c99b5a;
+    --color-gold-dim: #ac8856;
+    --color-gold-glow: rgba(201, 155, 90, 0.15);
+    --color-violet: #764be5;
+    --color-violet-dim: #5937af;
+    --color-violet-glow: rgba(118, 75, 229, 0.15);
+    --color-accent: #c99b5a;
+    --color-secondary: #764be5;
+    --color-border: rgba(201, 155, 90, 0.12);
+    --color-card: #060402;
+    --color-card-hover: #0d0804;
+    --color-success: #45ba50;
+    --color-warning: #d9a514;
+    --color-danger: #f94144;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+html, body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 300; letter-spacing: -0.01em; }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: oklch(0.72 0.10 75 / 0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(0.72 0.10 75 / 0.4); }
+
+/* ─── Animações ─── */
+@keyframes gold-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+@keyframes violet-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0px rgba(200,169,110,0); }
+  50% { box-shadow: 0 0 25px rgba(200,169,110,0.1); }
+}
+
+.animate-fade-up { animation: fade-up 0.6s ease-out both; }
+.animate-fade-up-1 { animation-delay: 0.1s; }
+.animate-fade-up-2 { animation-delay: 0.2s; }
+.animate-fade-up-3 { animation-delay: 0.3s; }
+.animate-fade-up-4 { animation-delay: 0.4s; }
+.animate-fade-up-5 { animation-delay: 0.5s; }
+.animate-fade-up-6 { animation-delay: 0.6s; }
+
+/* ─── Gold line ─── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  opacity: 0.3;
+}
+
+/* ─── Glass card ─── */
+.glass-card {
+  background: oklch(0.11 0.01 75 / 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal) var(--easing-smooth);
+}
+.glass-card:hover {
+  background: oklch(0.14 0.015 75 / 0.7);
+  border-color: oklch(0.72 0.10 75 / 0.25);
+}
+
+/* ─── Sympla button ─── */
+.sympla-btn {
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dim));
+  color: #000;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.6rem 1.5rem;
+  transition: all var(--transition-fast) var(--easing-smooth);
+}
+.sympla-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.03);
+}
+.sympla-btn:active {
+  transform: scale(0.97);
+}
