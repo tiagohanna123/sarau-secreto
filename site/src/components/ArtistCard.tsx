@@ -1,44 +1,70 @@
+import { motion } from 'framer-motion'
 import type { Artista } from '@/data/artists'
-import { Music, Instagram, Headphones } from 'lucide-react'
+import { Music, Instagram, Sparkles } from 'lucide-react'
 
 export function ArtistCard({ artista, index }: { artista: Artista; index: number }) {
+  const isLeft = index % 2 === 0
+
   return (
-    <div className={`glass-card p-5 animate-fade-up animate-fade-up-${Math.min(index + 1, 6)} ${artista.destaque ? 'ring-1 ring-gold/15' : ''}`}>
-      {/* Avatar placeholder */}
-      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-gold/10 to-violet/10 border border-border mb-4 flex items-center justify-center">
-        {artista.foto ? (
-          <img src={artista.foto} alt={artista.nome} className="w-full h-full rounded-full object-cover" />
-        ) : (
-          <Music size={20} className="text-gold-dim/40" />
-        )}
-      </div>
+    <motion.div
+      initial={{ opacity: 0, x: isLeft ? -30 : 30, y: 20 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{
+        duration: 0.8,
+        delay: index * 0.07,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className={`glass-premium p-5 group relative ${artista.destaque ? 'ring-1 ring-crimson/12' : ''}`}
+    >
+      {/* Glow overlay */}
+      <div className="absolute inset-0 rounded-[inherit] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+        style={{
+          background: 'radial-gradient(600px circle at 50% 50%, var(--color-crimson-glow), transparent 60%)',
+        }}
+      />
 
-      <h3 className="text-sm font-display font-light text-foreground mb-0.5">
-        {artista.nome}
-      </h3>
-      <p className="text-[0.6rem] tracking-wider uppercase text-gold-dim mb-3">
-        {artista.estilo}
-      </p>
-      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
-        {artista.bio}
-      </p>
-
-      {artista.redes && (
-        <div className="flex items-center gap-2 mt-3 pt-3 border-t border-border/30">
-          {artista.redes.instagram && (
-            <span className="flex items-center gap-1 text-[0.55rem] text-muted-foreground">
-              <Instagram size={10} className="text-violet-dim" />
-              {artista.redes.instagram}
-            </span>
+      <div className="relative">
+        {/* Avatar */}
+        <div className="relative w-14 h-14 rounded-full mb-4 overflow-hidden ring-1 ring-crimson/10 group-hover:ring-crimson/25 transition-all duration-500">
+          <div className="absolute inset-0 bg-gradient-to-br from-crimson/12 to-wine/12" />
+          {artista.foto ? (
+            <img src={artista.foto} alt={artista.nome} className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <Music size={18} className="text-crimson-dim/30 group-hover:text-crimson-dim/50 transition-colors duration-500" />
+            </div>
           )}
-          {artista.redes.soundcloud && (
-            <span className="flex items-center gap-1 text-[0.55rem] text-muted-foreground">
-              <Headphones size={10} className="text-violet-dim" />
-              {artista.redes.soundcloud}
-            </span>
+          {artista.destaque && (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-crimson flex items-center justify-center shadow-[0_0_12px_rgba(220,38,38,0.3)]"
+            >
+              <Sparkles size={8} className="text-background" />
+            </motion.div>
           )}
         </div>
-      )}
-    </div>
+
+        <h3 className="text-sm font-display font-light text-foreground group-hover:text-crimson transition-colors duration-300">
+          {artista.nome}
+        </h3>
+        <p className="text-[0.5rem] tracking-[0.15em] uppercase text-crimson-dim mt-0.5 mb-2.5">
+          {artista.estilo}
+        </p>
+        <p className="text-xs text-muted-foreground leading-relaxed line-clamp-3">
+          {artista.bio}
+        </p>
+
+        {artista.redes?.instagram && (
+          <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-border/20">
+            <Instagram size={10} className="text-crimson-dim" />
+            <span className="text-[0.5rem] text-muted-foreground tracking-wider">
+              {artista.redes.instagram}
+            </span>
+          </div>
+        )}
+      </div>
+    </motion.div>
   )
 }
