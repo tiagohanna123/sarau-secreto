@@ -287,6 +287,7 @@ interface EnrichedEvent {
   noShow: number | null
   noShowPct: number | null
   symplaEventId: string | null
+  produtos?: { name: string; qty: number; total: number; pct: number }[]
 }
 
 function enrichEvent(ev: FlatEvent): EnrichedEvent {
@@ -317,7 +318,42 @@ function enrichEvent(ev: FlatEvent): EnrichedEvent {
     noShow: noShow > 0 ? noShow : null,
     noShowPct,
     symplaEventId: ev.symplaEventId,
+    produtos: ev.produtos,
   }
+}
+
+// --- Top Produtos ---
+
+function ProdutosCard({ produtos, barRevenue }: { produtos?: { name: string; qty: number; total: number; pct: number }[]; barRevenue: number }) {
+  if (!produtos?.length || barRevenue <= 0) return null
+
+  return (
+    <div className="chart-box">
+      <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+        Discriminação de Vendas · {produtos.length} itens
+      </p>
+      <div className="space-y-1">
+        {produtos.slice(0, 20).map((p, i) => (
+          <div key={p.name} className="flex items-center gap-2 py-1.5 border-b border-white/5 last:border-0">
+            <span className="text-[10px] text-[#4b5563] w-4 font-mono text-right">{i+1}</span>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] text-[#9ca3af] truncate">{p.name}</span>
+                <div className="flex items-center gap-3 shrink-0 ml-2">
+                  <span className="text-[10px] text-[#4b5563] w-12 text-right">{p.qty}x</span>
+                  <span className="text-xs text-white font-medium w-20 text-right">{fmt(p.total)}</span>
+                  <span className="text-[10px] text-[#c8a96e] w-10 text-right">{p.pct.toFixed(1)}%</span>
+                </div>
+              </div>
+              <div className="mt-1 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                <div className="h-full rounded-full bg-[#c8a96e]/60" style={{ width: `${p.pct}%` }} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
 
 // --- Componente Principal ---
@@ -435,6 +471,13 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
         <ComparacaoMedia ev={ev} overview={o} />
         <NoShowCard checkedIn={ev.checkedIn} ticketsSold={ev.ticketsSold} />
       </div>
+
+      {/* Row 4: Discriminação de vendas */}
+      {ev.produtos?.length > 0 && ev.barRevenue > 0 && (
+        <div className="mb-6">
+          <ProdutosCard produtos={ev.produtos} barRevenue={ev.barRevenue} />
+        </div>
+      )}
 
       {/* Footer info */}
       <div className="text-[10px] text-[#4b5563] space-y-1">

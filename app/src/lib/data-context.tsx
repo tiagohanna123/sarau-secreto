@@ -18,6 +18,7 @@ export interface FlatEvent {
   status: string
   noShowRate: number
   symplaEventId: string | null
+  produtos?: { name: string; qty: number; total: number; pct: number }[]
 }
 
 export interface DataContextValue {
@@ -65,6 +66,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
           : 0
       ),
       symplaEventId: ev.symplaEventId ?? ev.id?.startsWith('bar-') ? null : (ev.symplaEventId || ev.id || null),
+      produtos: ev.produtos || barData?.eventos?.find((be: any) => be.start === (ev.date || '').slice(0, 10))?.produtos,
     }))
     }
 
@@ -85,6 +87,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
         status: 'completed',
         noShowRate: 0,
         symplaEventId: null,
+        produtos: ev.produtos,
       }))
     }
 
