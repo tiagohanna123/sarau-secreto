@@ -20,17 +20,7 @@ export interface EmbeddedDB {
 export const EMBEDDED_DB: EmbeddedDB = {
   "events": [
     {
-      "id": "cmrnwoc4q0001tuel5sp59129",
-      "title": "SARAU SECRETO CONVIDA LETÍCIA FIALHO",
-      "date": "1691708400000",
-      "symplaEventId": "s2008d6",
-      "soldCount": null,
-      "totalRevenue": null,
-      "capacity": null,
-      "status": "published"
-    },
-    {
-      "id": "cmro03i0b0001tuexa97h3ksh",
+      "id": "cmos4gt0l0001tuzohf8se5zp",
       "title": "SARAU SECRETO CONVIDA LETÍCIA FIALHO",
       "date": "1691708400000",
       "symplaEventId": "2099414",
@@ -40,17 +30,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
-      "id": "cmrnwockh0002tuela7o7e2l3",
-      "title": "Sarau Secreto",
-      "date": "1697065200000",
-      "symplaEventId": "s217f2b",
-      "soldCount": null,
-      "totalRevenue": null,
-      "capacity": null,
-      "status": "published"
-    },
-    {
-      "id": "cmro03ij30002tuex5sxhkvvh",
+      "id": "cmos4gtzk0002tuzo6qahavd8",
       "title": "Sarau Secreto",
       "date": "1697065200000",
       "symplaEventId": "2195243",
@@ -60,17 +40,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
-      "id": "cmrnwocqb0005tuelsn49fe5w",
-      "title": "Sarau Secreto Convida Os Garotin",
-      "date": "1699570800000",
-      "symplaEventId": "s21eda6",
-      "soldCount": null,
-      "totalRevenue": null,
-      "capacity": null,
-      "status": "published"
-    },
-    {
-      "id": "cmro03itf0005tuexqi33t4vd",
+      "id": "cmos4gumu0005tuzowyzny7xa",
       "title": "Sarau Secreto Convida Os Garotin",
       "date": "1699570800000",
       "symplaEventId": "2223526",
@@ -80,17 +50,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
-      "id": "cmrnwocvv000atuelcidqhk61",
-      "title": "Sarau Secreto",
-      "date": "1702594800000",
-      "symplaEventId": "s22b6ab",
-      "soldCount": null,
-      "totalRevenue": null,
-      "capacity": null,
-      "status": "published"
-    },
-    {
-      "id": "cmro03j3h000atuex2fs8ndlr",
+      "id": "cmos4gv9d0008tuzod1v6vohy",
       "title": "Sarau Secreto",
       "date": "1702594800000",
       "symplaEventId": "2274987",
@@ -100,17 +60,17 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
-      "id": "cmrnwod14000dtuelw4rrofiy",
-      "title": "AFTER SECRETO",
-      "date": "1706223600000",
-      "symplaEventId": "s234269",
+      "id": "cmowubsuk0d4ktua7kgqhk7ad",
+      "title": "Sarau Secreto (2024-01-18)",
+      "date": "1705536000000",
+      "symplaEventId": null,
       "soldCount": null,
       "totalRevenue": null,
       "capacity": null,
-      "status": "published"
+      "status": "completed"
     },
     {
-      "id": "cmro03jd7000dtuexr0nnl648",
+      "id": "cmos4gvwi000btuzoc8pt324j",
       "title": "AFTER SECRETO",
       "date": "1706223600000",
       "symplaEventId": "2310761",
@@ -120,17 +80,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
-      "id": "cmrnwod6l000etueloc7rhc39",
-      "title": "Sarau Secreto Convida Youn",
-      "date": "1709852400000",
-      "symplaEventId": "s23fac9",
-      "soldCount": null,
-      "totalRevenue": null,
-      "capacity": null,
-      "status": "published"
-    },
-    {
-      "id": "cmro03jmm000etuex60pxjlvw",
+      "id": "cmos4gwit000ctuzobv5wgzyb",
       "title": "Sarau Secreto Convida Youn",
       "date": "1709852400000",
       "symplaEventId": "2357961",
@@ -140,17 +90,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
-      "id": "cmrnwodck000htuelon3bjl71",
-      "title": "After Secreto - Antonela",
-      "date": "1711062000000",
-      "symplaEventId": "s243606",
-      "soldCount": null,
-      "totalRevenue": null,
-      "capacity": null,
-      "status": "published"
-    },
-    {
-      "id": "cmro03jwm000htuexs456mgeh",
+      "id": "cmos4gx76000ftuzo0zg533i4",
       "title": "After Secreto - Antonela",
       "date": "1711062000000",
       "symplaEventId": "2373126",
@@ -160,159 +100,69 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
-      "id": "1936356",
-      "title": "AFTER SECRETO (2 edição)",
-      "date": "2023-04-06",
-      "symplaEventId": "1936356",
-      "soldCount": 125,
-      "totalRevenue": 3410.0,
-      "capacity": 160,
-      "status": "published"
+      "id": "cmowubsml0c80tua7xboaj3ew",
+      "title": "Sarau Secreto (2024-04-11)",
+      "date": "1712793600000",
+      "symplaEventId": null,
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "completed"
     },
     {
-      "id": "2099414",
-      "title": "SARAU SECRETO CONVIDA LETÍCIA FIALHO",
-      "date": "2023-08-10",
-      "symplaEventId": "2099414",
-      "soldCount": 399,
-      "totalRevenue": 10076.0,
-      "capacity": 425,
-      "status": "published"
+      "id": "cmowubsjx0bxbtua7thjxu0s1",
+      "title": "Sarau Secreto (2024-05-09)",
+      "date": "1715212800000",
+      "symplaEventId": null,
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "completed"
     },
     {
-      "id": "2195243",
-      "title": "Sarau Secreto",
-      "date": "2023-10-11",
-      "symplaEventId": "2195243",
-      "soldCount": 371,
-      "totalRevenue": 10230.0,
-      "capacity": 410,
-      "status": "published"
+      "id": "cmowubshe0bgxtua70qoojntf",
+      "title": "Sarau Secreto (2024-06-13)",
+      "date": "1718236800000",
+      "symplaEventId": null,
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "completed"
     },
     {
-      "id": "2223526",
-      "title": "Sarau Secreto Convida Os Garotin",
-      "date": "2023-11-09",
-      "symplaEventId": "2223526",
-      "soldCount": 943,
-      "totalRevenue": 33935.0,
-      "capacity": 945,
-      "status": "published"
+      "id": "cmowubsej0b28tua7nxx9qkg8",
+      "title": "Sarau Secreto (2024-07-11)",
+      "date": "1720656000000",
+      "symplaEventId": null,
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "completed"
     },
     {
-      "id": "2274987",
-      "title": "Sarau Secreto",
-      "date": "2023-12-14",
-      "symplaEventId": "2274987",
-      "soldCount": 329,
-      "totalRevenue": 8255.36,
-      "capacity": 331,
-      "status": "published"
+      "id": "cmowubsat0a9qtua7cydohe8k",
+      "title": "Sarau Secreto (2024-08-15)",
+      "date": "1723680000000",
+      "symplaEventId": null,
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "completed"
     },
     {
-      "id": "2305571",
-      "title": "Sarau Secreto",
-      "date": "2024-01-18",
-      "symplaEventId": "2305571",
-      "soldCount": 598,
-      "totalRevenue": 15279.0,
-      "capacity": 600,
-      "status": "published"
-    },
-    {
-      "id": "2310761",
-      "title": "AFTER SECRETO",
-      "date": "2024-01-25",
-      "symplaEventId": "2310761",
-      "soldCount": 218,
-      "totalRevenue": 6369.0,
-      "capacity": 300,
-      "status": "published"
-    },
-    {
-      "id": "2357961",
-      "title": "Sarau Secreto Convida Youn",
-      "date": "2024-03-07",
-      "symplaEventId": "2357961",
-      "soldCount": 667,
-      "totalRevenue": 29700.0,
-      "capacity": 670,
-      "status": "published"
-    },
-    {
-      "id": "2373126",
-      "title": "After Secreto - Antonela",
-      "date": "2024-03-21",
-      "symplaEventId": "2373126",
-      "soldCount": 241,
-      "totalRevenue": 7782.5,
-      "capacity": 400,
-      "status": "published"
-    },
-    {
-      "id": "2409324",
-      "title": "SARAU SECRETO CONVIDA JOYCE ALANE",
-      "date": "2024-04-11",
-      "symplaEventId": "2409324",
-      "soldCount": 601,
-      "totalRevenue": 27852.0,
-      "capacity": 650,
-      "status": "published"
-    },
-    {
-      "id": "2455842",
-      "title": "Sarau Secreto",
-      "date": "2024-05-09",
-      "symplaEventId": "2455842",
-      "soldCount": 239,
-      "totalRevenue": 7661.5,
-      "capacity": 300,
-      "status": "published"
-    },
-    {
-      "id": "2499043",
-      "title": "Sarau Secreto",
-      "date": "2024-06-13",
-      "symplaEventId": "2499043",
-      "soldCount": 584,
-      "totalRevenue": 25465.0,
-      "capacity": 600,
-      "status": "published"
-    },
-    {
-      "id": "2539507",
-      "title": "SARAU SECRETO",
-      "date": "2024-07-11",
-      "symplaEventId": "2539507",
-      "soldCount": 414,
-      "totalRevenue": 17600.0,
-      "capacity": 450,
-      "status": "published"
-    },
-    {
-      "id": "2586278",
-      "title": "SARAU SECRETO Convida Fat family e Tali",
-      "date": "2024-08-15",
-      "symplaEventId": "2586278",
-      "soldCount": 1081,
-      "totalRevenue": 43604.0,
-      "capacity": 1447,
-      "status": "published"
-    },
-    {
-      "id": "2598111",
-      "title": "AFTER SECRETO MAGRÃO",
-      "date": "2024-08-22",
-      "symplaEventId": "2598111",
-      "soldCount": 221,
-      "totalRevenue": 11137.5,
-      "capacity": 578,
-      "status": "published"
+      "id": "cmowubs7u0a0wtua7mzroohak",
+      "title": "Sarau Secreto (2024-08-22)",
+      "date": "1724284800000",
+      "symplaEventId": null,
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "completed"
     },
     {
       "id": "sympla-2633353",
       "title": "SARAU SECRETO - 2 ANOS",
-      "date": "2024-09-12",
+      "date": "1726099200000",
       "symplaEventId": "2633353",
       "soldCount": 505,
       "totalRevenue": 18100.5,
@@ -322,7 +172,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2675465",
       "title": "SARAU SECRETO",
-      "date": "2024-10-10",
+      "date": "1728518400000",
       "symplaEventId": "2675465",
       "soldCount": 607,
       "totalRevenue": 20152.0,
@@ -332,7 +182,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2686304",
       "title": "After Secreto - Black ipê Jazz",
-      "date": "2024-10-17",
+      "date": "1729123200000",
       "symplaEventId": "2686304",
       "soldCount": 450,
       "totalRevenue": 12474.0,
@@ -342,7 +192,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2721616",
       "title": "SARAU SECRETO - RIO DE JANEIRO",
-      "date": "2024-11-12",
+      "date": "1731369600000",
       "symplaEventId": "2721616",
       "soldCount": 254,
       "totalRevenue": 2607.0,
@@ -352,7 +202,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2729608",
       "title": "SARAU SECRETO CONVIDA IMBA",
-      "date": "2024-11-14",
+      "date": "1731542400000",
       "symplaEventId": "2729608",
       "soldCount": 501,
       "totalRevenue": 18810.0,
@@ -362,7 +212,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2754645",
       "title": "Sarau Secreto - O ultimo Ato",
-      "date": "2024-12-06",
+      "date": "1733443200000",
       "symplaEventId": "2754645",
       "soldCount": 588,
       "totalRevenue": 21285.0,
@@ -372,7 +222,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2785141",
       "title": "SARAU SECRETO - RIO DE JANEIRO",
-      "date": "2025-01-07",
+      "date": "1736208000000",
       "symplaEventId": "2785141",
       "soldCount": 326,
       "totalRevenue": 2541.0,
@@ -382,7 +232,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2795323",
       "title": "Sarau Secreto",
-      "date": "2025-01-16",
+      "date": "1736985600000",
       "symplaEventId": "2795323",
       "soldCount": 342,
       "totalRevenue": 9372.0,
@@ -392,7 +242,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2828931",
       "title": "SARAU SECRETO",
-      "date": "2025-02-13",
+      "date": "1739404800000",
       "symplaEventId": "2828931",
       "soldCount": 312,
       "totalRevenue": 13145.0,
@@ -402,7 +252,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2862206",
       "title": "SALA SECRETA",
-      "date": "2025-03-12",
+      "date": "1741737600000",
       "symplaEventId": "2862206",
       "soldCount": 90,
       "totalRevenue": 4950.0,
@@ -412,7 +262,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2887562",
       "title": "SARAU SECRETO CONVIDA JEAN TASSY",
-      "date": "2025-04-10",
+      "date": "1744243200000",
       "symplaEventId": "2887562",
       "soldCount": 1361,
       "totalRevenue": 64735.0,
@@ -422,7 +272,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-2942257",
       "title": "SARAU SECRETO",
-      "date": "2025-05-08",
+      "date": "1746662400000",
       "symplaEventId": "2942257",
       "soldCount": 277,
       "totalRevenue": 9977.0,
@@ -430,9 +280,19 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
+      "id": "cmowubrg505sftua7duoe1ojk",
+      "title": "Sarau Secreto (2025-05-16)",
+      "date": "1747353600000",
+      "symplaEventId": null,
+      "soldCount": null,
+      "totalRevenue": null,
+      "capacity": null,
+      "status": "completed"
+    },
+    {
       "id": "sympla-2987008",
       "title": "SARAU SECRETO - JUNHO",
-      "date": "2025-06-12",
+      "date": "1749686400000",
       "symplaEventId": "2987008",
       "soldCount": 628,
       "totalRevenue": 26510.0,
@@ -442,7 +302,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3028036",
       "title": "Sarau Secreto - Julho",
-      "date": "2025-07-10",
+      "date": "1752105600000",
       "symplaEventId": "3028036",
       "soldCount": 377,
       "totalRevenue": 16021.5,
@@ -450,9 +310,9 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "status": "published"
     },
     {
-      "id": "3060095",
+      "id": "sympla-3060095",
       "title": "Sarau Secreto - Ceilandia",
-      "date": "2025-08-08",
+      "date": "1754611200000",
       "symplaEventId": "3060095",
       "soldCount": 1640,
       "totalRevenue": 0.0,
@@ -462,7 +322,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3073170",
       "title": "Sala Secreta",
-      "date": "2025-08-11",
+      "date": "1754870400000",
       "symplaEventId": "3073170",
       "soldCount": 242,
       "totalRevenue": 11715.0,
@@ -472,7 +332,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3113883",
       "title": "Sarau Secreto 3 anos.",
-      "date": "2025-09-11",
+      "date": "1757548800000",
       "symplaEventId": "3113883",
       "soldCount": 1502,
       "totalRevenue": 78622.5,
@@ -482,7 +342,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3150968",
       "title": "Sarau Secreto - Rio de Janeiro",
-      "date": "2025-10-07",
+      "date": "1759795200000",
       "symplaEventId": "3150968",
       "soldCount": 281,
       "totalRevenue": 4466.0,
@@ -492,7 +352,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3168880",
       "title": "Sarau secreto",
-      "date": "2025-10-16",
+      "date": "1760572800000",
       "symplaEventId": "3168880",
       "soldCount": 292,
       "totalRevenue": 10004.5,
@@ -502,7 +362,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3209412",
       "title": "SARAU SECRETO",
-      "date": "2025-11-13",
+      "date": "1762992000000",
       "symplaEventId": "3209412",
       "soldCount": 420,
       "totalRevenue": 17270.0,
@@ -512,7 +372,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3245686",
       "title": "Sarau Secreto - Ultimo Ato",
-      "date": "2025-12-11",
+      "date": "1765411200000",
       "symplaEventId": "3245686",
       "soldCount": 1860,
       "totalRevenue": 116737.5,
@@ -522,7 +382,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3272845",
       "title": "Sarau Secreto - Janeiro 2026",
-      "date": "2026-01-15",
+      "date": "1768435200000",
       "symplaEventId": "3272845",
       "soldCount": 455,
       "totalRevenue": 21796.5,
@@ -532,7 +392,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3297245",
       "title": "Sarau Secreto",
-      "date": "2026-02-05",
+      "date": "1770249600000",
       "symplaEventId": "3297245",
       "soldCount": 381,
       "totalRevenue": 15576.0,
@@ -542,7 +402,7 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3332505",
       "title": "Sarau Secreto - No caminho da arte",
-      "date": "2026-03-12",
+      "date": "1773273600000",
       "symplaEventId": "3332505",
       "soldCount": 603,
       "totalRevenue": 28147.79,
@@ -552,94 +412,28 @@ export const EMBEDDED_DB: EmbeddedDB = {
     {
       "id": "sympla-3384296",
       "title": "Sarau Secreto Convida Leticia Fialho",
-      "date": "2026-04-16",
+      "date": "1776297600000",
       "symplaEventId": "3384296",
       "soldCount": 675,
       "totalRevenue": 35431.71,
       "capacity": 792,
       "status": "published"
-    },
-    {
-      "id": "cm89a37dab087b8",
-      "title": "SARAU SECRETO - MAIO",
-      "date": "2026-05-14",
-      "symplaEventId": "3420938",
-      "soldCount": 323,
-      "totalRevenue": 19491.89,
-      "capacity": 335,
-      "status": "published"
-    },
-    {
-      "id": "cm875260665fa5f",
-      "title": "Sarau Secreto Convida Magrão",
-      "date": "2026-06-11",
-      "symplaEventId": "3457402",
-      "soldCount": 715,
-      "totalRevenue": 39269.05,
-      "capacity": 754,
-      "status": "published"
-    },
-    {
-      "id": "sympla-3474070",
-      "title": "Sala Secreta",
-      "date": "2026-06-25",
-      "symplaEventId": "3474070",
-      "soldCount": 199,
-      "totalRevenue": 12100.0,
-      "capacity": 220,
-      "status": "published"
-    },
-    {
-      "id": "cm8ae3f1b0ada38",
-      "title": "Sarau Secreto Convida Ellen Oleria",
-      "date": "2026-07-09",
-      "symplaEventId": "3492296",
-      "soldCount": 621,
-      "totalRevenue": 21560.0,
-      "capacity": 819,
-      "status": "published"
-    },
-    {
-      "id": "cm842b46dd96f70",
-      "title": "Sarau Secreto x Crema convidam Sotam",
-      "date": "2026-07-16",
-      "symplaEventId": "3500838",
-      "soldCount": 898,
-      "totalRevenue": 40731.9,
-      "capacity": 1290,
-      "status": "published"
     }
   ],
   "tickets": {
-    "cmrnwockh0002tuela7o7e2l3": {
+    "cmos4gtzk0002tuzo6qahavd8": {
       "count": 1,
       "revenue": 33.0
     },
-    "cmrnwocqb0005tuelsn49fe5w": {
+    "cmos4gumu0005tuzowyzny7xa": {
       "count": 2,
       "revenue": 198.0
     },
-    "cmrnwocvv000atuelcidqhk61": {
+    "cmos4gv9d0008tuzod1v6vohy": {
       "count": 1,
       "revenue": 33.0
     },
-    "cmrnwod6l000etueloc7rhc39": {
-      "count": 1,
-      "revenue": 88.0
-    },
-    "cmro03ij30002tuex5sxhkvvh": {
-      "count": 1,
-      "revenue": 33.0
-    },
-    "cmro03itf0005tuexqi33t4vd": {
-      "count": 2,
-      "revenue": 198.0
-    },
-    "cmro03j3h000atuex2fs8ndlr": {
-      "count": 1,
-      "revenue": 33.0
-    },
-    "cmro03jmm000etuex60pxjlvw": {
+    "cmos4gwit000ctuzobv5wgzyb": {
       "count": 1,
       "revenue": 88.0
     }
