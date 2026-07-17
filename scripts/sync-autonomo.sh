@@ -17,6 +17,7 @@ cd /home/ser/sistema-sarau-secreto
 if ! git diff --quiet; then
   git add -A
   git commit -m "sync autonomo $(date +%Y-%m-%d-%H:%M)" 2>&1 | tee -a "$LOG"
+  git pull --rebase origin main 2>&1 | tee -a "$LOG"
   git push origin main 2>&1 | tee -a "$LOG"
   echo "[sync] Deploy acionado via push." | tee -a "$LOG"
 else
