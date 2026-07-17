@@ -31,7 +31,7 @@ export interface WineAnalysis {
 }
 
 export interface BarHistoryData {
-  source: 'live' | 'backup' | 'insights' | 'empty'
+  source: 'live' | 'backup' | 'insights' | 'empty' | 'database'
   totalEvents: number
   totalRevenue: number
   totalOrders: number
