@@ -403,6 +403,61 @@ function ProdutosCard({ produtos, barRevenue }: { produtos?: { name: string; qty
   )
 }
 
+// --- Lucratividade Líquida ---
+
+const CUSTO_PRODUCAO_FIXO = 12000
+const CMV_BAR_RATE = 0.42
+const TAXA_SYMPLA_RATE = 0.08
+
+function LucroCard({ totalRevenue, ticketRevenue, barRevenue }: {
+  totalRevenue: number; ticketRevenue: number; barRevenue: number
+}) {
+  const custoProducao = CUSTO_PRODUCAO_FIXO
+  const custoCMV = barRevenue * CMV_BAR_RATE
+  const custoSympla = ticketRevenue * TAXA_SYMPLA_RATE
+  const custoTotal = custoProducao + custoCMV + custoSympla
+  const lucroLiquido = totalRevenue - custoTotal
+  const margemLiquida = totalRevenue > 0 ? (lucroLiquido / totalRevenue) * 100 : 0
+
+  const isLucroPositivo = lucroLiquido >= 0
+
+  const rows = [
+    { label: 'Receita Total', value: fmt(totalRevenue), color: 'text-white' },
+    { label: 'Produção (fixo)', value: `-${fmt(custoProducao)}`, color: 'text-red-400' },
+    { label: 'CMV Bar (42%)', value: `-${fmt(custoCMV)}`, color: 'text-red-400' },
+    { label: 'Taxa Sympla (8%)', value: `-${fmt(custoSympla)}`, color: 'text-red-400' },
+    { label: 'Custo Total', value: fmt(custoTotal), color: 'text-orange-400' },
+  ]
+
+  return (
+    <div className="bg-card border border-border rounded-xl p-4">
+      <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+        Lucratividade Líquida Estimada
+      </p>
+      <div className="space-y-2">
+        {rows.map(r => (
+          <div key={r.label} className="flex items-center justify-between border-b border-white/5 pb-1.5 last:border-0">
+            <span className="text-[11px] text-muted-foreground">{r.label}</span>
+            <span className={`text-sm font-bold ${r.color}`}>{r.value}</span>
+          </div>
+        ))}
+        <div className="flex items-center justify-between pt-2 border-t border-white/10">
+          <span className="text-[11px] text-muted-foreground">Lucro Líquido</span>
+          <span className={`text-sm font-bold ${isLucroPositivo ? 'text-success' : 'text-red-400'}`}>
+            {fmt(lucroLiquido)}
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] text-muted-foreground">Margem Líquida</span>
+          <span className={`text-sm font-bold ${margemLiquida >= 0 ? 'text-success' : 'text-red-400'}`}>
+            {margemLiquida >= 0 ? '+' : ''}{margemLiquida.toFixed(1)}%
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // --- Componente Principal ---
 
 export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) {
@@ -532,6 +587,15 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
           <ProdutosCard produtos={ev.produtos} barRevenue={ev.barRevenue} />
         </div>
       )}
+
+      {/* Row 5: Lucratividade Líquida */}
+      <div className="mb-6">
+        <LucroCard
+          totalRevenue={ev.totalRevenue}
+          ticketRevenue={ev.ticketRevenue}
+          barRevenue={ev.barRevenue}
+        />
+      </div>
 
       {/* Footer info */}
       <div className="text-[10px] text-[#4b5563] space-y-1">

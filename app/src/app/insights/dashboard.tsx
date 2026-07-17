@@ -58,6 +58,12 @@ function computeNoShowRate(eventos: any[]): number | null {
   return ((totalOrders - totalCheckedIn) / totalOrders) * 100
 }
 
+const MONTHS = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
+
+function formatMonth(date: Date): string {
+  return `${MONTHS[date.getMonth()]}/${date.getFullYear()}`
+}
+
 /** Renderiza uma sparkline inline (mini area chart). */
 function Sparkline({ data, color }: { data: { label: string; revenue: number }[]; color: string }) {
   if (!data || data.length < 2) return null
@@ -144,6 +150,26 @@ export function Dashboard() {
     // Últimos 6 meses para sparkline
     const last6 = mensais.slice(-6)
 
+    // Próximo Evento (FlatEvent[] com date + totalRevenue)
+    const hoje = new Date()
+    const nextEvent = events
+      .filter(ev => new Date(ev.date) > hoje)
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0] || null
+
+    // Dias até o próximo evento
+    const daysUntilNext = nextEvent
+      ? Math.ceil((new Date(nextEvent.date).getTime() - hoje.getTime()) / (1000 * 60 * 60 * 24))
+      : 0
+
+    // Forecasting: média móvel simples dos últimos 3 eventos finalizados
+    const completedForForecast = [...events]
+      .filter(ev => new Date(ev.date) <= hoje)
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 3)
+    const forecastedRevenue = completedForForecast.length > 0
+      ? completedForForecast.reduce((s, ev) => s + ev.totalRevenue, 0) / completedForForecast.length
+      : 0
+
     return {
       eventos, totalRevenue, totalOrders, totalEvents, ticketMedio,
       prevRevenue, prevOrders, prevEvents, prevTicketMedio,
@@ -151,8 +177,9 @@ export function Dashboard() {
       topProduto, noShowRate,
       revenuePerEvent, rpeChange,
       mensais, last6,
+      nextEvent, daysUntilNext, forecastedRevenue,
     }
-  }, [data, dateRange])
+  }, [data, dateRange, events])
 
   // --- Loading ---
   if (loading) {
@@ -208,6 +235,9 @@ export function Dashboard() {
   // Últimos eventos filtrados
   const ultimosEventos = f.eventos.slice(0, 6)
 
+  // Label do período anterior para comparação no snapshot
+  const prevRangeLabel = dateRange ? formatMonth(getPrevRange(dateRange)?.start || dateRange.start) : ''
+
   return (
     <div className="p-4 sm:p-6 max-w-7xl mx-auto">
       {/* Header + Filtro de Período */}
@@ -221,6 +251,23 @@ export function Dashboard() {
         </div>
         <PeriodFilter className="shrink-0" />
       </div>
+
+      {/* ═══ Snapshot Mensal Executivo ═══ */}
+      {dateRange && (
+        <div className="bg-card border border-border rounded-xl p-4 mb-6">
+          <p className="text-[9px] text-muted-foreground uppercase tracking-widest mb-1 flex items-center gap-1">
+            <CalendarDays size={10} /> Snapshot Mensal
+          </p>
+          <p className="text-sm font-bold text-foreground tracking-tight">
+            {formatMonth(dateRange.start)}: {f.totalEvents} eventos · {fmt(f.totalRevenue)} receita · {fmtNum(f.totalOrders)} ingressos{f.noShowRate !== null ? ` · ${pctAbs(f.noShowRate)} no-show` : ''} · {fmt(f.revenuePerEvent)}/evento
+          </p>
+          {hasPrev && (
+            <p className={`text-[10px] mt-0.5 ${trendUp(f.revenueChange) ? 'text-success' : trendDown(f.revenueChange) ? 'text-danger' : 'text-muted-foreground'}`}>
+              {trendUp(f.revenueChange) ? '↑' : trendDown(f.revenueChange) ? '↓' : '→'} {pctAbs(f.revenueChange)} vs {prevRangeLabel}
+            </p>
+          )}
+        </div>
+      )}
 
       {/* ═══ KPIs Principais ═══ */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -311,6 +358,40 @@ export function Dashboard() {
           <p className="text-sm font-bold text-foreground tracking-tight">{fmt(f.revenuePerEvent)}</p>
           <p className="text-[9px] text-[#4b5563] mt-0.5">
             {hasPrev ? `${pct(f.rpeChange)} vs anterior` : 'Média por evento'}
+          </p>
+        </div>
+
+        {/* Próximo Evento */}
+        <div className="bg-card border border-border rounded-xl p-4 transition-all hover:border-gold/35 hover:scale-[1.02]">
+          <p className="text-[9px] text-muted-foreground uppercase tracking-widest mb-0.5 flex items-center gap-1">
+            <CalendarDays size={10} /> Próximo Evento
+          </p>
+          {f.nextEvent ? (
+            <>
+              <p className="text-sm font-bold text-foreground tracking-tight truncate">{f.nextEvent.title}</p>
+              <p className="text-[9px] text-[#4b5563] mt-0.5">
+                {new Date(f.nextEvent.date).toLocaleDateString('pt-BR')} · {f.daysUntilNext}d
+              </p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">
+                Est. {fmt(f.forecastedRevenue)}
+              </p>
+            </>
+          ) : (
+            <>
+              <p className="text-sm font-bold text-[#4b5563]">Nenhum</p>
+              <p className="text-[9px] text-[#4b5563] mt-0.5">Nenhum evento futuro agendado</p>
+            </>
+          )}
+        </div>
+
+        {/* Forecasting — Receita Estimada */}
+        <div className="bg-card border border-border rounded-xl p-4 transition-all hover:border-gold/35 hover:scale-[1.02]">
+          <p className="text-[9px] text-muted-foreground uppercase tracking-widest mb-0.5 flex items-center gap-1">
+            <TrendingUp size={10} /> Receita Estimada
+          </p>
+          <p className="text-sm font-bold text-foreground tracking-tight">{fmt(f.forecastedRevenue)}</p>
+          <p className="text-[9px] text-[#4b5563] mt-0.5">
+            Média móvel dos últimos {Math.min(events.filter(ev => new Date(ev.date) <= new Date()).length, 3)} eventos
           </p>
         </div>
       </div>

@@ -1,8 +1,19 @@
 import { useState, useMemo } from 'react'
 import { useData } from '@/lib/data-context'
 import type { FlatEvent } from '@/lib/data-context'
-import { SarauInput } from '@/lib/design-system'
-import { Search, X } from 'lucide-react'
+
+const CUSTO_PRODUCAO_FIXO = 12_000
+const CMV_BAR_RATE = 0.42
+const TAXA_SYMPLA_RATE = 0.08
+
+const calcProfit = (revenue: number, barRevenue: number, ticketRevenue: number) => {
+  const custoCMV = barRevenue * CMV_BAR_RATE
+  const custoSympla = ticketRevenue * TAXA_SYMPLA_RATE
+  return revenue - (CUSTO_PRODUCAO_FIXO + custoCMV + custoSympla)
+}
+
+const profitEvent = (ev: { revenue: number; barRevenue: number; total: number }) =>
+  calcProfit(ev.total, ev.barRevenue, ev.revenue)
 
 const fmtBRL = (v: number) =>
   v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })
@@ -47,20 +58,11 @@ export function EventsPage({
 }) {
   const { events: dataEvents, loading, source } = useData()
   const [hovered, setHovered] = useState<string | null>(null)
-  const [sortBy, setSortBy] = useState<'date' | 'revenue' | 'bar' | 'perCapita'>('date')
-  const [search, setSearch] = useState('')
+  const [sortBy, setSortBy] = useState<'date' | 'revenue' | 'bar' | 'profit'>('date')
+  const [searchQuery, setSearchQuery] = useState('')
   const [monthFilter, setMonthFilter] = useState('')
 
-  // Extrai meses únicos para o filtro
-  const mesesDisponiveis = useMemo(() => {
-    const set = new Set<string>()
-    for (const ev of dataEvents || []) {
-      if (ev.date) set.add(ev.date.slice(0, 7)) // "YYYY-MM"
-    }
-    return [...set].sort((a, b) => b.localeCompare(a))
-  }, [dataEvents])
-
-  // Transforma FlatEvent[] → EventData[] + filtra + ordena
+  // Transforma FlatEvent[] → EventData[] + ordena + filtra
   const sorted = useMemo(() => {
     const mapped = (dataEvents || []).map((ev: FlatEvent) => ({
       id: ev.id,
@@ -79,22 +81,30 @@ export function EventsPage({
       status: ev.status ?? 'completed',
     }))
 
-    return [...mapped]
-      .filter(ev => {
-        if (search) {
-          const q = search.toLowerCase()
-          if (!ev.title.toLowerCase().includes(q) && !ev.dateLabel.toLowerCase().includes(q)) return false
-        }
-        if (monthFilter && ev.date && ev.date.slice(0, 7) !== monthFilter) return false
-        return true
-      })
-      .sort((a, b) => {
+    let result = [...mapped].sort((a, b) => {
       if (sortBy === 'revenue') return b.total - a.total
       if (sortBy === 'bar') return b.barRevenue - a.barRevenue
-      if (sortBy === 'perCapita') return b.perCapitaBar - a.perCapitaBar
+      if (sortBy === 'profit') {
+        const profitA = profitEvent(a)
+        const profitB = profitEvent(b)
+        return profitB - profitA
+      }
       return new Date(b.date).getTime() - new Date(a.date).getTime()
     })
-  }, [dataEvents, sortBy])
+
+    // Filtro por busca textual
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase()
+      result = result.filter(ev => ev.title.toLowerCase().includes(q))
+    }
+
+    // Filtro por mês/ano
+    if (monthFilter) {
+      result = result.filter(ev => ev.dateLabel === monthFilter)
+    }
+
+    return result
+  }, [dataEvents, sortBy, searchQuery, monthFilter])
 
   // KPIs
   const totalTickets = dataEvents.reduce((s, e) => s + e.ticketsSold, 0)
@@ -104,6 +114,46 @@ export function EventsPage({
   const barPerCapitaGeral = totalTickets > 0 ? totalBar / totalTickets : 0
   const barPctKPI = totalGeral > 0 ? Math.round(totalBar / totalGeral * 100) : 0
   const receitaPorIngresso = totalTickets > 0 ? totalGeral / totalTickets : 0
+
+  // Opções para o filtro de mês
+  const monthOptions = useMemo(() => {
+    const set = new Set<string>()
+    ;(dataEvents || []).forEach(ev => {
+      set.add(fmtDateLabel(ev.date))
+    })
+    const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
+    return Array.from(set).sort((a, b) => {
+      const [mA, yA] = a.split('/')
+      const [mB, yB] = b.split('/')
+      if (yA !== yB) return Number(yB) - Number(yA)
+      return meses.indexOf(mB) - meses.indexOf(mA)
+    })
+  }, [dataEvents])
+
+  // Exporta os eventos filtrados como CSV
+  const exportCSV = () => {
+    if (sorted.length === 0) return
+    const headers = ['Data', 'Evento', 'Ingressos', 'Check-in', 'Bilheteria', 'Bar', 'Total', 'Bar/pessoa', 'No-Show%']
+    const rows = sorted.map(ev => [
+      ev.dateLabel,
+      `"${ev.title.replace(/"/g, '""')}"`,
+      ev.tickets,
+      ev.checkedIn ?? 0,
+      fmtBRL(ev.revenue),
+      fmtBRL(ev.barRevenue),
+      fmtBRL(ev.total),
+      ev.barRevenue > 0 ? fmtBRLc(ev.perCapitaBar) : '—',
+      ev.noShow != null ? `${ev.noShow}%` : '—',
+    ].join(','))
+    const csv = [headers.join(','), ...rows].join('\n')
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `eventos-${new Date().toISOString().slice(0, 10)}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
 
   if (loading) return <LoadingSkeleton />
 
@@ -139,48 +189,44 @@ export function EventsPage({
               {sorted.length} edições · {totalTickets.toLocaleString('pt-BR')} ingressos · {fmtBRL(totalGeral)} receita total
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            {/* Search + Filter */}
-            <div className="relative hidden sm:block">
-              <Search size={12} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="text"
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-                placeholder="Buscar evento..."
-                className="w-40 bg-muted border border-border rounded-lg pl-7 pr-7 py-1.5 text-[11px] text-foreground placeholder:text-muted-foreground outline-none focus:border-gold-dim transition-colors"
-              />
-              {search && (
-                <button onClick={() => setSearch('')} className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
-                  <X size={12} />
-                </button>
-              )}
-            </div>
-            <select
-              value={monthFilter}
-              onChange={e => setMonthFilter(e.target.value)}
-              className="bg-muted border border-border rounded-lg px-2 py-1.5 text-[11px] text-foreground outline-none focus:border-gold-dim transition-colors"
-            >
-              <option value="">Todos os meses</option>
-              {mesesDisponiveis.map(m => {
-                const [y, mo] = m.split('-')
-                const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
-                return <option key={m} value={m}>{meses[parseInt(mo)-1]}/{y}</option>
-              })}
-            </select>
-            {/* Sort controls */}
+          {/* Sort controls */}
           <div className="flex items-center gap-1 text-[10px]">
             <span className="text-muted-foreground">Ordenar:</span>
-            {(['date', 'revenue', 'bar', 'perCapita'] as const).map(s => (
+            {(['date', 'revenue', 'bar', 'profit'] as const).map(s => (
               <button key={s} onClick={() => setSortBy(s)}
                 className={`px-2 py-1 rounded transition-colors ${sortBy === s ? 'bg-gold/20 text-gold' : 'text-muted-foreground hover:text-foreground'}`}>
-                {s === 'date' ? 'Data' : s === 'revenue' ? 'Receita' : s === 'bar' ? 'Bar' : 'Per Capita'}
+                {s === 'date' ? 'Data' : s === 'revenue' ? 'Receita' : s === 'bar' ? 'Bar' : 'Lucro'}
               </button>
             ))}
+            <span className="mx-1 text-muted-foreground/30">|</span>
+            <button onClick={exportCSV}
+              className="px-2 py-1 rounded transition-colors text-muted-foreground hover:text-foreground">
+              ⬇ CSV
+            </button>
           </div>
         </div>
-      </div>
       </header>
+
+      {/* Filtros */}
+      <div className="mb-4 flex items-center gap-3">
+        <input
+          type="text"
+          placeholder="Buscar evento…"
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          className="flex-1 rounded-lg border border-border bg-card px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-gold/50 transition-colors"
+        />
+        <select
+          value={monthFilter}
+          onChange={e => setMonthFilter(e.target.value)}
+          className="rounded-lg border border-border bg-card px-3 py-2 text-xs text-foreground outline-none focus:border-gold/50 transition-colors"
+        >
+          <option value="">Todos os meses</option>
+          {monthOptions.map(m => (
+            <option key={m} value={m}>{m}</option>
+          ))}
+        </select>
+      </div>
 
       {/* KPIs estratégicos */}
       <div className="mb-6 grid grid-cols-5 gap-3">
@@ -198,58 +244,6 @@ export function EventsPage({
           </div>
         ))}
       </div>
-
-      {/* Snapshot Mensal (quando filtrado por mês) */}
-      {(() => {
-        if (!monthFilter) return null
-        const mesLabel = mesesDisponiveis.find(m => m === monthFilter)
-        if (!mesLabel) return null
-        const [yr, mo] = monthFilter.split('-')
-        const nomeMes = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'][parseInt(mo)-1]
-        const eventosMes = sorted.filter(ev => ev.date && ev.date.slice(0, 7) === monthFilter)
-        const qtd = eventosMes.length
-        const recTotal = eventosMes.reduce((s, e) => s + e.revenue + e.barRevenue, 0)
-        const recTicket = eventosMes.reduce((s, e) => s + e.revenue, 0)
-        const recBar = eventosMes.reduce((s, e) => s + e.barRevenue, 0)
-        const ingTotal = eventosMes.reduce((s, e) => s + e.tickets, 0)
-        const barPctMes = recTotal > 0 ? Math.round(recBar / recTotal * 100) : 0
-        const ticketMedioMes = ingTotal > 0 ? recTotal / ingTotal : 0
-        const barPerCapMes = ingTotal > 0 ? recBar / ingTotal : 0
-
-        return (
-          <div className="bg-card border border-border rounded-xl p-4 mb-6">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-gold text-lg">📅</span>
-              <div>
-                <p className="text-[9px] text-gold uppercase tracking-widest">{nomeMes} {yr}</p>
-                <p className="text-[10px] text-muted-foreground">{qtd} evento{qtd !== 1 ? 's' : ''} neste mês</p>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="bg-white/[0.03] rounded-lg p-3 text-center">
-                <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Receita</p>
-                <p className="text-sm font-bold text-gold">{fmtBRL(recTotal)}</p>
-                <p className="text-[8px] text-muted-foreground">{fmtBRL(recTicket)} ingressos · {fmtBRL(recBar)} bar ({barPctMes}%)</p>
-              </div>
-              <div className="bg-white/[0.03] rounded-lg p-3 text-center">
-                <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Ingressos</p>
-                <p className="text-sm font-bold">{ingTotal.toLocaleString('pt-BR')}</p>
-                <p className="text-[8px] text-muted-foreground">média de {Math.round(ingTotal / qtd)}/evento</p>
-              </div>
-              <div className="bg-white/[0.03] rounded-lg p-3 text-center">
-                <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Ticket Total</p>
-                <p className="text-sm font-bold">{fmtBRLc(ticketMedioMes)}</p>
-                <p className="text-[8px] text-muted-foreground">receita total / ingresso</p>
-              </div>
-              <div className="bg-white/[0.03] rounded-lg p-3 text-center">
-                <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Bar por Pessoa</p>
-                <p className="text-sm font-bold text-success">{fmtBRLc(barPerCapMes)}</p>
-                <p className="text-[8px] text-muted-foreground">receita bar / ingresso</p>
-              </div>
-            </div>
-          </div>
-        )
-      })()}
 
       {/* Lista de eventos */}
       <div className="space-y-3">
@@ -318,10 +312,15 @@ export function EventsPage({
                   <p className="mt-0.5 text-sm font-bold">{fmtBRL(ev.total)}</p>
                 </div>
 
-                {/* Per capita bar */}
+                {/* Lucro (estimado) */}
                 <div className="rounded-lg bg-white/[0.03] px-3 py-2">
-                  <p className="text-[9px] uppercase tracking-wider text-muted-foreground">Bar por Pessoa</p>
-                  <p className="mt-0.5 text-sm font-bold">{ev.barRevenue > 0 ? fmtBRLc(ev.perCapitaBar) : '—'}</p>
+                  <p className="text-[9px] uppercase tracking-wider text-muted-foreground">
+                    Lucro
+                    <span className="ml-1 rounded bg-warning/15 px-1 py-[1px] text-[7px] uppercase tracking-widest text-warning">estimado</span>
+                  </p>
+                  <p className="mt-0.5 text-sm font-bold" style={{ color: profitEvent(ev) >= 0 ? undefined : '#f87171' }}>
+                    {fmtBRL(profitEvent(ev))}
+                  </p>
                 </div>
               </div>
 
