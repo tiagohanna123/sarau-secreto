@@ -473,7 +473,7 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
       </div>
 
       {/* Row 4: Discriminação de vendas */}
-      {ev.produtos?.length > 0 && ev.barRevenue > 0 && (
+      {(ev.produtos?.length ?? 0) > 0 && ev.barRevenue > 0 && (
         <div className="mb-6">
           <ProdutosCard produtos={ev.produtos} barRevenue={ev.barRevenue} />
         </div>
