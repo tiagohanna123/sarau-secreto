@@ -69,6 +69,5 @@ export const BAR_REVENUE_MAP = {
     "sympla-2721616": null,
     "sympla-2785141": null,
     "sympla-3150968": null,
-    "cm842b46dd96f70": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
     "sympla-3500838": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93}
   }
