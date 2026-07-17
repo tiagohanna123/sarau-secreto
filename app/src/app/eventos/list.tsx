@@ -216,7 +216,7 @@ export function EventsPage({
 
                 {/* Per capita bar */}
                 <div className="rounded-lg bg-white/[0.03] px-3 py-2">
-                  <p className="text-[9px] uppercase tracking-wider text-muted-foreground">Gasto/ingresso</p>
+                  <p className="text-[9px] uppercase tracking-wider text-muted-foreground">Bar por Pessoa</p>
                   <p className="mt-0.5 text-sm font-bold">{ev.barRevenue > 0 ? fmtBRLc(ev.perCapitaBar) : '—'}</p>
                 </div>
               </div>

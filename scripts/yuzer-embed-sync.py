@@ -235,98 +235,18 @@ def main():
     BAR_EMBED.write_text("\n".join(lines)+"\n")
     print(f"\n3. Escrito: bar-embed.ts ({len(events)} eventos, R$ {total_r:,.2f})")
 
-    # 4. Atualizar functions/data/bar.ts (BAR_REVENUE_MAP com entradas do Yuzer)
-    FUNCS_BAR = PROJECT / "app/functions/data/bar.ts"
-    if FUNCS_BAR.exists():
-        funcs_text = FUNCS_BAR.read_text()
-        # Encontrar e atualizar BAR_EVENTOS
-        m_ev = re.search(r'export const BAR_EVENTOS = \[', funcs_text)
-        if m_ev:
-            start = m_ev.end()
-            depth = 1; pos = start
-            while pos < len(funcs_text) and depth > 0:
-                if funcs_text[pos] == '[': depth += 1
-                if funcs_text[pos] == ']': depth -= 1
-                pos += 1
-            old_ev_body = funcs_text[start:pos-1]
-            
-            # Build new BAR_EVENTOS: merge Yuzer data
-            def safe_json(s):
-                return json.dumps(s, ensure_ascii=False)
-            
-            yuzer_by_date = {}
-            for ev in events:
-                d = ev["start"]
-                prods = []
-                for p in ev.get("produtos", []):
-                    prods.append(f'{{name:{safe_json(p["name"])},qty:{int(p["qty"])},revenue:{round(p["total"])}}}')
-                prod_str = ",".join(prods)
-                yuzer_by_date[d] = f'{{"start":"{d}T20:00:00.000Z","end":"{ev["end"]}T23:59:00.000Z","title":"{safe_json(ev.get("title",f"Evento {d}"))}","revenue":{round(ev["revenue"])},"orders":{ev["orders"]},"products":[{prod_str}]}}'
-            
-            # Parse existing eventos
-            old_events = []
-            if old_ev_body.strip():
-                # Split by },{ pattern
-                import re as re2
-                old_events_raw = re2.findall(r'\{[^}]+(?:[^{}]*\{[^}]*\}[^{}]*)*\}', old_ev_body)
-                old_events = old_events_raw
-            
-            # Build new events list, merging Yuzer data
-            new_events = []
-            seen_dates = set()
-            
-            for oe in old_events:
-                d_match = re.search(r'"start":"(\d{4}-\d{2}-\d{2})', oe)
-                if d_match:
-                    d = d_match.group(1)
-                    seen_dates.add(d)
-                    if d in yuzer_by_date:
-                        new_events.append("  " + yuzer_by_date[d])
-                    else:
-                        new_events.append("  " + oe)
-                else:
-                    new_events.append("  " + oe)
-            
-            for d in sorted(yuzer_by_date.keys()):
-                if d not in seen_dates:
-                    new_events.append("  " + yuzer_by_date[d])
-            
-            new_ev_body = ",\n".join(new_events)
-            new_funcs = funcs_text[:start] + "\n" + new_ev_body + "\n" + funcs_text[pos-1:]
-            
-            # Atualizar BAR_REVENUE_MAP com entradas do Yuzer
-            m_map = re.search(r'export const BAR_REVENUE_MAP = \{', new_funcs)
-            if m_map:
-                map_start = m_map.end()
-                map_depth = 1; map_pos = map_start
-                while map_pos < len(new_funcs) and map_depth > 0:
-                    if new_funcs[map_pos] == '{': map_depth += 1
-                    if new_funcs[map_pos] == '}': map_depth -= 1
-                    map_pos += 1
-                old_map_body = new_funcs[map_start:map_pos-1]
-                
-                # Parse existing entries
-                existing = {}
-                for entry in re.findall(r'"([^"]+)"\s*:\s*(null|\{[^}]*\})', old_map_body):
-                    existing[entry[0]] = entry[1]
-                
-                # Add date-keyed entries from Yuzer
-                for ev in events:
-                    d = ev["start"]
-                    rev = round(ev["revenue"])
-                    ords = ev["orders"]
-                    pc = round(rev / ords, 2) if ords > 0 else 0
-                    existing[d] = '{"revenue": %d, "transactions": %d, "perCapita": %.2f}' % (rev, ords, pc)
-                
-                # Rebuild map
-                map_lines = []
-                for k in sorted(existing.keys()):
-                    map_lines.append('    "%s": %s' % (k, existing[k]))
-                new_map_body = "\n" + ",\n".join(map_lines) + "\n  "
-                new_funcs = new_funcs[:map_start] + new_map_body + new_funcs[map_pos-1:]
-            
-            FUNCS_BAR.write_text(new_funcs)
-            print(f"4. Escrito: functions/data/bar.ts (atualizado com dados Yuzer)")
+    # 4. Regenerar functions/data/bar.ts via script dedicado (limpo, sem corromper)
+    REGEN_SCRIPT = PROJECT / "scripts/regenerate-bar-ts.py"
+    if REGEN_SCRIPT.exists():
+        import subprocess as sp
+        result = sp.run(["python3", str(REGEN_SCRIPT)], capture_output=True, text=True, timeout=30)
+        if result.returncode == 0:
+            print(f"4. Regenerated: functions/data/bar.ts via {REGEN_SCRIPT.name}")
+            for line in result.stdout.strip().split("\n"):
+                print(f"   {line}")
+        else:
+            print(f"4. ERRO: regenerate-bar-ts.py falhou (exit {result.returncode})")
+            if result.stderr: print(f"   stderr: {result.stderr[:500]}")
 
 if __name__ == "__main__":
     main()

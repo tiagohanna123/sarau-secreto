@@ -46,8 +46,34 @@ function KPICard({ label, value, sub, trend, color }: {
   )
 }
 
-function SplitPie({ ticketRevenue, barRevenue, ticketMedio, perCapitaBar }: {
-  ticketRevenue: number; barRevenue: number; ticketMedio: number; perCapitaBar: number
+function TicketMedioCard({ ticketMedio, perCapitaBar, totalMedio, ticketsSold }: {
+  ticketMedio: number; perCapitaBar: number; totalMedio: number; ticketsSold: number
+}) {
+  return (
+    <div className="bg-card border border-border rounded-xl p-4">
+      <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+        Ticket Médio · {ticketsSold} ingressos
+      </p>
+      <div className="space-y-2">
+        <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+          <span className="text-[11px] text-muted-foreground">Total por pessoa</span>
+          <span className="text-sm font-bold text-gold">{fmtc(totalMedio)}</span>
+        </div>
+        <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
+          <span className="text-[11px] text-muted-foreground">Ingresso por pessoa</span>
+          <span className="text-sm font-bold">{fmtc(ticketMedio)}</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] text-muted-foreground">Bar por pessoa</span>
+          <span className="text-sm font-bold text-success">{fmtc(perCapitaBar)}</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function SplitPie({ ticketRevenue, barRevenue }: {
+  ticketRevenue: number; barRevenue: number
 }) {
   const total = ticketRevenue + barRevenue
   if (total <= 0) return null
@@ -84,12 +110,8 @@ function SplitPie({ ticketRevenue, barRevenue, ticketMedio, perCapitaBar }: {
           </div>
           <div className="pt-2 border-t border-white/5">
             <div className="flex items-center gap-2">
-              <span className="text-muted-foreground">Ticket médio</span>
-              <span className="font-medium text-white ml-auto">{fmtc(ticketMedio)}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-muted-foreground">Bar/pessoa</span>
-              <span className="font-medium text-white ml-auto">{fmtc(perCapitaBar)}</span>
+              <span className="text-muted-foreground">Total</span>
+              <span className="font-medium text-white ml-auto">{fmt(ticketRevenue + barRevenue)}</span>
             </div>
           </div>
         </div>
@@ -377,10 +399,11 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
           sub={`${fmt(ev.ticketRevenue)} ingressos · ${fmt(ev.barRevenue)} bar`}
           color="text-[#c8a96e]"
         />
-        <KPICard
-          label="Ticket Médio"
-          value={fmtc(ev.ticketMedio)}
-          sub={`${ev.ticketsSold} ingressos vendidos`}
+        <TicketMedioCard
+          ticketMedio={ev.ticketMedio}
+          perCapitaBar={ev.perCapitaBar}
+          totalMedio={ev.ticketsSold > 0 ? ev.totalRevenue / ev.ticketsSold : 0}
+          ticketsSold={ev.ticketsSold}
         />
         <KPICard
           label="Ocupação"
@@ -389,9 +412,9 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
           color="text-[#8b5cf6]"
         />
         <KPICard
-          label="Bar por Pessoa"
-          value={fmtc(ev.perCapitaBar)}
-          sub={`${ev.barPct}% da receita · ${fmt(ev.barRevenue)} total`}
+          label="Mix de Receita"
+          value={`${ev.barPct}% bar`}
+          sub={`${100 - ev.barPct}% bilheteria`}
           color="text-success"
         />
       </div>
@@ -402,8 +425,6 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
           <SplitPie
             ticketRevenue={ev.ticketRevenue}
             barRevenue={ev.barRevenue}
-            ticketMedio={ev.ticketMedio}
-            perCapitaBar={ev.perCapitaBar}
           />
         )}
         <OcupacaoBar capacity={ev.capacity} ticketsSold={ev.ticketsSold} />

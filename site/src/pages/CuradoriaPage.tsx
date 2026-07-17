@@ -1,70 +1,79 @@
-import { motion } from 'framer-motion'
-import { SectionTitle, ScrollReveal } from '@/components/ScrollReveal'
-import { ArtistCard } from '@/components/ArtistCard'
-import { artistas, curadoriaAreas } from '@/data/artists'
-import { Music, Palette, Sparkles, Heart, Instagram, ArrowUpRight } from 'lucide-react'
+import { FadeUp, SectionTitle } from '@/components/Shared'
 
-const areaIcons: Record<string, typeof Music> = {
-  music: Music,
-  palette: Palette,
-  sparkles: Sparkles,
-  heart: Heart,
+const ARTISTS = [
+  { name: 'Sandra de Sá', role: 'Cantora', genre: 'MPB' },
+  { name: 'Luedji Luna', role: 'Cantora', genre: 'NeoSoul' },
+  { name: 'Jotapê', role: 'Cantor', genre: 'R&B' },
+  { name: 'Fat Family', role: 'Grupo', genre: 'Gospel/Soul' },
+  { name: 'Os Garotin', role: 'Grupo', genre: 'Samba-Rock' },
+  { name: 'Jean Tassy', role: 'Cantor', genre: 'MPB' },
+  { name: 'Marvyn', role: 'Cantor/Compositor', genre: 'R&B' },
+  { name: 'Israel Paixão', role: 'Cantor', genre: 'Gospel' },
+  { name: 'Bell Lins', role: 'Cantor', genre: 'MPB' },
+  { name: 'Laady B', role: 'Cantora', genre: 'Pop' },
+  { name: 'Cecília Marcos', role: 'Cantora', genre: 'MPB' },
+  { name: 'Gabi Blue', role: 'Cantora', genre: 'NeoSoul' },
+  { name: 'Nat Telles', role: 'Cantora', genre: 'Pop' },
+  { name: 'Vitu Voz', role: 'Cantor', genre: 'R&B' },
+]
+
+function ArtistInitials(name: string) {
+  return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
+}
+
+function ArtistGradient(name: string) {
+  // Deterministic gradient based on name
+  const hue = (name.length * 23) % 360
+  return `linear-gradient(135deg, hsl(${hue}, 20%, 12%), hsl(${(hue + 30) % 360}, 15%, 8%))`
 }
 
 export function CuradoriaPage() {
   return (
-    <section id="artistas" className="section-chapter">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <section id="artistas" className="section relative">
+      <div className="max-w-7xl mx-auto px-5">
         <SectionTitle
-          label="Artistas"
-          title="Quem Já Passou pelo Palco"
-          subtitle="O Sarau já reuniu nomes consagrados e talentos emergentes da cena independente brasileira e internacional. Sandra de Sá, Luedji Luna, Fat Family e muitos outros."
+          label="Curadoria"
+          title="Quem Já Passou Pelo Palco"
+          description="Diversidade, representatividade e inclusão no centro do palco."
         />
 
-        {/* Áreas de curadoria */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {curadoriaAreas.map((area, i) => {
-            const Icon = areaIcons[area.icone] ?? Music
-            return (
-              <ScrollReveal key={area.titulo} mode="scale-in" delay={i * 0.08} margin="-30px">
-                <div className="glass-premium p-5 text-center group h-full">
-                  <div className="w-10 h-10 rounded-xl bg-crimson-subtle border border-crimson/8 flex items-center justify-center mx-auto mb-3 group-hover:bg-crimson-glow group-hover:border-crimson/15 transition-all duration-500">
-                    <Icon size={18} className="text-crimson-dim group-hover:text-crimson transition-colors" />
+        {/* Artist grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 max-w-6xl mx-auto">
+          {ARTISTS.map((artist, i) => (
+            <FadeUp key={i} delay={i * 0.04}>
+              <div className="card p-3 text-center group cursor-default hover:border-crimson/20 transition-all duration-300">
+                {/* Photo placeholder */}
+                <div className="w-full aspect-square rounded-xl mb-2.5 relative overflow-hidden"
+                  style={{ background: ArtistGradient(artist.name) }}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-lg font-display text-muted-foreground/20 group-hover:text-crimson/20 transition-colors duration-500">
+                      {ArtistInitials(artist.name)}
+                    </span>
                   </div>
-                  <h3 className="text-sm font-display font-light text-foreground mb-2 group-hover:text-crimson transition-colors duration-300">{area.titulo}</h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">{area.descricao}</p>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-              </ScrollReveal>
-            )
-          })}
-        </div>
-
-        {/* Artistas grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {artistas.map((artista, i) => (
-            <ArtistCard key={artista.id} artista={artista} index={i} />
+                <h3 className="text-[0.6rem] font-heading text-foreground leading-tight">{artist.name}</h3>
+                <p className="text-[0.45rem] text-muted-foreground mt-0.5">{artist.role}</p>
+                <span className="inline-block mt-1 tag text-[0.35rem]">{artist.genre}</span>
+              </div>
+            </FadeUp>
           ))}
         </div>
 
-        {/* Chamada para artistas */}
-        <ScrollReveal mode="perspective" delay={0.3} className="mt-16">
-          <div className="glass-premium p-8 text-center relative overflow-hidden">
-            <div className="relative">
-              <h3 className="text-lg font-display font-light text-foreground mb-2">
-                Quer subir no palco?
-              </h3>
-              <p className="text-sm text-muted-foreground max-w-md mx-auto mb-6 leading-relaxed">
-                Artistas, músicos, poetas: o Sarau Secreto tem chamada aberta. Siga @osarausecreto no Instagram e fique de olho nos anúncios.
-              </p>
-              <a href="https://instagram.com/osarausecreto" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs text-crimson border border-crimson/20 rounded-xl px-5 py-2.5 hover:bg-crimson-glow hover:border-crimson/30 transition-all duration-300">
-                <Instagram size={14} />
-                @osarausecreto
-                <ArrowUpRight size={12} />
-              </a>
-            </div>
+        {/* Destaque call */}
+        <FadeUp delay={0.4}>
+          <div className="max-w-xl mx-auto mt-8 text-center card p-6">
+            <span className="text-lg font-display text-crimson">♫</span>
+            <h3 className="text-sm font-heading text-foreground mt-2">Quer se apresentar?</h3>
+            <p className="text-[0.65rem] text-muted-foreground mt-1 leading-relaxed">
+              Siga @osarausecreto no Instagram. Chamadas abertas são anunciadas por lá.
+            </p>
+            <a href="https://www.instagram.com/osarausecreto" target="_blank" rel="noopener noreferrer"
+              className="btn-ghost text-xs mt-4">
+              Seguir no Instagram
+            </a>
           </div>
-        </ScrollReveal>
+        </FadeUp>
       </div>
     </section>
   )
