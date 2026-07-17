@@ -236,7 +236,7 @@ def main():
     print(f"\n3. Escrito: bar-embed.ts ({len(events)} eventos, R$ {total_r:,.2f})")
 
     # 4. Atualizar functions/data/bar.ts (BAR_REVENUE_MAP com entradas do Yuzer)
-    FUNCS_BAR = PROJECT.parent / "app/functions/data/bar.ts"
+    FUNCS_BAR = PROJECT / "app/functions/data/bar.ts"
     if FUNCS_BAR.exists():
         funcs_text = FUNCS_BAR.read_text()
         # Encontrar e atualizar BAR_EVENTOS
