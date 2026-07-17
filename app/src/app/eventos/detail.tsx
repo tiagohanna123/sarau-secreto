@@ -409,7 +409,7 @@ const CUSTO_PRODUCAO_FIXO = 12000
 const CMV_BAR_RATE = 0.42
 const TAXA_SYMPLA_RATE = 0.08
 
-function LucroCard({ totalRevenue, ticketRevenue, barRevenue }: {
+function LucroCardDetalhado({ totalRevenue, ticketRevenue, barRevenue }: {
   totalRevenue: number; ticketRevenue: number; barRevenue: number
 }) {
   const custoProducao = CUSTO_PRODUCAO_FIXO
@@ -590,7 +590,7 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
 
       {/* Row 5: Lucratividade Líquida */}
       <div className="mb-6">
-        <LucroCard
+        <LucroCardDetalhado
           totalRevenue={ev.totalRevenue}
           ticketRevenue={ev.ticketRevenue}
           barRevenue={ev.barRevenue}
