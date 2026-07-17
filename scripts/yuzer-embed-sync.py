@@ -8,14 +8,14 @@ from datetime import datetime, timezone
 from collections import defaultdict
 from pathlib import Path
 
-PROJECT = Path("/home/ser/sistema-sarau-secreto")
+PROJECT = Path("/home/ser/projetos/sarau-secreto-novo")
 APP_LIB = PROJECT / "app/src/lib"
 BAR_EMBED = APP_LIB / "bar-embed.ts"
 YUZER_API = "https://api.eagle.yuzer.com.br/api"
 
 def get_token(key):
     """Read token from ~/sistema-sarau-secreto/.env or environment."""
-    env_path = Path.home() / "sistema-sarau-secreto/.env"
+    env_path = Path.home() / "projetos/sarau-secreto-novo/.env"
     if env_path.exists():
         for line in env_path.read_text().splitlines():
             line = line.strip()
