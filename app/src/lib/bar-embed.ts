@@ -523,183 +523,126 @@ export const BAR_EMBED: BarHistoryData = {
       "itensVendidos": 0,
       "produtos": [],
       "metodosPagamento": []
-    }
+    },
   ],
   "eventBarRevenue": {
-    "2024-09-12": {"revenue": 7125.0, "transactions": 240, "perCapita": 29.69},
-    "2024-10-10": {"revenue": 22924.0, "transactions": 621, "perCapita": 36.91},
-    "2024-10-17": {"revenue": 11837.0, "transactions": 308, "perCapita": 38.43},
-    "2024-11-14": {"revenue": 21061.0, "transactions": 546, "perCapita": 38.57},
-    "2024-12-06": {"revenue": 24940.0, "transactions": 645, "perCapita": 38.67},
-    "2025-01-16": {"revenue": 11984.0, "transactions": 388, "perCapita": 30.89},
-    "2025-02-13": {"revenue": 13639.0, "transactions": 312, "perCapita": 43.71},
-    "2025-03-12": {"revenue": 2700.0, "transactions": 73, "perCapita": 36.99},
-    "2025-04-10": {"revenue": 52235.0, "transactions": 1372, "perCapita": 38.07},
-    "2025-05-08": {"revenue": 12205.0, "transactions": 269, "perCapita": 45.37},
-    "2025-05-16": {"revenue": 1155.0, "transactions": 20, "perCapita": 57.75},
-    "2025-06-12": {"revenue": 28126.0, "transactions": 534, "perCapita": 52.67},
-    "2025-07-10": {"revenue": 19007.0, "transactions": 359, "perCapita": 52.94},
-    "2025-08-08": {"revenue": 17167.0, "transactions": 481, "perCapita": 35.69},
-    "2025-08-14": {"revenue": 13111.0, "transactions": 284, "perCapita": 46.17},
-    "2025-09-11": {"revenue": 65403.0, "transactions": 1508, "perCapita": 43.37},
-    "2025-10-16": {"revenue": 13415.0, "transactions": 413, "perCapita": 32.48},
-    "2025-11-13": {"revenue": 17390.0, "transactions": 419, "perCapita": 41.5},
-    "2025-12-11": {"revenue": 83578.0, "transactions": 1852, "perCapita": 45.13},
-    "2026-01-15": {"revenue": 18592.0, "transactions": 462, "perCapita": 40.24},
-    "2026-02-05": {"revenue": 16951.0, "transactions": 369, "perCapita": 45.94},
-    "2026-03-12": {"revenue": 25633.0, "transactions": 571, "perCapita": 44.89},
-    "2026-04-16": {"revenue": 30293.0, "transactions": 595, "perCapita": 50.91},
-    "2026-05-14": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
-    "2026-06-10": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
-    "2026-06-25": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
-    "2026-07-09": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
-    "2026-07-16": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
-    "sympla-2633353": {
-      "revenue": 20821.00,
-      "transactions": 603,
-      "perCapita": 34.53
-    },
-    "sympla-2675465": {
-      "revenue": 22924.00,
-      "transactions": 624,
-      "perCapita": 36.74
-    },
-    "sympla-2686304": {
-      "revenue": 11837.00,
-      "transactions": 465,
-      "perCapita": 25.46
-    },
-    "sympla-2721616": null,
-    "sympla-2729608": {
-      "revenue": 21061.00,
-      "transactions": 617,
-      "perCapita": 34.13
-    },
-    "sympla-2754645": {
-      "revenue": 24940.00,
-      "transactions": 641,
-      "perCapita": 38.91
-    },
-    "sympla-2785141": null,
-    "sympla-2795323": {
-      "revenue": 11984.00,
-      "transactions": 475,
-      "perCapita": 25.23
-    },
-    "sympla-2828931": {
-      "revenue": 13639.00,
-      "transactions": 449,
-      "perCapita": 30.38
-    },
-    "sympla-2862206": {
-      "revenue": 2700.00,
-      "transactions": 123,
-      "perCapita": 21.95
-    },
-    "sympla-2887562": {
-      "revenue": 52234.69,
-      "transactions": 1033,
-      "perCapita": 50.57
-    },
-    "sympla-2942257": {
-      "revenue": 12204.94,
-      "transactions": 430,
-      "perCapita": 28.38
-    },
-    "sympla-2987008": {
-      "revenue": 28126.02,
-      "transactions": 571,
-      "perCapita": 49.26
-    },
-    "sympla-3028036": {
-      "revenue": 19007.00,
-      "transactions": 505,
-      "perCapita": 37.64
-    },
-    "sympla-3060095": {
-      "revenue": 17167.00,
-      "transactions": 478,
-      "perCapita": 35.91
-    },
-    "sympla-3073170": {
-      "revenue": 13111.00,
-      "transactions": 449,
-      "perCapita": 29.2
-    },
-    "sympla-3113883": {
-      "revenue": 65403.00,
-      "transactions": 854,
-      "perCapita": 76.58
-    },
-    "sympla-3150968": null,
-    "sympla-3168880": {
-      "revenue": 13415.00,
-      "transactions": 521,
-      "perCapita": 25.75
-    },
-    "sympla-3209412": {
-      "revenue": 17390.00,
-      "transactions": 533,
-      "perCapita": 32.63
-    },
-    "sympla-3245686": {
-      "revenue": 83578.00,
-      "transactions": 841,
-      "perCapita": 99.38
-    },
-    "sympla-3272845": {
-      "revenue": 18592.00,
-      "transactions": 544,
-      "perCapita": 34.18
-    },
-    "sympla-3297245": {
-      "revenue": 16951.00,
-      "transactions": 598,
-      "perCapita": 28.35
+    "sympla-3384296": {
+      "revenue": 30293.15,
+      "transactions": 849,
+      "perCapita": 35.68
     },
     "sympla-3332505": {
       "revenue": 25633.00,
       "transactions": 759,
       "perCapita": 33.77
     },
-    "sympla-3384296": {
-      "revenue": 30293.15,
-      "transactions": 849,
-      "perCapita": 35.68
+    "sympla-3297245": {
+      "revenue": 16951.00,
+      "transactions": 598,
+      "perCapita": 28.35
     },
-    "sympla-3420938": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
-    "sympla-3457402": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
-    "sympla-3474070": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
-    "sympla-3477015": null,
-    "sympla-3492296": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
-    "sympla-3500838": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
-    "cmos4gt0l0001tuzohf8se5zp": null,
-    "cmos4gtzk0002tuzo6qahavd8": null,
-    "cmos4gumu0005tuzowyzny7xa": {
-      "revenue": 29881.00,
-      "transactions": 710,
-      "perCapita": 42.09
+    "sympla-3272845": {
+      "revenue": 18592.00,
+      "transactions": 544,
+      "perCapita": 34.18
     },
-    "cmos4gv9d0008tuzod1v6vohy": {
-      "revenue": 10697.04,
-      "transactions": 399,
-      "perCapita": 26.81
+    "sympla-3245686": {
+      "revenue": 83578.00,
+      "transactions": 841,
+      "perCapita": 99.38
     },
-    "cmos4gvwi000btuzoc8pt324j": {
-      "revenue": 4906.00,
-      "transactions": 240,
-      "perCapita": 20.44
+    "sympla-3209412": {
+      "revenue": 17390.00,
+      "transactions": 533,
+      "perCapita": 32.63
     },
-    "cmos4gwit000ctuzobv5wgzyb": null,
-    "cmos4gx76000ftuzo0zg533i4": {
-      "revenue": 5008.08,
-      "transactions": 275,
-      "perCapita": 18.21
+    "sympla-3168880": {
+      "revenue": 13415.00,
+      "transactions": 521,
+      "perCapita": 25.75
+    },
+    "sympla-3150968": null,
+    "sympla-3113883": {
+      "revenue": 65403.00,
+      "transactions": 854,
+      "perCapita": 76.58
+    },
+    "sympla-3073170": {
+      "revenue": 13111.00,
+      "transactions": 449,
+      "perCapita": 29.2
+    },
+    "sympla-3060095": {
+      "revenue": 17167.00,
+      "transactions": 478,
+      "perCapita": 35.91
+    },
+    "sympla-3028036": {
+      "revenue": 19007.00,
+      "transactions": 505,
+      "perCapita": 37.64
+    },
+    "sympla-2987008": {
+      "revenue": 28126.02,
+      "transactions": 571,
+      "perCapita": 49.26
     },
     "cmowubrg505sftua7duoe1ojk": {
       "revenue": 1155.00,
       "transactions": 28,
       "perCapita": 41.25
+    },
+    "sympla-2942257": {
+      "revenue": 12204.94,
+      "transactions": 430,
+      "perCapita": 28.38
+    },
+    "sympla-2887562": {
+      "revenue": 52234.69,
+      "transactions": 1033,
+      "perCapita": 50.57
+    },
+    "sympla-2862206": {
+      "revenue": 2700.00,
+      "transactions": 123,
+      "perCapita": 21.95
+    },
+    "sympla-2828931": {
+      "revenue": 13639.00,
+      "transactions": 449,
+      "perCapita": 30.38
+    },
+    "sympla-2795323": {
+      "revenue": 11984.00,
+      "transactions": 475,
+      "perCapita": 25.23
+    },
+    "sympla-2785141": null,
+    "sympla-2754645": {
+      "revenue": 24940.00,
+      "transactions": 641,
+      "perCapita": 38.91
+    },
+    "sympla-2729608": {
+      "revenue": 21061.00,
+      "transactions": 617,
+      "perCapita": 34.13
+    },
+    "sympla-2721616": null,
+    "sympla-2686304": {
+      "revenue": 11837.00,
+      "transactions": 465,
+      "perCapita": 25.46
+    },
+    "sympla-2675465": {
+      "revenue": 22924.00,
+      "transactions": 624,
+      "perCapita": 36.74
+    },
+    "sympla-2633353": {
+      "revenue": 20821.00,
+      "transactions": 603,
+      "perCapita": 34.53
     },
     "cmowubs7u0a0wtua7mzroohak": {
       "revenue": 8350.00,
@@ -731,17 +674,40 @@ export const BAR_EMBED: BarHistoryData = {
       "transactions": 656,
       "perCapita": 37.33
     },
+    "cmos4gx76000ftuzo0zg533i4": {
+      "revenue": 5008.08,
+      "transactions": 275,
+      "perCapita": 18.21
+    },
+    "cmos4gwit000ctuzobv5wgzyb": null,
+    "cmos4gvwi000btuzoc8pt324j": {
+      "revenue": 4906.00,
+      "transactions": 240,
+      "perCapita": 20.44
+    },
     "cmowubsuk0d4ktua7kgqhk7ad": {
       "revenue": 16030.00,
       "transactions": 582,
       "perCapita": 27.54
     },
+    "cmos4gv9d0008tuzod1v6vohy": {
+      "revenue": 10697.04,
+      "transactions": 399,
+      "perCapita": 26.81
+    },
+    "cmos4gumu0005tuzowyzny7xa": {
+      "revenue": 29881.00,
+      "transactions": 710,
+      "perCapita": 42.09
+    },
+    "cmos4gtzk0002tuzo6qahavd8": null,
+    "cmos4gt0l0001tuzohf8se5zp": null,
+    "sarau-secreto-maio-2026": null,
+    "sarau-secreto-convida-magrao": null,
     "sala-secreta": null,
     "sarau-secreto-convida-ellen-oleria": null,
-    "sarau-secreto-convida-magrao": null,
     "sarau-secreto-convida-sotam": null,
-    "sarau-secreto-maio-2026": null,
-    "sarau-secreto-solsticio-de-inverno": null
+    "sarau-secreto-solsticio-de-inverno": null,
   },
   "mensais": [],
   "produtoMix": [
@@ -924,7 +890,7 @@ export const BAR_EMBED: BarHistoryData = {
       "qty": 231,
       "total": 4482.00,
       "pct": 0.6
-    }
+    },
   ],
   "metodosPagamento": [],
   "categorias": []
