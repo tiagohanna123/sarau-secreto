@@ -8,14 +8,14 @@ from datetime import datetime, timezone
 from collections import defaultdict
 from pathlib import Path
 
-PROJECT = Path("/home/ser/projetos/sarau-secreto-novo")
+PROJECT = Path("/home/ser/sistema-sarau-secreto")
 APP_LIB = PROJECT / "app/src/lib"
 BAR_EMBED = APP_LIB / "bar-embed.ts"
 YUZER_API = "https://api.eagle.yuzer.com.br/api"
 
 def get_token(key):
     """Read token from ~/sistema-sarau-secreto/.env or environment."""
-    env_path = Path.home() / "projetos/sarau-secreto-novo/.env"
+    env_path = PROJECT / ".env"
     if env_path.exists():
         for line in env_path.read_text().splitlines():
             line = line.strip()
@@ -38,7 +38,11 @@ def yuzer_post(path, body):
     try:
         return json.loads(result.stdout)
     except json.JSONDecodeError:
-        print(f"  JSON decode error on page {body.get('page', '?')}")
+        # Check if response is empty or HTML (e.g. 401 page)
+        content_preview = result.stdout[:200].strip()
+        print(f"  JSON decode error on page {body.get('page', '?')} (curl exit {result.returncode})")
+        if '401' in content_preview or 'Unauthorized' in content_preview or not content_preview:
+            print(f"  => Possivel token YUZER_JWT expirado. Renove manualmente.")
         return {}
 
 def fetch_all_orders():
