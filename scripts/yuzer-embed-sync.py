@@ -118,7 +118,7 @@ def main():
     # Safety: if Yuzer returned 0 eventos, preserve existing data to avoid wipe
     if len(events) == 0 and BAR_EMBED.exists():
         txt = BAR_EMBED.read_text()
-        existing_count = len(re.findall(r'\"start\":\\s*\"', txt))
+        existing_count = len(re.findall(r'"start":\s*"', txt))
         if existing_count > 0:
             print(f"   AVISO: Yuzer retornou 0 eventos, mas bar-embed.ts tem {existing_count} eventos. Preservando dados existentes.")
             sys.exit(0)
