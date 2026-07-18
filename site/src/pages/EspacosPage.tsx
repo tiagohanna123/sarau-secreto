@@ -1,97 +1,86 @@
-import { motion } from 'framer-motion'
-import { SectionTitle } from '@/components/SectionTitle'
-import { ScrollReveal } from '@/components/ScrollReveal'
-import { AdCard } from '@/components/AdCard'
-import { anuncios } from '@/data/ads'
-import { Users, TrendingUp, Building2, BarChart3, Mail, Instagram, ArrowUpRight } from 'lucide-react'
+import { FadeUp, SectionTitle } from '@/components/Shared'
 
-const stats = [
-  { icon: Users, label: 'Publico', value: '700+' },
-  { icon: Building2, label: 'Edicoes 2025', value: '4' },
-  { icon: TrendingUp, label: 'Engajamento', value: '92%' },
-  { icon: BarChart3, label: 'Cidades', value: '3' },
+const ADS = [
+  { id: 1, name: 'Destaque no Site', price: 400, type: 'Digital', desc: 'Logo + link na página inicial do Sarau.', spots: 6 },
+  { id: 2, name: 'Post Patrocinado', price: 800, type: 'Redes', desc: 'Post dedicado no Instagram do Sarau (35k+ seguidores).', spots: 4 },
+  { id: 3, name: 'Apoio Cultural', price: 1500, type: 'Presencial', desc: 'Logo no telão + menção em palco + post dedicado.', spots: 3 },
+  { id: 4, name: 'Patrocínio Oficial', price: 3000, type: 'Completo', desc: 'Logo em todo material + telão + redes + presença no evento.', spots: 2 },
+  { id: 5, name: 'Patrocínio Master', price: 5000, type: 'Master', desc: 'Exclusividade de categoria. Todo o pacote anterior + ativação no local.', spots: 1 },
+  { id: 6, name: 'Bar Personalizado', price: 2500, type: 'Experiência', desc: 'Seu produto/serviço como experiência exclusiva durante o evento.', spots: 2 },
+]
+
+const AUDIENCE_STATS = [
+  { value: '700+', label: 'Público por edição' },
+  { value: '25-40', label: 'Faixa etária' },
+  { value: '60%', label: 'Público feminino' },
+  { value: '85%', label: 'Classe A/B' },
 ]
 
 export function EspacosPage() {
   return (
-    <section id="espacos" className="section-chapter">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <section id="anuncie" className="section relative">
+      <div className="max-w-7xl mx-auto px-5">
         <SectionTitle
-          label="Espacos Publicitarios"
-          title="Sua Marca no Sarau"
-          subtitle="O Sarau Secreto reune um publico seleto de 700+ pessoas por edicao em Brasilia, Rio e Lisboa."
+          label="Espaços Publicitários"
+          title="O Próximo Pode Ser o Seu"
+          description="Posicione sua marca no palco do festival cultural mais exclusivo de Brasília."
         />
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          {stats.map((stat, i) => (
-            <ScrollReveal key={stat.label} mode="scale-in" delay={i * 0.08} margin="-30px">
-              <div className="glass-premium p-5 text-center group">
-                <stat.icon size={16} className="text-gold-dim mx-auto mb-2 group-hover:text-gold transition-colors duration-300" />
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className="stat-num block"
-                >
-                  {stat.value}
-                </motion.span>
-                <span className="text-[0.45rem] tracking-wider uppercase text-muted-foreground">{stat.label}</span>
+        {/* Audience stats */}
+        <div className="max-w-3xl mx-auto mb-8">
+          <FadeUp>
+            <div className="card p-6">
+              <span className="text-[0.45rem] tracking-[0.2em] uppercase text-muted-foreground font-semibold">Perfil do Público</span>
+              <div className="grid grid-cols-4 gap-4 mt-4">
+                {AUDIENCE_STATS.map((stat, i) => (
+                  <div key={i} className="text-center">
+                    <div className="stat-num text-xl">{stat.value}</div>
+                    <p className="text-[0.45rem] text-muted-foreground mt-1">{stat.label}</p>
+                  </div>
+                ))}
               </div>
-            </ScrollReveal>
-          ))}
-        </div>
-
-        {/* Anuncios */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-          {anuncios.map((anuncio, i) => (
-            <AdCard key={anuncio.id} anuncio={anuncio} index={i} />
-          ))}
-        </div>
-
-        {/* Perfil do publico */}
-        <ScrollReveal mode="clip-left" delay={0.2}>
-          <div className="glass-premium p-6 sm:p-8">
-            <h3 className="text-sm font-display font-light text-foreground mb-5">Perfil do Publico</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-muted-foreground mb-5">
-              {[
-                { label: 'Faixa Etaria', value: '22-40 anos (85%)' },
-                { label: 'Interesses', value: 'Musica, arte, cultura, gastronomia' },
-                { label: 'Cidades', value: 'Brasilia · Rio · Lisboa' },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.06, duration: 0.4 }}
-                  className="p-3 rounded-xl bg-gold-subtle/50 border border-gold/5"
-                >
-                  <span className="text-[0.45rem] tracking-[0.2em] uppercase text-gold-dim block mb-1.5">{item.label}</span>
-                  <span className="text-xs text-foreground/80">{item.value}</span>
-                </motion.div>
-              ))}
             </div>
-            <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent my-4 opacity-50" />
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              Interessado em patrocinar ou anunciar? Entre em contato.
+          </FadeUp>
+        </div>
+
+        {/* Ad cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          {ADS.map((ad, i) => (
+            <FadeUp key={ad.id} delay={i * 0.08}>
+              <div className="card p-5 h-full flex flex-col hover:border-crimson/20 transition-all group">
+                <div className="flex items-start justify-between mb-3">
+                  <span className="text-[0.4rem] tracking-[0.2em] uppercase border border-crimson/20 text-crimson px-2 py-0.5 rounded-full">
+                    {ad.type}
+                  </span>
+                  <span className="text-[0.4rem] text-muted-foreground">{ad.spots} vaga{ad.spots > 1 ? 's' : ''}</span>
+                </div>
+                <h3 className="text-sm font-display text-foreground mb-2 leading-snug">{ad.name}</h3>
+                <p className="text-[0.6rem] text-muted-foreground mb-3 flex-1 leading-relaxed">{ad.desc}</p>
+                <div className="flex items-center justify-between mt-auto pt-3 border-t border-border/50">
+                  <span className="text-lg font-display text-crimson group-hover:opacity-80 transition-opacity">
+                    R$ {ad.price.toLocaleString('pt-BR')}
+                  </span>
+                  <span className="tag text-[0.4rem]">{ad.type}</span>
+                </div>
+              </div>
+            </FadeUp>
+          ))}
+        </div>
+
+        {/* Contact CTA */}
+        <FadeUp delay={0.5}>
+          <div className="max-w-xl mx-auto mt-8 text-center card p-6">
+            <span className="text-lg font-display text-crimson">⊡</span>
+            <h3 className="text-sm font-heading text-foreground mt-2">Quer anunciar?</h3>
+            <p className="text-[0.65rem] text-muted-foreground mt-1 leading-relaxed">
+              Entre em contato para criar o pacote ideal para sua marca.
             </p>
-            <div className="flex flex-wrap items-center gap-4 mt-4">
-              <a href="mailto:comercial@osarausecreto.com"
-                className="inline-flex items-center gap-1.5 text-xs text-violet hover:text-violet-dim transition-colors group">
-                <Mail size={12} className="group-hover:scale-110 transition-transform" />
-                comercial@osarausecreto.com
-              </a>
-              <a href="https://instagram.com/osarausecreto" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-violet hover:text-violet-dim transition-colors group">
-                <Instagram size={12} className="group-hover:scale-110 transition-transform" />
-                @osarausecreto
-                <ArrowUpRight size={10} />
-              </a>
-            </div>
+            <a href="mailto:comercial@sarausecreto.com"
+              className="btn-sympla text-xs mt-4">
+              comercial@sarausecreto.com
+            </a>
           </div>
-        </ScrollReveal>
+        </FadeUp>
       </div>
     </section>
   )

@@ -2,12 +2,8 @@ import { useEffect, useRef } from 'react'
 import Lenis from 'lenis'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-<<<<<<< Updated upstream
 import { ScrollProgress } from '@/components/Shared'
 import { AdBannerHero, AdBannerMiddle, AdBannerFooter, AdBannerSidebar } from '@/components/AdBanner'
-=======
-import { ScrollProgress } from '@/components/ScrollProgress'
->>>>>>> Stashed changes
 import { HomePage } from '@/pages/HomePage'
 import { EventosPage } from '@/pages/EventosPage'
 import { MarketplacePage } from '@/pages/MarketplacePage'
@@ -18,11 +14,7 @@ export function App() {
 
   useEffect(() => {
     const lenis = new Lenis({
-<<<<<<< Updated upstream
       duration: 1.4,
-=======
-      duration: 1.6,
->>>>>>> Stashed changes
       easing: (t) => 1 - Math.pow(1 - t, 3),
       smoothWheel: true,
       wheelMultiplier: 0.8,
@@ -52,24 +44,15 @@ export function App() {
   }
 
   return (
-<<<<<<< Updated upstream
     <div className="min-h-screen bg-black text-foreground">
       <div className="grain" />
       <div className="vignette" />
-=======
-    <div className="min-h-screen bg-background text-foreground">
->>>>>>> Stashed changes
       <ScrollProgress />
       <Header onScrollTo={scrollTo} />
       <main>
         <HomePage onScrollTo={scrollTo} />
-<<<<<<< Updated upstream
         <AdBannerHero />
-=======
->>>>>>> Stashed changes
         <EventosPage />
-        <CuradoriaPage />
-        <AdBannerMiddle index={0} />
         <div className="max-w-7xl mx-auto px-5">
           <div className="flex gap-6 items-start">
             <div className="flex-1 min-w-0">
@@ -82,11 +65,12 @@ export function App() {
             </div>
           </div>
         </div>
+        <AdBannerMiddle index={0} />
+        <CuradoriaPage />
         <AdBannerMiddle index={1} />
       </main>
       <AdBannerFooter />
       <Footer />
-      <div className="cursor-dot" id="cursor-dot" />
     </div>
   )
 }

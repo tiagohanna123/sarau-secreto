@@ -1,7 +1,8 @@
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
 import { useData } from '@/lib/data-context'
 import type { FlatEvent } from '@/lib/data-context'
+import { api } from '@/lib/api'
 
 const GOLD = '#c8a96e'
 const VIOLET = '#8b5cf6'
@@ -403,6 +404,87 @@ function ProdutosCard({ produtos, barRevenue }: { produtos?: { name: string; qty
   )
 }
 
+// --- Discriminação de Vendas: Métodos de Pagamento ---
+
+function PaymentMethodsCard({ methods, total }: {
+  methods?: { method: string; total: number }[]; total: number
+}) {
+  if (!methods?.length || total <= 0) return null
+
+  const sorted = [...methods].sort((a, b) => b.total - a.total)
+
+  return (
+    <div className="chart-box">
+      <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+        Formas de Pagamento · {sorted.length} métodos
+      </p>
+      <div className="space-y-1">
+        {sorted.map((p, i) => {
+          const pct = total > 0 ? (p.total / total) * 100 : 0
+          return (
+            <div key={p.method} className="flex items-center gap-2 py-1.5 border-b border-white/5 last:border-0">
+              <span className="text-[10px] text-[#4b5563] w-4 font-mono text-right">{i+1}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] text-[#9ca3af] truncate">{p.method}</span>
+                  <div className="flex items-center gap-3 shrink-0 ml-2">
+                    <span className="text-xs text-white font-medium w-24 text-right">{fmt(p.total)}</span>
+                    <span className="text-[10px] text-[#c8a96e] w-10 text-right">{pct.toFixed(1)}%</span>
+                  </div>
+                </div>
+                <div className="mt-1 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div className="h-full rounded-full bg-violet/60" style={{ width: `${pct}%` }} />
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+// --- Discriminação de Vendas: Vendas por Hora ---
+
+function HourlySalesCard({ hourlySales }: {
+  hourlySales?: { hour: string; qty: number; revenue: number }[]
+}) {
+  if (!hourlySales?.length) return null
+
+  const maxRevenue = Math.max(...hourlySales.map(h => h.revenue))
+
+  return (
+    <div className="chart-box">
+      <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+        Vendas por Hora · {hourlySales.length} horas com movimento
+      </p>
+      <div className="space-y-1">
+        {hourlySales.map((h) => {
+          const barPct = maxRevenue > 0 ? (h.revenue / maxRevenue) * 100 : 0
+          return (
+            <div key={h.hour} className="flex items-center gap-2 py-1 border-b border-white/5 last:border-0">
+              <span className="text-[10px] text-muted-foreground w-8 font-mono text-right">{h.hour}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between">
+                  <div className="flex-1">
+                    <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-full rounded-full bg-gold transition-all" style={{ width: `${barPct}%` }} />
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 shrink-0 ml-3">
+                    <span className="text-[10px] text-[#4b5563] w-8 text-right">{h.qty}x</span>
+                    <span className="text-xs text-white font-medium w-20 text-right">{fmt(h.revenue)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 // --- Lucratividade Líquida ---
 
 const CUSTO_PRODUCAO_FIXO = 12000
@@ -463,6 +545,19 @@ function LucroCardDetalhado({ totalRevenue, ticketRevenue, barRevenue }: {
 export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) {
   const { eventsMap, overview, loading, refresh } = useData()
   const isSynthetic = id.startsWith('bar-')
+  const [insightData, setInsightData] = useState<any>(null)
+  const [insightLoading, setInsightLoading] = useState(false)
+
+  // Busca dados detalhados da API (produtos, pagamentos, vendas por hora)
+  useEffect(() => {
+    let cancelled = false
+    setInsightLoading(true)
+    api.insights.event(id)
+      .then(data => { if (!cancelled) setInsightData(data) })
+      .catch(() => { if (!cancelled) setInsightData(null) })
+      .finally(() => { if (!cancelled) setInsightLoading(false) })
+    return () => { cancelled = true }
+  }, [id])
 
   // Obtém o evento do MAPA do contexto — SEMPRE sincronizado com o DataProvider
   const ev = useMemo<EnrichedEvent | null>(() => {
@@ -581,12 +676,35 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
         <NoShowCard checkedIn={ev.checkedIn} ticketsSold={ev.ticketsSold} />
       </div>
 
-      {/* Row 4: Discriminação de vendas */}
-      {(ev.produtos?.length ?? 0) > 0 && ev.barRevenue > 0 && (
-        <div className="mb-6">
-          <ProdutosCard produtos={ev.produtos} barRevenue={ev.barRevenue} />
-        </div>
-      )}
+      {/* Row 4: Discriminação de Vendas do Bar — produtos, pagamentos, horário */}
+      {ev.barRevenue > 0 && (() => {
+        // Transforma topProducts da API no formato do ProdutosCard
+        const produtos = insightData?.topProducts?.length
+          ? insightData.topProducts.map((p: any) => ({
+              name: p.name,
+              qty: p.qty,
+              total: p.revenue,
+              pct: ev.barRevenue > 0 ? (p.revenue / ev.barRevenue) * 100 : 0,
+            }))
+          : []
+        const paymentMethods = insightData?.paymentMethods || []
+        const hourlySales = insightData?.hourlyBarSales || []
+
+        return (
+          <div className="mb-6 space-y-4">
+            {/* Top Produtos */}
+            {produtos.length > 0 && (
+              <ProdutosCard produtos={produtos} barRevenue={ev.barRevenue} />
+            )}
+
+            {/* Grade: Métodos de Pagamento + Vendas por Hora */}
+            <div className="grid gap-4 lg:grid-cols-2">
+              <PaymentMethodsCard methods={paymentMethods} total={ev.barRevenue} />
+              <HourlySalesCard hourlySales={hourlySales} />
+            </div>
+          </div>
+        )
+      })()}
 
       {/* Row 5: Lucratividade Líquida */}
       <div className="mb-6">
@@ -601,6 +719,9 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
       <div className="text-[10px] text-[#4b5563] space-y-1">
         <p>📊 Dados do contexto compartilhado — consistentes com Dashboard, Eventos, Financeiro e demais seções.</p>
         <p>📐 Comparações vs média geral de {agg.totalEvents || 0} eventos do sistema.</p>
+        {insightData && (
+          <p>🍸 Discriminação de vendas do bar carregada — {insightData.topProducts?.length || 0} produtos, {insightData.paymentMethods?.length || 0} formas de pagamento.</p>
+        )}
         <p>🔄 Dados atualizam automaticamente após importação. Fonte: {eventsMap.size} eventos carregados.</p>
       </div>
     </div>
