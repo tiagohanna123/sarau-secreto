@@ -26,8 +26,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 30293.15,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "UVITA BLEND TINTO", "qty": 74, "total": 6808.0, "pct": 22.3}, {"name": "SANTA ANGÉLICA ROSE", "qty": 37, "total": 3404.0, "pct": 11.1}, {"name": "STELLA PURE GOLD ", "qty": 128, "total": 2173.0, "pct": 7.1}, {"name": "BODEGA PRIVADA BRANCO", "qty": 22, "total": 2024.0, "pct": 6.6}, {"name": "HEINEKEN LONG NECK", "qty": 113, "total": 1917.0, "pct": 6.3}, {"name": "TAÇA ", "qty": 139, "total": 1668.0, "pct": 5.5}, {"name": "LONGITUD CARMENERE", "qty": 13, "total": 1196.0, "pct": 3.9}, {"name": "UNUS MERLOT ", "qty": 9, "total": 1170.0, "pct": 3.8}, {"name": "AGUA SEM GAS", "qty": 177, "total": 1062.0, "pct": 3.5}, {"name": "LONGITUDE MERLOT", "qty": 11, "total": 1012.0, "pct": 3.3}, {"name": "LONGITUD CABERNET SAUVIGNON", "qty": 11, "total": 1012.0, "pct": 3.3}, {"name": "CERVEJA LONG NECK ZERO", "qty": 55, "total": 931.0, "pct": 3.0}, {"name": "MONTANHA DO VALE VIOGNIER CHARDONNAY", "qty": 10, "total": 920.0, "pct": 3.0}, {"name": "LONGITUDE MALBEC", "qty": 10, "total": 920.0, "pct": 3.0}, {"name": "VIEIRA CAMPOS VINHO VERDE", "qty": 7, "total": 770.0, "pct": 2.5}, {"name": "PRAHOVA VALLEY TINTO", "qty": 5, "total": 750.0, "pct": 2.5}, {"name": "AGUA COM GAS", "qty": 95, "total": 665.0, "pct": 2.2}, {"name": "UNUS CABERNET SAUVIGNON", "qty": 4, "total": 520.0, "pct": 1.7}, {"name": "MONTANHA DO VALE CABERNE", "qty": 5, "total": 460.0, "pct": 1.5}, {"name": "COCA COLA  ZERO", "qty": 48, "total": 384.0, "pct": 1.3}, {"name": "UVITA MALBEC ", "qty": 3, "total": 276.0, "pct": 0.9}, {"name": "COCA COLA ", "qty": 26, "total": 208.0, "pct": 0.7}, {"name": "UNUS CHARDONNA", "qty": 1, "total": 130.0, "pct": 0.4}, {"name": "MONTANHA DO VALE TINTO", "qty": 1, "total": 92.0, "pct": 0.3}, {"name": "RED BULL SUGAR FREE", "qty": 2, "total": 40.0, "pct": 0.1}, {"name": "RED BULL TRADICIONAL", "qty": 1, "total": 20.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 21189.77, "pct": 69.4}, {"method": "Débito", "total": 6562.75, "pct": 21.5}, {"method": "Pix", "total": 2779.48, "pct": 9.1}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2026-03-11",
@@ -37,8 +37,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 25633.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "UVITA BLEND TINTO", "qty": 56, "total": 4984.0, "pct": 20.3}, {"name": "VIEIRA CAMPOS VINHO VERDE", "qty": 45, "total": 4005.0, "pct": 16.3}, {"name": "SANTA ANGÉLICA ROSE", "qty": 31, "total": 2759.0, "pct": 11.3}, {"name": "HEINEKEN LONG NECK", "qty": 131, "total": 2096.0, "pct": 8.5}, {"name": "STELLA PURE GOLD ", "qty": 103, "total": 1648.0, "pct": 6.7}, {"name": "BODEGA PRIVADA BRANCO", "qty": 14, "total": 1246.0, "pct": 5.1}, {"name": "MONTANHA DO VALE TINTO", "qty": 14, "total": 1246.0, "pct": 5.1}, {"name": "AGUA SEM GAS", "qty": 201, "total": 1206.0, "pct": 4.9}, {"name": "UNUS CABERNET SAUVIGNON", "qty": 7, "total": 910.0, "pct": 3.7}, {"name": "LONGITUDE CARMENERE", "qty": 10, "total": 890.0, "pct": 3.6}, {"name": "TAÇA ", "qty": 72, "total": 864.0, "pct": 3.5}, {"name": "PRAHOVA VALLEY TINTO", "qty": 5, "total": 750.0, "pct": 3.1}, {"name": "AGUA COM GAS", "qty": 92, "total": 644.0, "pct": 2.6}, {"name": "CERVEJA LONG NECK ZERO", "qty": 38, "total": 608.0, "pct": 2.5}, {"name": "COCA COLA  ZERO", "qty": 45, "total": 360.0, "pct": 1.5}, {"name": "RED BULL SUGAR FREE", "qty": 10, "total": 200.0, "pct": 0.8}, {"name": "COCA COLA ", "qty": 13, "total": 104.0, "pct": 0.4}],
-      "metodosPagamento": [{"method": "Crédito", "total": 15946.83, "pct": 65.0}, {"method": "Débito", "total": 5697.17, "pct": 23.2}, {"method": "Pix", "total": 2845.0, "pct": 11.6}, {"method": "Dinheiro", "total": 31.0, "pct": 0.1}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2026-02-04",
@@ -48,8 +48,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 16951.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "SANTA ANGÉLICA ROSE", "qty": 28, "total": 2492.0, "pct": 15.5}, {"name": "BODEGA PRIVADA BRANCO", "qty": 24, "total": 2136.0, "pct": 13.2}, {"name": "MONTANHA DO VALE TINTO", "qty": 21, "total": 1869.0, "pct": 11.6}, {"name": "UVITA BLEND TINTO", "qty": 21, "total": 1869.0, "pct": 11.6}, {"name": "UVITA MALBEC ", "qty": 16, "total": 1424.0, "pct": 8.8}, {"name": "HEINEKEN LONG NECK", "qty": 75, "total": 1200.0, "pct": 7.4}, {"name": "STELLA PURE GOLD ", "qty": 59, "total": 944.0, "pct": 5.9}, {"name": "TAÇA ", "qty": 52, "total": 624.0, "pct": 3.9}, {"name": "AGUA SEM GAS", "qty": 100, "total": 600.0, "pct": 3.7}, {"name": "AGUA COM GAS", "qty": 81, "total": 567.0, "pct": 3.5}, {"name": "CERVEJA LONG NECK ZERO", "qty": 33, "total": 528.0, "pct": 3.3}, {"name": "VIEIRA CAMPOS VINHO VERDE", "qty": 4, "total": 520.0, "pct": 3.2}, {"name": "UNUS MERLOT ", "qty": 3, "total": 390.0, "pct": 2.4}, {"name": "RED BULL SUGAR FREE", "qty": 15, "total": 300.0, "pct": 1.9}, {"name": "PRAHOVA VALLEY TINTO", "qty": 2, "total": 300.0, "pct": 1.9}, {"name": "COCA COLA  ZERO", "qty": 23, "total": 184.0, "pct": 1.1}, {"name": "COCA COLA ", "qty": 10, "total": 80.0, "pct": 0.5}, {"name": "RED BULL TRADICIONAL", "qty": 4, "total": 80.0, "pct": 0.5}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 2, "total": 16.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 7679.0, "pct": 47.6}, {"method": "Débito", "total": 6132.5, "pct": 38.0}, {"method": "Pix", "total": 2311.5, "pct": 14.3}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2026-01-14",
@@ -59,8 +59,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 18592.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 134, "total": 11926.0, "pct": 64.6}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 204, "total": 3060.0, "pct": 16.6}, {"name": "AGUA SEM GAS", "qty": 173, "total": 1038.0, "pct": 5.6}, {"name": "TAÇA ", "qty": 57, "total": 684.0, "pct": 3.7}, {"name": "AGUA COM GAS", "qty": 84, "total": 588.0, "pct": 3.2}, {"name": "Coca Cola Zero", "qty": 44, "total": 352.0, "pct": 1.9}, {"name": "HEINEKEN ZERO ", "qty": 21, "total": 336.0, "pct": 1.8}, {"name": "RED BULL SUGAR FREE", "qty": 9, "total": 180.0, "pct": 1.0}, {"name": "RED BULL TRADICIONAL", "qty": 8, "total": 160.0, "pct": 0.9}, {"name": "Coca Cola", "qty": 16, "total": 128.0, "pct": 0.7}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 1, "total": 8.0, "pct": 0.0}],
-      "metodosPagamento": [{"method": "Crédito", "total": 11158.75, "pct": 60.4}, {"method": "Débito", "total": 5613.0, "pct": 30.4}, {"method": "Pix", "total": 1593.25, "pct": 8.6}, {"method": "Dinheiro", "total": 95.0, "pct": 0.5}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-12-10",
@@ -70,8 +70,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 83578.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 558, "total": 49662.0, "pct": 61.4}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 1098, "total": 16470.0, "pct": 20.4}, {"name": "AGUA SEM GAS", "qty": 787, "total": 4722.0, "pct": 5.8}, {"name": "AGUA COM GAS", "qty": 389, "total": 2723.0, "pct": 3.4}, {"name": "TAÇA ", "qty": 217, "total": 2604.0, "pct": 3.2}, {"name": "CERVEJA LONG NECK ZERO", "qty": 131, "total": 2096.0, "pct": 2.6}, {"name": "Coca Cola", "qty": 112, "total": 896.0, "pct": 1.1}, {"name": "Coca Cola Zero", "qty": 107, "total": 856.0, "pct": 1.1}, {"name": "RED BULL SUGAR FREE", "qty": 24, "total": 480.0, "pct": 0.6}, {"name": "RED BULL TRADICIONAL", "qty": 16, "total": 320.0, "pct": 0.4}],
-      "metodosPagamento": [{"method": "Crédito", "total": 52029.5, "pct": 64.4}, {"method": "Débito", "total": 22254.5, "pct": 27.5}, {"method": "Pix", "total": 6545.0, "pct": 8.1}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-11-12",
@@ -81,8 +81,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 17390.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 129, "total": 11481.0, "pct": 68.1}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 164, "total": 2460.0, "pct": 14.6}, {"name": "AGUA SEM GAS", "qty": 118, "total": 708.0, "pct": 4.2}, {"name": "ÁGUA COM GÁS", "qty": 82, "total": 574.0, "pct": 3.4}, {"name": "TAÇA ", "qty": 46, "total": 552.0, "pct": 3.3}, {"name": "CERVEJA LONG NECK ZERO", "qty": 29, "total": 464.0, "pct": 2.8}, {"name": "Coca Cola Zero", "qty": 26, "total": 208.0, "pct": 1.2}, {"name": "RED BULL SUGAR FREE", "qty": 10, "total": 200.0, "pct": 1.2}, {"name": "Coca Cola", "qty": 25, "total": 200.0, "pct": 1.2}],
-      "metodosPagamento": [{"method": "Crédito", "total": 10533.0, "pct": 62.5}, {"method": "Débito", "total": 4204.67, "pct": 25.0}, {"method": "Pix", "total": 1969.83, "pct": 11.7}, {"method": "Dinheiro", "total": 139.5, "pct": 0.8}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-10-15",
@@ -92,8 +92,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 13415.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 86, "total": 7396.0, "pct": 55.7}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 193, "total": 2895.0, "pct": 21.8}, {"name": "AGUA SEM GAS", "qty": 108, "total": 648.0, "pct": 4.9}, {"name": "Estacionamento ", "qty": 56, "total": 560.0, "pct": 4.2}, {"name": "ÁGUA COM GÁS", "qty": 54, "total": 378.0, "pct": 2.8}, {"name": "TAÇA ", "qty": 30, "total": 360.0, "pct": 2.7}, {"name": "Coca Cola Zero", "qty": 38, "total": 304.0, "pct": 2.3}, {"name": "RED BULL SUGAR FREE", "qty": 11, "total": 220.0, "pct": 1.7}, {"name": "BUDWEISER SEM ALCOOL", "qty": 15, "total": 210.0, "pct": 1.6}, {"name": "Coca Cola", "qty": 23, "total": 184.0, "pct": 1.4}, {"name": "CORONA ZERO ", "qty": 4, "total": 64.0, "pct": 0.5}, {"name": "RED BULL TRADICIONAL", "qty": 3, "total": 60.0, "pct": 0.5}],
-      "metodosPagamento": [{"method": "Crédito", "total": 7792.0, "pct": 58.7}, {"method": "Débito", "total": 4337.0, "pct": 32.7}, {"method": "Pix", "total": 1150.0, "pct": 8.7}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-10-06",
@@ -114,8 +114,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 65403.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 399, "total": 34314.0, "pct": 58.3}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 949, "total": 14235.0, "pct": 24.2}, {"name": "ÁGUA SEM GÁS", "qty": 462, "total": 2772.0, "pct": 4.7}, {"name": "TAÇA ", "qty": 218, "total": 2616.0, "pct": 4.4}, {"name": "ÁGUA COM GÁS", "qty": 222, "total": 1554.0, "pct": 2.6}, {"name": "BUDWEISER SEM ALCOOL", "qty": 82, "total": 1148.0, "pct": 2.0}, {"name": "Coca Cola", "qty": 98, "total": 784.0, "pct": 1.3}, {"name": "RED BULL SUGAR FREE", "qty": 38, "total": 760.0, "pct": 1.3}, {"name": "Coca Cola Zero", "qty": 53, "total": 424.0, "pct": 0.7}, {"name": "RED BULL TRADICIONAL", "qty": 13, "total": 260.0, "pct": 0.4}],
-      "metodosPagamento": [{"method": "Crédito", "total": 34060.67, "pct": 57.9}, {"method": "Débito", "total": 19249.17, "pct": 32.7}, {"method": "Pix", "total": 5390.67, "pct": 9.2}, {"method": "Dinheiro", "total": 166.5, "pct": 0.3}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-08-10",
@@ -125,8 +125,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 13111.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 5, "total": 410.0, "pct": 51.1}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 28, "total": 280.0, "pct": 34.9}, {"name": "ÁGUA SEM GÁS", "qty": 10, "total": 60.0, "pct": 7.5}, {"name": "Coca Cola", "qty": 4, "total": 32.0, "pct": 4.0}, {"name": "ÁGUA COM GÁS", "qty": 3, "total": 21.0, "pct": 2.6}],
-      "metodosPagamento": [{"method": "Crédito", "total": 386.0, "pct": 48.1}, {"method": "Débito", "total": 282.0, "pct": 35.1}, {"method": "Pix", "total": 94.0, "pct": 11.7}, {"method": "Dinheiro", "total": 41.0, "pct": 5.1}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-08-07",
@@ -136,8 +136,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 17167.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 130, "total": 10660.0, "pct": 64.8}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 347, "total": 3470.0, "pct": 21.1}, {"name": "ÁGUA SEM GÁS", "qty": 117, "total": 702.0, "pct": 4.3}, {"name": "TAÇA ", "qty": 40, "total": 480.0, "pct": 2.9}, {"name": "ÁGUA COM GÁS", "qty": 58, "total": 406.0, "pct": 2.5}, {"name": "Coca Cola", "qty": 36, "total": 288.0, "pct": 1.8}, {"name": "Coca Cola Zero", "qty": 34, "total": 272.0, "pct": 1.7}, {"name": "RED BULL TRADICIONAL", "qty": 5, "total": 100.0, "pct": 0.6}, {"name": "RED BULL SUGAR FREE", "qty": 3, "total": 60.0, "pct": 0.4}],
-      "metodosPagamento": [{"method": "Crédito", "total": 7535.0, "pct": 45.8}, {"method": "Débito", "total": 5867.0, "pct": 35.7}, {"method": "Pix", "total": 2900.0, "pct": 17.6}, {"method": "Dinheiro", "total": 136.0, "pct": 0.8}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-07-09",
@@ -147,8 +147,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 19007.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 173, "total": 14186.0, "pct": 77.0}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 84, "total": 1260.0, "pct": 6.8}, {"name": "TAÇA ", "qty": 75, "total": 900.0, "pct": 4.9}, {"name": "ÁGUA SEM GÁS", "qty": 106, "total": 636.0, "pct": 3.5}, {"name": "CORONA ", "qty": 30, "total": 480.0, "pct": 2.6}, {"name": "ÁGUA COM GÁS", "qty": 51, "total": 357.0, "pct": 1.9}, {"name": "Budweiser Zero", "qty": 11, "total": 176.0, "pct": 1.0}, {"name": "Coca Cola Zero", "qty": 22, "total": 176.0, "pct": 1.0}, {"name": "Coca Cola", "qty": 18, "total": 144.0, "pct": 0.8}, {"name": "RED BULL TRADICIONAL", "qty": 4, "total": 80.0, "pct": 0.4}, {"name": "RED BULL SUGAR FREE", "qty": 1, "total": 20.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 10329.17, "pct": 56.1}, {"method": "Débito", "total": 5881.17, "pct": 31.9}, {"method": "Pix", "total": 2155.67, "pct": 11.7}, {"method": "Dinheiro", "total": 49.0, "pct": 0.3}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-06-11",
@@ -158,8 +158,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 28126.02,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 255, "total": 20910.0, "pct": 79.6}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 136, "total": 2040.0, "pct": 7.8}, {"name": "TAÇA ", "qty": 91, "total": 1092.0, "pct": 4.2}, {"name": "ÁGUA SEM GÁS", "qty": 115, "total": 690.0, "pct": 2.6}, {"name": "ÁGUA COM GÁS", "qty": 74, "total": 518.0, "pct": 2.0}, {"name": "Coca Cola", "qty": 29, "total": 232.0, "pct": 0.9}, {"name": "Coca Cola Zero", "qty": 29, "total": 232.0, "pct": 0.9}, {"name": "RED BULL TRADICIONAL", "qty": 10, "total": 200.0, "pct": 0.8}, {"name": "Budweiser Zero", "qty": 11, "total": 170.0, "pct": 0.6}, {"name": "RED BULL SUGAR FREE", "qty": 5, "total": 100.0, "pct": 0.4}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 7, "total": 56.0, "pct": 0.2}, {"name": "CERVEJA LONG NECK ZERO", "qty": 1, "total": 16.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 15860.67, "pct": 60.4}, {"method": "Débito", "total": 7913.67, "pct": 30.1}, {"method": "Pix", "total": 2349.33, "pct": 8.9}, {"method": "Dinheiro", "total": 132.33, "pct": 0.5}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-05-15",
@@ -169,8 +169,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 1155.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 12, "total": 984.0, "pct": 85.2}, {"name": "TAÇA ", "qty": 5, "total": 60.0, "pct": 5.2}, {"name": "CERVEJA LONG NECK ZERO", "qty": 2, "total": 32.0, "pct": 2.8}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 2, "total": 30.0, "pct": 2.6}, {"name": "Coca Cola", "qty": 3, "total": 24.0, "pct": 2.1}, {"name": "ÁGUA SEM GÁS", "qty": 3, "total": 18.0, "pct": 1.6}, {"name": "ÁGUA COM GÁS", "qty": 1, "total": 7.0, "pct": 0.6}],
-      "metodosPagamento": [{"method": "Crédito", "total": 524.0, "pct": 45.4}, {"method": "Débito", "total": 377.0, "pct": 32.6}, {"method": "Pix", "total": 254.0, "pct": 22.0}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-05-07",
@@ -180,8 +180,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 12204.94,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "VINHO", "qty": 99, "total": 8118.0, "pct": 70.5}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 105, "total": 1575.0, "pct": 13.7}, {"name": "ÁGUA SEM GÁS", "qty": 71, "total": 426.0, "pct": 3.7}, {"name": "TAÇA ", "qty": 30, "total": 352.0, "pct": 3.1}, {"name": "ÁGUA COM GÁS", "qty": 43, "total": 301.0, "pct": 2.6}, {"name": "CERVEJA LONG NECK ZERO", "qty": 15, "total": 240.0, "pct": 2.1}, {"name": "Coca Cola", "qty": 22, "total": 176.0, "pct": 1.5}, {"name": "Coca Cola Zero", "qty": 11, "total": 88.0, "pct": 0.8}, {"name": "Uvita de Plata Malbec", "qty": 1, "total": 82.0, "pct": 0.7}, {"name": "RED BULL TRADICIONAL", "qty": 3, "total": 60.0, "pct": 0.5}, {"name": "RED BULL SUGAR FREE", "qty": 2, "total": 40.0, "pct": 0.3}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 4, "total": 32.0, "pct": 0.3}, {"name": "AGUA SEM GAS", "qty": 5, "total": 30.0, "pct": 0.3}],
-      "metodosPagamento": [{"method": "Crédito", "total": 6011.5, "pct": 52.2}, {"method": "Débito", "total": 4263.5, "pct": 37.0}, {"method": "Pix", "total": 1245.0, "pct": 10.8}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-04-09",
@@ -191,8 +191,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 52234.69,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 796, "total": 11940.0, "pct": 25.5}, {"name": "Chac Chac Cabernet Franc ", "qty": 60, "total": 4920.0, "pct": 10.5}, {"name": "Vinho Undurraga Carmenere", "qty": 51, "total": 4182.0, "pct": 8.9}, {"name": "FOYE ROSE", "qty": 44, "total": 3608.0, "pct": 7.7}, {"name": "Segundo Rosé ", "qty": 35, "total": 2870.0, "pct": 6.1}, {"name": "Uvita de Plata", "qty": 34, "total": 2788.0, "pct": 6.0}, {"name": "AGUA SEM GAS", "qty": 457, "total": 2742.0, "pct": 5.9}, {"name": "Vinho Chac Chac Malbec", "qty": 31, "total": 2542.0, "pct": 5.4}, {"name": "Vinho Undurraga Merlot", "qty": 27, "total": 2214.0, "pct": 4.7}, {"name": "TAÇA ", "qty": 152, "total": 1824.0, "pct": 3.9}, {"name": "Uvita de Plata Malbec", "qty": 20, "total": 1640.0, "pct": 3.5}, {"name": "Cerveja Zero", "qty": 87, "total": 1347.0, "pct": 2.9}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 9, "total": 702.0, "pct": 1.5}, {"name": "Uvita de Blend", "qty": 8, "total": 656.0, "pct": 1.4}, {"name": "AGUA COM GAS", "qty": 89, "total": 623.0, "pct": 1.3}, {"name": "RED BULL TRADICIONAL", "qty": 27, "total": 540.0, "pct": 1.2}, {"name": "RED BULL SUGAR FREE", "qty": 28, "total": 504.0, "pct": 1.1}, {"name": "Coca Cola", "qty": 58, "total": 464.0, "pct": 1.0}, {"name": "Coca Cola Zero", "qty": 51, "total": 408.0, "pct": 0.9}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 39, "total": 312.0, "pct": 0.7}],
-      "metodosPagamento": [{"method": "Crédito", "total": 25737.0, "pct": 55.0}, {"method": "Débito", "total": 17207.33, "pct": 36.7}, {"method": "Pix", "total": 3846.67, "pct": 8.2}, {"method": "Dinheiro", "total": 35.0, "pct": 0.1}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-03-11",
@@ -202,8 +202,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 2700.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 46, "total": 690.0, "pct": 25.5}, {"name": "Uvita de Blend", "qty": 8, "total": 656.0, "pct": 24.2}, {"name": "Segundo Rosé ", "qty": 7, "total": 574.0, "pct": 21.2}, {"name": "AGUA SEM GAS", "qty": 43, "total": 258.0, "pct": 9.5}, {"name": "Uvita de Plata Malbec", "qty": 3, "total": 246.0, "pct": 9.1}, {"name": "TAÇA ", "qty": 9, "total": 108.0, "pct": 4.0}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 1, "total": 82.0, "pct": 3.0}, {"name": "RED BULL TRADICIONAL", "qty": 3, "total": 60.0, "pct": 2.2}, {"name": "Coca Cola Zero", "qty": 3, "total": 24.0, "pct": 0.9}, {"name": "Coca Cola", "qty": 1, "total": 8.0, "pct": 0.3}],
-      "metodosPagamento": [{"method": "Crédito", "total": 1241.0, "pct": 45.9}, {"method": "Débito", "total": 852.0, "pct": 31.5}, {"method": "Pix", "total": 613.0, "pct": 22.7}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-02-12",
@@ -213,8 +213,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 13639.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 218, "total": 3270.0, "pct": 24.6}, {"name": "Segundo Rosé ", "qty": 20, "total": 1640.0, "pct": 12.3}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 15, "total": 1230.0, "pct": 9.2}, {"name": "Vinho Chac Chac Malbec", "qty": 12, "total": 984.0, "pct": 7.4}, {"name": "Reservado Carmenere ", "qty": 11, "total": 902.0, "pct": 6.8}, {"name": "Vinho Undurraga Blend", "qty": 11, "total": 902.0, "pct": 6.8}, {"name": "Uvita de Plata", "qty": 9, "total": 738.0, "pct": 5.5}, {"name": "Uvita de Plata Malbec", "qty": 7, "total": 574.0, "pct": 4.3}, {"name": "Uvita de Blend", "qty": 6, "total": 492.0, "pct": 3.7}, {"name": "Vinho Tinto Macaw", "qty": 6, "total": 492.0, "pct": 3.7}, {"name": "AGUA SEM GAS", "qty": 81, "total": 486.0, "pct": 3.6}, {"name": "TAÇA ", "qty": 37, "total": 444.0, "pct": 3.3}, {"name": "AGUA COM GAS", "qty": 62, "total": 434.0, "pct": 3.3}, {"name": "Budweiser Zero", "qty": 15, "total": 240.0, "pct": 1.8}, {"name": "RED BULL TRADICIONAL", "qty": 6, "total": 120.0, "pct": 0.9}, {"name": "Coca Cola", "qty": 15, "total": 120.0, "pct": 0.9}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 10, "total": 80.0, "pct": 0.6}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 9, "total": 72.0, "pct": 0.5}, {"name": "Coca Cola Zero", "qty": 7, "total": 56.0, "pct": 0.4}, {"name": "RED BULL SUGAR FREE", "qty": 2, "total": 40.0, "pct": 0.3}],
-      "metodosPagamento": [{"method": "Crédito", "total": 8123.17, "pct": 61.0}, {"method": "Débito", "total": 3934.83, "pct": 29.5}, {"method": "Pix", "total": 1164.0, "pct": 8.7}, {"method": "Dinheiro", "total": 94.0, "pct": 0.7}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-01-15",
@@ -224,8 +224,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 11984.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 157, "total": 2355.0, "pct": 20.8}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 16, "total": 1312.0, "pct": 11.6}, {"name": "Pink Rabbit Grenache e Syrah", "qty": 12, "total": 984.0, "pct": 8.7}, {"name": "Uvita de Plata", "qty": 10, "total": 820.0, "pct": 7.2}, {"name": "Estacionamento ", "qty": 82, "total": 820.0, "pct": 7.2}, {"name": "Chac Chac Cabernet Franc ", "qty": 9, "total": 738.0, "pct": 6.5}, {"name": "Vinho Undurraga Merlot", "qty": 9, "total": 738.0, "pct": 6.5}, {"name": "Vinho Undurraga Carmenere", "qty": 8, "total": 656.0, "pct": 5.8}, {"name": "Vinho Chac Chac Malbec", "qty": 7, "total": 574.0, "pct": 5.1}, {"name": "TAÇA ", "qty": 43, "total": 516.0, "pct": 4.6}, {"name": "AGUA SEM GAS", "qty": 79, "total": 474.0, "pct": 4.2}, {"name": "Uvita de Blend", "qty": 5, "total": 410.0, "pct": 3.6}, {"name": "AGUA COM GAS", "qty": 36, "total": 252.0, "pct": 2.2}, {"name": "Reservado Carmenere ", "qty": 2, "total": 164.0, "pct": 1.4}, {"name": "Coca Cola Zero", "qty": 14, "total": 112.0, "pct": 1.0}, {"name": "Vinho Undurraga Blend", "qty": 1, "total": 82.0, "pct": 0.7}, {"name": "RED BULL TRADICIONAL", "qty": 4, "total": 80.0, "pct": 0.7}, {"name": "Budweiser Zero", "qty": 5, "total": 75.0, "pct": 0.7}, {"name": "RED BULL SUGAR FREE", "qty": 3, "total": 60.0, "pct": 0.5}, {"name": "Coca Cola", "qty": 7, "total": 56.0, "pct": 0.5}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 3, "total": 24.0, "pct": 0.2}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 2, "total": 16.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 5756.0, "pct": 50.9}, {"method": "Débito", "total": 3832.83, "pct": 33.9}, {"method": "Pix", "total": 1595.17, "pct": 14.1}, {"method": "Dinheiro", "total": 134.0, "pct": 1.2}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2025-01-06",
@@ -246,8 +246,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 24940.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 336, "total": 5040.0, "pct": 23.6}, {"name": "CHAC CHAC MALBEC ROSE", "qty": 51, "total": 4182.0, "pct": 19.6}, {"name": "Vinho Chac Chac Malbec", "qty": 24, "total": 1968.0, "pct": 9.2}, {"name": "Vinho Undurraga Carmenere", "qty": 24, "total": 1968.0, "pct": 9.2}, {"name": "TAÇA ", "qty": 93, "total": 1116.0, "pct": 5.2}, {"name": "Vinho Chac Chac Cabernet ", "qty": 14, "total": 1092.0, "pct": 5.1}, {"name": "AGUA SEM GAS", "qty": 178, "total": 1068.0, "pct": 5.0}, {"name": "Vinho Rosé Alecrin", "qty": 13, "total": 1066.0, "pct": 5.0}, {"name": "Vinho Undurraga Merlot", "qty": 11, "total": 902.0, "pct": 4.2}, {"name": "Chac Chac Cabernet Franc ", "qty": 9, "total": 738.0, "pct": 3.5}, {"name": "Vinho Undurraga Blend", "qty": 6, "total": 492.0, "pct": 2.3}, {"name": "AGUA COM GAS", "qty": 68, "total": 476.0, "pct": 2.2}, {"name": "BUDWEISER SEM ALCOOL", "qty": 22, "total": 352.0, "pct": 1.6}, {"name": "RED BULL SUGAR FREE", "qty": 14, "total": 280.0, "pct": 1.3}, {"name": "RED BULL TRADICIONAL", "qty": 14, "total": 280.0, "pct": 1.3}, {"name": "Coca Cola", "qty": 21, "total": 168.0, "pct": 0.8}, {"name": "Coca Cola Zero", "qty": 13, "total": 104.0, "pct": 0.5}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 6, "total": 48.0, "pct": 0.2}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 4, "total": 32.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 11872.67, "pct": 55.6}, {"method": "Débito", "total": 7037.33, "pct": 32.9}, {"method": "Pix", "total": 2436.0, "pct": 11.4}, {"method": "Dinheiro", "total": 26.0, "pct": 0.1}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-11-13",
@@ -257,8 +257,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 21061.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 272, "total": 3808.0, "pct": 20.8}, {"name": "Vinho Undurraga Carmenere", "qty": 28, "total": 2184.0, "pct": 11.9}, {"name": "Vinho Chac Chac Malbec", "qty": 27, "total": 2106.0, "pct": 11.5}, {"name": "CHAC CHAC MALBEC ROSE", "qty": 25, "total": 1950.0, "pct": 10.6}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 21, "total": 1638.0, "pct": 8.9}, {"name": "Vinho Rosé Alecrin", "qty": 13, "total": 1014.0, "pct": 5.5}, {"name": "Chac Chac Cabernet Franc ", "qty": 12, "total": 936.0, "pct": 5.1}, {"name": "AGUA SEM GAS", "qty": 134, "total": 804.0, "pct": 4.4}, {"name": "Vinho Chac Chac Cabernet ", "qty": 10, "total": 780.0, "pct": 4.3}, {"name": "TAÇA ", "qty": 63, "total": 756.0, "pct": 4.1}, {"name": "AGUA COM GAS", "qty": 69, "total": 483.0, "pct": 2.6}, {"name": "Vinho Undurraga Merlot", "qty": 6, "total": 468.0, "pct": 2.6}, {"name": "Vinho Undurraga Blend", "qty": 4, "total": 312.0, "pct": 1.7}, {"name": "RED BULL TRADICIONAL", "qty": 17, "total": 306.0, "pct": 1.7}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 33, "total": 264.0, "pct": 1.4}, {"name": "RED BULL SUGAR FREE", "qty": 11, "total": 198.0, "pct": 1.1}, {"name": "Coca Cola Zero", "qty": 16, "total": 128.0, "pct": 0.7}, {"name": "Corona Zero", "qty": 7, "total": 105.0, "pct": 0.6}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 11, "total": 88.0, "pct": 0.5}],
-      "metodosPagamento": [{"method": "Crédito", "total": 10428.0, "pct": 56.9}, {"method": "Débito", "total": 6213.0, "pct": 33.9}, {"method": "Pix", "total": 1570.0, "pct": 8.6}, {"method": "Dinheiro", "total": 117.0, "pct": 0.6}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-11-11",
@@ -279,8 +279,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 11837.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 149, "total": 2086.0, "pct": 17.7}, {"name": "Vinho Chac Chac Malbec", "qty": 21, "total": 1638.0, "pct": 13.9}, {"name": "Vinho Rosé Alecrin", "qty": 21, "total": 1638.0, "pct": 13.9}, {"name": "Vinho Undurraga Carmenere", "qty": 14, "total": 1092.0, "pct": 9.2}, {"name": "Chac Chac Cabernet Franc ", "qty": 13, "total": 1014.0, "pct": 8.6}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 12, "total": 936.0, "pct": 7.9}, {"name": "Vinho Undurraga Blend", "qty": 8, "total": 624.0, "pct": 5.3}, {"name": "AGUA SEM GAS", "qty": 94, "total": 564.0, "pct": 4.8}, {"name": "TAÇA ", "qty": 37, "total": 444.0, "pct": 3.8}, {"name": "AGUA COM GAS", "qty": 56, "total": 392.0, "pct": 3.3}, {"name": "Vinho Undurraga Merlot", "qty": 3, "total": 234.0, "pct": 2.0}, {"name": "RED BULL TRADICIONAL", "qty": 12, "total": 216.0, "pct": 1.8}, {"name": "RED BULL SUGAR FREE", "qty": 11, "total": 198.0, "pct": 1.7}, {"name": "Coca Cola", "qty": 24, "total": 192.0, "pct": 1.6}, {"name": "RED BULL TROPICAL", "qty": 10, "total": 180.0, "pct": 1.5}, {"name": "Vinho Chac Chac Cabernet ", "qty": 1, "total": 78.0, "pct": 0.7}, {"name": "Budweiser Zero", "qty": 5, "total": 70.0, "pct": 0.6}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 8, "total": 64.0, "pct": 0.5}, {"name": "Corona Zero", "qty": 4, "total": 60.0, "pct": 0.5}, {"name": "Coca Cola Zero", "qty": 6, "total": 48.0, "pct": 0.4}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 5, "total": 40.0, "pct": 0.3}],
-      "metodosPagamento": [{"method": "Crédito", "total": 6045.0, "pct": 51.2}, {"method": "Débito", "total": 4477.0, "pct": 37.9}, {"method": "Pix", "total": 1184.0, "pct": 10.0}, {"method": "Dinheiro", "total": 102.0, "pct": 0.9}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-10-09",
@@ -290,8 +290,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 22924.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 429, "total": 6006.0, "pct": 27.4}, {"name": "CHAC CHAC MALBEC ROSE", "qty": 46, "total": 3588.0, "pct": 16.4}, {"name": "Vinho Undurraga Carmenere", "qty": 26, "total": 2028.0, "pct": 9.3}, {"name": "Vinho Chac Chac Malbec", "qty": 25, "total": 1950.0, "pct": 8.9}, {"name": "Vinho Undurraga Merlot", "qty": 23, "total": 1794.0, "pct": 8.2}, {"name": "AGUA SEM GAS", "qty": 217, "total": 1302.0, "pct": 5.9}, {"name": "Vinho Chac Chac Cabernet ", "qty": 15, "total": 1170.0, "pct": 5.3}, {"name": "Chac Chac Cabernet Franc ", "qty": 11, "total": 858.0, "pct": 3.9}, {"name": "TAÇA ", "qty": 60, "total": 720.0, "pct": 3.3}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 9, "total": 702.0, "pct": 3.2}, {"name": "AGUA COM GAS", "qty": 88, "total": 616.0, "pct": 2.8}, {"name": "Budweiser Zero", "qty": 24, "total": 336.0, "pct": 1.5}, {"name": "Coca Cola Zero", "qty": 27, "total": 216.0, "pct": 1.0}, {"name": "Coca Cola", "qty": 25, "total": 200.0, "pct": 0.9}, {"name": "RED BULL SUGAR FREE", "qty": 7, "total": 126.0, "pct": 0.6}, {"name": "RED BULL TRADICIONAL", "qty": 6, "total": 108.0, "pct": 0.5}, {"name": "RED BULL TROPICAL", "qty": 5, "total": 90.0, "pct": 0.4}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 7, "total": 56.0, "pct": 0.3}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 4, "total": 32.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 12221.0, "pct": 55.8}, {"method": "Débito", "total": 7016.0, "pct": 32.0}, {"method": "Pix", "total": 2654.0, "pct": 12.1}, {"method": "Dinheiro", "total": 7.0, "pct": 0.0}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-09-11",
@@ -301,8 +301,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 20821.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 392, "total": 5488.0, "pct": 27.6}, {"name": "CHAC CHAC MALBEC ROSE", "qty": 47, "total": 3666.0, "pct": 18.4}, {"name": "Vinho Chac Chac Malbec", "qty": 27, "total": 2106.0, "pct": 10.6}, {"name": "Vinho Undurraga Merlot", "qty": 20, "total": 1560.0, "pct": 7.8}, {"name": "Vinho Undurraga Carmenere", "qty": 20, "total": 1560.0, "pct": 7.8}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 15, "total": 1170.0, "pct": 5.9}, {"name": "AGUA SEM GAS", "qty": 183, "total": 1098.0, "pct": 5.5}, {"name": "Chac Chac Cabernet Franc ", "qty": 12, "total": 936.0, "pct": 4.7}, {"name": "AGUA COM GAS", "qty": 90, "total": 630.0, "pct": 3.2}, {"name": "TAÇA ", "qty": 47, "total": 564.0, "pct": 2.8}, {"name": "Coca Cola Zero", "qty": 28, "total": 224.0, "pct": 1.1}, {"name": "RED BULL TRADICIONAL", "qty": 12, "total": 216.0, "pct": 1.1}, {"name": "Coca Cola", "qty": 25, "total": 200.0, "pct": 1.0}, {"name": "RED BULL TROPICAL", "qty": 9, "total": 162.0, "pct": 0.8}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 20, "total": 160.0, "pct": 0.8}, {"name": "Budweiser Zero", "qty": 10, "total": 140.0, "pct": 0.7}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 3, "total": 24.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 11145.83, "pct": 56.0}, {"method": "Débito", "total": 7270.17, "pct": 36.5}, {"method": "Pix", "total": 1468.0, "pct": 7.4}, {"method": "Dinheiro", "total": 20.0, "pct": 0.1}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-08-21",
@@ -312,8 +312,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 8350.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "Chac Chac Cabernet Franc ", "qty": 17, "total": 1326.0, "pct": 16.3}, {"name": "Vinho Undurraga Carmenere", "qty": 15, "total": 1170.0, "pct": 14.4}, {"name": "Miolo Cabernet Suv. & Tempranillo Rosé", "qty": 14, "total": 1092.0, "pct": 13.4}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 73, "total": 1022.0, "pct": 12.6}, {"name": "Casillero  Del Diablo  Cabernet Sauvingnon", "qty": 12, "total": 936.0, "pct": 11.5}, {"name": "Cava Negra Malbec ", "qty": 9, "total": 702.0, "pct": 8.6}, {"name": "AGUA SEM GAS", "qty": 91, "total": 546.0, "pct": 6.7}, {"name": "Reservado Merlot Rosé", "qty": 5, "total": 390.0, "pct": 4.8}, {"name": "AGUA COM GAS", "qty": 25, "total": 175.0, "pct": 2.2}, {"name": "TAÇA ", "qty": 14, "total": 168.0, "pct": 2.1}, {"name": "Vinho Undurraga Merlot", "qty": 2, "total": 156.0, "pct": 1.9}, {"name": "Vinho Chac Chac Malbec", "qty": 2, "total": 156.0, "pct": 1.9}, {"name": "CHAC CHAC MALBEC ROSE", "qty": 1, "total": 78.0, "pct": 1.0}, {"name": "RED BULL TRADICIONAL", "qty": 4, "total": 72.0, "pct": 0.9}, {"name": "Coca Cola Zero", "qty": 8, "total": 64.0, "pct": 0.8}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 7, "total": 56.0, "pct": 0.7}, {"name": "Coca Cola", "qty": 3, "total": 24.0, "pct": 0.3}],
-      "metodosPagamento": [{"method": "Crédito", "total": 4529.0, "pct": 55.7}, {"method": "Débito", "total": 2686.0, "pct": 33.0}, {"method": "Pix", "total": 918.0, "pct": 11.3}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-08-14",
@@ -323,8 +323,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 40007.68,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN LONG NECK ", "qty": 679, "total": 9506.0, "pct": 25.8}, {"name": "CHAC CHAC MALBEC ROSE", "qty": 80, "total": 6240.0, "pct": 16.9}, {"name": "Vinho Chac Chac Malbec", "qty": 57, "total": 4446.0, "pct": 12.0}, {"name": "Vinho Undurraga Carmenere", "qty": 42, "total": 3276.0, "pct": 8.9}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 41, "total": 3198.0, "pct": 8.7}, {"name": "AGUA SEM GAS", "qty": 471, "total": 2355.0, "pct": 6.4}, {"name": "Vinho Undurraga Merlot", "qty": 19, "total": 1482.0, "pct": 4.0}, {"name": "AGUA COM GAS", "qty": 158, "total": 1106.0, "pct": 3.0}, {"name": "TAÇA ", "qty": 82, "total": 1086.0, "pct": 2.9}, {"name": "Spaten lata ", "qty": 77, "total": 924.0, "pct": 2.5}, {"name": "Coca Cola", "qty": 76, "total": 608.0, "pct": 1.6}, {"name": "RED BULL TROPICAL", "qty": 32, "total": 576.0, "pct": 1.6}, {"name": "RED BULL TRADICIONAL", "qty": 32, "total": 576.0, "pct": 1.6}, {"name": "BUDWEISER SEM ALCOOL", "qty": 41, "total": 574.0, "pct": 1.6}, {"name": "Coca Cola Zero", "qty": 56, "total": 448.0, "pct": 1.2}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 41, "total": 328.0, "pct": 0.9}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 22, "total": 176.0, "pct": 0.5}],
-      "metodosPagamento": [{"method": "Crédito", "total": 19825.5, "pct": 53.7}, {"method": "Débito", "total": 13733.5, "pct": 37.2}, {"method": "Pix", "total": 3245.0, "pct": 8.8}, {"method": "Dinheiro", "total": 101.0, "pct": 0.3}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-07-10",
@@ -334,8 +334,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 14653.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "Vinho Chac Chac Cabernet ", "qty": 50, "total": 3900.0, "pct": 26.6}, {"name": "Vinho Chac Chac Malbec", "qty": 38, "total": 2964.0, "pct": 20.2}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 149, "total": 2086.0, "pct": 14.2}, {"name": "CHAC CHAC MALBEC ROSE", "qty": 21, "total": 1638.0, "pct": 11.2}, {"name": "Vinho Undurraga Merlot", "qty": 14, "total": 1092.0, "pct": 7.4}, {"name": "AGUA SEM GAS", "qty": 142, "total": 710.0, "pct": 4.8}, {"name": "Spaten lata ", "qty": 42, "total": 504.0, "pct": 3.4}, {"name": "AGUA COM GAS", "qty": 64, "total": 448.0, "pct": 3.1}, {"name": "Chac Chac Sauvignon Blanc ", "qty": 5, "total": 390.0, "pct": 2.7}, {"name": "RED BULL TRADICIONAL", "qty": 18, "total": 324.0, "pct": 2.2}, {"name": "Coca Cola", "qty": 23, "total": 184.0, "pct": 1.3}, {"name": "TAÇA ", "qty": 15, "total": 120.0, "pct": 0.8}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 14, "total": 112.0, "pct": 0.8}, {"name": "BUDWEISER SEM ALCOOL", "qty": 7, "total": 98.0, "pct": 0.7}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 8, "total": 64.0, "pct": 0.4}, {"name": "RED BULL TROPICAL", "qty": 2, "total": 36.0, "pct": 0.2}, {"name": "RED BULL SUGAR FREE", "qty": 1, "total": 18.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 8431.0, "pct": 57.4}, {"method": "Débito", "total": 5114.0, "pct": 34.8}, {"method": "Pix", "total": 892.0, "pct": 6.1}, {"method": "Dinheiro", "total": 251.0, "pct": 1.7}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-06-12",
@@ -345,8 +345,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 19031.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "Vinho Chac Chac Malbec", "qty": 64, "total": 4800.0, "pct": 26.4}, {"name": "Vinho Chac Chac Cabernet ", "qty": 55, "total": 4125.0, "pct": 22.7}, {"name": "CHAC CHAC MALBEC ROSE", "qty": 36, "total": 2700.0, "pct": 14.9}, {"name": "CERVEJA SPATEN LONG NECK ", "qty": 160, "total": 2240.0, "pct": 12.3}, {"name": "Vinho Undurraga Merlot", "qty": 26, "total": 1950.0, "pct": 10.7}, {"name": "AGUA SEM GAS", "qty": 140, "total": 700.0, "pct": 3.9}, {"name": "TAÇA ", "qty": 57, "total": 456.0, "pct": 2.5}, {"name": "AGUA COM GAS", "qty": 58, "total": 348.0, "pct": 1.9}, {"name": "Coca Cola", "qty": 42, "total": 336.0, "pct": 1.9}, {"name": "Spaten lata ", "qty": 16, "total": 224.0, "pct": 1.2}, {"name": "Coca Cola Zero", "qty": 16, "total": 128.0, "pct": 0.7}, {"name": "RED BULL TRADICIONAL", "qty": 4, "total": 72.0, "pct": 0.4}, {"name": "RED BULL TROPICAL", "qty": 3, "total": 54.0, "pct": 0.3}, {"name": "BUDWEISER SEM ALCOOL", "qty": 2, "total": 28.0, "pct": 0.2}],
-      "metodosPagamento": [{"method": "Crédito", "total": 11093.75, "pct": 61.1}, {"method": "Débito", "total": 5753.0, "pct": 31.7}, {"method": "Pix", "total": 1137.25, "pct": 6.3}, {"method": "Dinheiro", "total": 177.0, "pct": 1.0}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-05-08",
@@ -356,8 +356,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 9100.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "Vinho Chac Chac Malbec", "qty": 23, "total": 1725.0, "pct": 19.3}, {"name": "CHAC CHAC MALBEC ROSE", "qty": 21, "total": 1575.0, "pct": 17.6}, {"name": "Vinho Chac Chac Cabernet ", "qty": 16, "total": 1200.0, "pct": 13.4}, {"name": "Spaten lata ", "qty": 72, "total": 1008.0, "pct": 11.3}, {"name": "Vinho Undurraga Merlot", "qty": 13, "total": 975.0, "pct": 10.9}, {"name": "CERVEJA SPATEN", "qty": 50, "total": 700.0, "pct": 7.8}, {"name": "Vinho Secreto", "qty": 6, "total": 450.0, "pct": 5.0}, {"name": "BUDWEISER SEM ALCOOL", "qty": 22, "total": 308.0, "pct": 3.4}, {"name": "TAÇA ", "qty": 33, "total": 264.0, "pct": 3.0}, {"name": "AGUA SEM GAS", "qty": 52, "total": 260.0, "pct": 2.9}, {"name": "AGUA COM GAS", "qty": 35, "total": 210.0, "pct": 2.3}, {"name": "Coca Cola Zero", "qty": 8, "total": 64.0, "pct": 0.7}, {"name": "Coca Cola", "qty": 7, "total": 56.0, "pct": 0.6}, {"name": "RED BULL TROPICAL", "qty": 3, "total": 54.0, "pct": 0.6}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 5, "total": 40.0, "pct": 0.4}, {"name": "RED BULL TRADICIONAL", "qty": 2, "total": 36.0, "pct": 0.4}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 2, "total": 16.0, "pct": 0.2}],
-      "metodosPagamento": [{"method": "Crédito", "total": 4759.0, "pct": 53.2}, {"method": "Débito", "total": 3523.5, "pct": 39.4}, {"method": "Pix", "total": 658.5, "pct": 7.4}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-04-10",
@@ -367,8 +367,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 24491.28,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN", "qty": 453, "total": 6342.0, "pct": 28.4}, {"name": "Vinho Chac Chac Malbec", "qty": 52, "total": 4056.0, "pct": 18.1}, {"name": "Vinho Finca Premiada/Los Andes ", "qty": 31, "total": 2418.0, "pct": 10.8}, {"name": "VINHO CHILANO ROSE", "qty": 30, "total": 2340.0, "pct": 10.5}, {"name": "Vinho Chac Chac Cabernet ", "qty": 28, "total": 2184.0, "pct": 9.8}, {"name": "AGUA SEM GAS", "qty": 201, "total": 1206.0, "pct": 5.4}, {"name": "Vinho secreto", "qty": 10, "total": 780.0, "pct": 3.5}, {"name": "AGUA COM GAS", "qty": 78, "total": 546.0, "pct": 2.4}, {"name": "TAÇA ", "qty": 67, "total": 506.0, "pct": 2.3}, {"name": "Vinho Undurraga Merlot", "qty": 6, "total": 468.0, "pct": 2.1}, {"name": "BUDWEISER SEM ALCOOL", "qty": 28, "total": 392.0, "pct": 1.8}, {"name": "RED BULL TRADICIONAL", "qty": 18, "total": 324.0, "pct": 1.4}, {"name": "Coca Cola Zero", "qty": 25, "total": 200.0, "pct": 0.9}, {"name": "Coca Cola", "qty": 18, "total": 144.0, "pct": 0.6}, {"name": "RED BULL TROPICAL", "qty": 8, "total": 144.0, "pct": 0.6}, {"name": "RED BULL SUGAR FREE", "qty": 7, "total": 126.0, "pct": 0.6}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 15, "total": 120.0, "pct": 0.5}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 7, "total": 56.0, "pct": 0.3}],
-      "metodosPagamento": [{"method": "Crédito", "total": 14196.5, "pct": 63.5}, {"method": "Débito", "total": 6471.5, "pct": 29.0}, {"method": "Pix", "total": 1666.0, "pct": 7.5}, {"method": "Dinheiro", "total": 18.0, "pct": 0.1}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-03-21",
@@ -378,8 +378,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 5008.08,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN", "qty": 122, "total": 1708.0, "pct": 33.9}, {"name": "Vinho Chac Chac Malbec", "qty": 11, "total": 858.0, "pct": 17.0}, {"name": "Vinho Chac Chac Cabernet ", "qty": 9, "total": 702.0, "pct": 13.9}, {"name": "Vinho Finca Premiada/Los Andes ", "qty": 8, "total": 624.0, "pct": 12.4}, {"name": "AGUA SEM GAS", "qty": 60, "total": 360.0, "pct": 7.1}, {"name": "AGUA COM GAS", "qty": 29, "total": 203.0, "pct": 4.0}, {"name": "Coca Cola Zero", "qty": 16, "total": 126.0, "pct": 2.5}, {"name": "BUDWEISER", "qty": 7, "total": 98.0, "pct": 1.9}, {"name": "TAÇA ", "qty": 14, "total": 84.0, "pct": 1.7}, {"name": "Coca Cola", "qty": 9, "total": 72.0, "pct": 1.4}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 7, "total": 56.0, "pct": 1.1}, {"name": "RED BULL SUGAR FREE", "qty": 3, "total": 54.0, "pct": 1.1}, {"name": "RED BULL TRADICIONAL", "qty": 3, "total": 54.0, "pct": 1.1}, {"name": "RED BULL TROPICAL", "qty": 2, "total": 36.0, "pct": 0.7}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 1, "total": 8.0, "pct": 0.2}],
-      "metodosPagamento": [{"method": "Crédito", "total": 2555.0, "pct": 50.7}, {"method": "Débito", "total": 2081.0, "pct": 41.3}, {"method": "Pix", "total": 387.0, "pct": 7.7}, {"method": "Dinheiro", "total": 20.0, "pct": 0.4}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-03-07",
@@ -400,8 +400,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 4906.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN", "qty": 141, "total": 1974.0, "pct": 40.6}, {"name": "Vinho Finca Premiada/Los Andes ", "qty": 10, "total": 780.0, "pct": 16.0}, {"name": "Vinho Undurraga Merlot", "qty": 8, "total": 624.0, "pct": 12.8}, {"name": "Vinho Chac Chac Malbec", "qty": 5, "total": 390.0, "pct": 8.0}, {"name": "Vinho Chac Chac Cabernet ", "qty": 4, "total": 312.0, "pct": 6.4}, {"name": "Água sem gás", "qty": 40, "total": 200.0, "pct": 4.1}, {"name": "Budweiser Zero", "qty": 13, "total": 182.0, "pct": 3.7}, {"name": "Água com Gás", "qty": 26, "total": 130.0, "pct": 2.7}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 1, "total": 78.0, "pct": 1.6}, {"name": "Coca Cola", "qty": 10, "total": 60.0, "pct": 1.2}, {"name": "Coca Cola Zero", "qty": 9, "total": 54.0, "pct": 1.1}, {"name": "TAÇA ", "qty": 5, "total": 30.0, "pct": 0.6}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 4, "total": 24.0, "pct": 0.5}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 4, "total": 20.0, "pct": 0.4}, {"name": "GUARANÁ ANTÁRTICA 350ML", "qty": 1, "total": 6.0, "pct": 0.1}],
-      "metodosPagamento": [{"method": "Crédito", "total": 2331.0, "pct": 47.9}, {"method": "Débito", "total": 1906.0, "pct": 39.2}, {"method": "Pix", "total": 414.0, "pct": 8.5}, {"method": "Dinheiro", "total": 213.0, "pct": 4.4}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2024-01-17",
@@ -411,8 +411,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 16030.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "CERVEJA SPATEN", "qty": 245, "total": 3430.0, "pct": 23.1}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 30, "total": 2340.0, "pct": 15.8}, {"name": "Vinho Chac Chac Malbec", "qty": 27, "total": 2106.0, "pct": 14.2}, {"name": "Vinho Finca Premiada/Los Andes ", "qty": 23, "total": 1794.0, "pct": 12.1}, {"name": "Vinho Undurraga Merlot", "qty": 17, "total": 1326.0, "pct": 8.9}, {"name": "Água sem gás", "qty": 175, "total": 875.0, "pct": 5.9}, {"name": "Vinho Chac Chac Cabernet ", "qty": 10, "total": 780.0, "pct": 5.3}, {"name": "ALECRIM", "qty": 6, "total": 468.0, "pct": 3.2}, {"name": "Água com Gás", "qty": 86, "total": 430.0, "pct": 2.9}, {"name": "Budweiser Zero", "qty": 20, "total": 280.0, "pct": 1.9}, {"name": "TAÇA ", "qty": 40, "total": 240.0, "pct": 1.6}, {"name": "VINHO CHILANO ROSE", "qty": 3, "total": 234.0, "pct": 1.6}, {"name": "Coca Cola", "qty": 36, "total": 216.0, "pct": 1.5}, {"name": "Coca Cola Zero", "qty": 24, "total": 144.0, "pct": 1.0}, {"name": "GUARANÁ ANTÁRTICA 310ML", "qty": 18, "total": 90.0, "pct": 0.6}, {"name": "GUARANÁ ANTÁRTICA 350ML", "qty": 10, "total": 60.0, "pct": 0.4}, {"name": "GUARANÁ ZERO ANTÁRTICA 350ML", "qty": 5, "total": 30.0, "pct": 0.2}],
-      "metodosPagamento": [{"method": "Crédito", "total": 8135.0, "pct": 54.8}, {"method": "Débito", "total": 5608.0, "pct": 37.8}, {"method": "Pix", "total": 1016.0, "pct": 6.8}, {"method": "Dinheiro", "total": 84.0, "pct": 0.6}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2023-12-14",
@@ -422,8 +422,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 10697.04,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "Spaten Long Neck", "qty": 205, "total": 2870.0, "pct": 28.4}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 17, "total": 1326.0, "pct": 13.1}, {"name": "ALECRIM", "qty": 15, "total": 1170.0, "pct": 11.6}, {"name": "Vinho Finca Premiada Chile", "qty": 13, "total": 1014.0, "pct": 10.0}, {"name": "Vinho Chac Chac Cabernet Franc", "qty": 12, "total": 936.0, "pct": 9.3}, {"name": "Vinho Chac Chac Malbec", "qty": 11, "total": 858.0, "pct": 8.5}, {"name": "Vinho Undurraga Merlot", "qty": 10, "total": 780.0, "pct": 7.7}, {"name": "Água sem gás", "qty": 95, "total": 475.0, "pct": 4.7}, {"name": "Água com Gás", "qty": 55, "total": 275.0, "pct": 2.7}, {"name": "TAÇA ", "qty": 8, "total": 185.0, "pct": 1.8}, {"name": "Coca Cola", "qty": 21, "total": 126.0, "pct": 1.2}, {"name": "Coca Cola Zero", "qty": 17, "total": 102.0, "pct": 1.0}],
-      "metodosPagamento": [{"method": "Crédito", "total": 5492.0, "pct": 54.3}, {"method": "Débito", "total": 3942.0, "pct": 39.0}, {"method": "Pix", "total": 678.0, "pct": 6.7}, {"method": "Dinheiro", "total": 5.0, "pct": 0.0}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2023-11-09",
@@ -433,8 +433,8 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 29881.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "Spaten Long Neck", "qty": 659, "total": 9226.0, "pct": 32.8}, {"name": "Vinho Finca Premiada Chile", "qty": 61, "total": 4758.0, "pct": 16.9}, {"name": "Vinho Undurraga Cabernet Sauvignon", "qty": 41, "total": 3198.0, "pct": 11.4}, {"name": "Vinho Chac Chac Malbec", "qty": 39, "total": 3042.0, "pct": 10.8}, {"name": "Água sem gás", "qty": 451, "total": 2255.0, "pct": 8.0}, {"name": "Vinho Undurraga Carmenere", "qty": 23, "total": 1794.0, "pct": 6.4}, {"name": "Vinho Undurraga Merlot", "qty": 17, "total": 1326.0, "pct": 4.7}, {"name": "Vinho Chac Chac Cabernet Franc", "qty": 9, "total": 702.0, "pct": 2.5}, {"name": "BUDWEISER", "qty": 49, "total": 686.0, "pct": 2.4}, {"name": "Coca Cola", "qty": 74, "total": 444.0, "pct": 1.6}, {"name": "Coca Cola Zero", "qty": 64, "total": 384.0, "pct": 1.4}, {"name": "Água com Gás", "qty": 58, "total": 290.0, "pct": 1.0}],
-      "metodosPagamento": [{"method": "Crédito", "total": 15535.5, "pct": 55.3}, {"method": "Débito", "total": 9939.0, "pct": 35.4}, {"method": "Pix", "total": 2367.0, "pct": 8.4}, {"method": "Dinheiro", "total": 263.5, "pct": 0.9}]
+      "produtos": [],
+      "metodosPagamento": []
     },
     {
       "start": "2023-10-11",
@@ -521,185 +521,128 @@ export const BAR_EMBED: BarHistoryData = {
       "revenue": 0,
       "ticketMedio": 0,
       "itensVendidos": 0,
-      "produtos": [{"name": "UVITA BLEND TINTO", "qty": 1, "total": 92.0, "pct": 60.1}, {"name": "AGUA SEM GAS", "qty": 5, "total": 30.0, "pct": 19.6}, {"name": "STELLA PURE GOLD ", "qty": 1, "total": 17.0, "pct": 11.1}, {"name": "AGUA COM GAS", "qty": 2, "total": 14.0, "pct": 9.2}],
-      "metodosPagamento": [{"method": "Crédito", "total": 127.0, "pct": 83.0}, {"method": "Débito", "total": 26.0, "pct": 17.0}]
-    }
+      "produtos": [],
+      "metodosPagamento": []
+    },
   ],
   "eventBarRevenue": {
-    "2024-09-12": {"revenue": 7125.0, "transactions": 240, "perCapita": 29.69},
-    "2024-10-10": {"revenue": 22924.0, "transactions": 621, "perCapita": 36.91},
-    "2024-10-17": {"revenue": 11837.0, "transactions": 308, "perCapita": 38.43},
-    "2024-11-14": {"revenue": 21061.0, "transactions": 546, "perCapita": 38.57},
-    "2024-12-06": {"revenue": 24940.0, "transactions": 645, "perCapita": 38.67},
-    "2025-01-16": {"revenue": 11984.0, "transactions": 388, "perCapita": 30.89},
-    "2025-02-13": {"revenue": 13639.0, "transactions": 312, "perCapita": 43.71},
-    "2025-03-12": {"revenue": 2700.0, "transactions": 73, "perCapita": 36.99},
-    "2025-04-10": {"revenue": 52235.0, "transactions": 1372, "perCapita": 38.07},
-    "2025-05-08": {"revenue": 12205.0, "transactions": 269, "perCapita": 45.37},
-    "2025-05-16": {"revenue": 1155.0, "transactions": 20, "perCapita": 57.75},
-    "2025-06-12": {"revenue": 28126.0, "transactions": 534, "perCapita": 52.67},
-    "2025-07-10": {"revenue": 19007.0, "transactions": 359, "perCapita": 52.94},
-    "2025-08-08": {"revenue": 17167.0, "transactions": 481, "perCapita": 35.69},
-    "2025-08-14": {"revenue": 13111.0, "transactions": 284, "perCapita": 46.17},
-    "2025-09-11": {"revenue": 65403.0, "transactions": 1508, "perCapita": 43.37},
-    "2025-10-16": {"revenue": 13415.0, "transactions": 413, "perCapita": 32.48},
-    "2025-11-13": {"revenue": 17390.0, "transactions": 419, "perCapita": 41.5},
-    "2025-12-11": {"revenue": 83578.0, "transactions": 1852, "perCapita": 45.13},
-    "2026-01-15": {"revenue": 18592.0, "transactions": 462, "perCapita": 40.24},
-    "2026-02-05": {"revenue": 16951.0, "transactions": 369, "perCapita": 45.94},
-    "2026-03-12": {"revenue": 25633.0, "transactions": 571, "perCapita": 44.89},
-    "2026-04-16": {"revenue": 30293.0, "transactions": 595, "perCapita": 50.91},
-    "2026-05-14": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
-    "2026-06-10": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
-    "2026-06-25": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
-    "2026-07-09": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
-    "2026-07-16": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
-    "sympla-2633353": {
-      "revenue": 20821.00,
-      "transactions": 603,
-      "perCapita": 34.53
-    },
-    "sympla-2675465": {
-      "revenue": 22924.00,
-      "transactions": 624,
-      "perCapita": 36.74
-    },
-    "sympla-2686304": {
-      "revenue": 11837.00,
-      "transactions": 465,
-      "perCapita": 25.46
-    },
-    "sympla-2721616": null,
-    "sympla-2729608": {
-      "revenue": 21061.00,
-      "transactions": 617,
-      "perCapita": 34.13
-    },
-    "sympla-2754645": {
-      "revenue": 24940.00,
-      "transactions": 641,
-      "perCapita": 38.91
-    },
-    "sympla-2785141": null,
-    "sympla-2795323": {
-      "revenue": 11984.00,
-      "transactions": 475,
-      "perCapita": 25.23
-    },
-    "sympla-2828931": {
-      "revenue": 13639.00,
-      "transactions": 449,
-      "perCapita": 30.38
-    },
-    "sympla-2862206": {
-      "revenue": 2700.00,
-      "transactions": 123,
-      "perCapita": 21.95
-    },
-    "sympla-2887562": {
-      "revenue": 52234.69,
-      "transactions": 1033,
-      "perCapita": 50.57
-    },
-    "sympla-2942257": {
-      "revenue": 12204.94,
-      "transactions": 430,
-      "perCapita": 28.38
-    },
-    "sympla-2987008": {
-      "revenue": 28126.02,
-      "transactions": 571,
-      "perCapita": 49.26
-    },
-    "sympla-3028036": {
-      "revenue": 19007.00,
-      "transactions": 505,
-      "perCapita": 37.64
-    },
-    "sympla-3060095": {
-      "revenue": 17167.00,
-      "transactions": 478,
-      "perCapita": 35.91
-    },
-    "sympla-3073170": {
-      "revenue": 13111.00,
-      "transactions": 449,
-      "perCapita": 29.2
-    },
-    "sympla-3113883": {
-      "revenue": 65403.00,
-      "transactions": 854,
-      "perCapita": 76.58
-    },
-    "sympla-3150968": null,
-    "sympla-3168880": {
-      "revenue": 13415.00,
-      "transactions": 521,
-      "perCapita": 25.75
-    },
-    "sympla-3209412": {
-      "revenue": 17390.00,
-      "transactions": 533,
-      "perCapita": 32.63
-    },
-    "sympla-3245686": {
-      "revenue": 83578.00,
-      "transactions": 841,
-      "perCapita": 99.38
-    },
-    "sympla-3272845": {
-      "revenue": 18592.00,
-      "transactions": 544,
-      "perCapita": 34.18
-    },
-    "sympla-3297245": {
-      "revenue": 16951.00,
-      "transactions": 598,
-      "perCapita": 28.35
+    "sympla-3384296": {
+      "revenue": 30293.15,
+      "transactions": 849,
+      "perCapita": 35.68
     },
     "sympla-3332505": {
       "revenue": 25633.00,
       "transactions": 759,
       "perCapita": 33.77
     },
-    "sympla-3384296": {
-      "revenue": 30293.15,
-      "transactions": 849,
-      "perCapita": 35.68
+    "sympla-3297245": {
+      "revenue": 16951.00,
+      "transactions": 598,
+      "perCapita": 28.35
     },
-    "sympla-3420938": {"revenue": 15072.0, "transactions": 276, "perCapita": 54.61},
-    "sympla-3457402": {"revenue": 43138.0, "transactions": 750, "perCapita": 57.52},
-    "sympla-3474070": {"revenue": 8562.0, "transactions": 172, "perCapita": 49.78},
-    "sympla-3477015": null,
-    "sympla-3492296": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},
-    "sympla-3500838": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
-    "cmos4gt0l0001tuzohf8se5zp": null,
-    "cmos4gtzk0002tuzo6qahavd8": null,
-    "cmos4gumu0005tuzowyzny7xa": {
-      "revenue": 29881.00,
-      "transactions": 710,
-      "perCapita": 42.09
+    "sympla-3272845": {
+      "revenue": 18592.00,
+      "transactions": 544,
+      "perCapita": 34.18
     },
-    "cmos4gv9d0008tuzod1v6vohy": {
-      "revenue": 10697.04,
-      "transactions": 399,
-      "perCapita": 26.81
+    "sympla-3245686": {
+      "revenue": 83578.00,
+      "transactions": 841,
+      "perCapita": 99.38
     },
-    "cmos4gvwi000btuzoc8pt324j": {
-      "revenue": 4906.00,
-      "transactions": 240,
-      "perCapita": 20.44
+    "sympla-3209412": {
+      "revenue": 17390.00,
+      "transactions": 533,
+      "perCapita": 32.63
     },
-    "cmos4gwit000ctuzobv5wgzyb": null,
-    "cmos4gx76000ftuzo0zg533i4": {
-      "revenue": 5008.08,
-      "transactions": 275,
-      "perCapita": 18.21
+    "sympla-3168880": {
+      "revenue": 13415.00,
+      "transactions": 521,
+      "perCapita": 25.75
+    },
+    "sympla-3150968": null,
+    "sympla-3113883": {
+      "revenue": 65403.00,
+      "transactions": 854,
+      "perCapita": 76.58
+    },
+    "sympla-3073170": {
+      "revenue": 13111.00,
+      "transactions": 449,
+      "perCapita": 29.2
+    },
+    "sympla-3060095": {
+      "revenue": 17167.00,
+      "transactions": 478,
+      "perCapita": 35.91
+    },
+    "sympla-3028036": {
+      "revenue": 19007.00,
+      "transactions": 505,
+      "perCapita": 37.64
+    },
+    "sympla-2987008": {
+      "revenue": 28126.02,
+      "transactions": 571,
+      "perCapita": 49.26
     },
     "cmowubrg505sftua7duoe1ojk": {
       "revenue": 1155.00,
       "transactions": 28,
       "perCapita": 41.25
+    },
+    "sympla-2942257": {
+      "revenue": 12204.94,
+      "transactions": 430,
+      "perCapita": 28.38
+    },
+    "sympla-2887562": {
+      "revenue": 52234.69,
+      "transactions": 1033,
+      "perCapita": 50.57
+    },
+    "sympla-2862206": {
+      "revenue": 2700.00,
+      "transactions": 123,
+      "perCapita": 21.95
+    },
+    "sympla-2828931": {
+      "revenue": 13639.00,
+      "transactions": 449,
+      "perCapita": 30.38
+    },
+    "sympla-2795323": {
+      "revenue": 11984.00,
+      "transactions": 475,
+      "perCapita": 25.23
+    },
+    "sympla-2785141": null,
+    "sympla-2754645": {
+      "revenue": 24940.00,
+      "transactions": 641,
+      "perCapita": 38.91
+    },
+    "sympla-2729608": {
+      "revenue": 21061.00,
+      "transactions": 617,
+      "perCapita": 34.13
+    },
+    "sympla-2721616": null,
+    "sympla-2686304": {
+      "revenue": 11837.00,
+      "transactions": 465,
+      "perCapita": 25.46
+    },
+    "sympla-2675465": {
+      "revenue": 22924.00,
+      "transactions": 624,
+      "perCapita": 36.74
+    },
+    "sympla-2633353": {
+      "revenue": 20821.00,
+      "transactions": 603,
+      "perCapita": 34.53
     },
     "cmowubs7u0a0wtua7mzroohak": {
       "revenue": 8350.00,
@@ -731,17 +674,40 @@ export const BAR_EMBED: BarHistoryData = {
       "transactions": 656,
       "perCapita": 37.33
     },
+    "cmos4gx76000ftuzo0zg533i4": {
+      "revenue": 5008.08,
+      "transactions": 275,
+      "perCapita": 18.21
+    },
+    "cmos4gwit000ctuzobv5wgzyb": null,
+    "cmos4gvwi000btuzoc8pt324j": {
+      "revenue": 4906.00,
+      "transactions": 240,
+      "perCapita": 20.44
+    },
     "cmowubsuk0d4ktua7kgqhk7ad": {
       "revenue": 16030.00,
       "transactions": 582,
       "perCapita": 27.54
     },
+    "cmos4gv9d0008tuzod1v6vohy": {
+      "revenue": 10697.04,
+      "transactions": 399,
+      "perCapita": 26.81
+    },
+    "cmos4gumu0005tuzowyzny7xa": {
+      "revenue": 29881.00,
+      "transactions": 710,
+      "perCapita": 42.09
+    },
+    "cmos4gtzk0002tuzo6qahavd8": null,
+    "cmos4gt0l0001tuzohf8se5zp": null,
+    "sarau-secreto-maio-2026": null,
+    "sarau-secreto-convida-magrao": null,
     "sala-secreta": null,
     "sarau-secreto-convida-ellen-oleria": null,
-    "sarau-secreto-convida-magrao": null,
     "sarau-secreto-convida-sotam": null,
-    "sarau-secreto-maio-2026": null,
-    "sarau-secreto-solsticio-de-inverno": null
+    "sarau-secreto-solsticio-de-inverno": null,
   },
   "mensais": [],
   "produtoMix": [
@@ -924,7 +890,7 @@ export const BAR_EMBED: BarHistoryData = {
       "qty": 231,
       "total": 4482.00,
       "pct": 0.6
-    }
+    },
   ],
   "metodosPagamento": [],
   "categorias": []
