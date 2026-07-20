@@ -60,7 +60,7 @@ def main():
             ignored += 1
             continue
         
-        slug = slugify(nome, ev["data"])
+        slug = slugify(nome, ev["data"]) + "-" + sympla_id
         
         # Check if event exists by symplaEventId
         cur.execute("SELECT id, title, slug, date, capacity, status FROM Event WHERE symplaEventId = ?", (sympla_id,))

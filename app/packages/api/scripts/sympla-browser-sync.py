@@ -241,7 +241,7 @@ def fetch_internal_api(cookie_file: Path = COOKIE_FILE) -> list[dict]:
             f"?status=all&shared=all&field=START_DATE&sort=ASC&eventStatus=all&page={page_num}"
         )
         cmd = [
-            "curl", "-s",
+            "/usr/bin/curl", "-s",
             url,
             "-H", "X-Requested-With: XMLHttpRequest",
             "-H", "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
@@ -268,7 +268,7 @@ def fetch_internal_api(cookie_file: Path = COOKIE_FILE) -> list[dict]:
         print("   ⚠️  No events on page 1 — session may be expired")
         # Try fetching again with verbose curl to see what's happening
         cmd = [
-            "curl", "-v", "-s",
+            "/usr/bin/curl", "-v", "-s",
             "https://organizador.sympla.com.br/ajax/meus-eventos?status=all&shared=all&field=START_DATE&sort=ASC&eventStatus=all&page=1",
             "-H", "X-Requested-With: XMLHttpRequest",
             "-H", "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
@@ -604,7 +604,7 @@ def try_public_api_ids(all_events: list[dict]) -> list[str]:
 
         url = f"{base_url}/events/{event_id}"
         cmd = [
-            "curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
+            "/usr/bin/curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
             url,
             "-H", f"s_token: {token}",
             "-H", "User-Agent: Mozilla/5.0",
