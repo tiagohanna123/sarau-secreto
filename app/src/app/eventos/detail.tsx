@@ -178,53 +178,92 @@ function ComparacaoMedia({ ev, overview }: { ev: EnrichedEvent; overview: any })
     ? Math.round((agg.totalBarRevenue / agg.totalRevenue) * 100)
     : 0
 
-  const diffTicketMedio = avgTicketMedio > 0 && ev.ticketMedio > 0
-    ? ((ev.ticketMedio - avgTicketMedio) / avgTicketMedio) * 100 : null
+  const diff = (val: number, avg: number) =>
+    avg > 0 && val > 0 ? ((val - avg) / avg) * 100 : null
 
-  const items = [
-    {
-      label: 'Ticket Médio',
-      valor: fmtc(ev.ticketMedio),
-      media: fmtc(avgTicketMedio),
-      diff: diffTicketMedio,
-    },
-    {
-      label: 'Bar por Pessoa',
-      valor: fmtc(ev.perCapitaBar),
-      media: fmtc(avgPerCapitaBar),
-      diff: null,
-    },
-    {
-      label: 'Mix Bar',
-      valor: `${ev.barPct}%`,
-      media: `${avgBarPct}%`,
-      diff: null,
-    },
+  interface Row { label: string; valor: string; media: string; diffVal: number | null; dir?: '↑' | '↓' }
+  const rows: Row[] = [
+    { label: 'Ticket Médio', valor: fmtc(ev.ticketMedio), media: fmtc(avgTicketMedio), diffVal: diff(ev.ticketMedio, avgTicketMedio) },
+    { label: 'Bar por Pessoa', valor: fmtc(ev.perCapitaBar), media: fmtc(avgPerCapitaBar), diffVal: diff(ev.perCapitaBar, avgPerCapitaBar) },
+    { label: 'Mix Bar', valor: `${ev.barPct}%`, media: `${avgBarPct}%`, diffVal: diff(ev.barPct, avgBarPct) },
   ]
+
+  // Highlight melhor/mais saudável
+  const noDiff = (v: number | null) => v === null
 
   return (
     <div className="chart-box">
       <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
         Comparação com Média Geral ({agg.totalEvents} eventos)
       </p>
-      <div className="space-y-3">
-        {items.map(item => (
-          <div key={item.label} className="flex items-center justify-between text-xs py-1.5 border-b border-white/5 last:border-0">
-            <span className="text-muted-foreground flex-1">{item.label}</span>
-            <div className="flex gap-4 items-center">
-              <span className="text-white font-medium w-20 text-right">{item.valor}</span>
-              <span className="text-[#4b5563] w-20 text-right">{item.media}</span>
-              {item.diff !== null && (
-                <span className={`w-14 text-right font-medium ${
-                  item.diff > 0 ? 'text-success' : item.diff < 0 ? 'text-red-400' : 'text-muted-foreground'
-                }`}>
-                  {item.diff > 0 ? '+' : ''}{item.diff.toFixed(1)}%
-                </span>
-              )}
+
+      {/* Cabeçalho da tabela */}
+      <div className="hidden md:grid grid-cols-[1fr_90px_90px_80px] gap-2 mb-2 px-2">
+        <span className="text-[9px] uppercase tracking-[0.1em] text-[#4b5563]">Indicador</span>
+        <span className="text-[9px] uppercase tracking-[0.1em] text-[#4b5563] text-right">Este Evento</span>
+        <span className="text-[9px] uppercase tracking-[0.1em] text-[#4b5563] text-right">Média Geral</span>
+        <span className="text-[9px] uppercase tracking-[0.1em] text-[#4b5563] text-right">Diferença</span>
+      </div>
+
+      {/* Linhas */}
+      <div className="space-y-1">
+        {rows.map(r => (
+          <div key={r.label} className="grid grid-cols-1 md:grid-cols-[1fr_90px_90px_80px] gap-1 md:gap-2 items-center px-2 py-2 rounded-md bg-white/[0.02]">
+            {/* Label (full width no mobile) */}
+            <span className="text-[11px] text-muted-foreground font-medium">{r.label}</span>
+
+            {/* Mobile: inline row with valores */}
+            <div className="flex items-center justify-between md:hidden text-xs">
+              <span className="text-[10px] text-[#4b5563]">Este evento</span>
+              <span className="text-white font-semibold">{r.valor}</span>
             </div>
+            <div className="flex items-center justify-between md:hidden text-xs">
+              <span className="text-[10px] text-[#4b5563]">Média geral</span>
+              <span className="text-[#9ca3af]">{r.media}</span>
+            </div>
+
+            {/* Desktop: colunas */}
+            <span className="hidden md:block text-[13px] text-white font-semibold text-right tabular-nums">{r.valor}</span>
+            <span className="hidden md:block text-[13px] text-[#9ca3af] text-right tabular-nums">{r.media}</span>
+
+            {/* Diff */}
+            <span className={`hidden md:block text-[13px] text-right font-semibold tabular-nums ${
+              noDiff(r.diffVal) ? 'text-[#4b5563]' :
+              r.diffVal > 0 ? 'text-success' : 'text-red-400'
+            }`}>
+              {noDiff(r.diffVal) ? '—' : `${r.diffVal > 0 ? '+' : ''}${r.diffVal.toFixed(1)}%`}
+            </span>
+
+            {/* Barra de comparação visual */}
+            {r.diffVal !== null && (
+              <div className="col-span-1 md:col-span-4 mt-1 mb-0.5">
+                <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all ${
+                      r.diffVal > 0 ? 'bg-success' : r.diffVal < 0 ? 'bg-red-400' : 'bg-[#4b5563]'
+                    }`}
+                    style={{
+                      width: `${Math.min(100, Math.abs(r.diffVal))}%`,
+                      marginLeft: r.diffVal < 0 ? '0' : 'auto',
+                      // Se diff positivo, barra da direita pra esquerda
+                      ...(r.diffVal < 0 ? {} : {})
+                    }}
+                  />
+                </div>
+                <div className="flex justify-between text-[8px] text-[#4b5563] mt-0.5">
+                  <span>{r.diffVal < 0 ? `${Math.abs(r.diffVal).toFixed(0)}% abaixo` : ''}</span>
+                  <span>{r.diffVal > 0 ? `${r.diffVal.toFixed(0)}% acima` : ''}</span>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
+
+      {/* Rodapé da tabela - total de eventos */}
+      <p className="mt-2 text-[9px] text-[#4b5563] px-2">
+        Baseado em {agg.totalEvents} eventos · dados de bilheteria e bar
+      </p>
     </div>
   )
 }
@@ -378,10 +417,10 @@ function ProdutosCard({ produtos, barRevenue }: { produtos?: { name: string; qty
   return (
     <div className="chart-box">
       <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
-        Discriminação de Vendas · {produtos.length} itens
+        Top {Math.min(produtos.length, 10)} Produtos · R$ {barRevenue.toLocaleString('pt-BR', { minimumFractionDigits: 0 })} em vendas
       </p>
       <div className="space-y-1">
-        {produtos.slice(0, 20).map((p, i) => (
+        {produtos.slice(0, 10).map((p, i) => (
           <div key={p.name} className="flex items-center gap-2 py-1.5 border-b border-white/5 last:border-0">
             <span className="text-[10px] text-[#4b5563] w-4 font-mono text-right">{i+1}</span>
             <div className="flex-1 min-w-0">
@@ -678,15 +717,18 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
 
       {/* Row 4: Discriminação de Vendas do Bar — produtos, pagamentos, horário */}
       {ev.barRevenue > 0 && (() => {
-        // Transforma topProducts da API no formato do ProdutosCard
-        const produtos = insightData?.topProducts?.length
-          ? insightData.topProducts.map((p: any) => ({
-              name: p.name,
-              qty: p.qty,
-              total: p.revenue,
-              pct: ev.barRevenue > 0 ? (p.revenue / ev.barRevenue) * 100 : 0,
-            }))
-          : []
+        // Dados reais de produtos por evento (Yuzer/barData) têm prioridade.
+        // Fallback para topProducts sintéticos da API (computeBarInsights).
+        const produtos = ev.produtos?.length
+          ? [...ev.produtos].sort((a, b) => b.total - a.total).slice(0, 10)
+          : insightData?.topProducts?.length
+            ? insightData.topProducts.map((p: any) => ({
+                name: p.name,
+                qty: p.qty,
+                total: p.revenue,
+                pct: ev.barRevenue > 0 ? (p.revenue / ev.barRevenue) * 100 : 0,
+              })).slice(0, 10)
+            : []
         const paymentMethods = insightData?.paymentMethods || []
         const hourlySales = insightData?.hourlyBarSales || []
 
@@ -720,7 +762,7 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
         <p>📊 Dados do contexto compartilhado — consistentes com Dashboard, Eventos, Financeiro e demais seções.</p>
         <p>📐 Comparações vs média geral de {agg.totalEvents || 0} eventos do sistema.</p>
         {insightData && (
-          <p>🍸 Discriminação de vendas do bar carregada — {insightData.topProducts?.length || 0} produtos, {insightData.paymentMethods?.length || 0} formas de pagamento.</p>
+          <p>🍸 Top 10 produtos reais por evento carregados do bar — {insightData.topProducts?.length || 0} produtos, {insightData.paymentMethods?.length || 0} formas de pagamento.</p>
         )}
         <p>🔄 Dados atualizam automaticamente após importação. Fonte: {eventsMap.size} eventos carregados.</p>
       </div>

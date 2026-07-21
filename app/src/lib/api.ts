@@ -161,6 +161,7 @@ function buildMergedEvents(): any[] {
       ticketRevenue: ticketRev,
       totalRevenue: ticketRev + barRev,
       ...barData,
+      produtos: (barMatch && bestDist <= 2) ? (barMatch.event.produtos || []) : [],
     })
   }
 
@@ -188,6 +189,7 @@ function buildMergedEvents(): any[] {
       barRevenue: rev,
       barTransactions: be.orders || 0,
       perCapitaBar: 0,
+      produtos: be.produtos || [],
     })
   }
 
@@ -287,6 +289,7 @@ function enrichWithBarEvents(apiEvents: any[]): any[] {
       barTransactions: barData.barTransactions,
       perCapitaBar: barData.perCapitaBar,
       totalRevenue: tRev + mergedBarRev,
+      produtos: (bestBar && bestDist <= 2) ? (bestBar.produtos || []) : (ev.produtos || []),
     }
   })
 
@@ -313,6 +316,7 @@ function enrichWithBarEvents(apiEvents: any[]): any[] {
       barRevenue: rev,
       barTransactions: be.orders || 0,
       perCapitaBar: 0,
+      produtos: be.produtos || [],
     })
   }
 

@@ -150,33 +150,52 @@ export async function onRequest(context: { request: Request; env: any; params: {
     })).filter((e: any) => e.ticketsSold > 0 || e.ticketRevenue > 0 || e.barRevenue > 0))
   }
 
-// Gera discriminação de vendas do bar a partir de dados agregados
-// (receita total, número de transações). Usa mix aproximado baseado em
-// dados históricos reais de bar de eventos culturais.
-function computeBarInsights(barRevenue: number, barTransactions: number) {
+// Índice de produtos reais por data (extraído do BAR_EVENTOS)
+const BAR_PRODUTOS_BY_DATE = new Map<string, { name: string; qty: number; revenue: number }[]>()
+for (const be of BAR_EVENTOS) {
+  const d = be.start ? be.start.slice(0, 10) : ''
+  if (d && be.products?.length) {
+    BAR_PRODUTOS_BY_DATE.set(d, be.products)
+  }
+}
+
+// Retorna os top 10 produtos REAIS de um evento, rankeados por receita.
+// Fallback: dados sintéticos aproximados quando não há dados reais.
+function computeBarInsights(barRevenue: number, barTransactions: number, eventDate?: string) {
   if (barRevenue <= 0) return { topProducts: [], paymentMethods: [], hourlyBarSales: [] }
 
-  // Mix de produtos típico (percentuais aproximados sobre receita total do bar)
-  const PRODUCT_MIX = [
-    { name: 'Cerveja Lata', pct: 0.32 },
-    { name: 'Drink', pct: 0.22 },
-    { name: 'Água Mineral', pct: 0.12 },
-    { name: 'Refrigerante', pct: 0.10 },
-    { name: 'Vinho/Taça', pct: 0.08 },
-    { name: 'Petiscos', pct: 0.07 },
-    { name: 'Suco Natural', pct: 0.05 },
-    { name: 'Cerveja Long Neck', pct: 0.04 },
-  ]
+  // Tenta buscar produtos REAIS do evento pela data
+  let topProducts: { name: string; qty: number; revenue: number }[] = []
+  if (eventDate) {
+    const reais = BAR_PRODUTOS_BY_DATE.get(eventDate)
+    if (reais?.length) {
+      topProducts = [...reais]
+        .sort((a, b) => b.revenue - a.revenue)
+        .slice(0, 10)
+    }
+  }
 
-  const precoMedio = barTransactions > 0 ? barRevenue / barTransactions : 25
-
-  const topProducts = PRODUCT_MIX
-    .map(p => {
-      const total = Math.round(barRevenue * p.pct)
-      const qty = Math.max(1, Math.round(total / precoMedio))
-      return { name: p.name, qty, revenue: total }
-    })
-    .filter(p => p.revenue > 0)
+  // Fallback sintético para eventos sem dados reais de produtos
+  if (!topProducts.length) {
+    const PRODUCT_MIX = [
+      { name: 'Cerveja Lata', pct: 0.32 },
+      { name: 'Drink', pct: 0.22 },
+      { name: 'Água Mineral', pct: 0.12 },
+      { name: 'Refrigerante', pct: 0.10 },
+      { name: 'Vinho/Taça', pct: 0.08 },
+      { name: 'Petiscos', pct: 0.07 },
+      { name: 'Suco Natural', pct: 0.05 },
+      { name: 'Cerveja Long Neck', pct: 0.04 },
+    ]
+    const precoMedio = barTransactions > 0 ? barRevenue / barTransactions : 25
+    topProducts = PRODUCT_MIX
+      .map(p => {
+        const total = Math.round(barRevenue * p.pct)
+        const qty = Math.max(1, Math.round(total / precoMedio))
+        return { name: p.name, qty, revenue: total }
+      })
+      .filter(p => p.revenue > 0)
+  }
 
   // Formas de pagamento típicas
   const PAYMENT_MIX = [
@@ -216,7 +235,7 @@ function computeBarInsights(barRevenue: number, barTransactions: number) {
     const barRev = ev.barRevenue || 0; const checkedIn = ev.checkedIn || 0
     const noShow = ts > 0 ? ts - checkedIn : 0
 
-    const barInsights = computeBarInsights(barRev, ev.barTransactions || 0)
+    const barInsights = computeBarInsights(barRev, ev.barTransactions || 0, ev.date)
 
     return json({
       event: {
