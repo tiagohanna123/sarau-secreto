@@ -87,7 +87,7 @@ function buildMergedEvents() {
   // Bar revenue from real events is already attributed via BAR_REVENUE_MAP in Pass 1
 
   // Remove eventos sem receita de bilheteria (exceção: Ceilândia, entrada gratuita)
-  const kept = merged.filter(e => e.ticketRevenue > 0 || e.id === '3060095')
+  const kept = merged.filter(e => e.ticketRevenue > 0 || e.id === 'sympla-3060095')
 
   kept.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   return kept

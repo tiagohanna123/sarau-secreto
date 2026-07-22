@@ -85,7 +85,7 @@ export function AdBannerSidebar() {
 
 function PublicoTag() {
   return (
-    <span className="absolute top-2 right-2 z-10 text-[0.4rem] tracking-[0.15em] uppercase
+    <span className="absolute top-2 right-2 z-10 text-[0.7rem] tracking-[0.15em] uppercase
       text-white/20 bg-black/40 px-2 py-0.5 rounded-full border border-white/5
       backdrop-blur-sm">
       Publicidade
@@ -122,11 +122,11 @@ function AdCard({ ad, variant }: { ad: typeof ADS[0]; variant: 'hero' | 'horizon
                 <span className="text-lg md:text-xl font-display" style={{ color: ad.accent }}>{ad.logo}</span>
               </div>
               <div className="text-center">
-                <span className="text-[0.4rem] tracking-[0.25em] uppercase text-white/20 block mb-0.5">{ad.category}</span>
+                <span className="text-[0.7rem] tracking-[0.25em] uppercase text-white/20 block mb-0.5">{ad.category}</span>
                 <span className="text-lg md:text-2xl font-display text-white/60 group-hover:text-white/80 transition-colors duration-500 block leading-tight">{ad.brand}</span>
-                <span className="text-[0.5rem] text-white/30 block mt-0.5">{ad.tagline}</span>
+                <span className="text-[0.8rem] text-white/30 block mt-0.5">{ad.tagline}</span>
               </div>
-              <span className="text-[0.45rem] tracking-[0.2em] uppercase px-3 py-1.5 rounded-full border border-white/10 text-white/30 group-hover:text-white/50 group-hover:border-white/20 transition-all duration-500 hidden md:inline">
+              <span className="text-[0.75rem] tracking-[0.2em] uppercase px-3 py-1.5 rounded-full border border-white/10 text-white/30 group-hover:text-white/50 group-hover:border-white/20 transition-all duration-500 hidden md:inline">
                 {ad.cta} →
               </span>
             </div>
@@ -167,8 +167,8 @@ function AdCard({ ad, variant }: { ad: typeof ADS[0]; variant: 'hero' | 'horizon
             </div>
             <span className="text-[0.35rem] tracking-[0.25em] uppercase text-white/15 block mb-1">{ad.category}</span>
             <span className="text-sm font-display text-white/50 group-hover:text-white/70 transition-colors duration-500 block leading-tight">{ad.brand}</span>
-            <span className="text-[0.45rem] text-white/25 block mt-0.5 leading-relaxed max-w-[140px]">{ad.tagline}</span>
-            <span className="text-[0.4rem] tracking-[0.2em] uppercase px-2.5 py-1 rounded-full border border-white/10 text-white/25 mt-3 group-hover:text-white/40 group-hover:border-white/20 transition-all duration-500">
+            <span className="text-[0.75rem] text-white/25 block mt-0.5 leading-relaxed max-w-[140px]">{ad.tagline}</span>
+            <span className="text-[0.7rem] tracking-[0.2em] uppercase px-2.5 py-1 rounded-full border border-white/10 text-white/25 mt-3 group-hover:text-white/40 group-hover:border-white/20 transition-all duration-500">
               {ad.cta} →
             </span>
           </div>
@@ -205,7 +205,7 @@ function AdCard({ ad, variant }: { ad: typeof ADS[0]; variant: 'hero' | 'horizon
           </div>
           <div className="min-w-0">
             <span className="text-[0.35rem] tracking-[0.2em] uppercase text-white/15 block">{ad.category}</span>
-            <span className="text-[0.55rem] font-display text-white/50 group-hover:text-white/70 transition-colors block truncate">{ad.brand}</span>
+            <span className="text-[0.7rem] font-display text-white/50 group-hover:text-white/70 transition-colors block truncate">{ad.brand}</span>
           </div>
         </div>
         <PublicoTag />
@@ -248,10 +248,10 @@ function AdCard({ ad, variant }: { ad: typeof ADS[0]; variant: 'hero' | 'horizon
               <div>
                 <span className="text-[0.35rem] tracking-[0.25em] uppercase text-white/15 block mb-0.5">{ad.category}</span>
                 <span className="text-sm md:text-base font-display text-white/50 group-hover:text-white/70 transition-colors duration-500 block leading-tight">{ad.brand}</span>
-                <span className="text-[0.45rem] text-white/25 block mt-0.5 hidden sm:block">{ad.tagline}</span>
+                <span className="text-[0.75rem] text-white/25 block mt-0.5 hidden sm:block">{ad.tagline}</span>
               </div>
             </div>
-            <span className="text-[0.4rem] tracking-[0.2em] uppercase px-2.5 py-1.5 rounded-full border border-white/10 text-white/25 group-hover:text-white/40 group-hover:border-white/20 transition-all duration-500 flex-shrink-0">
+            <span className="text-[0.7rem] tracking-[0.2em] uppercase px-2.5 py-1.5 rounded-full border border-white/10 text-white/25 group-hover:text-white/40 group-hover:border-white/20 transition-all duration-500 flex-shrink-0">
               {ad.cta} →
             </span>
           </div>

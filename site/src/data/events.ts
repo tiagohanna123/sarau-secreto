@@ -17,7 +17,7 @@ export const eventos: Evento[] = [
     titulo: 'Sarau Secreto — Edição 2025',
     data: '2025-07-11',
     local: 'Yuzer Bar · Brasília',
-    descricao: '3 dias de música, poesia e conexão. Sexta (11/07): Cida Oliveira, Banda Vira Lata, Sorriso Dela. Sábado (12/07): Tchello, Sandu Áudio e Jadsa, Samuca EletroAcústico. Domingo (13/07): Fim de tarde com som autoral, convidados especiais e jam session. Open bar de cerveja e refrigerante incluso. Estacionamento gratuito. Local fechado, sem risco de chuva.',
+    descricao: '3 dias de música ao vivo e conexão. Sexta (11/07): Cida Oliveira, Banda Vira Lata, Sorriso Dela. Sábado (12/07): Tchello, Sandu Áudio e Jadsa, Samuca EletroAcústico. Domingo (13/07): Fim de tarde com som autoral, convidados especiais e jam session. Open bar de cerveja e refrigerante incluso. Estacionamento gratuito.',
     imagem: '',
     symplaUrl: 'https://www.sympla.com.br/produtor/sarausecreto',
     destaque: true,

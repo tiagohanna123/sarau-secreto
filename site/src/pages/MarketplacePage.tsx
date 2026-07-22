@@ -2,6 +2,13 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FadeUp, SectionTitle } from '@/components/Shared'
 
+const PRODUCT_PHOTOS = [
+  'https://gpsbrasilia.com.br/wp-content/uploads/2023/09/Na_Praia_BS_Fotografias_cf08e4034c.jpg',
+  'https://images.metroimg.com/2023/09/07175650/Sarau-Secreto-3.jpeg',
+  'https://images.metroimg.com/2023/09/07175647/Sarau-Secreto-2.jpeg',
+  'https://midias.correiobraziliense.com.br/_midias/jpg/2023/07/05/675x450/1__mg_6785_2-28437321.jpg',
+]
+
 const PRODUCTS = [
   { id: 1, name: 'Camiseta SS Logo', category: 'vestuario', price: 89, sizes: 'P-GG' },
   { id: 2, name: 'Camiseta Arte Exclusiva', category: 'vestuario', price: 99, sizes: 'P-GG' },
@@ -22,49 +29,19 @@ const CATEGORIES = [
   { key: 'midia', label: 'Mídia' },
 ]
 
-const CATEGORY_COLORS: Record<string, string> = {
-  vestuario: '#dc2626',
-  acessorios: '#b91c1c',
-  casa: '#7f1d1d',
-  midia: '#450a0a',
-}
-
-function ProductPlaceholder({ name, category }: { name: string; category: string }) {
-  const gradients: Record<string, string> = {
-    vestuario: 'linear-gradient(135deg, #1a0a0a 0%, #2d1515 30%, #1a0a0a 60%, #2d1515 100%)',
-    acessorios: 'linear-gradient(135deg, #0a0a1a 0%, #15152d 30%, #0a0a1a 60%, #15152d 100%)',
-    casa: 'linear-gradient(135deg, #0a1210 0%, #15201a 30%, #0a1210 60%, #15201a 100%)',
-    midia: 'linear-gradient(135deg, #120a12 0%, #201520 30%, #120a12 60%, #201520 100%)',
-  }
-  const patterns: Record<string, string> = {
-    vestuario: 'radial-gradient(circle at 30% 40%, rgba(220,38,38,0.08) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(127,29,29,0.06) 0%, transparent 40%)',
-    acessorios: 'radial-gradient(circle at 50% 30%, rgba(99,102,241,0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(139,92,246,0.06) 0%, transparent 40%)',
-    casa: 'radial-gradient(circle at 60% 40%, rgba(34,197,94,0.08) 0%, transparent 50%), radial-gradient(circle at 30% 70%, rgba(16,185,129,0.06) 0%, transparent 40%)',
-    midia: 'radial-gradient(circle at 40% 30%, rgba(168,85,247,0.08) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(236,72,153,0.06) 0%, transparent 40%)',
-  }
-  const icons: Record<string, string> = {
-    vestuario: '◈',
-    acessorios: '✦',
-    casa: '□',
-    midia: '♢',
-  }
+function ProductPhoto({ name, index }: { name: string; index: number }) {
+  const photo = PRODUCT_PHOTOS[index % PRODUCT_PHOTOS.length]
   return (
-    <div className="w-full aspect-[3/4] rounded-xl relative overflow-hidden group"
-      style={{ background: gradients[category] || gradients.vestuario }}>
-      <div className="absolute inset-0 transition-opacity duration-500"
-        style={{ backgroundImage: patterns[category] || patterns.vestuario }} />
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'linear-gradient(0deg, rgba(220,38,38,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(220,38,38,0.2) 1px, transparent 1px)',
-        backgroundSize: '40px 40px',
-      }} />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-3xl font-display text-white/[0.04] group-hover:text-white/[0.08] transition-all duration-500 group-hover:scale-110">
-          {icons[category] || '◆'}
-        </span>
-      </div>
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    <div className="w-full aspect-[3/4] rounded-xl relative overflow-hidden group">
+      <img
+        src={photo}
+        alt={name}
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span className="text-[0.4rem] text-white/60 block leading-tight line-clamp-2">{name}</span>
+        <span className="text-sm text-white/80 block leading-tight line-clamp-2">{name}</span>
       </div>
     </div>
   )
@@ -92,7 +69,7 @@ export function MarketplacePage() {
             <button
               key={cat.key}
               onClick={() => setActiveCategory(cat.key)}
-              className={`text-[0.5rem] tracking-[0.15em] uppercase px-4 py-2 rounded-full border transition-all duration-300 ${
+              className={`text-sm tracking-[0.15em] uppercase px-4 py-2 rounded-full border transition-all duration-300 ${
                 activeCategory === cat.key
                   ? 'border-crimson text-crimson bg-crimson-glow shadow-[0_0_12px_rgba(220,38,38,0.08)]'
                   : 'border-border text-muted-foreground hover:text-foreground hover:border-border-hover bg-transparent'
@@ -116,18 +93,18 @@ export function MarketplacePage() {
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="card p-3 group cursor-default hover:border-crimson/20 transition-all duration-300 h-full flex flex-col">
-                  <ProductPlaceholder name={product.name} category={product.category} />
+                  <ProductPhoto name={product.name} index={product.id} />
                   <div className="mt-2.5 space-y-1 flex-1 flex flex-col">
-                    <h3 className="text-xs font-heading text-foreground leading-tight line-clamp-2 min-h-[2rem]">
+                    <h3 className="text-sm font-heading text-foreground leading-tight line-clamp-2 min-h-[2rem]">
                       {product.name}
                     </h3>
                     <div className="flex items-center justify-between mt-auto pt-1">
                       <span className="text-lg font-display text-crimson leading-none">
                         R$ {product.price}
                       </span>
-                      <span className="tag text-[0.4rem] shrink-0 ml-1">{product.sizes}</span>
+                      <span className="tag shrink-0 ml-1">{product.sizes}</span>
                     </div>
-                    <span className="text-[0.4rem] tracking-wider uppercase text-muted-foreground/50">
+                    <span className="text-sm tracking-wider uppercase text-muted-foreground/50">
                       {catLabel(product.category)}
                     </span>
                   </div>
@@ -138,7 +115,7 @@ export function MarketplacePage() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="text-center text-[0.65rem] text-muted-foreground mt-8">Nenhum produto nesta categoria.</p>
+          <p className="text-center text-sm text-muted-foreground mt-8">Nenhum produto nesta categoria.</p>
         )}
       </div>
     </section>

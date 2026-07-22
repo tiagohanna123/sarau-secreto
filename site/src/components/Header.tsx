@@ -6,7 +6,6 @@ const NAV_ITEMS = [
   { label: 'Eventos', href: 'eventos' },
   { label: 'Artistas', href: 'artistas' },
   { label: 'Loja', href: 'loja' },
-  { label: 'Anuncie', href: 'anuncie' },
 ]
 
 export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
@@ -44,10 +43,12 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
       <div className="max-w-7xl mx-auto px-5 flex items-center justify-between h-16">
         <button onClick={() => { onScrollTo('hero'); setOpen(false) }}
           className="flex items-center gap-2.5 group">
-          <div className="ss-emblem shadow-[0_0_12px_rgba(220,38,38,0.1)] group-hover:shadow-[0_0_20px_rgba(220,38,38,0.2)] transition-shadow duration-500">
-            <span>SS</span>
-          </div>
-          <span className="hidden sm:inline text-[0.5rem] text-muted-foreground tracking-[0.25em] uppercase"
+          <img
+            src="/site/sarau-logo-white.png"
+            alt="Sarau Secreto"
+            className="h-7 w-auto object-contain opacity-60 hidden sm:block"
+          />
+          <span className="hidden sm:inline text-[0.8rem] text-muted-foreground tracking-[0.25em] uppercase"
             style={{ opacity: scrolled ? 0.5 : 0.25 }}>
             2026
           </span>
@@ -58,7 +59,7 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
             <button
               key={item.href}
               onClick={() => onScrollTo(item.href)}
-              className="relative px-3 py-2 text-[0.55rem] tracking-[0.2em] uppercase transition-colors duration-300 rounded-lg"
+              className="relative px-3 py-2 text-[0.7rem] tracking-[0.2em] uppercase transition-colors duration-300 rounded-lg"
               style={{
                 color: activeSection === item.href
                   ? 'var(--color-foreground)'
@@ -88,7 +89,7 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1"/></svg>
           </a>
           <a href="https://www.sympla.com.br/produtor/sarausecreto" target="_blank" rel="noopener noreferrer"
-            className="ml-1 btn-sympla text-[0.55rem]">
+            className="ml-1 btn-sympla text-[0.7rem]">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
             Ingressos
           </a>
@@ -133,12 +134,12 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
               ))}
               <div className="flex gap-2 mt-4 pt-4 border-t border-border/50">
                 <a href="https://www.instagram.com/osarausecreto" target="_blank" rel="noopener noreferrer"
-                  className="flex-1 text-center text-[0.55rem] tracking-wider text-muted-foreground hover:text-crimson px-3 py-2.5 border border-border rounded-lg transition-colors hover:border-crimson/30">
+                  className="flex-1 text-center text-[0.7rem] tracking-wider text-muted-foreground hover:text-crimson px-3 py-2.5 border border-border rounded-lg transition-colors hover:border-crimson/30">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="inline mr-1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1"/></svg>
                   Instagram
                 </a>
                 <a href="https://www.sympla.com.br/produtor/sarausecreto" target="_blank" rel="noopener noreferrer"
-                  className="flex-1 text-center btn-sympla text-[0.55rem] justify-center">
+                  className="flex-1 text-center btn-sympla text-[0.7rem] justify-center">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="inline mr-1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
                   Ingressos
                 </a>

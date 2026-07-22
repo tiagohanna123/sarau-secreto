@@ -1,3 +1,8 @@
 # Site publico do Sarau Secreto em /site/
+# Static assets must NOT go through the SPA rewrite
+/site/assets/* /site/assets/:splat 200
+/site/fonts/* /site/fonts/:splat 200
+/site/sarau-logo-* /site/:splat 200
+/site/icon-* /site/:splat 200
 /site /site/ 301
 /site/* /site/:splat 200

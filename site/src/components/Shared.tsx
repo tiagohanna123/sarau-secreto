@@ -27,18 +27,18 @@ export function SectionTitle({ label, title, description }: { label: string; tit
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4, delay: 0.1 }}
-        className="text-[0.5rem] tracking-[0.25em] uppercase text-crimson-dim font-semibold"
+        className="text-sm tracking-[0.25em] uppercase text-crimson-dim font-semibold"
       >
         {label}
       </motion.span>
-      <h2 className="text-2xl md:text-4xl mt-2 text-foreground">{title}</h2>
+      <h2 className="text-2xl md:text-5xl mt-2 text-foreground">{title}</h2>
       {description && (
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-[0.75rem] text-muted-foreground mt-2 max-w-xl mx-auto leading-relaxed"
+          className="text-[0.875rem] text-muted-foreground mt-2 max-w-xl mx-auto leading-relaxed"
         >
           {description}
         </motion.p>

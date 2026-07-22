@@ -3,12 +3,10 @@ import Lenis from 'lenis'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ScrollProgress } from '@/components/Shared'
-import { AdBannerHero, AdBannerMiddle, AdBannerFooter, AdBannerSidebar } from '@/components/AdBanner'
 import { HomePage } from '@/pages/HomePage'
 import { EventosPage } from '@/pages/EventosPage'
 import { MarketplacePage } from '@/pages/MarketplacePage'
 import { CuradoriaPage } from '@/pages/CuradoriaPage'
-import { EspacosPage } from '@/pages/EspacosPage'
 
 export function App() {
   const lenisRef = useRef<Lenis | null>(null)
@@ -82,26 +80,16 @@ export function App() {
       <Header onScrollTo={scrollTo} />
       <main>
         <HomePage onScrollTo={scrollTo} />
-        <AdBannerHero />
         <EventosPage />
         <div className="max-w-7xl mx-auto px-5">
           <div className="flex gap-6 items-start">
             <div className="flex-1 min-w-0">
               <MarketplacePage />
             </div>
-            <div className="hidden lg:block w-48 flex-shrink-0 pt-24">
-              <div className="sticky top-24">
-                <AdBannerSidebar />
-              </div>
-            </div>
           </div>
         </div>
-        <AdBannerMiddle index={0} />
         <CuradoriaPage />
-        <AdBannerMiddle index={1} />
-        <EspacosPage />
       </main>
-      <AdBannerFooter />
       <Footer onScrollTo={scrollTo} />
     </div>
   )

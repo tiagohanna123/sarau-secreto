@@ -1,5 +1,12 @@
 import { FadeUp, SectionTitle } from '@/components/Shared'
 
+const REAL_PHOTOS = [
+  'https://images.metroimg.com/2023/09/07175650/Sarau-Secreto-3.jpeg',
+  'https://images.metroimg.com/2023/09/07175647/Sarau-Secreto-2.jpeg',
+  'https://midias.correiobraziliense.com.br/_midias/jpg/2023/07/05/675x450/1__mg_6785_2-28437321.jpg',
+  'https://gpsbrasilia.com.br/wp-content/uploads/2023/09/Na_Praia_BS_Fotografias_cf08e4034c.jpg',
+]
+
 const ARTISTS = [
   { name: 'Sandra de Sá', role: 'Cantora', genre: 'MPB' },
   { name: 'Luedji Luna', role: 'Cantora', genre: 'NeoSoul' },
@@ -17,18 +24,22 @@ const ARTISTS = [
   { name: 'Vitu Voz', role: 'Cantor', genre: 'R&B' },
 ]
 
-function ArtistInitials(name: string) {
-  return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
-}
-
-function ArtistGradient(name: string) {
-  const hue = (name.length * 23) % 360
-  return `linear-gradient(135deg, hsl(${hue}, 20%, 12%), hsl(${(hue + 30) % 360}, 15%, 8%))`
-}
-
-function ArtistPattern(name: string) {
-  const hue = (name.length * 23) % 360
-  return `radial-gradient(circle at ${(name.charCodeAt(0) || 0) % 40 + 20}% ${(name.charCodeAt(1) || 0) % 40 + 20}%, hsla(${hue}, 30%, 15%, 0.15), transparent 60%), radial-gradient(circle at ${80 - (name.charCodeAt(0) || 0) % 30}% ${80 - (name.charCodeAt(1) || 0) % 30}%, hsla(${(hue + 60) % 360}, 20%, 12%, 0.1), transparent 50%)`
+function ArtistPhoto({ name, index }: { name: string; index: number }) {
+  const photo = REAL_PHOTOS[index % REAL_PHOTOS.length]
+  return (
+    <div className="w-full aspect-square rounded-xl mb-2.5 relative overflow-hidden group">
+      <img
+        src={photo}
+        alt={name}
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute bottom-2 left-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <span className="text-xs text-white/70">{name}</span>
+      </div>
+    </div>
+  )
 }
 
 export function CuradoriaPage() {
@@ -46,29 +57,10 @@ export function CuradoriaPage() {
           {ARTISTS.map((artist, i) => (
             <FadeUp key={i} delay={i * 0.04}>
               <div className="card p-3 text-center group cursor-default hover:border-crimson/20 transition-all duration-300">
-                {/* Photo placeholder */}
-                <div className="w-full aspect-square rounded-xl mb-2.5 relative overflow-hidden group"
-                  style={{ background: ArtistGradient(artist.name) }}>
-                  {/* Deterministic pattern */}
-                  <div className="absolute inset-0 transition-opacity duration-500"
-                    style={{ backgroundImage: ArtistPattern(artist.name) }} />
-                  {/* Subtle grid */}
-                  <div className="absolute inset-0 opacity-[0.02]"
-                    style={{
-                      backgroundImage: 'linear-gradient(0deg, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
-                      backgroundSize: '24px 24px',
-                    }} />
-                  {/* Initials */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-base font-display text-white/[0.06] group-hover:text-white/[0.12] transition-all duration-500">
-                      {ArtistInitials(artist.name)}
-                    </span>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <h3 className="text-xs font-heading text-foreground leading-tight">{artist.name}</h3>
-                <p className="text-[0.5rem] text-muted-foreground mt-0.5">{artist.role}</p>
-                <span className="inline-block mt-1 tag text-[0.45rem]">{artist.genre}</span>
+                <ArtistPhoto name={artist.name} index={i} />
+                <h3 className="text-sm font-heading text-foreground leading-tight">{artist.name}</h3>
+                <p className="text-sm text-muted-foreground mt-0.5">{artist.role}</p>
+                <span className="inline-block mt-1 tag">{artist.genre}</span>
               </div>
             </FadeUp>
           ))}
@@ -79,7 +71,7 @@ export function CuradoriaPage() {
           <div className="max-w-xl mx-auto mt-8 text-center card p-6">
             <span className="text-lg font-display text-crimson">♫</span>
             <h3 className="text-sm font-heading text-foreground mt-2">Quer se apresentar?</h3>
-            <p className="text-[0.65rem] text-muted-foreground mt-1 leading-relaxed">
+            <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
               Siga @osarausecreto no Instagram. Chamadas abertas são anunciadas por lá.
             </p>
             <a href="https://www.instagram.com/osarausecreto" target="_blank" rel="noopener noreferrer"

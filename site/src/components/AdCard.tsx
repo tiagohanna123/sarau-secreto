@@ -36,7 +36,7 @@ export function AdCard({ anuncio, index }: { anuncio: Anuncio; index: number }) 
           <h3 className="text-sm font-display font-light text-foreground group-hover:text-gold transition-colors duration-300">
             {anuncio.nome}
           </h3>
-          <span className="text-[0.45rem] tracking-[0.15em] uppercase text-muted-foreground/50">
+          <span className="text-[0.75rem] tracking-[0.15em] uppercase text-muted-foreground/50">
             {tipoLabels[anuncio.tipo]}
           </span>
         </div>
@@ -56,7 +56,7 @@ export function AdCard({ anuncio, index }: { anuncio: Anuncio; index: number }) 
       {anuncio.disponivel && (
         <div className="mt-3 pt-3 border-t border-border/20">
           <a href="mailto:comercial@osarausecreto.com"
-            className="inline-flex items-center gap-1.5 text-[0.5rem] tracking-wider uppercase text-violet hover:text-violet-dim transition-colors group-hover:opacity-100 opacity-70">
+            className="inline-flex items-center gap-1.5 text-[0.8rem] tracking-wider uppercase text-violet hover:text-violet-dim transition-colors group-hover:opacity-100 opacity-70">
             <Mail size={11} />
             comercial@osarausecreto.com
           </a>
