@@ -382,31 +382,20 @@ export function EventsPage({
                 </div>
               )}
 
-              {/* Barra receita split */}
-              <div className="mt-2 flex items-center gap-2">
-                <div className="flex-1 text-[9px] text-muted-foreground">
-                  Ingresso/pessoa: {ev.tickets > 0 ? fmtBRLc(ev.revenue / ev.tickets) : '—'}
-                  {ev.tickets > 0 && (
-                    <span className="ml-2">
-                      · Total/pessoa: {fmtBRLc(ev.total / ev.tickets)}
-                    </span>
-                  )}
-                </div>
-                {/* Bar split visual */}
-                {ev.total > 0 && (
-                  <div className="flex items-center gap-1.5">
-                    <div className="flex h-2 w-20 overflow-hidden rounded-full bg-white/10">
-                      <div className="h-full rounded-l-full bg-foreground/60 transition-all"
-                        style={{ width: `${100 - barPct}%` }} />
-                      <div className="h-full rounded-r-full bg-gold transition-all"
-                        style={{ width: `${barPct}%` }} />
-                    </div>
-                    <span className="text-[9px] text-muted-foreground">
-                      {barPct}% bar
-                    </span>
+              {/* Bar split visual */}
+              {ev.total > 0 && (
+                <div className="mt-2 flex items-center gap-1.5">
+                  <div className="flex h-2 w-20 overflow-hidden rounded-full bg-white/10">
+                    <div className="h-full rounded-l-full bg-foreground/60 transition-all"
+                      style={{ width: `${100 - barPct}%` }} />
+                    <div className="h-full rounded-r-full bg-gold transition-all"
+                      style={{ width: `${barPct}%` }} />
                   </div>
-                )}
-              </div>
+                  <span className="text-[9px] text-muted-foreground">
+                    {barPct}% bar
+                  </span>
+                </div>
+              )}
             </button>
           )
         })}
