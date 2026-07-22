@@ -381,7 +381,7 @@ function computeFromEmbed(path: string): any {
         perCapitaBar: totalTickets > 0 ? Math.round((totalBarRev / totalTickets) * 100) / 100 : 0,
         overallNoShowRate: totalTickets > 0 && totalCheckedIn > 0
           ? Math.round(((totalTickets - totalCheckedIn) / totalTickets) * 100 * 10) / 10
-          : 1,
+          : 0,
       },
       events: mapped,
     }
@@ -600,8 +600,11 @@ export const api = {
       request(`/yuzer/orders?range=${range}&perPage=${perPage}&page=${page}`),
     payments: (range = '30d') => request(`/yuzer/payments?range=${range}`),
     earningsDay: (range = '30d') => request(`/yuzer/earnings-day?range=${range}`),
-    productsStats: (range = '30d', limit = 10) =>
-      request(`/yuzer/products-stats?range=${range}&limit=${limit}`),
+    productsStats: (range = '30d', limit = 10, from?: string, to?: string) => {
+      let qs = `/yuzer/products-stats?range=${range}&limit=${limit}`
+      if (from && to) qs += `&from=${from}&to=${to}`
+      return request(qs)
+    },
     history: () => request('/yuzer/history'),
   },
 

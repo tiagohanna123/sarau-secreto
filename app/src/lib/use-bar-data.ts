@@ -81,20 +81,22 @@ function transformInsightsToBarData(insights: any): BarHistoryData {
     }))
     .sort((a, b) => a.mes.localeCompare(b.mes))
 
-  // Mapeia eventos do banco pro formato BarEvent
-  const eventos: BarEvent[] = events.map((ev: any) => ({
-    start: ev.date || '',
-    end: ev.date || '',
-    days: 1,
-    orders: ev.ticketsSold || 0,
-    revenue: ev.totalRevenue || 0,
-    ticketMedio: (ev.ticketsSold || 0) > 0 ? fmt((ev.totalRevenue || 0) / (ev.ticketsSold || 1)) : 0,
-    itensVendidos: ev.ticketsSold || 0,
-    produtos: [],
-    metodosPagamento: [],
-  }))
+  // Mapeia eventos do banco pro formato BarEvent, excluindo datas de teste/duplicatas
+  const eventos: BarEvent[] = events
+    .filter((ev: any) => ev.date && !EXCLUDED_BAR_DATES.has(ev.date.slice(0, 10)))
+    .map((ev: any) => ({
+      start: ev.date || '',
+      end: ev.date || '',
+      days: 1,
+      orders: ev.ticketsSold || 0,
+      revenue: ev.totalRevenue || 0,
+      ticketMedio: (ev.ticketsSold || 0) > 0 ? fmt((ev.totalRevenue || 0) / (ev.ticketsSold || 1)) : 0,
+      itensVendidos: ev.ticketsSold || 0,
+      produtos: [],
+      metodosPagamento: [],
+    }))
 
-  // Recalcula totais considerando todos os eventos (já enriquecidos via api.ts)
+  // Recalcula totais considerando todos os eventos válidos (excluindo datas de teste)
   const totalEvents = eventos.length
   const totalRevenue = fmt(eventos.reduce((sum, e) => sum + e.revenue, 0))
   const totalOrders = eventos.reduce((sum, e) => sum + e.orders, 0)
@@ -118,6 +120,11 @@ function transformInsightsToBarData(insights: any): BarHistoryData {
   }
 }
 
+// Eventos de bar excluídos (testes, duplicatas sem bilheteria)
+const EXCLUDED_BAR_DATES = new Set([
+  '2026-05-22', '2026-05-06', '2026-05-03', '2026-04-28', '2025-05-15',
+])
+
 /**
  * Converte BarHistoryData (Yuzer ou BAR_EMBED) pro formato rawInsights
  * que o DataContext espera pra derivar events[] e overview.
@@ -134,9 +141,9 @@ function barDataToRawInsights(data: BarHistoryData): { aggregates: any; events: 
       totalBarRevenue: data.totalRevenue,
       totalRevenue: data.totalRevenue,
       perCapitaBar: data.ticketMedioBar,
-      overallNoShowRate: 1,
+      overallNoShowRate: 0,
     },
-    events: data.eventos.map((ev, i) => ({
+    events: data.eventos.filter(ev => ev.start && !EXCLUDED_BAR_DATES.has(ev.start.slice(0, 10))).map((ev, i) => ({
       id: `bar-${ev.start}`,
       name: `Sarau Secreto (${ev.start})`,
       date: ev.start || '',

@@ -22,9 +22,13 @@ function ArtistInitials(name: string) {
 }
 
 function ArtistGradient(name: string) {
-  // Deterministic gradient based on name
   const hue = (name.length * 23) % 360
   return `linear-gradient(135deg, hsl(${hue}, 20%, 12%), hsl(${(hue + 30) % 360}, 15%, 8%))`
+}
+
+function ArtistPattern(name: string) {
+  const hue = (name.length * 23) % 360
+  return `radial-gradient(circle at ${(name.charCodeAt(0) || 0) % 40 + 20}% ${(name.charCodeAt(1) || 0) % 40 + 20}%, hsla(${hue}, 30%, 15%, 0.15), transparent 60%), radial-gradient(circle at ${80 - (name.charCodeAt(0) || 0) % 30}% ${80 - (name.charCodeAt(1) || 0) % 30}%, hsla(${(hue + 60) % 360}, 20%, 12%, 0.1), transparent 50%)`
 }
 
 export function CuradoriaPage() {
@@ -43,18 +47,28 @@ export function CuradoriaPage() {
             <FadeUp key={i} delay={i * 0.04}>
               <div className="card p-3 text-center group cursor-default hover:border-crimson/20 transition-all duration-300">
                 {/* Photo placeholder */}
-                <div className="w-full aspect-square rounded-xl mb-2.5 relative overflow-hidden"
+                <div className="w-full aspect-square rounded-xl mb-2.5 relative overflow-hidden group"
                   style={{ background: ArtistGradient(artist.name) }}>
+                  {/* Deterministic pattern */}
+                  <div className="absolute inset-0 transition-opacity duration-500"
+                    style={{ backgroundImage: ArtistPattern(artist.name) }} />
+                  {/* Subtle grid */}
+                  <div className="absolute inset-0 opacity-[0.02]"
+                    style={{
+                      backgroundImage: 'linear-gradient(0deg, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                      backgroundSize: '24px 24px',
+                    }} />
+                  {/* Initials */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-lg font-display text-muted-foreground/20 group-hover:text-crimson/20 transition-colors duration-500">
+                    <span className="text-base font-display text-white/[0.06] group-hover:text-white/[0.12] transition-all duration-500">
                       {ArtistInitials(artist.name)}
                     </span>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <h3 className="text-[0.6rem] font-heading text-foreground leading-tight">{artist.name}</h3>
-                <p className="text-[0.45rem] text-muted-foreground mt-0.5">{artist.role}</p>
-                <span className="inline-block mt-1 tag text-[0.35rem]">{artist.genre}</span>
+                <h3 className="text-xs font-heading text-foreground leading-tight">{artist.name}</h3>
+                <p className="text-[0.5rem] text-muted-foreground mt-0.5">{artist.role}</p>
+                <span className="inline-block mt-1 tag text-[0.45rem]">{artist.genre}</span>
               </div>
             </FadeUp>
           ))}

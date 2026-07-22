@@ -8,7 +8,7 @@ import {
   Card, Skel, fmt, fmtNum, pct, pctAbs, MESES, GOLD, PURPLE, BLUE, GREEN, PINK, ORANGE, PALETA, ChartTip,
   PageHeader, SarauSection, SarauKPI, SarauBadge, SarauTabs, EmptyState,
 } from '@/lib/ui'
-import { Brain, TrendingUp, BarChart3, PieChart, Target, Sparkles } from 'lucide-react'
+import { Brain, TrendingUp, BarChart3, PieChart, Target, Sparkles, RefreshCw } from 'lucide-react'
 
 /* ── Tooltip Theme ── */
 const TT = { background: '#1a1a1a', border: '1px solid #2a2a2a', borderRadius: 9, fontSize: 12, color: '#e5e7eb' }
@@ -64,8 +64,8 @@ function analyze(mensais: any[], eventos: any[], produtoMix: any[], categorias: 
   const mid = Math.floor(eventos.length / 2)
   const fh = eventos.slice(0, mid), sh = eventos.slice(mid)
   const pf: Record<string, number> = {}, ps: Record<string, number> = {}
-  for (const ev of fh) for (const p of ev.produtos) pf[p.name] = (pf[p.name] || 0) + p.total
-  for (const ev of sh) for (const p of ev.produtos) ps[p.name] = (ps[p.name] || 0) + p.total
+  for (const ev of fh) for (const p of ev.produtos || []) pf[p.name] = (pf[p.name] || 0) + p.total
+  for (const ev of sh) for (const p of ev.produtos || []) ps[p.name] = (ps[p.name] || 0) + p.total
   const prodGrowth = Object.keys(ps)
     .map(n => ({
       name: n,
@@ -112,13 +112,15 @@ function analyze(mensais: any[], eventos: any[], produtoMix: any[], categorias: 
 
   /* Eventos normalizados */
   const bestNorm = [...eventos]
-    .sort((a, b) => (b.revenue / b.days) - (a.revenue / a.days))
+    .filter((e: any) => (e.days || 1) > 0)
+    .sort((a, b) => ((b.revenue || 0) / (b.days || 1)) - ((a.revenue || 0) / (a.days || 1)))
     .slice(0, 3)
   const worstNorm = [...eventos]
-    .sort((a, b) => (a.revenue / a.days) - (b.revenue / a.days))
+    .filter((e: any) => (e.days || 1) > 0)
+    .sort((a, b) => ((a.revenue || 0) / (a.days || 1)) - ((b.revenue || 0) / (b.days || 1)))
     .slice(0, 3)
   const scatterData = eventos.map(e => ({
-    duracao: e.days, receita: e.revenue, nome: e.start,
+    duracao: e.days || 1, receita: e.revenue || 0, nome: e.start || e.date,
   }))
 
   /* Sazonalidade */

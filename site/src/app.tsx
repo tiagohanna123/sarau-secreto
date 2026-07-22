@@ -8,9 +8,11 @@ import { HomePage } from '@/pages/HomePage'
 import { EventosPage } from '@/pages/EventosPage'
 import { MarketplacePage } from '@/pages/MarketplacePage'
 import { CuradoriaPage } from '@/pages/CuradoriaPage'
+import { EspacosPage } from '@/pages/EspacosPage'
 
 export function App() {
   const lenisRef = useRef<Lenis | null>(null)
+  const cursorRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -31,6 +33,34 @@ export function App() {
     return () => { lenis.destroy() }
   }, [])
 
+  /* ─── Cursor glow ─── */
+  useEffect(() => {
+    const el = cursorRef.current
+    if (!el) return
+
+    let rafId: number
+    let mouseX = -999
+    let mouseY = -999
+
+    const onMove = (e: MouseEvent) => {
+      mouseX = e.clientX
+      mouseY = e.clientY
+    }
+
+    const tick = () => {
+      el.style.left = mouseX + 'px'
+      el.style.top = mouseY + 'px'
+      rafId = requestAnimationFrame(tick)
+    }
+    tick()
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      cancelAnimationFrame(rafId)
+    }
+  }, [])
+
   const scrollTo = (id: string) => {
     if (!lenisRef.current) return
     if (id === 'hero') {
@@ -47,6 +77,7 @@ export function App() {
     <div className="min-h-screen bg-black text-foreground">
       <div className="grain" />
       <div className="vignette" />
+      <div ref={cursorRef} className="cursor-glow hidden md:block" />
       <ScrollProgress />
       <Header onScrollTo={scrollTo} />
       <main>
@@ -68,9 +99,10 @@ export function App() {
         <AdBannerMiddle index={0} />
         <CuradoriaPage />
         <AdBannerMiddle index={1} />
+        <EspacosPage />
       </main>
       <AdBannerFooter />
-      <Footer />
+      <Footer onScrollTo={scrollTo} />
     </div>
   )
 }

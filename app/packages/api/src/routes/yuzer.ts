@@ -152,8 +152,11 @@ export default async function yuzerRoutes(app: FastifyInstance) {
     const range = ((q?.range as Range) || '30d')
     const limit = Math.min(parseInt(q?.limit || '100', 10), 500)
     const page = Math.max(parseInt(q?.page || '1', 10), 1)
-    const { from, to } = rangeToDates(range)
-    return cached(`yuzer:prods:${range}:${page}:${limit}`, 60_000, () =>
+    // Suporte a from/to custom (sobrescreve range quando fornecido)
+    const { from, to } = q.from && q.to
+      ? { from: q.from, to: q.to }
+      : rangeToDates(range)
+    return cached(`yuzer:prods:${from}:${to}:${page}:${limit}`, 60_000, () =>
       dashboardProducts({ from, to, companiesIds: [parseInt(MASTER_COMPANY_ID, 10)] }, page, limit),
     )
   })

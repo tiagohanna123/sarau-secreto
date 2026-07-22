@@ -1,6 +1,6 @@
 import { AuthProvider, useAuth } from '@/lib/auth'
 import { LoginPage } from '@/app/login'
-import { Dashboard } from '@/app/insights/dashboard'
+import { Dashboard, DashboardErrorBoundary } from '@/app/insights/dashboard'
 import { DataProvider } from '@/lib/data-context'
 import { PeriodProvider } from '@/lib/period-context'
 import { lazy, Suspense, useState, useEffect, type ReactNode } from 'react'
@@ -8,7 +8,7 @@ import { api } from '@/lib/api'
 
 import {
   LayoutDashboard, CalendarDays, Brain, DollarSign, Settings,
-  LogOut, Menu, BarChart3, Target, Music, Upload, ArrowLeft,
+  LogOut, Menu, BarChart3, Target, Music, Upload, ArrowLeft, Sun, Moon,
 } from 'lucide-react'
 
 const EventsPage       = lazy(() => import('@/app/eventos/list').then(m => ({ default: m.EventsPage })))
@@ -83,6 +83,15 @@ function Sidebar({ route, sub, navigate, open, onClose }: {
 }) {
   const { logout } = useAuth()
   const subNav = getSubNav(route)
+  const [isLight, setIsLight] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return localStorage.getItem('sarau-theme') === 'light'
+  })
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('light', isLight)
+    localStorage.setItem('sarau-theme', isLight ? 'light' : 'dark')
+  }, [isLight])
 
   return (
     <>
@@ -155,7 +164,14 @@ function Sidebar({ route, sub, navigate, open, onClose }: {
           })}
         </nav>
 
-        <div className="p-4 border-t border-border">
+        <div className="p-4 border-t border-border space-y-1">
+          <button
+            onClick={() => setIsLight(!isLight)}
+            className="w-full flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors py-2 px-2"
+          >
+            {isLight ? <Moon size={14} /> : <Sun size={14} />}
+            {isLight ? 'Modo escuro' : 'Modo claro'}
+          </button>
           <button
             onClick={logout}
             className="w-full flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors py-2 px-2"
@@ -263,7 +279,7 @@ function Router() {
     switch (route) {
       /* ── Dashboard (unifica bar + insights overview) ── */
       case 'dashboard':
-        return <Dashboard />
+        return <DashboardErrorBoundary><Dashboard /></DashboardErrorBoundary>
 
       /* ── Eventos (unifica comparativo) ── */
       case 'eventos':
@@ -291,11 +307,11 @@ function Router() {
 
       /* ── Artist Detail ── */
       case 'artist':
-        return <ArtistDetailWrapper id={sub} onBack={() => navigate('config/artistas')} />
+        return <ArtistDetailPage artist={{ id: sub } as any} onBack={() => navigate('config/artistas')} />
 
-      /* ── Default ── */
+      /* ── Dashboard (fallback para rotas nao mapeadas) ── */
       default:
-        return <Dashboard />
+        return <DashboardErrorBoundary><Dashboard /></DashboardErrorBoundary>
     }
   })()
 

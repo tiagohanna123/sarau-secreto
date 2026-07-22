@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from 'react'
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 import { useData } from '@/lib/data-context'
 import type { FlatEvent } from '@/lib/data-context'
 import { api } from '@/lib/api'
@@ -39,10 +39,10 @@ function KPICard({ label, value, sub, trend, color }: {
   label: string; value: string; sub?: string; trend?: 'up' | 'down'; color?: string
 }) {
   return (
-    <div className="kpi-card">
-      <p className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{label}</p>
-      <p className={`mt-1 text-2xl font-bold ${color || 'text-white'}`}>{value}</p>
-      {sub && <p className="mt-0.5 text-[10px] text-muted-foreground/60">{sub}</p>}
+    <div className="kpi-card min-w-0">
+      <p className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground truncate">{label}</p>
+      <p className={`mt-1 text-xl sm:text-2xl font-bold ${color || 'text-white'} truncate`}>{value}</p>
+      {sub && <p className="mt-0.5 text-[9px] sm:text-[10px] text-muted-foreground/60 truncate">{sub}</p>}
     </div>
   )
 }
@@ -51,22 +51,24 @@ function TicketMedioCard({ ticketMedio, perCapitaBar, totalMedio, ticketsSold }:
   ticketMedio: number; perCapitaBar: number; totalMedio: number; ticketsSold: number
 }) {
   return (
-    <div className="bg-card border border-border rounded-xl p-4">
-      <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+    <div className="bg-card border border-border rounded-xl p-4 min-w-0">
+      <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground truncate">
         Ticket Médio · {ticketsSold} ingressos
       </p>
       <div className="space-y-2">
-        <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-          <span className="text-[11px] text-muted-foreground">Total por pessoa</span>
-          <span className="text-sm font-bold text-gold">{fmtc(totalMedio)}</span>
+        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2">
+          <span className="text-[11px] text-muted-foreground truncate">Total por pessoa</span>
+          <span className="text-sm font-bold text-gold shrink-0">{fmtc(totalMedio)}</span>
         </div>
-        <div className="flex items-center justify-between border-b border-white/5 pb-1.5">
-          <span className="text-[11px] text-muted-foreground">Ingresso por pessoa</span>
-          <span className="text-sm font-bold">{fmtc(ticketMedio)}</span>
+        <div className="flex items-center justify-between border-b border-white/5 pb-1.5 gap-2">
+          <span className="text-[11px] text-muted-foreground truncate">Ingresso por pessoa</span>
+          <span className="text-sm font-bold shrink-0">{fmtc(ticketMedio)}</span>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="text-[11px] text-muted-foreground">Bar por pessoa</span>
-          <span className="text-sm font-bold text-success">{fmtc(perCapitaBar)}</span>
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[11px] text-muted-foreground truncate">Bar por pessoa</span>
+          <span className="text-sm font-bold text-success shrink-0">
+            {perCapitaBar > 0 ? fmtc(perCapitaBar) : '—'}
+          </span>
         </div>
       </div>
     </div>
@@ -96,6 +98,11 @@ function SplitPie({ ticketRevenue, barRevenue }: {
             <Pie data={splitData} cx="50%" cy="50%" innerRadius={38} outerRadius={62} dataKey="value" paddingAngle={2}>
               {splitData.map((_, i) => <Cell key={i} fill={[GOLD, VIOLET][i]} />)}
             </Pie>
+            <Tooltip
+              formatter={(v: number) => fmt(v)}
+              contentStyle={{ background: '#1a1a1a', border: '1px solid #2a2a2a', borderRadius: 9, fontSize: 12, color: '#e5e7eb' }}
+              labelStyle={{ color: '#c8a96e', fontWeight: 600 }}
+            />
           </PieChart>
         </ResponsiveContainer>
         <div className="space-y-2 text-xs">
@@ -124,7 +131,7 @@ function SplitPie({ ticketRevenue, barRevenue }: {
 function OcupacaoBar({ capacity, ticketsSold }: { capacity: number | null; ticketsSold: number }) {
   if (!capacity) {
     return (
-      <div className="chart-box">
+      <div className="chart-box h-full">
         <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Ocupação e Capacidade</p>
         <div className="flex h-[180px] items-center justify-center">
           <p className="text-xs text-muted-foreground">Capacidade não definida para este evento</p>
@@ -136,7 +143,7 @@ function OcupacaoBar({ capacity, ticketsSold }: { capacity: number | null; ticke
   const ocupacao = Math.round((ticketsSold / capacity) * 100)
 
   return (
-    <div className="chart-box">
+    <div className="chart-box h-full">
       <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Ocupação e Capacidade</p>
       <div className="space-y-4">
         <div>
@@ -168,31 +175,42 @@ function OcupacaoBar({ capacity, ticketsSold }: { capacity: number | null; ticke
   )
 }
 
-function ComparacaoMedia({ ev, overview }: { ev: EnrichedEvent; overview: any }) {
+function ComparacaoMedia({ ev, overview, insightData }: { ev: EnrichedEvent; overview: any; insightData?: any }) {
   const agg = overview?.aggregates
   if (!agg || !agg.totalEvents) return null
 
-  const avgTicketMedio = agg.totalTicketRevenue / agg.totalTickets || 0
-  const avgPerCapitaBar = agg.totalBarRevenue / agg.totalTickets || 0
-  const avgBarPct = agg.totalRevenue > 0
-    ? Math.round((agg.totalBarRevenue / agg.totalRevenue) * 100)
-    : 0
+  const avgIngressoPorPessoa = agg.ingressoPorPessoa || 0
+  const avgTicketOnly = agg.avgTicketOnly || 0
+  // Médias de bar filtradas — só eventos COM dados de bar
+  const avgPerCapitaBar = agg.avgPerCapitaBar || 0
+  const avgBarPct = agg.avgMixBar || 0
 
   const diff = (val: number, avg: number) =>
     avg > 0 && val > 0 ? ((val - avg) / avg) * 100 : null
 
   interface Row { label: string; valor: string; media: string; diffVal: number | null; dir?: '↑' | '↓' }
+  const hasBarData = ev.barRevenue > 0
+  const semBar = { valor: '—', media: hasBarData ? fmtc(avgPerCapitaBar) : '—', diffVal: null as number | null }
+  const semMix = { valor: '—', media: hasBarData ? `${avgBarPct}%` : '—', diffVal: null as number | null }
+
   const rows: Row[] = [
-    { label: 'Ticket Médio', valor: fmtc(ev.ticketMedio), media: fmtc(avgTicketMedio), diffVal: diff(ev.ticketMedio, avgTicketMedio) },
-    { label: 'Bar por Pessoa', valor: fmtc(ev.perCapitaBar), media: fmtc(avgPerCapitaBar), diffVal: diff(ev.perCapitaBar, avgPerCapitaBar) },
-    { label: 'Mix Bar', valor: `${ev.barPct}%`, media: `${avgBarPct}%`, diffVal: diff(ev.barPct, avgBarPct) },
+    { label: 'Ticket Médio', valor: fmtc(ev.ingressoPorPessoa), media: fmtc(avgIngressoPorPessoa), diffVal: diff(ev.ingressoPorPessoa, avgIngressoPorPessoa) },
+    { label: 'Ingresso/pessoa', valor: fmtc(ev.ticketMedio), media: fmtc(avgTicketOnly), diffVal: diff(ev.ticketMedio, avgTicketOnly) },
+    { label: 'Bar/pessoa', ...(hasBarData
+      ? { valor: fmtc(ev.perCapitaBar), media: fmtc(avgPerCapitaBar), diffVal: diff(ev.perCapitaBar, avgPerCapitaBar) }
+      : semBar)
+    },
+    { label: 'Mix Bar', ...(hasBarData
+      ? { valor: `${ev.barPct}%`, media: `${avgBarPct}%`, diffVal: diff(ev.barPct, avgBarPct) }
+      : semMix)
+    },
   ]
 
   // Highlight melhor/mais saudável
   const noDiff = (v: number | null) => v === null
 
   return (
-    <div className="chart-box">
+    <div className="chart-box h-full">
       <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
         Comparação com Média Geral ({agg.totalEvents} eventos)
       </p>
@@ -262,7 +280,8 @@ function ComparacaoMedia({ ev, overview }: { ev: EnrichedEvent; overview: any })
 
       {/* Rodapé da tabela - total de eventos */}
       <p className="mt-2 text-[9px] text-[#4b5563] px-2">
-        Baseado em {agg.totalEvents} eventos · dados de bilheteria e bar
+        Baseado em {agg.totalEvents} eventos
+        {agg.eventsWithBar > 0 ? ` · ${agg.eventsWithBar} com dados de bar` : ''}
       </p>
     </div>
   )
@@ -274,7 +293,7 @@ function NoShowCard({ checkedIn, ticketsSold }: { checkedIn: number; ticketsSold
 
   if (checkedIn > 0) {
     return (
-      <div className="chart-box">
+      <div className="chart-box h-full">
         <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Check-in e No-Show</p>
         <div className="flex h-[180px] flex-col items-center justify-center text-center">
           <p className="text-3xl font-bold text-white mb-1">{checkedIn}</p>
@@ -292,7 +311,7 @@ function NoShowCard({ checkedIn, ticketsSold }: { checkedIn: number; ticketsSold
   }
 
   return (
-    <div className="chart-box">
+    <div className="chart-box h-full">
       <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">Check-in e No-Show</p>
       <div className="flex h-[180px] flex-col items-center justify-center text-center">
         <span className="text-3xl mb-2 opacity-30">📋</span>
@@ -326,6 +345,7 @@ interface EnrichedEvent {
   barPct: number
   noShow: number | null
   noShowPct: number | null
+  ingressoPorPessoa: number
   symplaEventId: string | null
   produtos?: { name: string; qty: number; total: number; pct: number }[]
 }
@@ -335,6 +355,7 @@ function enrichEvent(ev: FlatEvent): EnrichedEvent {
   const ocupacao = ev.capacity && ev.capacity > 0
     ? Math.round((ev.ticketsSold / ev.capacity) * 100) : null
   const ticketMedio = ev.ticketsSold > 0 ? ev.ticketRevenue / ev.ticketsSold : 0
+  const ingressoPorPessoa = ev.ticketsSold > 0 ? totalRev / ev.ticketsSold : 0
   const barPct = totalRev > 0 ? Math.round((ev.barRevenue / totalRev) * 100) : 0
   const noShow = ev.ticketsSold - ev.checkedIn
   const noShowPct = ev.ticketsSold > 0 ? Math.round((noShow / ev.ticketsSold) * 100) : null
@@ -353,10 +374,11 @@ function enrichEvent(ev: FlatEvent): EnrichedEvent {
     totalRevenue: totalRev,
     ocupacao,
     ticketMedio,
-    perCapitaBar: ev.perCapitaBar,
+    perCapitaBar: ev.ticketsSold > 0 ? Math.round((ev.barRevenue / ev.ticketsSold) * 100) / 100 : 0,
     barPct,
     noShow: noShow > 0 ? noShow : null,
     noShowPct,
+    ingressoPorPessoa: Math.round(ingressoPorPessoa * 100) / 100,
     symplaEventId: ev.symplaEventId,
     produtos: ev.produtos,
   }
@@ -383,21 +405,21 @@ function LucroCard({ ev }: { ev: EnrichedEvent }) {
         Lucratividade Estimada
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div>
-          <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Receita Total</p>
+        <div className="min-w-0">
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider truncate">Receita Total</p>
           <p className="mt-0.5 text-sm font-bold text-white">{fmt(ev.totalRevenue)}</p>
         </div>
-        <div>
-          <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Custos Fixos</p>
+        <div className="min-w-0">
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider truncate">Custos Fixos</p>
           <p className="mt-0.5 text-sm font-bold text-red-400">{fmt(custoTotal)}</p>
           <p className="text-[8px] text-muted-foreground">Sympla {fmt(custoSympla)} + CMV {fmt(cmvBar)} + Produção {fmt(CUSTO_PRODUCAO)}</p>
         </div>
-        <div>
-          <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Lucro Líquido</p>
+        <div className="min-w-0">
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider truncate">Lucro Líquido</p>
           <p className={`mt-0.5 text-sm font-bold ${lucro >= 0 ? 'text-success' : 'text-red-400'}`}>{fmt(lucro)}</p>
         </div>
-        <div>
-          <p className="text-[9px] text-muted-foreground uppercase tracking-wider">Margem</p>
+        <div className="min-w-0">
+          <p className="text-[9px] text-muted-foreground uppercase tracking-wider truncate">Margem</p>
           <p className="mt-0.5 text-sm font-bold text-success">{margem.toFixed(1)}%</p>
           <p className="text-[8px] text-muted-foreground">{margemOp.toFixed(1)}% operacional</p>
         </div>
@@ -412,7 +434,23 @@ function LucroCard({ ev }: { ev: EnrichedEvent }) {
 }
 
 function ProdutosCard({ produtos, barRevenue }: { produtos?: { name: string; qty: number; total: number; pct: number }[]; barRevenue: number }) {
-  if (!produtos?.length || barRevenue <= 0) return null
+  const semDados = !produtos?.length || barRevenue <= 0
+  if (semDados) {
+    return (
+      <div className="chart-box">
+        <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+          Top Produtos · Sem dados disponíveis
+        </p>
+        <div className="flex h-[120px] items-center justify-center rounded-lg bg-white/[0.02]">
+          <div className="text-center">
+            <p className="text-2xl mb-1 opacity-30">📊</p>
+            <p className="text-xs text-muted-foreground">Nenhum dado de produtos disponível para este evento</p>
+            <p className="text-[9px] text-[#4b5563] mt-1">Os dados de produtos são importados manualmente da planilha de bar</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="chart-box">
@@ -455,7 +493,7 @@ function PaymentMethodsCard({ methods, total }: {
   return (
     <div className="chart-box">
       <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
-        Formas de Pagamento · {sorted.length} métodos
+        Formas de Pagamento - Bar · {sorted.length} métodos
       </p>
       <div className="space-y-1">
         {sorted.map((p, i) => {
@@ -495,7 +533,7 @@ function HourlySalesCard({ hourlySales }: {
   return (
     <div className="chart-box">
       <p className="mb-3 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
-        Vendas por Hora · {hourlySales.length} horas com movimento
+        Vendas por Hora - Bar · {hourlySales.length} horas com movimento
       </p>
       <div className="space-y-1">
         {hourlySales.map((h) => {
@@ -557,9 +595,9 @@ function LucroCardDetalhado({ totalRevenue, ticketRevenue, barRevenue }: {
       </p>
       <div className="space-y-2">
         {rows.map(r => (
-          <div key={r.label} className="flex items-center justify-between border-b border-white/5 pb-1.5 last:border-0">
-            <span className="text-[11px] text-muted-foreground">{r.label}</span>
-            <span className={`text-sm font-bold ${r.color}`}>{r.value}</span>
+          <div key={r.label} className="flex items-center justify-between border-b border-white/5 pb-1.5 last:border-0 gap-2">
+            <span className="text-[11px] text-muted-foreground truncate">{r.label}</span>
+            <span className={`text-sm font-bold ${r.color} shrink-0`}>{r.value}</span>
           </div>
         ))}
         <div className="flex items-center justify-between pt-2 border-t border-white/10">
@@ -592,7 +630,35 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
     let cancelled = false
     setInsightLoading(true)
     api.insights.event(id)
-      .then(data => { if (!cancelled) setInsightData(data) })
+      .then(data => {
+        if (cancelled) return
+        setInsightData(data)
+        // Fallback silencioso: se a API devolveu topProducts vazio mas o evento tem
+        // receita de bar, tenta buscar via Yuzer products-stats pela data do evento
+        if (!data?.topProducts?.length && data?.kpis?.barRevenue > 0 && data?.event?.date) {
+          const d = data.event.date.slice(0, 10)
+          const from = `${d}T00:00:00.000Z`
+          const to = `${d}T23:59:59.000Z`
+          api.yuzer.productsStats('30d', 10, from, to)
+            .then((yuzerData: any) => {
+              if (cancelled) return
+              const items = yuzerData?.data || yuzerData?.content || []
+              if (!items.length) return
+              const yp = items
+                .map((p: any) => ({
+                  name: p.productName || p.name || 'Produto',
+                  qty: p.quantity || p.qty || 0,
+                  revenue: p.totalEarnings || p.total || 0,
+                }))
+                .filter((p: any) => p.revenue > 0)
+                .slice(0, 10)
+              if (yp.length) {
+                setInsightData((prev: any) => prev ? { ...prev, topProducts: yp } : null)
+              }
+            })
+            .catch(() => {})
+        }
+      })
       .catch(() => { if (!cancelled) setInsightData(null) })
       .finally(() => { if (!cancelled) setInsightLoading(false) })
     return () => { cancelled = true }
@@ -633,7 +699,7 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
     )
   }
 
-  const o = overview || {}
+  const o = (overview || {}) as any
   const agg = (o as any)?.aggregates || {}
 
   return (
@@ -698,8 +764,8 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
         </div>
       )}
 
-      {/* Row 2: Split + Ocupação */}
-      <div className="mb-6 grid gap-4 lg:grid-cols-2">
+      {/* Row 2: Split + Ocupação — altura consistente */}
+      <div className="mb-6 grid gap-4 lg:grid-cols-2 lg:grid-rows-[auto_1fr]">
         {ev.totalRevenue > 0 && (
           <SplitPie
             ticketRevenue={ev.ticketRevenue}
@@ -709,9 +775,9 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
         <OcupacaoBar capacity={ev.capacity} ticketsSold={ev.ticketsSold} />
       </div>
 
-      {/* Row 3: Comparação + No-show */}
-      <div className="mb-6 grid gap-4 lg:grid-cols-2">
-        <ComparacaoMedia ev={ev} overview={o} />
+      {/* Row 3: Comparação + No-show — altura consistente */}
+      <div className="mb-6 grid gap-4 lg:grid-cols-2 lg:grid-rows-[auto_1fr]">
+        <ComparacaoMedia ev={ev} overview={o} insightData={insightData} />
         <NoShowCard checkedIn={ev.checkedIn} ticketsSold={ev.ticketsSold} />
       </div>
 
@@ -734,10 +800,8 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
 
         return (
           <div className="mb-6 space-y-4">
-            {/* Top Produtos */}
-            {produtos.length > 0 && (
-              <ProdutosCard produtos={produtos} barRevenue={ev.barRevenue} />
-            )}
+            {/* Top Produtos — sempre renderizado (card mostra "Sem dados" quando vazio) */}
+            <ProdutosCard produtos={produtos} barRevenue={ev.barRevenue} />
 
             {/* Grade: Métodos de Pagamento + Vendas por Hora */}
             <div className="grid gap-4 lg:grid-cols-2">
@@ -760,11 +824,18 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
       {/* Footer info */}
       <div className="text-[10px] text-[#4b5563] space-y-1">
         <p>📊 Dados do contexto compartilhado — consistentes com Dashboard, Eventos, Financeiro e demais seções.</p>
-        <p>📐 Comparações vs média geral de {agg.totalEvents || 0} eventos do sistema.</p>
+        <p>📐 Comparações vs média geral de {agg.totalEvents || 0} eventos
+          {agg.eventsWithBar > 0 ? ` (médias de bar: ${agg.eventsWithBar} eventos com dados)` : ''}.
+          {agg.excludedCount > 0 ? ` ${agg.excludedCount} eventos excluídos dos cálculos.` : ''}</p>
         {insightData && (
-          <p>🍸 Top 10 produtos reais por evento carregados do bar — {insightData.topProducts?.length || 0} produtos, {insightData.paymentMethods?.length || 0} formas de pagamento.</p>
+          <p>🍸 {insightData.topProducts?.length > 0
+            ? `Top ${Math.min(insightData.topProducts?.length || 0, 10)} produtos reais do bar`
+            : 'Sem dados de produtos para este evento'} —
+            {insightData.paymentMethods?.length || 0} formas de pagamento.</p>
         )}
-        <p>🔄 Dados atualizam automaticamente após importação. Fonte: {eventsMap.size} eventos carregados.</p>
+        <p>🔄 Dados atualizam automaticamente após importação.
+          {o?.lastSync ? ` ⏱ Última sincronização dos dados de bar: ${new Date(o.lastSync).toLocaleString('pt-BR')}.` : ''}
+          {' '}Fonte: {eventsMap.size} eventos carregados.</p>
       </div>
     </div>
   )

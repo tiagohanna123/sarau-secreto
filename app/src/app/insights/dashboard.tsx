@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, AreaChart, Area,
@@ -9,7 +9,7 @@ import { useData } from '@/lib/data-context'
 import {
   Skel, fmt, fmtNum, GOLD, PALETA, PageHeader, SarauSection, SarauKPI, EmptyState, pct, pctAbs,
 } from '@/lib/ui'
-import { CalendarDays, TrendingUp, TrendingDown, Wine, Sparkles, UserMinus, Target, Clock } from 'lucide-react'
+import { CalendarDays, TrendingUp, TrendingDown, Wine, Sparkles, UserMinus, Target, Clock, RefreshCw } from 'lucide-react'
 import { parseISO, isWithinInterval } from 'date-fns'
 
 /* ── Tooltip Theme ── */
@@ -92,15 +92,24 @@ function Sparkline({ data, color }: { data: { label: string; revenue: number }[]
 /* ── Componente Principal ──────────────────────────── */
 
 export function Dashboard() {
-  const { barData: data, loading, events } = useData()
+  const { barData: data, loading, events, refresh } = useData()
   const { period, dateRange } = usePeriod()
+  const [yearFilter, setYearFilter] = useState('')
 
   /* ── Dados filtrados por período ── */
   const filtered = useMemo(() => {
     if (!data) return null
 
     // Eventos (filtrados por data)
-    const eventos = filterEventos(data.eventos, dateRange?.start || null, dateRange?.end || null)
+    const eventosFiltrados = filterEventos(data.eventos, dateRange?.start || null, dateRange?.end || null)
+
+    // Filtro por ano
+    const eventos = yearFilter
+      ? eventosFiltrados.filter((ev: any) => {
+          const d = ev.start || ev.date || ''
+          return d.startsWith(yearFilter)
+        })
+      : eventosFiltrados
 
     // Totais do período atual
     const totalRevenue = eventos.reduce((s: number, e: any) => s + (e.revenue || 0), 0)
@@ -181,6 +190,16 @@ export function Dashboard() {
     }
   }, [data, dateRange, events])
 
+  // Anos disponíveis a partir dos eventos (ANTES dos early returns para evitar React error #300: didRenderTooFewHooks)
+  const yearOptions = useMemo(() => {
+    const set = new Set<string>()
+    ;(events || []).forEach(ev => {
+      const y = ev.date?.slice(0, 4)
+      if (y) set.add(y)
+    })
+    return Array.from(set).sort().reverse()
+  }, [events])
+
   // --- Loading ---
   if (loading) {
     return (
@@ -238,9 +257,10 @@ export function Dashboard() {
   // Label do período anterior para comparação no snapshot
   const prevRangeLabel = dateRange ? formatMonth(getPrevRange(dateRange)?.start || dateRange.start) : ''
 
+
   return (
     <div className="p-4 sm:p-6 max-w-7xl mx-auto">
-      {/* Header + Filtro de Período */}
+      {/* Header + Filtro de Período + Ano */}
       <div className="flex items-start justify-between mb-6 gap-4">
         <div>
           <PageHeader
@@ -249,7 +269,26 @@ export function Dashboard() {
             source={data.source}
           />
         </div>
-        <PeriodFilter className="shrink-0" />
+        <div className="flex items-center gap-2 shrink-0">
+          <button onClick={() => refresh()}
+            className="rounded-lg border border-border bg-card px-2 py-1.5 text-[10px] text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+            title="Recarregar dados"
+          >
+            <RefreshCw size={12} />
+            <span className="hidden sm:inline">Recarregar</span>
+          </button>
+          <select
+            value={yearFilter}
+            onChange={e => setYearFilter(e.target.value)}
+            className="rounded-lg border border-border bg-card px-2 py-1.5 text-[10px] text-foreground outline-none focus:border-gold/50 transition-colors"
+          >
+            <option value="">Todos os anos</option>
+            {yearOptions.map(y => (
+              <option key={y} value={y}>{y}</option>
+            ))}
+          </select>
+          <PeriodFilter />
+        </div>
       </div>
 
       {/* ═══ Snapshot Mensal Executivo ═══ */}
@@ -617,3 +656,41 @@ export function Dashboard() {
     </div>
   )
 }
+
+/* ── Error Boundary para capturar erro do refresh ── */
+import { Component, type ReactNode, type ErrorInfo } from 'react'
+
+interface EBProps { children: ReactNode }
+interface EBState { error: Error | null }
+
+class DashboardErrorBoundary extends Component<EBProps, EBState> {
+  state: EBState = { error: null }
+  static getDerivedStateFromError(error: Error): EBState {
+    console.error('[DashboardErrorBoundary] captured:', error.message, error.stack)
+    return { error }
+  }
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error('[DashboardErrorBoundary] detail:', error, info.componentStack)
+  }
+  render() {
+    if (this.state.error) {
+      return (
+        <div className="p-4 sm:p-6 max-w-7xl mx-auto">
+          <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-6 text-center">
+            <p className="text-red-400 font-semibold mb-2">Erro inesperado ao carregar dados</p>
+            <p className="text-sm text-red-300/70 mb-4">{this.state.error.message}</p>
+            <button
+              onClick={() => this.setState({ error: null })}
+              className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 rounded-lg text-sm transition-colors"
+            >
+              Tentar novamente
+            </button>
+          </div>
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
+
+export { DashboardErrorBoundary }

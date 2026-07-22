@@ -12,6 +12,13 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
     <>
       {/* ─── HERO ─── */}
       <section id="hero" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Floating background orbs */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="orb crimson" style={{ top: '15%', left: '5%' }} />
+          <div className="orb wine" style={{ bottom: '10%', right: '8%' }} />
+          <div className="orb pulse" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />
+        </div>
+
         {/* Background treatment */}
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-crimson-dark/10 via-transparent to-black/80" />
@@ -107,11 +114,11 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
                 { year: '2025', title: 'Expansão Nacional', desc: 'Rio de Janeiro e Lisboa. 700+ pessoas por edição. Metrópoles, Correio Braziliense, GPS Brasília.' },
               ].map((item, i) => (
                 <FadeUp key={i} delay={i * 0.1}>
-                  <div className="card p-5 flex gap-4 items-start">
-                    <div className="text-crimson font-display text-xl leading-none mt-0.5 w-10 flex-shrink-0">{item.year}</div>
+                  <div className="card p-5 flex gap-4 items-start hover:translate-x-0.5 transition-transform duration-300">
+                    <div className="text-crimson font-display text-xl leading-none mt-0.5 w-12 flex-shrink-0 font-normal">{item.year}</div>
                     <div>
                       <h3 className="text-sm font-heading text-foreground mb-1">{item.title}</h3>
-                      <p className="text-[0.7rem] text-muted-foreground leading-relaxed">{item.desc}</p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 </FadeUp>
@@ -122,14 +129,14 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
             <div className="space-y-6">
               <FadeUp delay={0.2}>
                 <div className="card p-6">
-                  <p className="text-[0.7rem] text-foreground/80 leading-relaxed mb-4">
+                  <p className="text-xs text-foreground/80 leading-relaxed mb-4">
                     O formato é único: cada artista se apresenta com uma banda sem ensaio prévio. Tudo resolvido ali, na hora, pela direção musical de Todd Henrique. A espontaneidade é a mágica.
                   </p>
                   <div className="border-l-2 border-crimson/20 pl-4">
-                    <p className="text-[0.65rem] text-muted-foreground italic leading-relaxed">
+                    <p className="text-[0.7rem] text-muted-foreground italic leading-relaxed">
                       "O Sarau Secreto nasceu da necessidade que a gente tinha de tocar nossa música, num espaço que a gente não se via contemplado."
                     </p>
-                    <p className="text-[0.5rem] text-muted-foreground mt-2 tracking-wider">— JM, idealizador</p>
+                    <p className="text-[0.55rem] text-muted-foreground mt-2 tracking-wider">— JM, idealizador</p>
                   </div>
                 </div>
               </FadeUp>
@@ -137,10 +144,10 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
               {/* Midia logos */}
               <FadeUp delay={0.35}>
                 <div className="card p-5">
-                  <span className="text-[0.45rem] tracking-[0.2em] uppercase text-muted-foreground font-semibold">Na Mídia</span>
+                  <span className="text-[0.5rem] tracking-[0.2em] uppercase text-muted-foreground font-semibold">Na Mídia</span>
                   <div className="flex flex-wrap gap-3 mt-3">
                     {['Metrópoles', 'Correio Braziliense', 'GPS Brasília'].map(m => (
-                      <span key={m} className="tag text-[0.5rem]">{m}</span>
+                      <span key={m} className="tag text-[0.55rem]">{m}</span>
                     ))}
                   </div>
                 </div>
@@ -149,7 +156,7 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
               {/* Pilares */}
               <FadeUp delay={0.5}>
                 <div className="card p-5">
-                  <span className="text-[0.45rem] tracking-[0.2em] uppercase text-muted-foreground font-semibold">A Experiência</span>
+                  <span className="text-[0.5rem] tracking-[0.2em] uppercase text-muted-foreground font-semibold">A Experiência</span>
                   <div className="grid grid-cols-2 gap-3 mt-3">
                     {[
                       { icon: '♪', label: 'Música real', sub: 'Zero ensaio, tudo ao vivo' },
@@ -157,10 +164,10 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
                       { icon: '◈', label: 'Única', sub: 'Nenhuma edição se repete' },
                       { icon: '⊜', label: 'Democrático', sub: 'Preços acessíveis' },
                     ].map((p, i) => (
-                      <div key={i} className="p-3 rounded-lg border border-border/50 bg-black/30">
-                        <span className="text-crimson text-sm">{p.icon}</span>
-                        <h4 className="text-[0.6rem] font-heading text-foreground mt-1">{p.label}</h4>
-                        <p className="text-[0.5rem] text-muted-foreground mt-0.5">{p.sub}</p>
+                      <div key={i} className="p-3 rounded-lg border border-border/50 bg-black/40 hover:bg-black/60 transition-colors duration-300">
+                        <span className="text-crimson text-base">{p.icon}</span>
+                        <h4 className="text-xs font-heading text-foreground mt-1">{p.label}</h4>
+                        <p className="text-[0.55rem] text-muted-foreground mt-0.5">{p.sub}</p>
                       </div>
                     ))}
                   </div>
@@ -170,10 +177,10 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
               {/* Sonoridade */}
               <FadeUp delay={0.65}>
                 <div className="card p-5">
-                  <span className="text-[0.45rem] tracking-[0.2em] uppercase text-muted-foreground font-semibold">A Sonoridade</span>
+                  <span className="text-[0.5rem] tracking-[0.2em] uppercase text-muted-foreground font-semibold">A Sonoridade</span>
                   <div className="flex flex-wrap gap-2 mt-3">
                     {['NeoSoul', 'R&B', 'MPB', 'Samba', 'Jazz', 'Gospel', 'Samba-Rock', 'Pop'].map(g => (
-                      <span key={g} className="tag text-[0.45rem]">{g}</span>
+                      <span key={g} className="tag text-[0.5rem]">{g}</span>
                     ))}
                   </div>
                 </div>
@@ -182,18 +189,18 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
               {/* Cidades */}
               <FadeUp delay={0.8}>
                 <div className="card p-5">
-                  <span className="text-[0.45rem] tracking-[0.2em] uppercase text-muted-foreground font-semibold">Onde Já Aconteceu</span>
+                  <span className="text-[0.5rem] tracking-[0.2em] uppercase text-muted-foreground font-semibold">Onde Já Aconteceu</span>
                   <div className="flex flex-wrap gap-3 mt-3">
                     {[
                       { city: 'Brasília', flag: '🇧🇷', desc: 'Berço do Sarau' },
                       { city: 'Rio de Janeiro', flag: '🇧🇷', desc: 'Edição Especial' },
                       { city: 'Lisboa', flag: '🇵🇹', desc: 'Internacional' },
                     ].map((c, i) => (
-                      <div key={i} className="p-3 rounded-lg border border-border/50 bg-black/30 flex items-center gap-3">
-                        <span className="text-sm">{c.flag}</span>
+                      <div key={i} className="p-3 rounded-lg border border-border/50 bg-black/40 hover:bg-black/60 transition-colors duration-300 flex items-center gap-3">
+                        <span className="text-lg">{c.flag}</span>
                         <div>
-                          <span className="text-[0.6rem] font-heading text-foreground">{c.city}</span>
-                          <p className="text-[0.45rem] text-muted-foreground">{c.desc}</p>
+                          <span className="text-xs font-heading text-foreground">{c.city}</span>
+                          <p className="text-[0.5rem] text-muted-foreground">{c.desc}</p>
                         </div>
                       </div>
                     ))}

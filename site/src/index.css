@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ─── Self-hosted fonts (local, reliable) ─── */
+/* ─── Self-hosted fonts ─── */
 @font-face {
   font-family: 'Anisette';
   src: url('/fonts/anisette-bold-2.otf') format('opentype');
@@ -8,8 +8,14 @@
   font-style: normal;
   font-display: swap;
 }
-/* Butik Display removed — was causing FOIT/blur on text.
-   Using system serif + Google Playfair Display instead. */
+@font-face {
+  font-family: 'Butik Display';
+  src: url('/fonts/ButikDisplayVF-Ups.woff2') format('woff2'),
+       url('/fonts/ButikDisplayVF-Ups.woff') format('woff');
+  font-weight: 100 900;
+  font-stretch: 75% 125%;
+  font-display: swap;
+}
 
 /* ─── Theme: Red/Crimson palette ─── */
 @theme {
@@ -35,7 +41,7 @@
   --color-danger: #dc2626;
   --color-warning: #f59e0b;
 
-  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-display: 'Butik Display', 'Playfair Display', 'Georgia', serif;
   --font-heading: 'Anisette', 'Inter', system-ui, sans-serif;
   --font-sans: 'Inter', system-ui, sans-serif;
 
@@ -62,7 +68,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 15px;
 }
 
 /* ─── Typography ─── */
@@ -121,6 +128,10 @@ body::after { right: 0; }
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 @keyframes pulseGlow {
   0%, 100% { box-shadow: 0 0 8px rgba(220,38,38,0.06); }
   50% { box-shadow: 0 0 20px rgba(220,38,38,0.15); }
@@ -129,18 +140,42 @@ body::after { right: 0; }
   0% { background-position: 200% center; }
   100% { background-position: -200% center; }
 }
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  25% { transform: translate(30px, -20px) scale(1.05); opacity: 0.7; }
+  50% { transform: translate(-10px, -40px) scale(0.95); opacity: 0.4; }
+  75% { transform: translate(-30px, -10px) scale(1.02); opacity: 0.6; }
+}
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+  33% { transform: translate(-20px, 30px) scale(1.03); opacity: 0.6; }
+  66% { transform: translate(25px, 10px) scale(0.97); opacity: 0.35; }
+}
+@keyframes orbPulse {
+  0%, 100% { transform: scale(1); opacity: 0.08; }
+  50% { transform: scale(1.08); opacity: 0.15; }
+}
+@keyframes lineGrow {
+  from { width: 0; opacity: 0; }
+  to { width: 60px; opacity: 1; }
+}
+@keyframes sectionReveal {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
 
 /* ─── Cards — NO backdrop-filter (was causing text blur) ─── */
 .card {
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
+  background: rgba(15, 12, 12, 0.7);
+  border: 1px solid rgba(220, 38, 38, 0.08);
   border-radius: var(--radius-lg);
   transition: all 0.4s var(--easing-smooth);
 }
 .card:hover {
-  border-color: var(--color-border-hover);
-  background: rgba(220, 38, 38, 0.03);
+  border-color: rgba(220, 38, 38, 0.2);
+  background: rgba(25, 18, 18, 0.85);
   animation: pulseGlow 2s ease-in-out infinite;
+  transform: translateY(-1px);
 }
 
 .card-premium {
@@ -152,6 +187,43 @@ body::after { right: 0; }
 }
 .card-premium:hover {
   border-color: var(--color-border-hover);
+}
+
+/* ─── Cursor glow ─── */
+.cursor-glow {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(220,38,38,0.04), transparent 70%);
+  pointer-events: none;
+  z-index: 9996;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s;
+  will-change: transform;
+}
+
+/* ─── Floating background orbs ─── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.orb.crimson {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(220,38,38,0.06), transparent 60%);
+  animation: orbFloat 12s ease-in-out infinite;
+}
+.orb.wine {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, rgba(127,29,29,0.08), transparent 60%);
+  animation: orbFloat2 15s ease-in-out infinite;
+}
+.orb.pulse {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(220,38,38,0.04), transparent 50%);
+  animation: orbPulse 8s ease-in-out infinite;
 }
 
 /* ─── Scroll progress ─── */
@@ -183,6 +255,9 @@ body::after { right: 0; }
   opacity: 0.08;
   width: 80px;
   margin: 1.5rem auto;
+}
+.divider.grow {
+  animation: lineGrow 1s cubic-bezier(0, 0, 0.2, 1) forwards;
 }
 
 /* ─── Sympla button ─── */
@@ -263,14 +338,14 @@ body::after { right: 0; }
 
 /* ─── Tag pill ─── */
 .tag {
-  font-size: 0.5rem;
-  letter-spacing: 0.12em;
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid var(--color-wine-glow);
+  border: 1px solid rgba(127, 29, 29, 0.2);
   color: var(--color-crimson-dim);
-  background: var(--color-crimson-subtle);
+  background: rgba(220, 38, 38, 0.06);
 }
 
 /* ─── Art placeholder ─── */
@@ -340,4 +415,24 @@ body::after { right: 0; }
 :focus-visible {
   outline: 1px solid rgba(220,38,38,0.3);
   outline-offset: 2px;
+}
+
+/* ─── Details/Summary smooth open ─── */
+details summary::-webkit-details-marker { display: none; }
+details summary { cursor: pointer; }
+
+/* ─── Line clamp ─── */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ─── Smooth image rendering ─── */
+img { -webkit-font-smoothing: antialiased; }
+
+/* ─── Subtle section separators ─── */
+.section + .section {
+  border-top: 1px solid rgba(220, 38, 38, 0.03);
 }

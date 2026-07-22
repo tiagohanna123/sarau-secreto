@@ -1,6 +1,11 @@
 import { createContext, useContext, useMemo, useCallback, type ReactNode } from 'react'
 import { useBarData, type BarHistoryData } from './use-bar-data'
 
+// Eventos de bar excluídos (testes, duplicatas sem bilheteria)
+const EXCLUDED_BAR_DATES = new Set([
+  '2026-05-22', '2026-05-06', '2026-05-03', '2026-04-28', '2025-05-15',
+])
+
 // --- Tipos exportados ---
 
 export interface FlatEvent {
@@ -47,7 +52,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const events = useMemo<FlatEvent[]>(() => {
     // Caminho feliz: rawInsights da API (com dados de bilheteria + bar)
     if (rawInsights?.events?.length) {
-      return (rawInsights.events || []).map((ev: any) => ({
+      return (rawInsights.events || []).filter((ev: any) => ev.date && !EXCLUDED_BAR_DATES.has(ev.date.slice(0, 10))).map((ev: any) => ({
       id: ev.id || ev.name,
       title: ev.name || ev.title || 'Evento',
       date: ev.date || '',
@@ -72,7 +77,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
     // Fallback offline: barData (BAR_EMBED ou Yuzer backup) — só dados de bar, sem bilheteria
     if (barData?.eventos?.length) {
-      return barData.eventos.map((ev: any) => ({
+      return barData.eventos.filter((ev: any) => ev.start && !EXCLUDED_BAR_DATES.has(ev.start.slice(0, 10))).map((ev: any) => ({
         id: ev.start || `bar-${Date.now()}`,
         title: `Sarau Secreto (${ev.start || ''})`,
         date: ev.start || '',
@@ -104,10 +109,54 @@ export function DataProvider({ children }: { children: ReactNode }) {
   }, [events])
 
   const overview = useMemo<{ aggregates: any; events: any[] } | null>(() => {
-    if (rawInsights) return rawInsights
+    if (rawInsights) {
+      // Aplica EXCLUDED_BAR_DATES também aos aggregates para consistência com events[]
+      const filteredEvents = (rawInsights.events || []).filter(
+        (ev: any) => ev.date && !EXCLUDED_BAR_DATES.has(ev.date.slice(0, 10))
+      )
+      const filteredTotalTickets = filteredEvents.reduce((s: number, e: any) => s + (e.ticketsSold || 0), 0)
+      const filteredCheckedIn = filteredEvents.reduce((s: number, e: any) => s + (e.checkedIn || 0), 0)
+      const filteredTicketRev = filteredEvents.reduce((s: number, e: any) => s + (e.ticketRevenue || 0), 0)
+      const filteredBarRev = filteredEvents.reduce((s: number, e: any) => s + (e.barRevenue || 0), 0)
+      return {
+        ...rawInsights,
+        events: filteredEvents,
+        aggregates: {
+          ...rawInsights.aggregates,
+          totalEvents: filteredEvents.length,
+          totalTickets: filteredTotalTickets,
+          totalCheckedIn: filteredCheckedIn,
+          totalTicketRevenue: filteredTicketRev,
+          totalBarRevenue: filteredBarRev,
+          totalRevenue: filteredTicketRev + filteredBarRev,
+          averagePerEvent: filteredEvents.length > 0 ? filteredCheckedIn / filteredEvents.length : 0,
+          perCapitaBar: filteredTotalTickets > 0
+            ? Math.round((filteredBarRev / filteredTotalTickets) * 100) / 100
+            : 0,
+          overallNoShowRate: filteredTotalTickets > 0 && filteredCheckedIn > 0
+            ? Math.round(((filteredTotalTickets - filteredCheckedIn) / filteredTotalTickets) * 100 * 10) / 10
+            : 0,
+          // Médias para tabela de comparação no detail.tsx
+          ingressoPorPessoa: filteredTotalTickets > 0
+            ? Math.round(((filteredTicketRev + filteredBarRev) / filteredTotalTickets) * 100) / 100
+            : 0,
+          avgTicketOnly: filteredTotalTickets > 0
+            ? Math.round((filteredTicketRev / filteredTotalTickets) * 100) / 100
+            : 0,
+          avgPerCapitaBar: filteredTotalTickets > 0
+            ? Math.round((filteredBarRev / filteredTotalTickets) * 100) / 100
+            : 0,
+          avgMixBar: (filteredTicketRev + filteredBarRev) > 0
+            ? Math.round((filteredBarRev / (filteredTicketRev + filteredBarRev)) * 100)
+            : 0,
+        },
+      }
+    }
     // Fallback offline: deriva overview de barData
     if (barData?.eventos?.length) {
-      const eventos = barData.eventos
+      const eventos = barData.eventos.filter(
+        (e: any) => e.start && !EXCLUDED_BAR_DATES.has(e.start.slice(0, 10))
+      )
       const totalRevenue = eventos.reduce((s: number, e: any) => s + (e.revenue || 0), 0)
       return {
         aggregates: {
@@ -119,7 +168,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
           totalBarRevenue: totalRevenue,
           totalRevenue,
           perCapitaBar: 0,
-          overallNoShowRate: 1,
+          overallNoShowRate: 0,
         },
         events: eventos.map((e: any) => ({
           id: e.start,
@@ -132,7 +181,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
           barTransactions: e.orders || 0,
           totalRevenue: e.revenue || 0,
           perCapitaBar: 0,
-          noShowRate: 1,
+          noShowRate: 0,
         })),
       }
     }

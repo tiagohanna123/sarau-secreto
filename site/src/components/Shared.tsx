@@ -15,14 +15,42 @@ export function ScrollProgress() {
 
 export function SectionTitle({ label, title, description }: { label: string; title: string; description?: string }) {
   return (
-    <div className="text-center mb-8 md:mb-10">
-      <span className="text-[0.5rem] tracking-[0.25em] uppercase text-crimson-dim font-semibold">{label}</span>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="text-center mb-8 md:mb-10"
+    >
+      <motion.span
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="text-[0.5rem] tracking-[0.25em] uppercase text-crimson-dim font-semibold"
+      >
+        {label}
+      </motion.span>
       <h2 className="text-2xl md:text-4xl mt-2 text-foreground">{title}</h2>
       {description && (
-        <p className="text-[0.75rem] text-muted-foreground mt-2 max-w-xl mx-auto leading-relaxed">{description}</p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-[0.75rem] text-muted-foreground mt-2 max-w-xl mx-auto leading-relaxed"
+        >
+          {description}
+        </motion.p>
       )}
-      <div className="divider" />
-    </div>
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="divider"
+      />
+    </motion.div>
   )
 }
 

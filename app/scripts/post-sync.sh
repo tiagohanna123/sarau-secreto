@@ -22,9 +22,10 @@ echo "🏗️  post-sync: rebuild da dist (admin)..."
 cd "$ROOT"
 npx vite build 2>&1 | tail -10
 
-# 4. Build do site publico
+# 4. Build do site publico (projeto legado em sistema-sarau-secreto/site/)
 echo "🌐 post-sync: build do site publico..."
-cd "$ROOT/../site"
-npm run build 2>&1 | tail -10
+cd /home/ser/sistema-sarau-secreto/site && npm run build 2>&1 | tail -10
+cp -r /home/ser/sistema-sarau-secreto/app/dist/site /home/ser/projetos/sarau-secreto-novo/app/dist/site
+cd /home/ser/projetos/sarau-secreto-novo/app
 
 echo "✅ post-sync: completo."

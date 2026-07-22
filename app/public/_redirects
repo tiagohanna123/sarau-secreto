@@ -1,0 +1,3 @@
+# Site publico do Sarau Secreto em /site/
+/site /site/ 301
+/site/* /site/:splat 200

@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useData } from '@/lib/data-context'
 import type { FlatEvent } from '@/lib/data-context'
+import { RefreshCw } from 'lucide-react'
 
 const CUSTO_PRODUCAO_FIXO = 12_000
 const CMV_BAR_RATE = 0.42
@@ -56,11 +57,12 @@ export function EventsPage({
   onBack: () => void
   onSelect: (id: string) => void
 }) {
-  const { events: dataEvents, loading, source } = useData()
+  const { events: dataEvents, loading, source, refresh } = useData()
   const [hovered, setHovered] = useState<string | null>(null)
   const [sortBy, setSortBy] = useState<'date' | 'revenue' | 'bar' | 'profit'>('date')
   const [searchQuery, setSearchQuery] = useState('')
   const [monthFilter, setMonthFilter] = useState('')
+  const [yearFilter, setYearFilter] = useState('')
 
   // Transforma FlatEvent[] → EventData[] + ordena + filtra
   const sorted = useMemo(() => {
@@ -103,6 +105,11 @@ export function EventsPage({
       result = result.filter(ev => ev.dateLabel === monthFilter)
     }
 
+    // Filtro por ano
+    if (yearFilter) {
+      result = result.filter(ev => ev.date.startsWith(yearFilter) || ev.dateLabel.includes(yearFilter))
+    }
+
     return result
   }, [dataEvents, sortBy, searchQuery, monthFilter])
 
@@ -114,6 +121,19 @@ export function EventsPage({
   const barPerCapitaGeral = totalTickets > 0 ? totalBar / totalTickets : 0
   const barPctKPI = totalGeral > 0 ? Math.round(totalBar / totalGeral * 100) : 0
   const receitaPorIngresso = totalTickets > 0 ? totalGeral / totalTickets : 0
+  const ingressoPerCapitaGeral = totalTickets > 0 ? totalRevenue / totalTickets : 0
+  // Médias para os indicadores de tendência
+  const avgRevenue = sorted.length > 0 ? sorted.reduce((s, e) => s + e.total, 0) / sorted.length : 0
+
+  // Opções para o filtro de ano
+  const yearOptions = useMemo(() => {
+    const set = new Set<string>()
+    ;(dataEvents || []).forEach(ev => {
+      const y = ev.date?.slice(0, 4)
+      if (y) set.add(y)
+    })
+    return Array.from(set).sort().reverse()
+  }, [dataEvents])
 
   // Opções para o filtro de mês
   const monthOptions = useMemo(() => {
@@ -133,7 +153,7 @@ export function EventsPage({
   // Exporta os eventos filtrados como CSV
   const exportCSV = () => {
     if (sorted.length === 0) return
-    const headers = ['Data', 'Evento', 'Ingressos', 'Check-in', 'Bilheteria', 'Bar', 'Total', 'Bar/pessoa', 'No-Show%']
+    const headers = ['Data', 'Evento', 'Ingressos', 'Check-in', 'Bilheteria', 'Bar', 'Total', 'Ingresso/pessoa', 'Bar/pessoa', 'Total/pessoa', 'No-Show%']
     const rows = sorted.map(ev => [
       ev.dateLabel,
       `"${ev.title.replace(/"/g, '""')}"`,
@@ -142,7 +162,9 @@ export function EventsPage({
       fmtBRL(ev.revenue),
       fmtBRL(ev.barRevenue),
       fmtBRL(ev.total),
-      ev.barRevenue > 0 ? fmtBRLc(ev.perCapitaBar) : '—',
+      ev.tickets > 0 ? fmtBRLc(ev.revenue / ev.tickets) : '—',
+      ev.tickets > 0 && ev.barRevenue > 0 ? fmtBRLc(ev.barRevenue / ev.tickets) : '—',
+      ev.tickets > 0 ? fmtBRLc(ev.total / ev.tickets) : '—',
       ev.noShow != null ? `${ev.noShow}%` : '—',
     ].join(','))
     const csv = [headers.join(','), ...rows].join('\n')
@@ -203,19 +225,35 @@ export function EventsPage({
               className="px-2 py-1 rounded transition-colors text-muted-foreground hover:text-foreground">
               ⬇ CSV
             </button>
+            <span className="mx-1 text-muted-foreground/30">|</span>
+            <button onClick={() => refresh()}
+              className="px-2 py-1 rounded transition-colors text-muted-foreground hover:text-foreground flex items-center gap-1"
+              title="Recarregar dados">
+              <RefreshCw size={12} /> Recarregar
+            </button>
           </div>
         </div>
       </header>
 
       {/* Filtros */}
-      <div className="mb-4 flex items-center gap-3">
+      <div className="mb-4 flex items-center gap-3 flex-wrap">
         <input
           type="text"
           placeholder="Buscar evento…"
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
-          className="flex-1 rounded-lg border border-border bg-card px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-gold/50 transition-colors"
+          className="flex-1 min-w-[180px] rounded-lg border border-border bg-card px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-gold/50 transition-colors"
         />
+        <select
+          value={yearFilter}
+          onChange={e => setYearFilter(e.target.value)}
+          className="rounded-lg border border-border bg-card px-3 py-2 text-xs text-foreground outline-none focus:border-gold/50 transition-colors"
+        >
+          <option value="">Todos os anos</option>
+          {yearOptions.map(y => (
+            <option key={y} value={y}>{y}</option>
+          ))}
+        </select>
         <select
           value={monthFilter}
           onChange={e => setMonthFilter(e.target.value)}
@@ -229,13 +267,14 @@ export function EventsPage({
       </div>
 
       {/* KPIs estratégicos */}
-      <div className="mb-6 grid grid-cols-5 gap-3">
+      <div className="mb-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {[
           { label: 'Receita Total', value: fmtBRL(totalGeral), sub: '' },
           { label: 'Bar Total', value: fmtBRL(totalBar), sub: `${barPctKPI}%` },
           { label: 'Ingressos', value: totalTickets.toLocaleString('pt-BR'), sub: `ingressos vendidos` },
-          { label: 'Receita/Ingresso', value: fmtBRLc(receitaPorIngresso), sub: `total por ingresso` },
-          { label: 'Gasto Médio', value: fmtBRLc(barPerCapitaGeral), sub: `por ingresso` },
+          { label: 'Ingresso/pessoa', value: fmtBRLc(ingressoPerCapitaGeral), sub: `por pessoa` },
+          { label: 'Bar/pessoa', value: fmtBRLc(barPerCapitaGeral), sub: `por pessoa` },
+          { label: 'Total/pessoa', value: fmtBRLc(receitaPorIngresso), sub: `ticket médio` },
         ].map(kpi => (
           <div key={kpi.label} className="bg-card border border-border rounded-xl p-4 text-center">
             <p className="text-[10px] uppercase tracking-widest text-muted-foreground">{kpi.label}</p>
@@ -309,7 +348,12 @@ export function EventsPage({
                 {/* Total */}
                 <div className="rounded-lg bg-white/[0.03] px-3 py-2">
                   <p className="text-[9px] uppercase tracking-wider text-muted-foreground">Total</p>
-                  <p className="mt-0.5 text-sm font-bold">{fmtBRL(ev.total)}</p>
+                  <p className="mt-0.5 text-sm font-bold flex items-center gap-1">
+                    {fmtBRL(ev.total)}
+                    <span className={`text-[9px] ${ev.total >= avgRevenue ? 'text-success' : 'text-red-400'}`}>
+                      {ev.total >= avgRevenue ? '↑' : '↓'}
+                    </span>
+                  </p>
                 </div>
 
                 {/* Lucro (estimado) */}
@@ -340,9 +384,13 @@ export function EventsPage({
 
               {/* Barra receita split */}
               <div className="mt-2 flex items-center gap-2">
-                {/* Ticket médio */}
                 <div className="flex-1 text-[9px] text-muted-foreground">
-                  Ticket médio: {ev.tickets > 0 ? fmtBRLc(ev.revenue / ev.tickets) : '—'}
+                  Ingresso/pessoa: {ev.tickets > 0 ? fmtBRLc(ev.revenue / ev.tickets) : '—'}
+                  {ev.tickets > 0 && (
+                    <span className="ml-2">
+                      · Total/pessoa: {fmtBRLc(ev.total / ev.tickets)}
+                    </span>
+                  )}
                 </div>
                 {/* Bar split visual */}
                 {ev.total > 0 && (
