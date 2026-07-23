@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { FadeUp, SectionTitle } from '@/components/Shared'
+import { HeroSpotlight } from '@/components/HeroSpotlight'
 
 const REAL_PHOTOS = [
   { src: 'https://gpsbrasilia.com.br/wp-content/uploads/2023/09/Na_Praia_BS_Fotografias_cf08e4034c.jpg', alt: 'Plateia Sarau Secreto' },
@@ -12,45 +13,71 @@ const REAL_PHOTOS = [
 export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
   const heroRef = useRef(null)
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
-  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '20%'])
+  const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '25%'])
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
+  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.05])
 
   return (
     <>
       {/* ─── HERO ─── */}
       <section id="hero" ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Real Sarau photo as background - less processed than before */}
-        <div className="absolute inset-0">
-          <img
-            src="https://images.metroimg.com/2023/09/07175650/Sarau-Secreto-3.jpeg"
-            alt=""
-            className="w-full h-full object-cover opacity-40"
-            style={{ filter: 'grayscale(20%) brightness(0.6)' }}
+        {/* Background layers */}
+        <motion.div style={{ y: heroY, scale: heroScale }} className="absolute inset-0">
+          {/* Hero background photo — real Sarau Secreto photo */}
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-[0.06]"
+            style={{
+              backgroundImage: `url('https://images.metroimg.com/2023/09/07175650/Sarau-Secreto-3.jpeg?w=1920&q=85')`,
+              filter: 'grayscale(30%)',
+            }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80" />
+
+          {/* Deep gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-crimson-dark/8 via-transparent to-black/90" />
+
+          {/* Warm ambient glow */}
           <div className="absolute inset-0" style={{
-            background: 'radial-gradient(ellipse 70% 60% at 50% 40%, rgba(220,38,38,0.2), transparent 60%)',
+            background: `
+              radial-gradient(ellipse 70% 40% at 50% 35%, rgba(220,38,38,0.07), transparent),
+              radial-gradient(ellipse 40% 30% at 20% 60%, rgba(127,29,29,0.03), transparent),
+              radial-gradient(ellipse 40% 30% at 80% 60%, rgba(153,27,27,0.03), transparent)
+            `,
           }} />
-        </div>
+
+          {/* Geometrical grid pattern */}
+          <div className="absolute inset-0 opacity-[0.012]" style={{
+            backgroundImage: `
+              linear-gradient(0deg, rgba(220,38,38,0.4) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(220,38,38,0.4) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+          }} />
+
+          {/* Decorative floating orbs */}
+          <div className="absolute top-1/4 left-1/4 w-40 h-40 rounded-full bg-crimson/3 blur-[80px] animate-float" style={{ animationDuration: '8s' }} />
+          <div className="absolute bottom-1/3 right-1/4 w-56 h-56 rounded-full bg-wine/3 blur-[100px] animate-float" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+          <div className="absolute top-1/2 left-1/2 w-32 h-32 rounded-full bg-crimson/2 blur-[60px] animate-float" style={{ animationDuration: '12s', animationDelay: '4s' }} />
+
+          {/* Mouse-follow spotlight */}
+          <HeroSpotlight />
+        </motion.div>
 
         <motion.div style={{ opacity: heroOpacity }} className="relative z-10 text-center px-5 max-w-4xl mx-auto">
           <FadeUp>
-            <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="flex items-center justify-center gap-3 mb-4">
               <img
-                src="/site/sarau-logo-white.png"
+                src="/assets/sarau/sarau-logo-white.png"
                 alt="Sarau Secreto"
-                className="h-32 md:h-44 w-auto object-contain opacity-95 drop-shadow-[0_0_40px_rgba(220,38,38,0.2)]"
+                className="w-10 h-11 object-contain drop-shadow-[0_0_20px_rgba(220,38,38,0.15)] hover:drop-shadow-[0_0_30px_rgba(220,38,38,0.3)] transition-all duration-500"
               />
+              <span className="text-[0.65rem] tracking-[0.3em] uppercase text-muted-foreground">2026 · No Caminho da Arte</span>
             </div>
           </FadeUp>
 
           <FadeUp delay={0.15}>
-            <span className="text-sm tracking-[0.3em] uppercase text-muted-foreground block mb-4">
-              2026 · No Caminho da Arte
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-normal leading-[1.08] text-foreground mb-4 tracking-[-0.03em]">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-normal leading-[1.06] text-foreground mb-4 tracking-[-0.03em]">
               A experiência musical<br />
-              <span className="text-crimson">mais exclusiva</span><br />
+              <span className="text-gradient">mais exclusiva</span><br />
               do Brasil
             </h1>
           </FadeUp>
@@ -74,7 +101,7 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
 
           {/* Stats */}
           <FadeUp delay={0.6}>
-            <div className="grid grid-cols-3 gap-6 mt-12 max-w-md mx-auto">
+            <div className="grid grid-cols-3 gap-8 mt-16 max-w-md mx-auto">
               {[
                 { num: '700+', label: 'por edição' },
                 { num: '25+', label: 'artistas' },
@@ -91,12 +118,15 @@ export function HomePage({ onScrollTo }: { onScrollTo: (id: string) => void }) {
 
         {/* Scroll indicator */}
         <motion.div
-          animate={{ y: [0, 6, 0], opacity: [0.3, 0.6, 0.3] }}
-          transition={{ duration: 2.5, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground"
+          animate={{ y: [0, 8, 0], opacity: [0.2, 0.5, 0.2] }}
+          transition={{ duration: 3, repeat: Infinity, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-muted-foreground"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
         </motion.div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent" />
       </section>
 
       {/* ─── SOBRE: COMO NASCEU — SINGLE COLUMN ─── */}

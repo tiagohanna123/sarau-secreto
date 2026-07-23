@@ -1,4 +1,5 @@
 import { FadeUp, SectionTitle } from '@/components/Shared'
+import { CountdownTimer } from '@/components/CountdownTimer'
 
 const EVENTS = [
   {
@@ -69,6 +70,7 @@ function StatusBadge({ status }: { status: string }) {
   const s = map[status] || map.breve
   return <span className={`badge border ${s.classes}`}>{s.label}</span>
 }
+}
 
 export function EventosPage() {
   return (
@@ -80,38 +82,105 @@ export function EventosPage() {
           description="O Sarau Secreto já passou por Brasília, Rio de Janeiro e Lisboa. Cada edição é única."
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
-          {EVENTS.map((event, i) => {
-            const isHighlighted = event.status === 'disponivel'
+        {/* Events visual banner */}
+        <FadeUp delay={0.05}>
+          <div className="max-w-5xl mx-auto mb-8 rounded-xl overflow-hidden h-32 sm:h-40 relative group">
+            <img
+              src="https://images.metroimg.com/2023/09/07175650/Sarau-Secreto-3.jpeg?w=1200&q=85"
+              alt="Sarau Secreto ao vivo"
+              className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/5 rounded-xl pointer-events-none" />
+            <div className="absolute bottom-4 left-5 right-5">
+              <div className="flex items-center gap-2.5">
+                <img src="/assets/sarau/sarau-logo-white.png" alt="" className="w-6 h-7 object-contain opacity-50" />
+                <span className="text-[0.65rem] tracking-[0.2em] uppercase text-white/40">Ao Vivo · Sem Ensaio · Único</span>
+              </div>
+            </div>
+          </div>
+        </FadeUp>
+
+        {/* Countdown to next event */}
+        {(() => {
+          const nextEvent = EVENTS.find(e => e.status === 'disponivel')
+          if (nextEvent) {
             return (
-              <FadeUp key={event.id} delay={i * 0.1}>
-                <div className={`card p-5 h-full flex flex-col relative transition-all duration-500 ${
-                  isHighlighted ? 'border-crimson/20 bg-gradient-to-b from-crimson-subtle to-transparent' : ''
-                }`}>
-                  {/* Glow line on highlighted cards */}
-                  {isHighlighted && (
-                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-crimson/30 to-transparent" />
-                  )}
+              <FadeUp delay={0.1}>
+                <div className="max-w-md mx-auto mb-10 card p-5">
+                  <CountdownTimer targetDate={new Date('2026-10-10T19:00:00-03:00')} label="Próxima Edição" />
+                </div>
+              </FadeUp>
+            )
+          }
+          return null
+        })()}
 
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="text-sm tracking-[0.2em] uppercase text-crimson font-semibold">
-                      SS {event.edition}
-                    </span>
-                    <StatusBadge status={event.status} />
-                  </div>
-                  <h3 className="text-base font-heading text-foreground mb-2 leading-snug">{event.title}</h3>
-                  <div className="space-y-1 mb-3">
-                    <p className="text-sm text-muted-foreground flex items-center gap-1.5">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="shrink-0 opacity-50"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                      {event.dates}
-                    </p>
-                    <p className="text-sm text-muted-foreground flex items-center gap-1.5">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="shrink-0 opacity-50"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                      {event.location}
-                    </p>
+                  {EVENTS.map((event, i) => {
+                    const isHighlighted = event.status === 'disponivel'
+                    return (
+                      <FadeUp key={event.id} delay={i * 0.1}>
+                        <div className={`card p-5 h-full flex flex-col relative transition-all duration-500 ${
+                          isHighlighted ? 'border-crimson/20 bg-gradient-to-b from-crimson-subtle to-transparent' : ''
+                        }`}>
+                          {/* Glow line on highlighted cards */}
+                          {isHighlighted && (
+                            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-crimson/30 to-transparent" />
+                          )}
+
+                          <div className="flex items-start justify-between mb-3">
+                            <span className="text-sm tracking-[0.2em] uppercase text-crimson font-semibold">
+                              SS {event.edition}
+                            </span>
+                            <StatusBadge status={event.status} />
+                          </div>
+                          <h3 className="text-base font-heading text-foreground mb-2 leading-snug">{event.title}</h3>
+                          <div className="space-y-1 mb-3">
+                            <p className="text-sm text-muted-foreground flex items-center gap-1.5">
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="shrink-0 opacity-50"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                              {event.dates}
+                            </p>
+                            <p className="text-sm text-muted-foreground flex items-center gap-1.5">
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="shrink-0 opacity-50"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                              {event.location}
+                            </p>
+                          </div>
+
+                          {event.lineup.length > 0 && (
+                            <div className="space-y-1 mb-3 flex-1">
+                              <span className="text-sm tracking-[0.15em] uppercase text-foreground/40 font-semibold">Lineup</span>
+                              {event.lineup.map((l, j) => (
+                                <p key={j} className="text-sm text-foreground/70 leading-relaxed">{l}</p>
+                              ))}
+                            </div>
+                          )}
+
+                          {event.perks.length > 0 && (
+                            <div className="flex flex-wrap gap-1.5 mb-3">
+                              {event.perks.map((p, j) => (
+                                <span key={j} className="tag">{p}</span>
+                              ))}
+                            </div>
+                          )}
+
+                          {event.sympla && (
+                            <a href={event.sympla} target="_blank" rel="noopener noreferrer"
+                              className={`btn-sympla text-sm self-start mt-auto ${
+                                event.status === 'disponivel' ? 'shadow-[0_0_16px_rgba(220,38,38,0.12)]' : ''
+                              }`}>
+                              Ver no Sympla
+                            </a>
+                          )}
+                          {!event.sympla && (
+                            <span className="text-sm text-muted-foreground mt-auto italic">Em breve</span>
+                          )}
+                        </div>
+                      </FadeUp>
+                    )
+                  })}
                   </div>
 
-                  {event.lineup.length > 0 && (
+                {event.lineup.length > 0 && (
                     <div className="space-y-1 mb-3 flex-1">
                       <span className="text-sm tracking-[0.15em] uppercase text-foreground/40 font-semibold">Lineup</span>
                       {event.lineup.map((l, j) => (
@@ -194,7 +263,7 @@ export function EventosPage() {
 
         {/* CTA final */}
         <FadeUp delay={0.65}>
-          <div className="text-center mt-8">
+          <div className="text-center mt-10">
             <a href="https://www.sympla.com.br/produtor/sarausecreto" target="_blank" rel="noopener noreferrer"
               className="btn-sympla text-sm px-8 py-3">
               Ver todos os ingressos no Sympla

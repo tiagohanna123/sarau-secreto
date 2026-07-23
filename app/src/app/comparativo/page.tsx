@@ -86,7 +86,7 @@ export function ComparativoPage() {
           </div>
         </>
       )}
-      <div className="mt-6 text-[10px] text-muted-foreground/40">Fonte: {data.source === 'live' ? 'Yuzer ao vivo' : 'Backup Yuzer'}</div>
+      <div className="mt-6 text-[10px] text-muted-foreground/50">Fonte: {data.source === 'live' ? 'Yuzer ao vivo' : 'Backup Yuzer'}</div>
     </div>
   )
 }
@@ -96,7 +96,7 @@ function SelectEvent({ eventos, value, onChange, label }: { eventos: any[]; valu
     <div>
       <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-1">{label}</p>
       <select value={value} onChange={e => onChange(parseInt(e.target.value))}
-        className="w-full bg-card border border-border rounded-lg px-3 py-2 text-xs text-foreground focus:outline-none focus:border-gold">
+        className="w-full bg-card border border-border rounded-lg px-3 py-2 text-xs text-foreground focus:outline-none focus:border-gold-dim">
         {eventos.map((ev, i) => (
           <option key={ev.start} value={i}>{ev.start} — {fmt(ev.revenue)} ({ev.orders} ingressos)</option>
         ))}
@@ -114,8 +114,8 @@ function Cmp({ label, a, b, diff, unit }: { label: string; a: string; b: string;
     <div className="bg-card border border-border rounded-xl p-4">
       <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">{label}</p>
       <div className="grid grid-cols-2 gap-2 text-center">
-        <div><p className="text-[10px] text-muted-foreground/40">A</p><p className="text-sm font-bold text-foreground">{a}</p></div>
-        <div><p className="text-[10px] text-muted-foreground/40">B</p><p className="text-sm font-bold text-foreground">{b}</p></div>
+        <div><p className="text-[10px] text-muted-foreground/50">A</p><p className="text-sm font-bold text-foreground">{a}</p></div>
+        <div><p className="text-[10px] text-muted-foreground/50">B</p><p className="text-sm font-bold text-foreground">{b}</p></div>
       </div>
       <div className={`text-center mt-1.5 text-[11px] font-medium ${isUp ? 'text-success' : 'text-danger'}`}>
         {isUp ? '↑' : '↓'} {diffStr}

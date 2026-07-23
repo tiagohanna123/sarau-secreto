@@ -24,12 +24,18 @@ export function Skel() {
 
 export const GOLD = '#c8a96e'
 export const PURPLE = '#a78bfa'
+export const VIOLET = '#8b5cf6'
 export const BLUE = '#60a5fa'
 export const GREEN = '#34d399'
 export const PINK = '#f472b6'
 export const ORANGE = '#fb923c'
 
 export const PALETA = [GOLD, PURPLE, BLUE, GREEN, PINK, ORANGE]
+
+/* ── Constantes de custo (centralizadas — usadas em financeiro, eventos, detail) ── */
+export const CMV_BAR = 0.42        // 42% — custo mercadoria vendida (Yuzer)
+export const TAXA_SYMPLA = 0.08    // 8% — taxa estimada da plataforma
+export const CUSTO_PRODUCAO = 12000 // R$ 12k/evento — produção (artista, equipe, espaço)
 
 export const fmt = (v: number) =>
   v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 })

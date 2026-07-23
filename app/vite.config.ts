@@ -4,6 +4,9 @@ import { defineConfig } from "vite";
 import { resolve } from 'path'
 
 export default defineConfig({
+  define: {
+    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+  },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: { '@': resolve(__dirname, 'src') }

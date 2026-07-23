@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
 import { getLLMConfig, setLLMConfig, clearMemory } from '@/lib/chat-memory'
+import { version } from '../../../package.json'
 
-// Build info: extrair do package.json ou usar fallback
-const BUILD_DATE = new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric' })
-const VERSION = '1.0.0'
+// Build info — injetado via Vite define, ver settings/page.tsx para build date
+declare const __BUILD_TIME__: string
+const BUILD_DATE = new Date(__BUILD_TIME__).toLocaleDateString('pt-BR', {
+  day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
+})
+const VERSION = version
 const STACK = ['React 19', 'Vite', 'Tailwind v4', 'Recharts'].join(' · ')
 
 function getProfileName() {
@@ -25,7 +29,7 @@ export function SettingsPage({ navigate }: { navigate: (path: string) => void })
   }, [])
 
   const handleProfileSave = () => {
-    setProfileName(profileName)
+    localStorage.setItem('user_profile_name', profileName)
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }

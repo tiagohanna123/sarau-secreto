@@ -41,6 +41,8 @@ function ArtistPhoto({ name, index }: { name: string; index: number }) {
     </div>
   )
 }
+  )
+}
 
 export function CuradoriaPage() {
   return (
@@ -68,14 +70,15 @@ export function CuradoriaPage() {
 
         {/* Destaque call */}
         <FadeUp delay={0.4}>
-          <div className="max-w-xl mx-auto mt-8 text-center card p-6">
+          <div className="max-w-xl mx-auto mt-10 text-center card p-6 relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-crimson/3 blur-[50px]" />
             <span className="text-lg font-display text-crimson">♫</span>
             <h3 className="text-sm font-heading text-foreground mt-2">Quer se apresentar?</h3>
             <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
               Siga @osarausecreto no Instagram. Chamadas abertas são anunciadas por lá.
             </p>
             <a href="https://www.instagram.com/osarausecreto" target="_blank" rel="noopener noreferrer"
-              className="btn-ghost text-xs mt-4">
+              className="btn-ghost text-xs mt-4 inline-flex">
               Seguir no Instagram
             </a>
           </div>

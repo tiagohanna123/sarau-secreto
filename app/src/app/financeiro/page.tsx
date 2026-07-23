@@ -1,14 +1,6 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { useData } from '@/lib/data-context'
-
-const fmt = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })
-
-const GOLD = '#c8a96e'
-const VIOLET = '#8b5cf6'
-const GREEN = '#34d399'
-const BLUE = '#60a5fa'
-const PINK = '#f472b6'
-const COLORS = [GOLD, GREEN, BLUE, VIOLET, PINK]
+import { GOLD, VIOLET, GREEN, BLUE, PINK, CMV_BAR, TAXA_SYMPLA, CUSTO_PRODUCAO, fmt, fmtNum } from '@/lib/ui'
 
 function downloadCSV(data: string, filename: string) {
   const blob = new Blob([data], { type: 'text/csv;charset=utf-8;' })
@@ -67,14 +59,11 @@ export function FinanceiroPage() {
   const ticketMedioBar = totalIngressos > 0 ? totalBar / totalIngressos : 0
   const ticketMedioEvento = totalGeral > 0 ? totalGeral / totalEventos : 0
 
-  // Estimativas de custo (transparentes)
-  const CMV_BAR = 0.42  // 42% — custo mercadoria vendida (de análise anterior)
-  const TAXA_SYMPLA = 0.08  // 8% — estimativa de taxa da plataforma
-  const CUSTO_PRODUCAO_PADRAO = 12000  // R$ 12k/evento — estimativa de produção (artista, equipe, espaço)
+  // Constantes de custo — importadas de @/lib/ui
 
   const custoBar = totalBar * CMV_BAR
   const custoSympla = totalTicket * TAXA_SYMPLA
-  const custoProducao = totalEventos * CUSTO_PRODUCAO_PADRAO
+  const custoProducao = totalEventos * CUSTO_PRODUCAO
   const custoTotal = custoBar + custoSympla + custoProducao
   const resultadoLiquido = totalGeral - custoTotal
   const margemLiquida = totalGeral > 0 ? (resultadoLiquido / totalGeral) * 100 : 0
@@ -94,7 +83,7 @@ export function FinanceiroPage() {
     .map(([mes, d]) => ({ mes, label: mes, receita: d.ticket + d.bar, bar: d.bar, ticket: d.ticket, ingressos: d.ingressos, eventos: d.qtd }))
     .sort((a, b) => a.mes.localeCompare(b.mes))
 
-  // Últimos 6 eventos para tabela
+  // Últimos 10 eventos para tabela
   const recentes = [...events].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 10)
 
   // Resumo por ano
@@ -112,7 +101,7 @@ export function FinanceiroPage() {
     receita: d.ticket + d.bar,
     bar: d.bar,
     ticket: d.ticket,
-    custo: (d.bar * CMV_BAR) + (d.ticket * TAXA_SYMPLA) + (d.qtd * CUSTO_PRODUCAO_PADRAO),
+    custo: (d.bar * CMV_BAR) + (d.ticket * TAXA_SYMPLA) + (d.qtd * CUSTO_PRODUCAO),
   })).sort((a, b) => a.ano.localeCompare(b.ano))
 
   const mixData = [
@@ -135,14 +124,19 @@ export function FinanceiroPage() {
           </div>
           <button
             onClick={() => {
-              const rows = [['Data','Evento','Bilheteria','Bar','Total','Ingressos','Bar/Pessoa']]
+              const rows = [['Data','Evento','Bilheteria','Bar','Total','Ingressos','Ticket Médio','Bar/Pessoa','%Bar','Lucro Est.','Margem']]
               for (const ev of events) {
                 const total = (ev.ticketRevenue || 0) + (ev.barRevenue || 0)
                 const bpc = ev.ticketsSold > 0 && ev.barRevenue > 0 ? (ev.barRevenue / ev.ticketsSold).toFixed(2) : '0'
+                const barPct = total > 0 ? ((ev.barRevenue || 0) / total * 100).toFixed(0) : '0'
+                const ticketMedio = ev.ticketsSold > 0 ? ((ev.ticketRevenue || 0) / ev.ticketsSold).toFixed(2) : '0'
+                const lucro = total - CUSTO_PRODUCAO - (ev.barRevenue || 0) * CMV_BAR - (ev.ticketRevenue || 0) * TAXA_SYMPLA
+                const margem = total > 0 ? ((lucro / total) * 100).toFixed(1) : '0'
                 rows.push([
                   ev.date || '', ev.title,
                   String(ev.ticketRevenue || 0), String(ev.barRevenue || 0), String(total),
-                  String(ev.ticketsSold || 0), bpc,
+                  String(ev.ticketsSold || 0), ticketMedio, bpc, barPct + '%',
+                  String(Math.round(lucro)), margem + '%',
                 ])
               }
               const csv = rows.map(r => r.map(c => `"${c.replace(/"/g,'""')}"`).join(',')).join('\n')
@@ -165,7 +159,7 @@ export function FinanceiroPage() {
 
       {/* KPIs — Custos e Resultado */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-        <Card label="Custo Produção" value={fmt(custoProducao)} sub={`${fmt(CUSTO_PRODUCAO_PADRAO)}/evento`} badge="estimado" />
+        <Card label="Custo Produção" value={fmt(custoProducao)} sub={`${fmt(CUSTO_PRODUCAO)}/evento`} badge="estimado" />
         <Card label="Custo Bar (CMV)" value={fmt(custoBar)} sub={`${(CMV_BAR*100).toFixed(0)}% da receita bar`} badge="estimado" />
         <Card label="Taxa Sympla" value={fmt(custoSympla)} sub={`${(TAXA_SYMPLA*100).toFixed(0)}% da bilheteria`} badge="estimado" />
         <Card label="Resultado Líquido" value={fmt(resultadoLiquido)} sub={`${margemLiquida.toFixed(1)}% de margem`} badge="estimado" />
@@ -260,33 +254,45 @@ export function FinanceiroPage() {
 
       {/* Tabela de Últimos Eventos */}
       <div className="bg-card border border-border rounded-xl p-5 mb-5">
-        <h3 className="text-xs font-semibold text-foreground mb-4">Últimos 10 Eventos</h3>
+        <h3 className="text-xs font-semibold text-foreground mb-4">Últimos 10 Eventos · KPIs por evento</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-[11px]">
             <thead>
               <tr className="text-muted-foreground border-b border-border">
-                <th className="text-left py-2 pr-3">Data</th>
-                <th className="text-left py-2 pr-3">Evento</th>
-                <th className="text-right py-2 pr-3">Bilheteria</th>
-                <th className="text-right py-2 pr-3">Bar</th>
-                <th className="text-right py-2 pr-3">Total</th>
-                <th className="text-right py-2 pr-3">Ingressos</th>
-                <th className="text-right py-2">Bar/pessoa</th>
+                <th className="text-left py-2 pr-2">Data</th>
+                <th className="text-left py-2 pr-2">Evento</th>
+                <th className="text-right py-2 pr-2">Bilheteria</th>
+                <th className="text-right py-2 pr-2">Bar</th>
+                <th className="text-right py-2 pr-2">Total</th>
+                <th className="text-right py-2 pr-2">Ingressos</th>
+                <th className="text-right py-2 pr-2">Ticket</th>
+                <th className="text-right py-2 pr-2">Bar/pessoa</th>
+                <th className="text-right py-2 pr-2">% Bar</th>
+                <th className="text-right py-2 pr-2">Lucro</th>
+                <th className="text-right py-2">Margem</th>
               </tr>
             </thead>
             <tbody>
               {recentes.map(ev => {
                 const total = (ev.ticketRevenue || 0) + (ev.barRevenue || 0)
                 const bpc = ev.ticketsSold > 0 && ev.barRevenue > 0 ? (ev.barRevenue / ev.ticketsSold) : 0
+                const barPct = total > 0 ? (ev.barRevenue || 0) / total * 100 : 0
+                const ticketMedio = ev.ticketsSold > 0 ? (ev.ticketRevenue || 0) / ev.ticketsSold : 0
+                const lucro = total - CUSTO_PRODUCAO - (ev.barRevenue || 0) * CMV_BAR - (ev.ticketRevenue || 0) * TAXA_SYMPLA
+                const margem = total > 0 ? (lucro / total) * 100 : 0
                 return (
                   <tr key={ev.id} className="border-b border-border/50 hover:bg-white/[0.03]">
-                    <td className="py-2 pr-3 text-muted-foreground whitespace-nowrap">{ev.date ? new Date(ev.date).toLocaleDateString('pt-BR') : '—'}</td>
-                    <td className="py-2 pr-3 text-foreground max-w-[200px] truncate">{ev.title}</td>
-                    <td className="py-2 pr-3 text-right text-foreground">{fmt(ev.ticketRevenue || 0)}</td>
-                    <td className="py-2 pr-3 text-right text-gold">{ev.barRevenue ? fmt(ev.barRevenue) : '—'}</td>
-                    <td className="py-2 pr-3 text-right text-foreground font-medium">{fmt(total)}</td>
-                    <td className="py-2 pr-3 text-right text-muted-foreground">{ev.ticketsSold || 0}</td>
-                    <td className="py-2 text-right text-muted-foreground">{bpc > 0 ? fmt(bpc) : '—'}</td>
+                    <td className="py-2 pr-2 text-muted-foreground whitespace-nowrap">{ev.date ? new Date(ev.date).toLocaleDateString('pt-BR') : '—'}</td>
+                    <td className="py-2 pr-2 text-foreground max-w-[140px] truncate">{ev.title}</td>
+                    <td className="py-2 pr-2 text-right text-foreground">{fmt(ev.ticketRevenue || 0)}</td>
+                    <td className="py-2 pr-2 text-right text-gold">{ev.barRevenue ? fmt(ev.barRevenue) : '—'}</td>
+                    <td className="py-2 pr-2 text-right text-foreground font-medium">{fmt(total)}</td>
+                    <td className="py-2 pr-2 text-right text-muted-foreground">{ev.ticketsSold || 0}</td>
+                    <td className="py-2 pr-2 text-right text-muted-foreground">{ticketMedio > 0 ? fmt(ticketMedio) : '—'}</td>
+                    <td className="py-2 pr-2 text-right text-muted-foreground">{bpc > 0 ? fmt(bpc) : '—'}</td>
+                    <td className="py-2 pr-2 text-right text-muted-foreground">{barPct > 0 ? `${barPct.toFixed(0)}%` : '—'}</td>
+                    <td className={`py-2 pr-2 text-right font-medium ${lucro >= 0 ? 'text-success' : 'text-danger'}`}>{fmt(lucro)}</td>
+                    <td className={`py-2 text-right font-medium ${margem >= 0 ? 'text-success' : 'text-danger'}`}>{margem !== 0 ? `${margem.toFixed(1)}%` : '—'}</td>
                   </tr>
                 )
               })}

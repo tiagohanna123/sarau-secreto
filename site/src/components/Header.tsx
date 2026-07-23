@@ -36,7 +36,7 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-black/80 backdrop-blur-xl border-b border-crimson-glow'
+          ? 'bg-black/85 backdrop-blur-2xl border-b border-crimson-glow'
           : 'bg-transparent'
       }`}
     >
@@ -75,7 +75,7 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
                 />
               )}
               <motion.div
-                className="absolute -bottom-px left-3 right-3 h-px bg-crimson/20"
+                className="absolute -bottom-px left-3 right-3 h-px bg-crimson/15"
                 initial={{ scaleX: 0 }}
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.3 }}
@@ -85,7 +85,7 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
           ))}
           <div className="w-px h-4 bg-border mx-2" />
           <a href="https://www.instagram.com/osarausecreto" target="_blank" rel="noopener noreferrer"
-            className="p-2 text-muted-foreground hover:text-crimson transition-colors rounded-lg hover:bg-crimson-subtle">
+            className="p-2 text-muted-foreground hover:text-crimson transition-all rounded-lg hover:bg-crimson-subtle hover:scale-110 duration-300">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1"/></svg>
           </a>
           <a href="https://www.sympla.com.br/produtor/sarausecreto" target="_blank" rel="noopener noreferrer"
@@ -113,7 +113,7 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden border-t border-border bg-black/90 overflow-hidden"
+            className="md:hidden border-t border-border bg-black/95 backdrop-blur-xl overflow-hidden"
           >
             <nav className="px-5 py-4 flex flex-col gap-1">
               {NAV_ITEMS.map((item, i) => (
@@ -123,7 +123,7 @@ export function Header({ onScrollTo }: { onScrollTo: (id: string) => void }) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.04, duration: 0.25 }}
                   onClick={() => { onScrollTo(item.href); setOpen(false) }}
-                  className={`px-3 py-3 text-sm text-left rounded-lg transition-colors ${
+                  className={`px-3 py-3 text-base text-left rounded-lg transition-colors ${
                     activeSection === item.href
                       ? 'text-crimson bg-crimson-subtle'
                       : 'text-muted-foreground hover:text-foreground hover:bg-white/[0.02]'

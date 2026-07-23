@@ -3,10 +3,13 @@ import Lenis from 'lenis'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { ScrollProgress } from '@/components/Shared'
+import { BackToTop } from '@/components/BackToTop'
+import { AdBannerHero, AdBannerMiddle, AdBannerFooter, AdBannerSidebar } from '@/components/AdBanner'
 import { HomePage } from '@/pages/HomePage'
 import { EventosPage } from '@/pages/EventosPage'
 import { MarketplacePage } from '@/pages/MarketplacePage'
 import { CuradoriaPage } from '@/pages/CuradoriaPage'
+// EspacosPage removida — manter apenas AdBanner (mostruário)
 
 export function App() {
   const lenisRef = useRef<Lenis | null>(null)
@@ -78,9 +81,14 @@ export function App() {
       <div ref={cursorRef} className="cursor-glow hidden md:block" />
       <ScrollProgress />
       <Header onScrollTo={scrollTo} />
+      <BackToTop />
       <main>
         <HomePage onScrollTo={scrollTo} />
+        <div className="section-divider max-w-xs" />
+        <AdBannerHero />
+        <div className="section-divider max-w-xs" />
         <EventosPage />
+        <div className="section-divider max-w-xs" />
         <div className="max-w-7xl mx-auto px-5">
           <div className="flex gap-6 items-start">
             <div className="flex-1 min-w-0">
@@ -88,7 +96,12 @@ export function App() {
             </div>
           </div>
         </div>
+        <div className="section-divider max-w-xs" />
+        <AdBannerMiddle index={0} />
         <CuradoriaPage />
+        <div className="section-divider max-w-xs" />
+        <AdBannerMiddle index={1} />
+        <div className="section-divider max-w-xs" />
       </main>
       <Footer onScrollTo={scrollTo} />
     </div>

@@ -5,8 +5,11 @@ export function Footer({ onScrollTo }: { onScrollTo?: (id: string) => void }) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
   return (
-    <footer className="border-t border-border/50 bg-black">
-      <div className="max-w-7xl mx-auto px-5 py-16">
+    <footer className="border-t border-border/50 bg-black relative">
+      {/* Top gradient line */}
+      <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-crimson/10 to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-5 py-16 md:py-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div>
             <img
@@ -18,6 +21,8 @@ export function Footer({ onScrollTo }: { onScrollTo?: (id: string) => void }) {
               A experiência musical mais exclusiva do Brasil. De Brasília para o mundo.
             </p>
           </div>
+
+          {/* Navegar */}
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-3">Navegar</h4>
             <div className="flex flex-col gap-1.5">
@@ -30,6 +35,8 @@ export function Footer({ onScrollTo }: { onScrollTo?: (id: string) => void }) {
               ))}
             </div>
           </div>
+
+          {/* Redes */}
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-3">Redes</h4>
             <div className="flex flex-col gap-1.5">
@@ -41,6 +48,8 @@ export function Footer({ onScrollTo }: { onScrollTo?: (id: string) => void }) {
                 className="text-sm text-muted-foreground hover:text-crimson transition-colors">Khem</a>
             </div>
           </div>
+
+          {/* Contato */}
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-3">Contato</h4>
             <div className="flex flex-col gap-1.5">
@@ -49,6 +58,8 @@ export function Footer({ onScrollTo }: { onScrollTo?: (id: string) => void }) {
             </div>
           </div>
         </div>
+
+        {/* Bottom bar */}
         <div className="border-t border-border/30 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <span className="text-sm text-muted-foreground tracking-wider">
             &copy; 2026 Sarau Secreto
