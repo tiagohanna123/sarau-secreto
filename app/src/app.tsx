@@ -200,7 +200,7 @@ function BottomNav({ route, navigate }: { route: string; navigate: (r: string) =
               key={item.id}
               onClick={() => navigate(item.id)}
               className="flex-1 flex flex-col items-center justify-center gap-1 py-3 transition-all relative"
-              style={{ color: active ? '#c8a96e' : '#6b7280' }}
+              style={{ color: active ? 'var(--color-gold)' : 'var(--color-muted-foreground)' }}
             >
               <span className="transition-transform" style={{ transform: active ? 'scale(1.15)' : 'scale(1)' }}>
                 {item.icon}
@@ -355,7 +355,7 @@ function ArtistDetailWrapper({ id, onBack }: { id: string; onBack: () => void })
   if (!artist) return (
     <div className="mx-auto max-w-4xl px-4 py-8 text-center">
       <p className="text-sm text-red-400">Erro ao carregar artista</p>
-      <button onClick={onBack} className="mt-4 text-xs text-[#c8a96e] hover:underline">← Voltar</button>
+      <button onClick={onBack} className="mt-4 text-xs text-gold hover:underline">← Voltar</button>
     </div>
   )
 

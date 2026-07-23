@@ -7,10 +7,10 @@ import './index.css'
 
 function RootFallback() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="text-center max-w-md">
         <p className="text-red-400/80 text-sm font-medium mb-2">Erro inesperado</p>
-        <p className="text-[#4b5563] text-xs mb-4">
+        <p className="text-muted-foreground text-xs mb-4">
           O sistema encontrou um erro ao carregar. Isso pode ser causado por dados
           salvos desatualizados.
         </p>

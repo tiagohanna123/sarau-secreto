@@ -41,7 +41,7 @@ function KPICard({ label, value, sub, trend, color }: {
   return (
     <div className="kpi-card min-w-0">
       <p className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground truncate">{label}</p>
-      <p className={`mt-1 text-xl sm:text-2xl font-bold ${color || 'text-white'} truncate`}>{value}</p>
+      <p className={`mt-1 text-xl sm:text-2xl font-bold ${color || 'text-foreground'} truncate`}>{value}</p>
       {sub && <p className="mt-0.5 text-[9px] sm:text-[10px] text-muted-foreground/60 truncate">{sub}</p>}
     </div>
   )
@@ -100,8 +100,8 @@ function SplitPie({ ticketRevenue, barRevenue }: {
             </Pie>
             <Tooltip
               formatter={(v: number) => fmt(v)}
-              contentStyle={{ background: '#1a1a1a', border: '1px solid #2a2a2a', borderRadius: 9, fontSize: 12, color: '#e5e7eb' }}
-              labelStyle={{ color: '#c8a96e', fontWeight: 600 }}
+              contentStyle={{ background: 'var(--color-card)', border: '1px solid var(--color-border)', borderRadius: 9, fontSize: 12, color: 'var(--color-foreground)' }}
+              labelStyle={{ color: 'var(--color-gold)', fontWeight: 600 }}
             />
           </PieChart>
         </ResponsiveContainer>
@@ -152,7 +152,7 @@ function OcupacaoBar({ capacity, ticketsSold }: { capacity: number | null; ticke
             <span className="text-white font-medium">{ocupacao}%</span>
           </div>
           <div className="h-3 w-full overflow-hidden rounded-full bg-white/10">
-            <div className="h-full rounded-full bg-[#c8a96e] transition-all"
+            <div className="h-full rounded-full bg-gold transition-all"
               style={{ width: `${Math.min(ocupacao, 100)}%` }} />
           </div>
         </div>
@@ -162,7 +162,7 @@ function OcupacaoBar({ capacity, ticketsSold }: { capacity: number | null; ticke
             <p className="text-[9px] text-muted-foreground">Capacidade</p>
           </div>
           <div>
-            <p className="text-lg font-bold text-[#c8a96e]">{ticketsSold}</p>
+            <p className="text-lg font-bold text-gold">{ticketsSold}</p>
             <p className="text-[9px] text-muted-foreground">Vendidos</p>
           </div>
           <div>
@@ -217,10 +217,10 @@ function ComparacaoMedia({ ev, overview, insightData }: { ev: EnrichedEvent; ove
 
       {/* Cabeçalho da tabela */}
       <div className="hidden md:grid grid-cols-[1fr_90px_90px_80px] gap-2 mb-2 px-2">
-        <span className="text-[9px] uppercase tracking-[0.1em] text-[#4b5563]">Indicador</span>
-        <span className="text-[9px] uppercase tracking-[0.1em] text-[#4b5563] text-right">Este Evento</span>
-        <span className="text-[9px] uppercase tracking-[0.1em] text-[#4b5563] text-right">Média Geral</span>
-        <span className="text-[9px] uppercase tracking-[0.1em] text-[#4b5563] text-right">Diferença</span>
+        <span className="text-[9px] uppercase tracking-[0.1em] text-muted-foreground">Indicador</span>
+        <span className="text-[9px] uppercase tracking-[0.1em] text-muted-foreground text-right">Este Evento</span>
+        <span className="text-[9px] uppercase tracking-[0.1em] text-muted-foreground text-right">Média Geral</span>
+        <span className="text-[9px] uppercase tracking-[0.1em] text-muted-foreground text-right">Diferença</span>
       </div>
 
       {/* Linhas */}
@@ -232,21 +232,21 @@ function ComparacaoMedia({ ev, overview, insightData }: { ev: EnrichedEvent; ove
 
             {/* Mobile: inline row with valores */}
             <div className="flex items-center justify-between md:hidden text-xs">
-              <span className="text-[10px] text-[#4b5563]">Este evento</span>
+              <span className="text-[10px] text-muted-foreground">Este evento</span>
               <span className="text-white font-semibold">{r.valor}</span>
             </div>
             <div className="flex items-center justify-between md:hidden text-xs">
-              <span className="text-[10px] text-[#4b5563]">Média geral</span>
-              <span className="text-[#9ca3af]">{r.media}</span>
+              <span className="text-[10px] text-muted-foreground">Média geral</span>
+              <span className="text-muted-foreground/80">{r.media}</span>
             </div>
 
             {/* Desktop: colunas */}
             <span className="hidden md:block text-[13px] text-white font-semibold text-right tabular-nums">{r.valor}</span>
-            <span className="hidden md:block text-[13px] text-[#9ca3af] text-right tabular-nums">{r.media}</span>
+            <span className="hidden md:block text-[13px] text-muted-foreground/80 text-right tabular-nums">{r.media}</span>
 
             {/* Diff */}
             <span className={`hidden md:block text-[13px] text-right font-semibold tabular-nums ${
-              noDiff(r.diffVal) ? 'text-[#4b5563]' :
+              noDiff(r.diffVal) ? 'text-muted-foreground' :
               r.diffVal > 0 ? 'text-success' : 'text-red-400'
             }`}>
               {noDiff(r.diffVal) ? '—' : `${r.diffVal > 0 ? '+' : ''}${r.diffVal.toFixed(1)}%`}
@@ -268,7 +268,7 @@ function ComparacaoMedia({ ev, overview, insightData }: { ev: EnrichedEvent; ove
                     }}
                   />
                 </div>
-                <div className="flex justify-between text-[8px] text-[#4b5563] mt-0.5">
+                <div className="flex justify-between text-[8px] text-muted-foreground mt-0.5">
                   <span>{r.diffVal < 0 ? `${Math.abs(r.diffVal).toFixed(0)}% abaixo` : ''}</span>
                   <span>{r.diffVal > 0 ? `${r.diffVal.toFixed(0)}% acima` : ''}</span>
                 </div>
@@ -279,7 +279,7 @@ function ComparacaoMedia({ ev, overview, insightData }: { ev: EnrichedEvent; ove
       </div>
 
       {/* Rodapé da tabela - total de eventos */}
-      <p className="mt-2 text-[9px] text-[#4b5563] px-2">
+      <p className="mt-2 text-[9px] text-muted-foreground px-2">
         Baseado em {agg.totalEvents} eventos
         {agg.eventsWithBar > 0 ? ` · ${agg.eventsWithBar} com dados de bar` : ''}
       </p>
@@ -445,7 +445,7 @@ function ProdutosCard({ produtos, barRevenue }: { produtos?: { name: string; qty
           <div className="text-center">
             <p className="text-2xl mb-1 opacity-30">📊</p>
             <p className="text-xs text-muted-foreground">Nenhum dado de produtos disponível para este evento</p>
-            <p className="text-[9px] text-[#4b5563] mt-1">Os dados de produtos são importados manualmente da planilha de bar</p>
+            <p className="text-[9px] text-muted-foreground mt-1">Os dados de produtos são importados manualmente da planilha de bar</p>
           </div>
         </div>
       </div>
@@ -460,14 +460,14 @@ function ProdutosCard({ produtos, barRevenue }: { produtos?: { name: string; qty
       <div className="space-y-1">
         {produtos.slice(0, 10).map((p, i) => (
           <div key={p.name} className="flex items-center gap-2 py-1.5 border-b border-white/5 last:border-0">
-            <span className="text-[10px] text-[#4b5563] w-4 font-mono text-right">{i+1}</span>
+            <span className="text-[10px] text-muted-foreground w-4 font-mono text-right">{i+1}</span>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] text-[#9ca3af] truncate">{p.name}</span>
+                <span className="text-[11px] text-muted-foreground/80 truncate">{p.name}</span>
                 <div className="flex items-center gap-3 shrink-0 ml-2">
-                  <span className="text-[10px] text-[#4b5563] w-12 text-right">{p.qty}x</span>
+                  <span className="text-[10px] text-muted-foreground w-12 text-right">{p.qty}x</span>
                   <span className="text-xs text-white font-medium w-20 text-right">{fmt(p.total)}</span>
-                  <span className="text-[10px] text-[#c8a96e] w-10 text-right">{p.pct.toFixed(1)}%</span>
+                  <span className="text-[10px] text-gold w-10 text-right">{p.pct.toFixed(1)}%</span>
                 </div>
               </div>
               <div className="mt-1 h-1 w-full bg-white/5 rounded-full overflow-hidden">
@@ -500,13 +500,13 @@ function PaymentMethodsCard({ methods, total }: {
           const pct = total > 0 ? (p.total / total) * 100 : 0
           return (
             <div key={p.method} className="flex items-center gap-2 py-1.5 border-b border-white/5 last:border-0">
-              <span className="text-[10px] text-[#4b5563] w-4 font-mono text-right">{i+1}</span>
+              <span className="text-[10px] text-muted-foreground w-4 font-mono text-right">{i+1}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] text-[#9ca3af] truncate">{p.method}</span>
+                  <span className="text-[11px] text-muted-foreground/80 truncate">{p.method}</span>
                   <div className="flex items-center gap-3 shrink-0 ml-2">
                     <span className="text-xs text-white font-medium w-24 text-right">{fmt(p.total)}</span>
-                    <span className="text-[10px] text-[#c8a96e] w-10 text-right">{pct.toFixed(1)}%</span>
+                    <span className="text-[10px] text-gold w-10 text-right">{pct.toFixed(1)}%</span>
                   </div>
                 </div>
                 <div className="mt-1 h-1 w-full bg-white/5 rounded-full overflow-hidden">
@@ -549,7 +549,7 @@ function HourlySalesCard({ hourlySales }: {
                     </div>
                   </div>
                   <div className="flex items-center gap-3 shrink-0 ml-3">
-                    <span className="text-[10px] text-[#4b5563] w-8 text-right">{h.qty}x</span>
+                    <span className="text-[10px] text-muted-foreground w-8 text-right">{h.qty}x</span>
                     <span className="text-xs text-white font-medium w-20 text-right">{fmt(h.revenue)}</span>
                   </div>
                 </div>
@@ -686,13 +686,13 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
     return (
       <div className="mx-auto max-w-5xl px-4 py-8 text-center">
         <p className="text-sm text-red-400">Evento não encontrado no contexto</p>
-        <p className="text-[10px] text-[#4b5563] mt-1">
+        <p className="text-[10px] text-muted-foreground mt-1">
           {isSynthetic
             ? 'Evento sintético do bar — pode ter sido removido após atualização dos dados.'
             : 'O evento pode ter sido removido ou a importação de dados está pendente.'}
         </p>
         <button onClick={() => { refresh(); onBack() }}
-          className="mt-4 text-xs text-[#c8a96e] hover:underline">
+          className="mt-4 text-xs text-gold hover:underline">
           ← Voltar e recarregar
         </button>
       </div>
@@ -712,7 +712,7 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
         </button>
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-[10px] uppercase tracking-widest text-[#8b5cf6]">{ev.dateLabel}</p>
+            <p className="text-[10px] uppercase tracking-widest text-violet">{ev.dateLabel}</p>
             <h1 className="text-xl font-bold tracking-tight">{ev.title}</h1>
             {ev.capacity && (
               <p className="mt-0.5 text-[11px] text-muted-foreground/80">
@@ -735,7 +735,7 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
           label="Receita Total"
           value={fmt(ev.totalRevenue)}
           sub={`${fmt(ev.ticketRevenue)} ingressos · ${fmt(ev.barRevenue)} bar`}
-          color="text-[#c8a96e]"
+          color="text-gold"
         />
         <TicketMedioCard
           ticketMedio={ev.ticketMedio}
@@ -747,7 +747,7 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
           label="Ocupação"
           value={ev.ocupacao !== null ? `${ev.ocupacao}%` : '—'}
           sub={ev.capacity ? `${ev.ticketsSold} de ${ev.capacity} lugares` : 'Capacidade não definida'}
-          color="text-[#8b5cf6]"
+          color="text-violet"
         />
         <KPICard
           label="Mix de Receita"
@@ -822,7 +822,7 @@ export function EventDetail({ id, onBack }: { id: string; onBack: () => void }) 
       </div>
 
       {/* Footer info */}
-      <div className="text-[10px] text-[#4b5563] space-y-1">
+      <div className="text-[10px] text-muted-foreground space-y-1">
         <p>📊 Dados do contexto compartilhado — consistentes com Dashboard, Eventos, Financeiro e demais seções.</p>
         <p>📐 Comparações vs média geral de {agg.totalEvents || 0} eventos
           {agg.eventsWithBar > 0 ? ` (médias de bar: ${agg.eventsWithBar} eventos com dados)` : ''}.
