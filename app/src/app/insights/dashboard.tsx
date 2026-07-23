@@ -261,8 +261,8 @@ export function Dashboard() {
   return (
     <div className="p-4 sm:p-6 max-w-7xl mx-auto">
       {/* Header + Filtro de Período + Ano */}
-      <div className="flex items-start justify-between mb-6 gap-4">
-        <div>
+      <div className="flex flex-col sm:flex-row items-start justify-between mb-6 gap-4">
+        <div className="w-full sm:w-auto">
           <PageHeader
             title="Dashboard"
             subtitle={`${f.totalEvents} eventos · ${fmtNum(f.totalOrders)} ingressos · ${fmt(f.totalRevenue)}`}

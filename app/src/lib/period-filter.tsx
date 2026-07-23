@@ -27,7 +27,7 @@ export function PeriodFilter({ className }: { className?: string }) {
             key={p.id}
             onClick={() => setPeriod(p.id)}
             className={cn(
-              'px-3 py-1.5 text-[11px] font-medium rounded-md transition-all select-none',
+              'px-2 sm:px-3 py-1.5 text-[10px] sm:text-[11px] font-medium rounded-md transition-all select-none',
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-dim',
               active
                 ? 'bg-gold text-black shadow-sm'
