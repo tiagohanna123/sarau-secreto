@@ -34,7 +34,7 @@ export const PALETA = [GOLD, PURPLE, BLUE, GREEN, PINK, ORANGE]
 
 /* ── Constantes de custo (centralizadas — usadas em financeiro, eventos, detail) ── */
 export const CMV_BAR = 0.42        // 42% — custo mercadoria vendida (Yuzer)
-export const TAXA_SYMPLA = 0.10    // 10% — taxa da plataforma (Sympla)
+export const TAXA_SYMPLA = 0.10    // 10% — taxa da plataforma Sympla
 export const CUSTO_PRODUCAO = 12000 // R$ 12k/evento — produção (artista, equipe, espaço)
 
 export const fmt = (v: number) =>

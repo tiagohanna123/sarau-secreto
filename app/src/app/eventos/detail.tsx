@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 import { useData } from '@/lib/data-context'
 import type { FlatEvent } from '@/lib/data-context'
 import { api } from '@/lib/api'
-import { GOLD, VIOLET } from '@/lib/ui'
+import { GOLD, VIOLET, CUSTO_PRODUCAO as CUSTO_PRODUCAO_FIXO, CMV_BAR as CMV_BAR_RATE, TAXA_SYMPLA as TAXA_SYMPLA_RATE } from '@/lib/ui'
 
 const fmt = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })
 const fmtc = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 2 })
@@ -558,7 +558,8 @@ function HourlySalesCard({ hourlySales }: {
 
 // --- Lucratividade Líquida ---
 
-import { CUSTO_PRODUCAO as CUSTO_PRODUCAO_FIXO, CMV_BAR as CMV_BAR_RATE, TAXA_SYMPLA as TAXA_SYMPLA_RATE } from '@/lib/ui'
+
+
 
 function LucroCardDetalhado({ totalRevenue, ticketRevenue, barRevenue }: {
   totalRevenue: number; ticketRevenue: number; barRevenue: number

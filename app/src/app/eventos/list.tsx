@@ -3,6 +3,7 @@ import { useData } from '@/lib/data-context'
 import type { FlatEvent } from '@/lib/data-context'
 import { RefreshCw } from 'lucide-react'
 
+
 import { CUSTO_PRODUCAO as CUSTO_PRODUCAO_FIXO, CMV_BAR as CMV_BAR_RATE, TAXA_SYMPLA as TAXA_SYMPLA_RATE } from '@/lib/ui'
 
 const calcProfit = (revenue: number, barRevenue: number, ticketRevenue: number) => {
