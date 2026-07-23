@@ -108,7 +108,7 @@ function Sidebar({ route, sub, navigate, open, onClose }: {
       >
         <div className="px-5 pt-7 pb-5 border-b border-border">
           <img src="/sarau-logo-white.png" alt="Sarau Secreto" className="w-32 opacity-90" />
-          <p className="mt-1.5 text-[0.6rem] tracking-[0.15em] uppercase text-[#4b5563]">Sistema de Gestão</p>
+          <p className="mt-1.5 text-[0.6rem] tracking-[0.15em] uppercase text-muted-foreground">Sistema de Gestão</p>
         </div>
 
         <nav className="flex-1 py-4 flex flex-col gap-0.5 overflow-y-auto">
@@ -233,7 +233,7 @@ function MobileHeader({ title, subTitle, onMenuOpen, onBack }: {
         )}
       </div>
       <img src="/sarau-logo-white.png" alt="Sarau Secreto" className="h-6 opacity-90 absolute left-1/2 -translate-x-1/2" />
-      <span className="text-[11px] text-[#4b5563] font-medium tracking-wide uppercase">{subTitle || title}</span>
+      <span className="text-[11px] text-muted-foreground font-medium tracking-wide uppercase">{subTitle || title}</span>
     </header>
   )
 }

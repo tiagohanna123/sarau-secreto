@@ -19,8 +19,14 @@ const AuthCtx = createContext<AuthContext>(null!)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
-    const stored = sessionStorage.getItem('sarau_user')
-    return stored ? JSON.parse(stored) : null
+    try {
+      const stored = sessionStorage.getItem('sarau_user')
+      return stored ? JSON.parse(stored) : null
+    } catch {
+      sessionStorage.removeItem('sarau_user')
+      sessionStorage.removeItem('sarau_token')
+      return null
+    }
   })
   const [token, setToken] = useState<string | null>(() => sessionStorage.getItem('sarau_token'))
 

@@ -155,14 +155,14 @@ export function SarauKPI({ label, value, sub, className, trend }: {
       <p className="text-[9px] text-muted-foreground uppercase tracking-widest mb-0.5">{label}</p>
       <p className="text-base font-bold text-foreground tracking-tight">{value}</p>
       {sub && (
-        <p className="flex items-center gap-1 text-[9px] text-[#4b5563] mt-0.5">
+        <p className="flex items-center gap-1 text-[9px] text-muted-foreground mt-0.5">
           {trend === 'up' && (
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-success">
               <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" />
             </svg>
           )}
           {trend === 'down' && (
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#f87171" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-danger">
               <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" /><polyline points="17 18 23 18 23 12" />
             </svg>
           )}
@@ -244,7 +244,7 @@ export function EmptyState({ icon, title, description }: {
     <div className="flex flex-col items-center justify-center py-16 text-center">
       {icon && <div className="text-muted-foreground mb-3 opacity-40">{icon}</div>}
       <p className="text-sm font-medium text-muted-foreground">{title}</p>
-      {description && <p className="text-[11px] text-[#4b5563] mt-1 max-w-xs">{description}</p>}
+      {description && <p className="text-[11px] text-muted-foreground mt-1 max-w-xs">{description}</p>}
     </div>
   )
 }

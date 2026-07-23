@@ -16,8 +16,8 @@ export function Card({ label, value, sub, className }: { label: string; value: s
 export function Skel() {
   return (
     <div className="bg-card border border-border rounded-xl p-5 animate-pulse">
-      <div className="h-3 bg-[#252525] rounded w-1/3 mb-4" />
-      <div className="h-40 bg-[#252525] rounded" />
+      <div className="h-3 bg-muted rounded w-1/3 mb-4" />
+      <div className="h-40 bg-muted rounded" />
     </div>
   )
 }
@@ -46,10 +46,10 @@ export function ChartTip({ active, payload, label }: any) {
   if (!active || !payload?.length) return null
   const isCount = (n: string) => /pedidos|orders|itens|qty|itensVendidos/i.test(n)
   return (
-    <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg px-3 py-2 shadow-xl text-xs">
-      <p className="text-[#6b7280] text-[10px] mb-1">{label}</p>
+    <div className="bg-card border border-border rounded-lg px-3 py-2 shadow-xl text-xs">
+      <p className="text-muted-foreground text-[10px] mb-1">{label}</p>
       {payload.map((p: any, i: number) => (
-        <p key={i} className="text-white font-medium">
+        <p key={i} className="text-foreground font-medium">
           {p.name}: {typeof p.value === 'number' ? (isCount(p.name) ? fmtNum(p.value) : fmt(p.value)) : p.value}
         </p>
       ))}

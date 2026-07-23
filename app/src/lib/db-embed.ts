@@ -464,8 +464,8 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "title": "Sarau Secreto x Crema convidam Sotam",
       "date": "1784170800000",
       "symplaEventId": "3500838",
-      "soldCount": 898,
-      "totalRevenue": 40731.9,
+      "soldCount": 917,
+      "totalRevenue": 41292.9,
       "capacity": 1290,
       "status": "published"
     }

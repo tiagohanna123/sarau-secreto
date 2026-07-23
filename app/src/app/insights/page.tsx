@@ -11,9 +11,9 @@ import {
 import { Brain, TrendingUp, BarChart3, PieChart, Target, Sparkles, RefreshCw } from 'lucide-react'
 
 /* ── Tooltip Theme ── */
-const TT = { background: '#1a1a1a', border: '1px solid #2a2a2a', borderRadius: 9, fontSize: 12, color: '#e5e7eb' }
-const TT_LABEL = { color: '#c8a96e', fontWeight: 600 }
-const TT_ITEM = { color: '#e5e7eb' }
+const TT = { background: 'var(--color-card)', border: '1px solid var(--color-border)', borderRadius: 9, fontSize: 12, color: 'var(--color-foreground)' }
+const TT_LABEL = { color: 'var(--color-gold)', fontWeight: 600 }
+const TT_ITEM = { color: 'var(--color-foreground)' }
 
 /* ── Motor de análise ──────────────────────────── */
 function analyze(mensais: any[], eventos: any[], produtoMix: any[], categorias: any[]) {
@@ -170,9 +170,9 @@ function TabOverview({ d, a }: { d: any; a: any }) {
       <SarauSection title="Tendência Mensal">
         <ResponsiveContainer width="100%" height={260}>
           <ComposedChart data={a.mom}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1e1e1e" vertical={false} />
-            <XAxis dataKey="label" tick={{ fill: '#6b7280', fontSize: 8 }} axisLine={false} tickLine={false} interval={3} angle={-45} textAnchor="end" height={60} />
-            <YAxis tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+            <XAxis dataKey="label" tick={{ fill: 'var(--color-muted-foreground)', fontSize: 8 }} axisLine={false} tickLine={false} interval={3} angle={-45} textAnchor="end" height={60} />
+            <YAxis tick={{ fill: 'var(--color-muted-foreground)', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
             <Tooltip contentStyle={TT} labelStyle={TT_LABEL} itemStyle={TT_ITEM} />
             <Bar dataKey="revenue" fill={GOLD} radius={[3, 3, 0, 0]} maxBarSize={28} opacity={0.7} name="Receita" />
             <Line type="monotone" dataKey="ma3" stroke={PURPLE} strokeWidth={2} dot={false} name="Média 3m" />
@@ -185,9 +185,9 @@ function TabOverview({ d, a }: { d: any; a: any }) {
         <SarauSection title="Trimestres">
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={a.quarters.slice(-8)}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e1e1e" vertical={false} />
-              <XAxis dataKey="label" tick={{ fill: '#6b7280', fontSize: 8 }} axisLine={false} tickLine={false} interval={0} angle={-45} textAnchor="end" height={50} />
-              <YAxis tick={{ fill: '#6b7280', fontSize: 8 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+              <XAxis dataKey="label" tick={{ fill: 'var(--color-muted-foreground)', fontSize: 8 }} axisLine={false} tickLine={false} interval={0} angle={-45} textAnchor="end" height={50} />
+              <YAxis tick={{ fill: 'var(--color-muted-foreground)', fontSize: 8 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
               <Tooltip contentStyle={TT} labelStyle={TT_LABEL} itemStyle={TT_ITEM} />
               <Bar dataKey="revenue" fill={GOLD} radius={[3, 3, 0, 0]} name="Receita" />
             </BarChart>
@@ -196,9 +196,9 @@ function TabOverview({ d, a }: { d: any; a: any }) {
         <SarauSection title="Previsão (Regressão Linear)">
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={combined}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e1e1e" vertical={false} />
-              <XAxis dataKey="label" tick={{ fill: '#6b7280', fontSize: 8 }} axisLine={false} tickLine={false} interval={0} angle={-45} textAnchor="end" height={50} />
-              <YAxis tick={{ fill: '#6b7280', fontSize: 8 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+              <XAxis dataKey="label" tick={{ fill: 'var(--color-muted-foreground)', fontSize: 8 }} axisLine={false} tickLine={false} interval={0} angle={-45} textAnchor="end" height={50} />
+              <YAxis tick={{ fill: 'var(--color-muted-foreground)', fontSize: 8 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
               <Tooltip contentStyle={TT} labelStyle={TT_LABEL} itemStyle={TT_ITEM} />
               <Bar dataKey="previsto" fill={PURPLE} radius={[3, 3, 0, 0]} name="Previsto" />
               <Bar dataKey="revenue" fill={GOLD} radius={[3, 3, 0, 0]} name="Real" />
@@ -217,7 +217,7 @@ function TabOverview({ d, a }: { d: any; a: any }) {
             <div key={i} className="flex justify-between text-[11px] py-1">
               <span className="text-muted-foreground">{e.start}</span>
               <span className="text-foreground font-medium">{fmt(e.revenue)}</span>
-              <span className="text-[#4b5563]">{fmt(Math.round(e.revenue / e.days))}/dia</span>
+              <span className="text-muted-foreground/40">{fmt(Math.round(e.revenue / e.days))}/dia</span>
             </div>
           ))}
         </SarauSection>
@@ -229,7 +229,7 @@ function TabOverview({ d, a }: { d: any; a: any }) {
             <div key={i} className="flex justify-between text-[11px] py-1">
               <span className="text-muted-foreground">{e.start}</span>
               <span className="text-foreground font-medium">{fmt(e.revenue)}</span>
-              <span className="text-[#4b5563]">{fmt(Math.round(e.revenue / e.days))}/dia</span>
+              <span className="text-muted-foreground/40">{fmt(Math.round(e.revenue / e.days))}/dia</span>
             </div>
           ))}
         </SarauSection>
@@ -256,9 +256,9 @@ function TabMix({ d, a }: { d: any; a: any }) {
               <div className="flex justify-between text-[11px] mb-0.5">
                 <span className="text-muted-foreground">{c.name}</span>
                 <span className="text-foreground font-medium">{pctAbs(c.pct)}</span>
-                <span className="text-[#4b5563]">{fmt(c.total)}</span>
+                <span className="text-muted-foreground/40">{fmt(c.total)}</span>
               </div>
-              <div className="h-2 bg-[#1e1e1e] rounded-full overflow-hidden">
+              <div className="h-2 bg-border rounded-full overflow-hidden">
                 <div className="h-full rounded-full transition-all duration-500"
                   style={{ width: `${c.pct}%`, background: [GOLD, PURPLE, BLUE, GREEN, PINK, ORANGE][i % 6] }} />
               </div>
@@ -275,7 +275,7 @@ function TabMix({ d, a }: { d: any; a: any }) {
               </div>
             ))
           ) : (
-            <p className="text-[10px] text-[#4b5563] text-center py-4">Nenhum com crescimento significativo</p>
+            <p className="text-[10px] text-muted-foreground/40 text-center py-4">Nenhum com crescimento significativo</p>
           )}
         </SarauSection>
       </div>
@@ -298,9 +298,9 @@ function TabCorr({ d, a }: { d: any; a: any }) {
         <SarauSection title="Receita × Ingressos">
           <ResponsiveContainer width="100%" height={260}>
             <ScatterChart>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e1e1e" />
-              <XAxis dataKey="orders" name="Ingressos" tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} />
-              <YAxis dataKey="revenue" name="Receita" tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="orders" name="Ingressos" tick={{ fill: 'var(--color-muted-foreground)', fontSize: 9 }} axisLine={false} tickLine={false} />
+              <YAxis dataKey="revenue" name="Receita" tick={{ fill: 'var(--color-muted-foreground)', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
               <Tooltip contentStyle={TT} labelStyle={TT_LABEL} itemStyle={TT_ITEM} />
               <Scatter data={d.mensais} fill={GOLD} opacity={0.7} />
             </ScatterChart>
@@ -309,9 +309,9 @@ function TabCorr({ d, a }: { d: any; a: any }) {
         <SarauSection title="Duração × Receita">
           <ResponsiveContainer width="100%" height={260}>
             <ScatterChart>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e1e1e" />
-              <XAxis dataKey="duracao" name="Dias" tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} />
-              <YAxis dataKey="receita" name="Receita" tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+              <XAxis dataKey="duracao" name="Dias" tick={{ fill: 'var(--color-muted-foreground)', fontSize: 9 }} axisLine={false} tickLine={false} />
+              <YAxis dataKey="receita" name="Receita" tick={{ fill: 'var(--color-muted-foreground)', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
               <Tooltip contentStyle={TT} labelStyle={TT_LABEL} itemStyle={TT_ITEM} />
               <Scatter data={a.scatterData} fill={PURPLE} opacity={0.7} />
             </ScatterChart>
@@ -320,9 +320,9 @@ function TabCorr({ d, a }: { d: any; a: any }) {
         <SarauSection title="Sazonalidade">
           <ResponsiveContainer width="100%" height={220}>
             <AreaChart data={a.seasonal}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e1e1e" vertical={false} />
-              <XAxis dataKey="mes" tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} interval={0} />
-              <YAxis tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+              <XAxis dataKey="mes" tick={{ fill: 'var(--color-muted-foreground)', fontSize: 9 }} axisLine={false} tickLine={false} interval={0} />
+              <YAxis tick={{ fill: 'var(--color-muted-foreground)', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`} />
               <Tooltip contentStyle={TT} labelStyle={TT_LABEL} itemStyle={TT_ITEM} />
               <defs>
                 <linearGradient id="sg">
@@ -337,9 +337,9 @@ function TabCorr({ d, a }: { d: any; a: any }) {
         <SarauSection title="Ticket Mensal">
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={d.mensais}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e1e1e" vertical={false} />
-              <XAxis dataKey="label" tick={{ fill: '#6b7280', fontSize: 8 }} axisLine={false} tickLine={false} interval={3} angle={-45} textAnchor="end" height={60} />
-              <YAxis tick={{ fill: '#6b7280', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => fmt(v)} domain={['dataMin - 5', 'dataMax + 5']} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+              <XAxis dataKey="label" tick={{ fill: 'var(--color-muted-foreground)', fontSize: 8 }} axisLine={false} tickLine={false} interval={3} angle={-45} textAnchor="end" height={60} />
+              <YAxis tick={{ fill: 'var(--color-muted-foreground)', fontSize: 9 }} axisLine={false} tickLine={false} tickFormatter={(v: number) => fmt(v)} domain={['dataMin - 5', 'dataMax + 5']} />
               <Tooltip contentStyle={TT} labelStyle={TT_LABEL} itemStyle={TT_ITEM} />
               <Line type="monotone" dataKey="ticketMedio" stroke={PINK} strokeWidth={2} dot={{ fill: PINK, r: 2 }} name="Ticket" />
             </LineChart>

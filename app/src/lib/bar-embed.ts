@@ -11,14 +11,14 @@ export interface EventBarRevenue {
 
 export const BAR_EMBED: BarHistoryData = {
   "source": "database",
-  "totalEvents": 46,
-  "totalRevenue": 726321.88,
+  "totalEvents": 39,
+  "totalRevenue": 845647.88,
   "totalOrders": 18695,
   "totalItens": 0,
   "ticketMedioBar": 0,
   "ticketMedioGeral": 0,
   "eventos": [
-    {
+{
       "start": "2026-04-15",
       "end": "2026-04-16",
       "days": 1,
@@ -29,7 +29,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2026-03-11",
       "end": "2026-03-12",
       "days": 1,
@@ -40,7 +40,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2026-02-04",
       "end": "2026-02-05",
       "days": 1,
@@ -51,7 +51,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2026-01-14",
       "end": "2026-01-15",
       "days": 1,
@@ -62,7 +62,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-12-10",
       "end": "2025-12-11",
       "days": 1,
@@ -73,7 +73,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-11-12",
       "end": "2025-11-13",
       "days": 1,
@@ -84,7 +84,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-10-15",
       "end": "2025-10-16",
       "days": 1,
@@ -95,18 +95,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
-      "start": "2025-10-06",
-      "end": "2025-10-07",
-      "days": 1,
-      "orders": 0,
-      "revenue": 0.00,
-      "ticketMedio": 0,
-      "itensVendidos": 0,
-      "produtos": [],
-      "metodosPagamento": []
-    },
-    {
+{
       "start": "2025-09-10",
       "end": "2025-09-11",
       "days": 1,
@@ -117,7 +106,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-08-10",
       "end": "2025-08-11",
       "days": 1,
@@ -128,7 +117,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-08-07",
       "end": "2025-08-08",
       "days": 1,
@@ -139,7 +128,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-07-09",
       "end": "2025-07-10",
       "days": 1,
@@ -150,7 +139,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-06-11",
       "end": "2025-06-12",
       "days": 1,
@@ -161,7 +150,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-05-15",
       "end": "2025-05-16",
       "days": 1,
@@ -172,7 +161,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-05-07",
       "end": "2025-05-08",
       "days": 1,
@@ -183,7 +172,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-04-09",
       "end": "2025-04-10",
       "days": 1,
@@ -194,7 +183,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-03-11",
       "end": "2025-03-12",
       "days": 1,
@@ -205,7 +194,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-02-12",
       "end": "2025-02-13",
       "days": 1,
@@ -216,7 +205,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2025-01-15",
       "end": "2025-01-16",
       "days": 1,
@@ -227,18 +216,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
-      "start": "2025-01-06",
-      "end": "2025-01-07",
-      "days": 1,
-      "orders": 0,
-      "revenue": 0.00,
-      "ticketMedio": 0,
-      "itensVendidos": 0,
-      "produtos": [],
-      "metodosPagamento": []
-    },
-    {
+{
       "start": "2024-12-05",
       "end": "2024-12-06",
       "days": 1,
@@ -249,7 +227,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-11-13",
       "end": "2024-11-14",
       "days": 1,
@@ -260,18 +238,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
-      "start": "2024-11-11",
-      "end": "2024-11-12",
-      "days": 1,
-      "orders": 0,
-      "revenue": 0.00,
-      "ticketMedio": 0,
-      "itensVendidos": 0,
-      "produtos": [],
-      "metodosPagamento": []
-    },
-    {
+{
       "start": "2024-10-16",
       "end": "2024-10-17",
       "days": 1,
@@ -282,7 +249,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-10-09",
       "end": "2024-10-10",
       "days": 1,
@@ -293,7 +260,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-09-11",
       "end": "2024-09-12",
       "days": 1,
@@ -304,7 +271,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-08-21",
       "end": "2024-08-22",
       "days": 1,
@@ -315,7 +282,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-08-14",
       "end": "2024-08-15",
       "days": 1,
@@ -326,7 +293,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-07-10",
       "end": "2024-07-11",
       "days": 1,
@@ -337,7 +304,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-06-12",
       "end": "2024-06-13",
       "days": 1,
@@ -348,7 +315,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-05-08",
       "end": "2024-05-09",
       "days": 1,
@@ -359,7 +326,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-04-10",
       "end": "2024-04-11",
       "days": 1,
@@ -370,7 +337,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-03-21",
       "end": "2024-03-22",
       "days": 1,
@@ -381,18 +348,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
-      "start": "2024-03-07",
-      "end": "2024-03-08",
-      "days": 1,
-      "orders": 0,
-      "revenue": 0.00,
-      "ticketMedio": 0,
-      "itensVendidos": 0,
-      "produtos": [],
-      "metodosPagamento": []
-    },
-    {
+{
       "start": "2024-01-25",
       "end": "2024-01-26",
       "days": 1,
@@ -403,7 +359,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2024-01-17",
       "end": "2024-01-18",
       "days": 1,
@@ -414,7 +370,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2023-12-14",
       "end": "2023-12-15",
       "days": 1,
@@ -425,7 +381,7 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
+{
       "start": "2023-11-09",
       "end": "2023-11-10",
       "days": 1,
@@ -436,94 +392,61 @@ export const BAR_EMBED: BarHistoryData = {
       "produtos": [],
       "metodosPagamento": []
     },
-    {
-      "start": "2023-10-11",
-      "end": "2023-10-12",
-      "days": 1,
-      "orders": 0,
-      "revenue": 0.00,
-      "ticketMedio": 0,
-      "itensVendidos": 0,
-      "produtos": [],
-      "metodosPagamento": []
-    },
-    {
-      "start": "2023-08-10",
-      "end": "2023-08-11",
-      "days": 1,
-      "orders": 0,
-      "revenue": 0.00,
-      "ticketMedio": 0,
-      "itensVendidos": 0,
-      "produtos": [],
-      "metodosPagamento": []
-    },
-    {
-      "start": "2026-05-22",
-      "end": "2026-05-23",
-      "days": 1,
-      "orders": 0,
-      "revenue": 0,
-      "ticketMedio": 0,
-      "itensVendidos": 0,
-      "produtos": [],
-      "metodosPagamento": []
-    },
-    {
+{
       "start": "2026-05-14",
       "end": "2026-05-15",
       "days": 1,
       "orders": 0,
-      "revenue": 0,
+      "revenue": 13890.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
       "produtos": [],
       "metodosPagamento": []
     },
-    {
-      "start": "2026-05-06",
-      "end": "2026-05-07",
+{
+      "start": "2026-06-11",
+      "end": "2026-06-11",
       "days": 1,
       "orders": 0,
-      "revenue": 0,
+      "revenue": 30745.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
       "produtos": [],
       "metodosPagamento": []
     },
-    {
-      "start": "2026-05-03",
-      "end": "2026-05-04",
+{
+      "start": "2026-06-25",
+      "end": "2026-06-25",
       "days": 1,
       "orders": 0,
-      "revenue": 0,
+      "revenue": 8557.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
       "produtos": [],
       "metodosPagamento": []
     },
-    {
-      "start": "2026-04-28",
-      "end": "2026-04-29",
+{
+      "start": "2026-07-09",
+      "end": "2026-07-09",
       "days": 1,
       "orders": 0,
-      "revenue": 0,
+      "revenue": 26703.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
       "produtos": [],
       "metodosPagamento": []
     },
-    {
-      "start": "2026-04-18",
-      "end": "2026-04-19",
+{
+      "start": "2026-07-16",
+      "end": "2026-07-16",
       "days": 1,
       "orders": 0,
-      "revenue": 0,
+      "revenue": 39431.00,
       "ticketMedio": 0,
       "itensVendidos": 0,
       "produtos": [],
       "metodosPagamento": []
-    },
+    }
   ],
   "eventBarRevenue": {
     "sympla-3384296": {
@@ -702,12 +625,11 @@ export const BAR_EMBED: BarHistoryData = {
     },
     "cmos4gtzk0002tuzo6qahavd8": null,
     "cmos4gt0l0001tuzohf8se5zp": null,
-    "sarau-secreto-maio-2026": null,
-    "sarau-secreto-convida-magrao": null,
-    "sala-secreta": null,
-    "sarau-secreto-convida-ellen-oleria": null,
-    "sarau-secreto-convida-sotam": null,
-    "sarau-secreto-solsticio-de-inverno": null,
+    "cm89a37dab087b8": {"revenue": 13890, "transactions": 0, "perCapita": 43.0},
+    "cm875260665fa5f": {"revenue": 30745, "transactions": 0, "perCapita": 43.0},
+    "sympla-3474070": {"revenue": 8557, "transactions": 0, "perCapita": 43.0},
+    "cm8ae3f1b0ada38": {"revenue": 26703, "transactions": 0, "perCapita": 43.0},
+    "cm842b46dd96f70": {"revenue": 39431, "transactions": 0, "perCapita": 43.0},
   },
   "mensais": [],
   "produtoMix": [

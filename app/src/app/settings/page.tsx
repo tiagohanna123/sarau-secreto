@@ -14,7 +14,7 @@ function setProfileName(name: string) {
 }
 
 export function SettingsPage({ navigate }: { navigate: (path: string) => void }) {
-  const [profileName, setProfileName] = useState(getProfileName())
+  const [profileName, setProfileNameState] = useState(getProfileName())
   const [apiKey, setApiKey] = useState('')
   const [saved, setSaved] = useState(false)
   const [cleared, setCleared] = useState(false)
@@ -43,50 +43,47 @@ export function SettingsPage({ navigate }: { navigate: (path: string) => void })
   }
 
   const initials = profileName.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() || '??'
-  const avatarColor = '#8b5cf6' // violeta do sistema
 
   return (
-    <div style={{ maxWidth: 700, margin: '0 auto', padding: '2rem 1.5rem' }}>
+    <div className="max-w-[700px] mx-auto p-8">
       {/* Header */}
-      <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 300, fontSize: '2rem', margin: 0 }}>Configurações</h1>
-        <p style={{ fontSize: '0.75rem', color: 'var(--color-muted-foreground)', marginTop: '0.25rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+      <div className="mb-8">
+        <h1 className="font-display font-light text-[2rem] m-0">Configurações</h1>
+        <p className="text-xs text-muted-foreground mt-1 tracking-widest uppercase">
           Personalização & sistema
         </p>
-        <div style={{ height: 1, background: 'linear-gradient(90deg, #c8a96e, transparent)', opacity: 0.3, marginTop: '0.75rem' }} />
+        <div className="h-px bg-gradient-to-r from-gold to-transparent opacity-30 mt-3" />
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div className="flex flex-col gap-6">
         {/* 1. Perfil */}
-        <section className="section-card" style={{ padding: '1.5rem' }}>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.1rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <span style={{ width: 32, height: 32, borderRadius: '50%', background: `linear-gradient(135deg, ${avatarColor}, ${avatarColor}cc)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 12, fontWeight: 700 }}>
+        <section className="bg-card border border-border rounded-xl p-6">
+          <h2 className="font-display font-medium text-lg mb-4 flex items-center gap-3">
+            <span className="w-8 h-8 rounded-full bg-gradient-to-br from-violet to-violet/80 flex items-center justify-center text-white text-xs font-bold">
               {initials}
             </span>
             Perfil
           </h2>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div className="flex flex-col gap-3">
             <div>
-              <label style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-muted-foreground)', display: 'block', marginBottom: '0.35rem' }}>
+              <label className="text-[11px] uppercase tracking-widest text-muted-foreground block mb-1">
                 Nome de exibição
               </label>
               <input
-                className="input-field"
+                className="w-full max-w-xs rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-gold/50 transition-colors"
                 value={profileName}
-                onChange={e => setProfileName(e.target.value)}
+                onChange={e => setProfileNameState(e.target.value)}
                 placeholder="Seu nome"
-                style={{ maxWidth: 320 }}
               />
-              <p style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.25rem' }}>
+              <p className="text-[11px] text-muted-foreground mt-1">
                 Salvo localmente no navegador
               </p>
             </div>
 
             <button
-              className="btn-primary"
+              className="self-start rounded-lg border border-border bg-card px-4 py-2 text-xs font-medium text-foreground hover:bg-card-hover hover:border-gold/30 transition-colors"
               onClick={handleProfileSave}
-              style={{ maxWidth: 200, marginTop: '0.5rem' }}
             >
               {saved ? '✓ Salvo' : 'Salvar perfil'}
             </button>
@@ -94,33 +91,31 @@ export function SettingsPage({ navigate }: { navigate: (path: string) => void })
         </section>
 
         {/* 2. LLM / IA */}
-        <section className="section-card" style={{ padding: '1.5rem' }}>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.1rem', marginBottom: '1rem' }}>
+        <section className="bg-card border border-border rounded-xl p-6">
+          <h2 className="font-display font-medium text-lg mb-4">
             LLM · Assistente IA
           </h2>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <div className="flex flex-col gap-3">
             <div>
-              <label style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-muted-foreground)', display: 'block', marginBottom: '0.35rem' }}>
+              <label className="text-[11px] uppercase tracking-widest text-muted-foreground block mb-1">
                 API Key (DeepSeek / OpenAI / Groq)
               </label>
               <input
                 type="password"
-                className="input-field"
+                className="w-full max-w-md rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-gold/50 transition-colors"
                 value={apiKey}
                 onChange={e => setApiKey(e.target.value)}
                 placeholder="sk-... ou gsk_..."
-                style={{ maxWidth: 400 }}
               />
-              <p style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.25rem' }}>
+              <p className="text-[11px] text-muted-foreground mt-1">
                 A mesma chave é usada na página Chat. Guardada localmente.
               </p>
             </div>
 
             <button
-              className="btn-primary"
+              className="self-start rounded-lg border border-border bg-card px-4 py-2 text-xs font-medium text-foreground hover:bg-card-hover hover:border-gold/30 transition-colors"
               onClick={handleKeySave}
-              style={{ maxWidth: 200, marginTop: '0.5rem' }}
             >
               {saved ? '✓ Salvo' : 'Salvar chave'}
             </button>
@@ -128,47 +123,45 @@ export function SettingsPage({ navigate }: { navigate: (path: string) => void })
         </section>
 
         {/* 3. Sistema */}
-        <section className="section-card" style={{ padding: '1.5rem' }}>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.1rem', marginBottom: '1rem' }}>
+        <section className="bg-card border border-border rounded-xl p-6">
+          <h2 className="font-display font-medium text-lg mb-4">
             Sistema
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
             <div>
-              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-muted-foreground)' }}>Versão</div>
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#c8a96e' }}>{VERSION}</div>
+              <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Versão</p>
+              <p className="text-base font-semibold text-gold">{VERSION}</p>
             </div>
             <div>
-              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-muted-foreground)' }}>Data do build</div>
-              <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#e5e7eb' }}>{BUILD_DATE}</div>
+              <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Data do build</p>
+              <p className="text-base font-semibold text-foreground">{BUILD_DATE}</p>
             </div>
             <div>
-              <div style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--color-muted-foreground)' }}>Stack</div>
-              <div style={{ fontSize: '0.85rem', fontWeight: 500, color: '#8b5cf6' }}>{STACK}</div>
+              <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Stack</p>
+              <p className="text-sm font-medium text-violet">{STACK}</p>
             </div>
           </div>
         </section>
 
         {/* 4. Avançado */}
-        <section className="section-card" style={{ padding: '1.5rem' }}>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, fontSize: '1.1rem', marginBottom: '1rem', color: '#ef4444' }}>
+        <section className="bg-card border border-border rounded-xl p-6">
+          <h2 className="font-display font-medium text-lg mb-4 text-danger">
             Avançado
           </h2>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <p style={{ fontSize: '0.85rem', color: '#6b7280', maxWidth: 480 }}>
+          <div className="flex flex-col gap-3">
+            <p className="text-sm text-muted-foreground max-w-[480px]">
               Limpa todo o histórico de conversas e insights salvos do assistente Chat. Esta ação não pode ser desfeita.
             </p>
 
             <button
-              style={{
-                background: cleared ? '#166534' : '#1a0a00',
-                border: `1px solid ${cleared ? '#166534' : '#7c2d12'}`,
-                color: cleared ? '#4ade80' : '#f59e0b',
-                borderRadius: 8, padding: '8px 14px', fontSize: 13, fontWeight: 600,
-                cursor: 'pointer', maxWidth: 220
-              }}
               onClick={handleClearCache}
+              className={`self-start rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${
+                cleared
+                  ? 'bg-success/90 text-white'
+                  : 'bg-[#1a0a00] border border-[#7c2d12] text-warning hover:bg-[#2a1500]'
+              }`}
             >
               {cleared ? '✓ Cache limpo' : '🗑️ Limpar cache do chat'}
             </button>

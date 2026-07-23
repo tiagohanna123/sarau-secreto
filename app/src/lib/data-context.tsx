@@ -52,7 +52,16 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const events = useMemo<FlatEvent[]>(() => {
     // Caminho feliz: rawInsights da API (com dados de bilheteria + bar)
     if (rawInsights?.events?.length) {
-      return (rawInsights.events || []).filter((ev: any) => ev.date && !EXCLUDED_BAR_DATES.has(ev.date.slice(0, 10))).map((ev: any) => ({
+      return (rawInsights.events || [])
+        .filter((ev: any) => {
+          if (!ev.date) return false
+          if (EXCLUDED_BAR_DATES.has(ev.date.slice(0, 10))) return false
+          // Remove eventos com receita total zerada (sem bilheteria e sem bar)
+          const total = (ev.ticketRevenue || 0) + (ev.barRevenue || 0)
+          if (total <= 0) return false
+          return true
+        })
+        .map((ev: any) => ({
       id: ev.id || ev.name,
       title: ev.name || ev.title || 'Evento',
       date: ev.date || '',
