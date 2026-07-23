@@ -41,8 +41,6 @@ function ArtistPhoto({ name, index }: { name: string; index: number }) {
     </div>
   )
 }
-  )
-}
 
 export function CuradoriaPage() {
   return (

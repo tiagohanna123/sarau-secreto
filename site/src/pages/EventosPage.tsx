@@ -70,7 +70,6 @@ function StatusBadge({ status }: { status: string }) {
   const s = map[status] || map.breve
   return <span className={`badge border ${s.classes}`}>{s.label}</span>
 }
-}
 
 export function EventosPage() {
   return (
@@ -116,71 +115,33 @@ export function EventosPage() {
           return null
         })()}
 
-                  {EVENTS.map((event, i) => {
-                    const isHighlighted = event.status === 'disponivel'
-                    return (
-                      <FadeUp key={event.id} delay={i * 0.1}>
-                        <div className={`card p-5 h-full flex flex-col relative transition-all duration-500 ${
-                          isHighlighted ? 'border-crimson/20 bg-gradient-to-b from-crimson-subtle to-transparent' : ''
-                        }`}>
-                          {/* Glow line on highlighted cards */}
-                          {isHighlighted && (
-                            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-crimson/30 to-transparent" />
-                          )}
-
-                          <div className="flex items-start justify-between mb-3">
-                            <span className="text-sm tracking-[0.2em] uppercase text-crimson font-semibold">
-                              SS {event.edition}
-                            </span>
-                            <StatusBadge status={event.status} />
-                          </div>
-                          <h3 className="text-base font-heading text-foreground mb-2 leading-snug">{event.title}</h3>
-                          <div className="space-y-1 mb-3">
-                            <p className="text-sm text-muted-foreground flex items-center gap-1.5">
-                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="shrink-0 opacity-50"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                              {event.dates}
-                            </p>
-                            <p className="text-sm text-muted-foreground flex items-center gap-1.5">
-                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="shrink-0 opacity-50"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                              {event.location}
-                            </p>
-                          </div>
-
-                          {event.lineup.length > 0 && (
-                            <div className="space-y-1 mb-3 flex-1">
-                              <span className="text-sm tracking-[0.15em] uppercase text-foreground/40 font-semibold">Lineup</span>
-                              {event.lineup.map((l, j) => (
-                                <p key={j} className="text-sm text-foreground/70 leading-relaxed">{l}</p>
-                              ))}
-                            </div>
-                          )}
-
-                          {event.perks.length > 0 && (
-                            <div className="flex flex-wrap gap-1.5 mb-3">
-                              {event.perks.map((p, j) => (
-                                <span key={j} className="tag">{p}</span>
-                              ))}
-                            </div>
-                          )}
-
-                          {event.sympla && (
-                            <a href={event.sympla} target="_blank" rel="noopener noreferrer"
-                              className={`btn-sympla text-sm self-start mt-auto ${
-                                event.status === 'disponivel' ? 'shadow-[0_0_16px_rgba(220,38,38,0.12)]' : ''
-                              }`}>
-                              Ver no Sympla
-                            </a>
-                          )}
-                          {!event.sympla && (
-                            <span className="text-sm text-muted-foreground mt-auto italic">Em breve</span>
-                          )}
-                        </div>
-                      </FadeUp>
-                    )
-                  })}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-6xl mx-auto">
+          {EVENTS.map((event, i) => {
+            const isHighlighted = event.status === 'disponivel'
+            return (
+              <FadeUp key={event.id} delay={i * 0.1}>
+                <div className={`card p-5 h-full flex flex-col relative transition-all duration-500 ${
+                  isHighlighted ? 'border-crimson/20 bg-gradient-to-b from-crimson-subtle to-transparent' : ''
+                }`}>
+                  {isHighlighted && (
+                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-crimson/30 to-transparent" />
+                  )}
+                  <div className="flex items-start justify-between mb-3">
+                    <span className="text-sm tracking-[0.2em] uppercase text-crimson font-semibold">SS {event.edition}</span>
+                    <StatusBadge status={event.status} />
                   </div>
-
-                {event.lineup.length > 0 && (
+                  <h3 className="text-base font-heading text-foreground mb-2 leading-snug">{event.title}</h3>
+                  <div className="space-y-1 mb-3">
+                    <p className="text-sm text-muted-foreground flex items-center gap-1.5">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="shrink-0 opacity-50"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                      {event.dates}
+                    </p>
+                    <p className="text-sm text-muted-foreground flex items-center gap-1.5">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="shrink-0 opacity-50"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                      {event.location}
+                    </p>
+                  </div>
+                  {event.lineup.length > 0 && (
                     <div className="space-y-1 mb-3 flex-1">
                       <span className="text-sm tracking-[0.15em] uppercase text-foreground/40 font-semibold">Lineup</span>
                       {event.lineup.map((l, j) => (
@@ -188,7 +149,6 @@ export function EventosPage() {
                       ))}
                     </div>
                   )}
-
                   {event.perks.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 mb-3">
                       {event.perks.map((p, j) => (
@@ -196,12 +156,9 @@ export function EventosPage() {
                       ))}
                     </div>
                   )}
-
                   {event.sympla && (
                     <a href={event.sympla} target="_blank" rel="noopener noreferrer"
-                      className={`btn-sympla text-sm self-start mt-auto ${
-                        event.status === 'disponivel' ? 'shadow-[0_0_16px_rgba(220,38,38,0.12)]' : ''
-                      }`}>
+                      className={`btn-sympla text-sm self-start mt-auto ${event.status === 'disponivel' ? 'shadow-[0_0_16px_rgba(220,38,38,0.12)]' : ''}`}>
                       Ver no Sympla
                     </a>
                   )}
