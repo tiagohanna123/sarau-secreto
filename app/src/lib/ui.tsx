@@ -8,7 +8,7 @@ export function Card({ label, value, sub, className }: { label: string; value: s
     <div className={`bg-card border border-border rounded-xl p-3.5 ${className || ''}`}>
       <p className="text-[9px] text-muted-foreground uppercase tracking-widest mb-0.5">{label}</p>
       <p className="text-sm font-bold text-foreground">{value}</p>
-      {sub && <p className="text-[9px] text-[#4b5563] mt-0.5">{sub}</p>}
+      {sub && <p className="text-[9px] text-muted-foreground/70 mt-0.5">{sub}</p>}
     </div>
   )
 }
@@ -34,7 +34,7 @@ export const PALETA = [GOLD, PURPLE, BLUE, GREEN, PINK, ORANGE]
 
 /* ── Constantes de custo (centralizadas — usadas em financeiro, eventos, detail) ── */
 export const CMV_BAR = 0.42        // 42% — custo mercadoria vendida (Yuzer)
-export const TAXA_SYMPLA = 0.08    // 8% — taxa estimada da plataforma
+export const TAXA_SYMPLA = 0.10    // 10% — taxa da plataforma (Sympla)
 export const CUSTO_PRODUCAO = 12000 // R$ 12k/evento — produção (artista, equipe, espaço)
 
 export const fmt = (v: number) =>

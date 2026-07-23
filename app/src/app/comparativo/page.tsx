@@ -11,7 +11,9 @@ export function ComparativoPage() {
   if (loading) return <div className="p-4 sm:p-6 max-w-7xl mx-auto space-y-4">{[1,2].map(i => <Skel key={i}/>)}</div>
   if (!data) return <div className="p-4 sm:p-6 max-w-7xl mx-auto text-center py-20 text-muted-foreground text-sm">Dados indisponíveis</div>
 
-  const eventos = data.eventos.sort((a: any, b: any) => a.start.localeCompare(b.start))
+  const eventos = data.eventos
+    .filter((e: any) => (e.revenue || 0) > 0)
+    .sort((a: any, b: any) => a.start.localeCompare(b.start))
   const evA = eventos[a]
   const evB = eventos[b]
 

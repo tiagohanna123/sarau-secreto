@@ -379,7 +379,7 @@ function TabInsights({ d, a }: { d: any; a: any }) {
         a.cagr > 20 ? 'Crescimento explosivo.'
           : a.cagr > 10 ? 'Crescimento sólido e consistente.'
             : 'Crescimento moderado. Hora de buscar novos canais.'}`,
-      color: a.cagr > 15 ? '#34d399' : a.cagr > 5 ? '#c8a96e' : '#f87171',
+      color: a.cagr > 15 ? 'var(--color-success)' : a.cagr > 5 ? 'var(--color-gold)' : 'var(--color-danger)',
     },
     {
       icon: a.tg > 5 ? '💎' : a.tg > -5 ? '🔶' : '⚠️',
@@ -388,7 +388,7 @@ function TabInsights({ d, a }: { d: any; a: any }) {
         a.tg > 10 ? 'Público consumindo mais caro.'
           : a.tg > 0 ? 'Leve aumento.'
             : 'Queda no ticket. Possível defasagem de preços.'}`,
-      color: a.tg > 5 ? '#34d399' : a.tg > -5 ? '#c8a96e' : '#f87171',
+      color: a.tg > 5 ? 'var(--color-success)' : a.tg > -5 ? 'var(--color-gold)' : 'var(--color-danger)',
     },
     {
       icon: a.top3CatPct > 80 ? '🍷' : '🔄',
@@ -397,13 +397,13 @@ function TabInsights({ d, a }: { d: any; a: any }) {
         a.top3CatPct > 85 ? 'Alta concentração — risco.'
           : a.top3CatPct > 65 ? 'Concentração saudável.'
             : 'Mix bem distribuído.'}`,
-      color: a.top3CatPct > 85 ? '#f87171' : a.top3CatPct > 65 ? '#c8a96e' : '#34d399',
+      color: a.top3CatPct > 85 ? 'var(--color-danger)' : a.top3CatPct > 65 ? 'var(--color-gold)' : 'var(--color-success)',
     },
     {
       icon: recentGrowth > 15 ? '🔥' : recentGrowth > 0 ? '✅' : '❄️',
       title: 'Tendência Recente',
       text: `Últimos 3 meses ${recentGrowth > 0 ? 'cresceram' : 'caíram'} ${pctAbs(Math.abs(recentGrowth))} vs trimestre anterior.`,
-      color: recentGrowth > 10 ? '#34d399' : recentGrowth > 0 ? '#c8a96e' : '#f87171',
+      color: recentGrowth > 10 ? 'var(--color-success)' : recentGrowth > 0 ? 'var(--color-gold)' : 'var(--color-danger)',
     },
     {
       icon: a.correlation > 0.85 ? '🎯' : '📐',
@@ -411,7 +411,7 @@ function TabInsights({ d, a }: { d: any; a: any }) {
       text: a.correlation > 0.85
         ? `R=${a.correlation.toFixed(2)}. Crescer = mais ingressos.`
         : `R=${a.correlation.toFixed(2)}. Ticket e mix importam.`,
-      color: a.correlation > 0.85 ? '#a78bfa' : '#60a5fa',
+      color: a.correlation > 0.85 ? 'var(--color-violet)' : 'var(--color-blue)',
     },
     {
       icon: a.topN <= 5 ? '📦' : '📋',
@@ -420,7 +420,7 @@ function TabInsights({ d, a }: { d: any; a: any }) {
         a.topN <= 5 ? 'Risco de ruptura.'
           : a.topN <= 10 ? 'Concentração moderada.'
             : 'Distribuição saudável.'}`,
-      color: a.topN <= 5 ? '#f87171' : a.topN <= 10 ? '#c8a96e' : '#34d399',
+      color: a.topN <= 5 ? 'var(--color-danger)' : a.topN <= 10 ? 'var(--color-gold)' : 'var(--color-success)',
     },
   ]
 
@@ -444,7 +444,7 @@ function TabInsights({ d, a }: { d: any; a: any }) {
       ))}
 
       {/* Recomendação */}
-      <div className="bg-gradient-to-r from-[#1a1a1a] to-card border border-border rounded-xl p-5">
+      <div className="bg-gradient-to-r from-card/80 to-card border border-border rounded-xl p-5">
         <p className="text-[10px] text-gold uppercase tracking-wider mb-2">🎯 Recomendação</p>
         <p className="text-xs text-foreground/[0.8] leading-relaxed">
           {a.cagr > 15 && a.correlation > 0.85

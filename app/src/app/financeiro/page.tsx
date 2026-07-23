@@ -60,7 +60,6 @@ export function FinanceiroPage() {
   const ticketMedioEvento = totalGeral > 0 ? totalGeral / totalEventos : 0
 
   // Constantes de custo — importadas de @/lib/ui
-
   const custoBar = totalBar * CMV_BAR
   const custoSympla = totalTicket * TAXA_SYMPLA
   const custoProducao = totalEventos * CUSTO_PRODUCAO
@@ -265,9 +264,11 @@ export function FinanceiroPage() {
                 <th className="text-right py-2 pr-2">Bar</th>
                 <th className="text-right py-2 pr-2">Total</th>
                 <th className="text-right py-2 pr-2">Ingressos</th>
-                <th className="text-right py-2 pr-2">Ticket</th>
-                <th className="text-right py-2 pr-2">Bar/pessoa</th>
+                <th className="text-right py-2 pr-2">Check-in</th>
+                <th className="text-right py-2 pr-2">No-show</th>
                 <th className="text-right py-2 pr-2">% Bar</th>
+                <th className="text-right py-2 pr-2">Bar/pessoa</th>
+                <th className="text-right py-2 pr-2">Total/pessoa</th>
                 <th className="text-right py-2 pr-2">Lucro</th>
                 <th className="text-right py-2">Margem</th>
               </tr>
@@ -276,8 +277,10 @@ export function FinanceiroPage() {
               {recentes.map(ev => {
                 const total = (ev.ticketRevenue || 0) + (ev.barRevenue || 0)
                 const bpc = ev.ticketsSold > 0 && ev.barRevenue > 0 ? (ev.barRevenue / ev.ticketsSold) : 0
-                const barPct = total > 0 ? (ev.barRevenue || 0) / total * 100 : 0
-                const ticketMedio = ev.ticketsSold > 0 ? (ev.ticketRevenue || 0) / ev.ticketsSold : 0
+                const checkedIn = ev.checkedIn || 0
+                const noShow = ev.ticketsSold > 0 ? ((ev.ticketsSold - checkedIn) / ev.ticketsSold) * 100 : 0
+                const barPct = total > 0 ? ((ev.barRevenue || 0) / total) * 100 : 0
+                const totalPorPessoa = ev.ticketsSold > 0 ? total / ev.ticketsSold : 0
                 const lucro = total - CUSTO_PRODUCAO - (ev.barRevenue || 0) * CMV_BAR - (ev.ticketRevenue || 0) * TAXA_SYMPLA
                 const margem = total > 0 ? (lucro / total) * 100 : 0
                 return (
@@ -288,9 +291,13 @@ export function FinanceiroPage() {
                     <td className="py-2 pr-2 text-right text-gold">{ev.barRevenue ? fmt(ev.barRevenue) : '—'}</td>
                     <td className="py-2 pr-2 text-right text-foreground font-medium">{fmt(total)}</td>
                     <td className="py-2 pr-2 text-right text-muted-foreground">{ev.ticketsSold || 0}</td>
-                    <td className="py-2 pr-2 text-right text-muted-foreground">{ticketMedio > 0 ? fmt(ticketMedio) : '—'}</td>
-                    <td className="py-2 pr-2 text-right text-muted-foreground">{bpc > 0 ? fmt(bpc) : '—'}</td>
+                    <td className="py-2 pr-2 text-right text-muted-foreground">{checkedIn > 0 ? checkedIn : '—'}</td>
+                    <td className="py-2 pr-2 text-right" style={{ color: noShow > 30 ? 'var(--color-danger)' : noShow > 15 ? 'var(--color-gold)' : 'var(--color-muted-foreground)' }}>
+                      {ev.ticketsSold > 0 ? `${noShow.toFixed(1)}%` : '—'}
+                    </td>
                     <td className="py-2 pr-2 text-right text-muted-foreground">{barPct > 0 ? `${barPct.toFixed(0)}%` : '—'}</td>
+                    <td className="py-2 pr-2 text-right text-muted-foreground">{bpc > 0 ? fmt(bpc) : '—'}</td>
+                    <td className="py-2 pr-2 text-right text-muted-foreground">{totalPorPessoa > 0 ? fmt(totalPorPessoa) : '—'}</td>
                     <td className={`py-2 pr-2 text-right font-medium ${lucro >= 0 ? 'text-success' : 'text-danger'}`}>{fmt(lucro)}</td>
                     <td className={`py-2 text-right font-medium ${margem >= 0 ? 'text-success' : 'text-danger'}`}>{margem !== 0 ? `${margem.toFixed(1)}%` : '—'}</td>
                   </tr>
@@ -304,7 +311,7 @@ export function FinanceiroPage() {
       {/* Nota de transparência */}
       <div className="text-[10px] text-muted-foreground/80 space-y-1">
         <p>📊 Receita: dados reais do Sympla (bilheteria) + Yuzer (bar).</p>
-        <p>📐 Custos: estimativas baseadas em benchmarks de mercado. Produção: R$ 12k/evento (artista, espaço, equipe). CMV bar: 42%. Taxa Sympla: 8%.</p>
+        <p>📐 Custos: estimativas baseadas em benchmarks de mercado. Produção: R$ 12k/evento (artista, espaço, equipe). CMV bar: 42%. Taxa Sympla: 10%.</p>
         <p>🎯 Para custos reais por evento, cadastre as despesas no sistema (futuro: módulo de custos).</p>
       </div>
     </div>

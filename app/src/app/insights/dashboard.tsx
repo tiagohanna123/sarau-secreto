@@ -13,9 +13,9 @@ import { CalendarDays, TrendingUp, TrendingDown, Wine, Sparkles, UserMinus, Targ
 import { parseISO, isWithinInterval } from 'date-fns'
 
 /* ── Tooltip Theme ── */
-const TT = { background: '#1a1a1a', border: '1px solid #2a2a2a', borderRadius: 9, fontSize: 12, color: '#e5e7eb' }
-const TT_LABEL = { color: '#c8a96e', fontWeight: 600 }
-const TT_ITEM = { color: '#e5e7eb' }
+const TT = { background: 'var(--color-card)', border: '1px solid var(--color-border)', borderRadius: 9, fontSize: 12, color: 'var(--color-foreground)' }
+const TT_LABEL = { color: 'var(--color-gold)', fontWeight: 600 }
+const TT_ITEM = { color: 'var(--color-foreground)' }
 
 /* ── Helpers ─────────────────────────────────────────── */
 
@@ -545,7 +545,7 @@ export function Dashboard() {
                     <stop offset="100%" stopColor={GOLD} stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e1e1e" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
                 <XAxis
                   dataKey="label"
                   tick={{ fill: '#6b7280', fontSize: 8 }}

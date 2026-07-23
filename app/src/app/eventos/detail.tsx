@@ -3,9 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 import { useData } from '@/lib/data-context'
 import type { FlatEvent } from '@/lib/data-context'
 import { api } from '@/lib/api'
-
-const GOLD = '#c8a96e'
-const VIOLET = '#8b5cf6'
+import { GOLD, VIOLET } from '@/lib/ui'
 
 const fmt = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })
 const fmtc = (v: number) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 2 })
@@ -387,14 +385,10 @@ function enrichEvent(ev: FlatEvent): EnrichedEvent {
 // --- Top Produtos ---
 
 function LucroCard({ ev }: { ev: EnrichedEvent }) {
-  const CMV_BAR = 0.42
-  const TAXA_SYMPLA = 0.08
-  const CUSTO_PRODUCAO = 12000
-
   const total = ev.ticketRevenue + ev.barRevenue
-  const custoSympla = ev.ticketRevenue * TAXA_SYMPLA
-  const cmvBar = ev.barRevenue * CMV_BAR
-  const custoTotal = custoSympla + cmvBar + CUSTO_PRODUCAO
+  const custoSympla = ev.ticketRevenue * TAXA_SYMPLA_RATE
+  const cmvBar = ev.barRevenue * CMV_BAR_RATE
+  const custoTotal = custoSympla + cmvBar + CUSTO_PRODUCAO_FIXO
   const lucro = total - custoTotal
   const margem = total > 0 ? (lucro / total) * 100 : 0
   const margemOp = total > 0 ? ((total - custoSympla - cmvBar) / total) * 100 : 0
@@ -412,7 +406,7 @@ function LucroCard({ ev }: { ev: EnrichedEvent }) {
         <div className="min-w-0">
           <p className="text-[9px] text-muted-foreground uppercase tracking-wider truncate">Custos Fixos</p>
           <p className="mt-0.5 text-sm font-bold text-red-400">{fmt(custoTotal)}</p>
-          <p className="text-[8px] text-muted-foreground">Sympla {fmt(custoSympla)} + CMV {fmt(cmvBar)} + Produção {fmt(CUSTO_PRODUCAO)}</p>
+          <p className="text-[8px] text-muted-foreground">Sympla {fmt(custoSympla)} + CMV {fmt(cmvBar)} + Produção {fmt(CUSTO_PRODUCAO_FIXO)}</p>
         </div>
         <div className="min-w-0">
           <p className="text-[9px] text-muted-foreground uppercase tracking-wider truncate">Lucro Líquido</p>
@@ -428,7 +422,7 @@ function LucroCard({ ev }: { ev: EnrichedEvent }) {
         <div className={`h-full rounded-full transition-all ${lucro >= 0 ? 'bg-success' : 'bg-red-400'}`}
           style={{ width: `${Math.min(100, Math.max(0, (lucro / ev.totalRevenue) * 100 * 2))}%` }} />
       </div>
-      <p className="mt-1 text-[8px] text-muted-foreground">Barra proporcional ao lucro (200% = margem de 100%). Custos: Sympla {TAXA_SYMPLA*100}%, CMV bar {CMV_BAR*100}%, Produção R$ {CUSTO_PRODUCAO}/evento.</p>
+      <p className="mt-1 text-[8px] text-muted-foreground">Barra proporcional ao lucro (200% = margem de 100%). Custos: Sympla {TAXA_SYMPLA_RATE*100}%, CMV bar {CMV_BAR_RATE*100}%, Produção R$ {CUSTO_PRODUCAO_FIXO}/evento.</p>
     </div>
   )
 }
@@ -564,9 +558,7 @@ function HourlySalesCard({ hourlySales }: {
 
 // --- Lucratividade Líquida ---
 
-const CUSTO_PRODUCAO_FIXO = 12000
-const CMV_BAR_RATE = 0.42
-const TAXA_SYMPLA_RATE = 0.08
+import { CUSTO_PRODUCAO as CUSTO_PRODUCAO_FIXO, CMV_BAR as CMV_BAR_RATE, TAXA_SYMPLA as TAXA_SYMPLA_RATE } from '@/lib/ui'
 
 function LucroCardDetalhado({ totalRevenue, ticketRevenue, barRevenue }: {
   totalRevenue: number; ticketRevenue: number; barRevenue: number
