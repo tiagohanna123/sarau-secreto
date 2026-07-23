@@ -577,7 +577,7 @@ function LucroCardDetalhado({ totalRevenue, ticketRevenue, barRevenue }: {
     { label: 'Receita Total', value: fmt(totalRevenue), color: 'text-white' },
     { label: 'Produção (fixo)', value: `-${fmt(custoProducao)}`, color: 'text-red-400' },
     { label: 'CMV Bar (42%)', value: `-${fmt(custoCMV)}`, color: 'text-red-400' },
-    { label: 'Taxa Sympla (10%)', value: `-${fmt(custoSympla)}`, color: 'text-red-400' },
+    { label: `Taxa Sympla (${(TAXA_SYMPLA_RATE*100).toFixed(0)}%)`, value: `-${fmt(custoSympla)}`, color: 'text-red-400' },
     { label: 'Custo Total', value: fmt(custoTotal), color: 'text-orange-400' },
   ]
 

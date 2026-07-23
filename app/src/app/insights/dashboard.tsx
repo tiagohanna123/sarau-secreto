@@ -261,17 +261,17 @@ export function Dashboard() {
   return (
     <div className="p-4 sm:p-6 max-w-7xl mx-auto">
       {/* Header + Filtro de Período + Ano */}
-      <div className="flex flex-col sm:flex-row items-start justify-between mb-6 gap-4">
-        <div className="w-full sm:w-auto">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6 gap-3 sm:gap-4">
+        <div className="min-w-0">
           <PageHeader
             title="Dashboard"
             subtitle={`${f.totalEvents} eventos · ${fmtNum(f.totalOrders)} ingressos · ${fmt(f.totalRevenue)}`}
             source={data.source}
           />
         </div>
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-2 flex-wrap">
           <button onClick={() => refresh()}
-            className="rounded-lg border border-border bg-card px-2 py-1.5 text-[10px] text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+            className="rounded-lg border border-border bg-card px-2 py-1.5 text-[10px] text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1 shrink-0"
             title="Recarregar dados"
           >
             <RefreshCw size={12} />
@@ -280,7 +280,7 @@ export function Dashboard() {
           <select
             value={yearFilter}
             onChange={e => setYearFilter(e.target.value)}
-            className="rounded-lg border border-border bg-card px-2 py-1.5 text-[10px] text-foreground outline-none focus:border-gold/50 transition-colors"
+            className="rounded-lg border border-border bg-card px-2 py-1.5 text-[10px] text-foreground outline-none focus:border-gold/50 transition-colors max-w-[110px] sm:max-w-none shrink-0"
           >
             <option value="">Todos os anos</option>
             {yearOptions.map(y => (
