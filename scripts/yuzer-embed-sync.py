@@ -25,25 +25,30 @@ def get_token(key):
 
 YUZER_JWT = get_token("YUZER_JWT") or get_token("YUZER_TOKEN") or ""
 
-def yuzer_post(path, body):
+def yuzer_post(path, body, retries=3):
     url = f"{YUZER_API}{path}"
     cmd = ["curl", "-s", "-X", "POST", url,
            "-H", "Content-Type: application/json",
            "-H", f"Authorization: Bearer {YUZER_JWT}",
            "-d", json.dumps(body)]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
-    if result.returncode != 0:
-        print(f"  curl error (exit {result.returncode})")
-        return {}
-    try:
-        return json.loads(result.stdout)
-    except json.JSONDecodeError:
-        # Check if response is empty or HTML (e.g. 401 page)
-        content_preview = result.stdout[:200].strip()
-        print(f"  JSON decode error on page {body.get('page', '?')} (curl exit {result.returncode})")
-        if '401' in content_preview or 'Unauthorized' in content_preview or not content_preview:
-            print(f"  => Possivel token YUZER_JWT expirado. Renove manualmente.")
-        return {}
+    for attempt in range(1, retries + 1):
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        if result.returncode != 0:
+            print(f"  curl error (exit {result.returncode}) tentativa {attempt}/{retries}")
+            time.sleep(2 * attempt)
+            continue
+        try:
+            return json.loads(result.stdout)
+        except json.JSONDecodeError:
+            content_preview = result.stdout[:200].strip()
+            print(f"  JSON decode error on page {body.get('page', '?')} tentativa {attempt}/{retries}")
+            if attempt < retries:
+                time.sleep(3 * attempt)
+                continue
+            if '401' in content_preview or 'Unauthorized' in content_preview or not content_preview:
+                print(f"  => Possivel token YUZER_JWT expirado. Renove manualmente.")
+            return {}
+    return {}
 
 def fetch_all_orders():
     all_orders = []
@@ -53,7 +58,7 @@ def fetch_all_orders():
         data = yuzer_post("/orders/search", {
             "from": "2023-11-01T00:00:00.000Z",
             "to": "2026-12-31T23:59:59.000Z",
-            "page": page, "perPage": 5000,
+            "page": page, "perPage": 1500,
             "sort": "desc", "sortColumn": "createdAt", "status": "PAID",
         })
         items = data.get("content", [])
