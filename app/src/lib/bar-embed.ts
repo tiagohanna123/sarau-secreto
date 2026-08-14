@@ -11,9 +11,9 @@ export interface EventBarRevenue {
 
 export const BAR_EMBED: BarHistoryData = {
   "source": "database",
-  "totalEvents": 39,
-  "totalRevenue": 845647.88,
-  "totalOrders": 18695,
+  "totalEvents": 40,
+  "totalRevenue": 859857.88,
+  "totalOrders": 19071,
   "totalItens": 0,
   "ticketMedioBar": 0,
   "ticketMedioGeral": 0,
@@ -446,9 +446,30 @@ export const BAR_EMBED: BarHistoryData = {
       "itensVendidos": 0,
       "produtos": [],
       "metodosPagamento": []
+    },
+{
+      "start": "2026-08-13",
+      "end": "2026-08-14",
+      "days": 2,
+      "orders": 376,
+      "revenue": 14210.00,
+      "ticketMedio": 37.79,
+      "itensVendidos": 578,
+      "produtos": [{"name": "SANTA ANGELICA ROSE", "qty": 23, "total": 2185.0, "pct": 15.4}, {"name": "STELLA PURE GOLD", "qty": 116, "total": 1972.0, "pct": 13.9}, {"name": "LONGITUDE MALBEC", "qty": 19, "total": 1805.0, "pct": 12.7}, {"name": "UVITA BLEND TINTO", "qty": 18, "total": 1710.0, "pct": 12.0}, {"name": "HEINEKEN LONG NECK", "qty": 73, "total": 1241.0, "pct": 8.7}, {"name": "LONGITUD CHARDONNAY", "qty": 13, "total": 1235.0, "pct": 8.7}, {"name": "LONGITUDE MERLOT", "qty": 9, "total": 855.0, "pct": 6.0}, {"name": "AGUA SEM GAS", "qty": 111, "total": 666.0, "pct": 4.7}, {"name": "BODEGA PRIVADA BRANCO", "qty": 6, "total": 570.0, "pct": 4.0}, {"name": "AGUA COM GAS", "qty": 75, "total": 525.0, "pct": 3.7}, {"name": "CORONA CERO", "qty": 22, "total": 374.0, "pct": 2.6}, {"name": "RED BULL SUGAR FREE", "qty": 11, "total": 220.0, "pct": 1.5}, {"name": "COCA COLA ZERO", "qty": 26, "total": 208.0, "pct": 1.5}, {"name": "TACA", "qty": 26, "total": 208.0, "pct": 1.5}, {"name": "ALUGUEL DE CADEIRA", "qty": 8, "total": 200.0, "pct": 1.4}, {"name": "COCA COLA", "qty": 16, "total": 128.0, "pct": 0.9}, {"name": "RED BULL TRADICIONAL", "qty": 5, "total": 100.0, "pct": 0.7}, {"name": "PEPSI BLACK", "qty": 1, "total": 8.0, "pct": 0.1}],
+      "metodosPagamento": []
     }
   ],
   "eventBarRevenue": {
+    "sympla-3535478": {
+      "revenue": 14210.00,
+      "transactions": 376,
+      "perCapita": 37.79
+    },
+    "2026-08-13": {
+      "revenue": 14210.00,
+      "transactions": 376,
+      "perCapita": 37.79
+    },
     "sympla-3384296": {
       "revenue": 30293.15,
       "transactions": 849,

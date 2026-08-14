@@ -678,6 +678,16 @@ export const EMBEDDED_DB: EmbeddedDB = {
       "totalRevenue": 41292.9,
       "capacity": 1290,
       "status": "published"
+    },
+    {
+      "id": "sympla-3535478",
+      "title": "Sarau Secreto Convida YOUN",
+      "date": "2026-08-13",
+      "symplaEventId": "3535478",
+      "soldCount": 475,
+      "totalRevenue": 14769.7,
+      "capacity": 920,
+      "status": "published"
     }
   ],
   "tickets": {

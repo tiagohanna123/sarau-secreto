@@ -57,6 +57,13 @@ def fetch_all_orders():
             "sort": "desc", "sortColumn": "createdAt", "status": "PAID",
         })
         items = data.get("content", [])
+        if not data:
+            # Falha de paginacao (JSON decode / token expirado / rede): abortar
+            # ANTES de sobrescrever dados existentes - dados parciais corromperiam o embed.
+            raise RuntimeError(
+                f"fetch_all_orders: resposta vazia/invalida na pagina {page} "
+                f"({len(all_orders)} orders ja coletadas). Abortando para preservar dados existentes."
+            )
         all_orders.extend(items)
         total_pages = data.get("totalPages", 1)
         print(f"  Page {page}/{total_pages}: {len(items)} orders")
@@ -106,7 +113,12 @@ def main():
 
     print(f"[{datetime.now().strftime('%H:%M:%S')}] Yuzer Embed Sync")
     print("1. Buscando orders...")
-    orders = fetch_all_orders()
+    try:
+        orders = fetch_all_orders()
+    except RuntimeError as e:
+        print(f"   ABORTADO: {e}")
+        print("   Dados existentes preservados (nenhuma escrita feita).")
+        sys.exit(2)
     print(f"   Total: {len(orders)} orders")
 
     print("2. Clusterizando eventos...")
