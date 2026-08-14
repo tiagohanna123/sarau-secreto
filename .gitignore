@@ -34,3 +34,4 @@ packages/api/prisma/*.db
 packages/api/prisma/*.db-journal
 temp/
 tmp/
+scripts/__pycache__/
