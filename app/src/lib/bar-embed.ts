@@ -54,6 +54,9 @@ export const BAR_EMBED: BarHistoryData = {
     {"start": "2026-08-13", "end": "2026-08-14", "days": 2, "orders": 376, "revenue": 14210.0, "ticketMedio": 37.79, "itensVendidos": 578.0, "produtos": [{"name": "SANTA ANG\u00c9LICA ROSE", "qty": 23.0, "total": 2185.0, "pct": 15.4}, {"name": "STELLA PURE GOLD ", "qty": 116.0, "total": 1972.0, "pct": 13.9}, {"name": "LONGITUDE MALBEC", "qty": 19.0, "total": 1805.0, "pct": 12.7}, {"name": "UVITA BLEND TINTO", "qty": 18.0, "total": 1710.0, "pct": 12.0}, {"name": "HEINEKEN LONG NECK", "qty": 73.0, "total": 1241.0, "pct": 8.7}, {"name": "LONGITUD CHARDONNAY", "qty": 13.0, "total": 1235.0, "pct": 8.7}, {"name": "LONGITUDE MERLOT", "qty": 9.0, "total": 855.0, "pct": 6.0}, {"name": "AGUA SEM GAS", "qty": 111.0, "total": 666.0, "pct": 4.7}, {"name": "BODEGA PRIVADA BRANCO", "qty": 6.0, "total": 570.0, "pct": 4.0}, {"name": "AGUA COM GAS", "qty": 75.0, "total": 525.0, "pct": 3.7}, {"name": "CORONA CERO", "qty": 22.0, "total": 374.0, "pct": 2.6}, {"name": "RED BULL SUGAR FREE", "qty": 11.0, "total": 220.0, "pct": 1.5}, {"name": "COCA COLA  ZERO", "qty": 26.0, "total": 208.0, "pct": 1.5}, {"name": "TA\u00c7A ", "qty": 26.0, "total": 208.0, "pct": 1.5}, {"name": "ALUGUEL DE CADEIRA", "qty": 8.0, "total": 200.0, "pct": 1.4}, {"name": "COCA COLA ", "qty": 16.0, "total": 128.0, "pct": 0.9}, {"name": "RED BULL TRADICIONAL", "qty": 5.0, "total": 100.0, "pct": 0.7}, {"name": "PEPSI BLACK", "qty": 1.0, "total": 8.0, "pct": 0.1}], "metodosPagamento": []}
   ],
   "eventBarRevenue": {
+    "2025-08-14": {"revenue": 13111.0, "transactions": 284, "perCapita": 46.17},
+    "2025-08-11": {"revenue": 13111.0, "transactions": 284, "perCapita": 46.17},
+
     "2026-08-13": {"revenue": 14210.0, "transactions": 376, "perCapita": 37.79},
     "2026-07-16": {"revenue": 29423.0, "transactions": 627, "perCapita": 46.93},
     "2026-07-09": {"revenue": 22433.0, "transactions": 534, "perCapita": 42.01},

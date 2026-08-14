@@ -68,6 +68,7 @@ export const BAR_REVENUE_MAP: Record<string, { revenue: number; transactions: nu
   "sympla-2987008": {"revenue": 28126, "transactions": 534, "perCapita": 52.67},
   "sympla-3028036": {"revenue": 19007, "transactions": 359, "perCapita": 52.94},
   "sympla-3060095": {"revenue": 17167, "transactions": 481, "perCapita": 35.69},
+  "sympla-3073170": {"revenue": 13111, "transactions": 284, "perCapita": 46.17},
   "sympla-3113883": {"revenue": 65403, "transactions": 1508, "perCapita": 43.37},
   "sympla-3168880": {"revenue": 13415, "transactions": 413, "perCapita": 32.48},
   "sympla-3209412": {"revenue": 17390, "transactions": 419, "perCapita": 41.5},

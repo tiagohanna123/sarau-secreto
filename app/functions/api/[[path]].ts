@@ -180,6 +180,11 @@ export async function onRequest(context: { request: Request; env: any; params: {
     })).filter((e: any) => e.ticketsSold > 0 || e.ticketRevenue > 0 || e.barRevenue > 0))
   }
 
+// Desalinhamentos data Sympla -> data Yuzer (bar registrado dias depois)
+const BAR_DATE_ALIASES: Record<string, string> = {
+  '2025-08-11': '2025-08-14', // Sala Secreta: Sympla 11/08, Yuzer registrou 14/08
+}
+
 // Índice de produtos reais por data (extraído do BAR_EVENTOS)
 const BAR_PRODUTOS_BY_DATE = new Map<string, { name: string; qty: number; revenue: number }[]>()
 for (const be of BAR_EVENTOS) {
@@ -198,7 +203,11 @@ function computeBarInsights(barRevenue: number, barTransactions: number, eventDa
   let topProducts: { name: string; qty: number; revenue: number }[] = []
 
   // Usa a data do match do bar (que tolera até 2 dias de diferença) se disponível
-  const lookupDate = barMatchDate || eventDate
+  // BAR_DATE_ALIASES: casos onde o Yuzer registrou o bar dias depois do evento Sympla
+  let lookupDate = barMatchDate || eventDate
+  if (lookupDate && BAR_DATE_ALIASES[lookupDate]) {
+    lookupDate = BAR_DATE_ALIASES[lookupDate]
+  }
   if (lookupDate) {
     const reais = BAR_PRODUTOS_BY_DATE.get(lookupDate)
     if (reais?.length) {
