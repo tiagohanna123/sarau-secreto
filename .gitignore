@@ -35,3 +35,5 @@ packages/api/prisma/*.db-journal
 temp/
 tmp/
 scripts/__pycache__/
+app/_worker.bundle
+.wrangler/
